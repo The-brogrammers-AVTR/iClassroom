@@ -6,6 +6,7 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="nav-wrapper">
+    <h1>iClassroom</h1>
     {/* <img src={logo} /> */}
     <nav className="navbar">
       {isLoggedIn ? (

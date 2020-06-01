@@ -17,7 +17,7 @@ label {
 }
 
 .course-sidebar {
-  background-color: lightblue;
+  background-color: #6576bb;
   width: 15%;
   height: 750px;
 }
@@ -40,7 +40,7 @@ label {
 }
 
 .course-navigation > button:hover {
-  background-color: dodgerblue;
+  background-color: #59cbc0;
   cursor: pointer;
 }
 
@@ -64,7 +64,7 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: #31409e;
+  background-color: #6576bb;
   padding: 1rem;
   list-style-type: none;
   color: white;
@@ -74,7 +74,7 @@ label {
 }
 
 .course-card > a {
-  background-color: tomato;
+  background-color: #59cbc0;
   padding: 1rem;
   text-decoration: none;
   color: white;
@@ -83,23 +83,24 @@ label {
 
 .course-card > a:hover {
   cursor: pointer;
-  background-color: firebrick;
+  background-color: lightseagreen;
 }
 
 h1 {
   text-align: center;
+  color: #6576bb;
 }
 /* navbar */
 nav a {
   margin: 1rem;
-  color: white;
+  color: #6576bb;
   font-weight: bolder;
 }
 
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
-  background-color: #31409e;
+  background-color: lightblue;
   padding-left: 1rem;
 }
 
