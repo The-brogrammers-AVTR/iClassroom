@@ -9,7 +9,7 @@ class Sidebar extends React.Component {
 
   render() {
     const {courses, user} = this.props
-
+    const id = 1
     return (
       <div className="course-sidebar">
         <div className="course-info">
@@ -20,13 +20,15 @@ class Sidebar extends React.Component {
           <p>Syllabus Link</p>
         </div>
         <div className="course-navigation">
-          {user.isTeacher === true && <button>Students</button>}
-          <button> Announcements </button>
-          <button> Lessons </button>
-          <button> Assignments </button>
-          <button> Grades </button>
-          <button> Video Call </button>
-          <Link to="/home"> Back to Courses</Link>
+          {user.isTeacher === true && (
+            <Link to={`/course/${id}/students`}>Students</Link>
+          )}
+          <Link to={`/course/${id}/announcements`}>Announcements</Link>
+          <Link to={`/course/${id}/lessons`}>Lessons</Link>
+          <Link to={`/course/${id}/assignments`}>Assignments</Link>
+          <Link to={`/course/${id}/grades`}>Grades</Link>
+          <Link to={`/course/${id}/videocall`}>Video Call</Link>
+          <Link to="/"> Back to Courses</Link>
         </div>
       </div>
     )

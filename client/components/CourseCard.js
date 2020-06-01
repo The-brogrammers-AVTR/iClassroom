@@ -14,7 +14,7 @@ class ProductCard extends React.Component {
       <li key={id} className="course-card">
         <h2>{name} - #### </h2>
         <h4> Course Instructor </h4>
-        <Link to={`/home/${id}`}>Enter Class</Link>
+        <Link to={`/course/${id}/announcements`}>Enter Class</Link>
         <br />
         <button> Edit Course </button>
       </li>

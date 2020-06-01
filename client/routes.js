@@ -20,8 +20,8 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/home" component={Courses} />
-            <Route path="/home/:id" component={CourseHome} />
+            <Route exact path="/" component={Courses} />
+            <Route path="/course/:id/announcements" component={CourseHome} />
             <Route path="/assignments" component={Assignments} />
           </Switch>
         )}
