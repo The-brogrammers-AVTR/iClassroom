@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import Sidebar from './Sidebar.js'
 
-class CourseHome extends React.Component {
+class Announcements extends React.Component {
   constructor() {
     super()
   }
@@ -26,4 +26,4 @@ const mapStateToProps = ({courses, user}) => {
   return {courses, user}
 }
 
-export default connect(mapStateToProps)(CourseHome)
+export default connect(mapStateToProps)(Announcements)

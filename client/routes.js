@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Login, Signup, Courses, Assignments, CourseHome} from './components'
+import {Login, Signup, Courses, Assignments, Announcements} from './components'
 import {me, getCourses} from './store'
 
 class Routes extends Component {
@@ -21,7 +21,11 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={Courses} />
-            <Route path="/course/:id/announcements" component={CourseHome} />
+            <Route path="/course/:id/announcements" component={Announcements} />
+            <Route path="/course/:id/students" component={Announcements} />
+            <Route path="/course/:id/lessons" component={Announcements} />
+            <Route path="/course/:id/grades" component={Announcements} />
+            <Route path="/course/:id/videocall" component={Announcements} />
             <Route path="/assignments" component={Assignments} />
           </Switch>
         )}
