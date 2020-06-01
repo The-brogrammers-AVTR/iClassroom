@@ -71,6 +71,7 @@ label {
   align-items: center;
   width: 25%;
   border-radius: 5px;
+  margin: 1rem;
 }
 
 .course-card > a {
@@ -84,6 +85,21 @@ label {
 .course-card > a:hover {
   cursor: pointer;
   background-color: lightseagreen;
+}
+
+.course-card > h2 {
+  text-align: center;
+  color: white;
+}
+
+.course-card > button {
+  border-radius: 10px;
+  background-color: white;
+}
+
+.course-card > button:hover {
+  cursor: pointer;
+  background-color: teal;
 }
 
 h1 {
@@ -115,6 +131,7 @@ nav a {
   border-radius: 50%;
   font-weight: bolder;
   color: white;
+  width: 15px;
 }
 
 .courses-wrapper {
