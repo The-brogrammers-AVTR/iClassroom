@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -10,11 +11,100 @@ label {
   display: block;
 }
 
-nav a {
-  /* display: inline-block; */
-  margin: 1em;
+/* courseHome */
+.course-home-wrapper {
+  display: flex;
 }
 
-.google-login {
+.course-sidebar {
+  background-color: #6576bb;
+  width: 15%;
+  height: 750px;
+}
+
+.course-info {
+  margin: 1rem;
+}
+
+.course-navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-navigation > button {
+  margin: 1rem;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.course-navigation > button:hover {
+  background-color: #59cbc0;
+  cursor: pointer;
+}
+
+.course-content {
+  width: 80%;
+}
+
+.course-content > h1 {
   text-align: center;
+}
+
+/* course-card */
+
+.course-card-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #6576bb;
+  padding: 1rem;
+  list-style-type: none;
+  color: white;
+  align-items: center;
+  width: 25%;
+  border-radius: 5px;
+}
+
+.course-card > a {
+  background-color: #59cbc0;
+  padding: 1rem;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+}
+
+.course-card > a:hover {
+  cursor: pointer;
+  background-color: lightseagreen;
+}
+
+h1 {
+  text-align: center;
+  color: #6576bb;
+}
+/* navbar */
+nav a {
+  margin: 1rem;
+  color: #6576bb;
+  font-weight: bolder;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: lightblue;
+  padding-left: 1rem;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
 }

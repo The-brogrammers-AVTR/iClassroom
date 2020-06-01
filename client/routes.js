@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Login, Signup, UserHome, Assignments} from './components'
-import {me} from './store'
+import {Login, Signup, Courses, Assignments, CourseHome} from './components'
+import {me, getCourses} from './store'
 
 class Routes extends Component {
   componentDidMount() {
@@ -20,7 +20,8 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/home" component={Courses} />
+            <Route path="/home/:id" component={CourseHome} />
             <Route path="/assignments" component={Assignments} />
           </Switch>
         )}
@@ -43,6 +44,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getCourses())
     }
   }
 }
