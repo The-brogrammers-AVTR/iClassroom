@@ -9,21 +9,18 @@ class Courses extends React.Component {
 
   render() {
     const {courses} = this.props
-    // let filteredProducts
-    // if (category !== 'all') {
-    //   filteredProducts = products.filter(
-    //     (product) => product.category === category
-    //   )
-    // } else {
-    //   filteredProducts = products
-    // }
-
     return (
       <div>
-        <div className="course-card-wrapper">
-          {courses.map(course => {
-            return <CourseCard key={course.id} {...course} />
-          })}
+        <div>
+          <h1> Courses </h1>
+          <div className="course-card-wrapper">
+            {courses.map(course => {
+              return <CourseCard key={course.id} {...course} />
+            })}
+          </div>
+        </div>
+        <div>
+          <h1> Calendar Goes Here </h1>
         </div>
       </div>
     )

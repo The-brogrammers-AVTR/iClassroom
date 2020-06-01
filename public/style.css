@@ -19,7 +19,7 @@ label {
 .course-sidebar {
   background-color: lightblue;
   width: 15%;
-  height: 650px;
+  height: 750px;
 }
 
 .course-info {
@@ -54,20 +54,23 @@ label {
 
 /* course-card */
 
-.course-card {
+.course-card-wrapper {
   display: flex;
-  justify-content: space-evenly;
-  background-color: dodgerblue;
-  padding: 2rem;
-  margin: 1rem;
-  list-style-type: none;
-  width: 30%;
-  border-radius: 10px;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
-course-card-wrapper {
+.course-card {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #31409e;
+  padding: 1rem;
+  list-style-type: none;
+  color: white;
+  align-items: center;
+  width: 25%;
+  border-radius: 5px;
 }
 
 .course-card > a {
@@ -83,6 +86,9 @@ course-card-wrapper {
   background-color: firebrick;
 }
 
+h1 {
+  text-align: center;
+}
 /* navbar */
 nav a {
   margin: 1rem;
