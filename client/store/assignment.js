@@ -50,7 +50,7 @@ export const createAssignment = assignment => {
   }
 }
 
-const updateAssignment = assignment => {
+export const updateAssignment = assignment => {
   return async dispatch => {
     const updatedAssignment = (await axios.put(
       `/api/assignment/${assignment.id}`,
@@ -60,14 +60,14 @@ const updateAssignment = assignment => {
   }
 }
 
-const readAssignment = id => {
+export const readAssignment = id => {
   return async dispatch => {
     const _assignment = (await axios.get(`/api/assignments/${id}`)).data
     dispatch(_readAssignment(_assignment))
   }
 }
 
-const deleteAssignment = assignment => {
+export const deleteAssignment = assignment => {
   return async dispatch => {
     await axios.delete(`/api/assignments/${assignment.id}`)
     dispatch(_deleteAssignment(assignment))

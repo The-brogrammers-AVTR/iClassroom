@@ -5,6 +5,8 @@ import {createAssignment} from '../store/assignment'
 //import {REACT_APP_NASA_KEY} from '../../secrets'
 //console.log(REACT_APP_NASA_KEY);
 //const apiKey = process.env.REACT_APP_NASA_KEY
+const {apiKey1} = require('../../secrets.json')
+console.log(apiKey1)
 
 class MakeAssignment extends Component {
   constructor() {
@@ -16,8 +18,8 @@ class MakeAssignment extends Component {
 
   async componentDidMount() {
     const res = await fetch(
-      //`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`
-      `https://api.nasa.gov/planetary/apod?api_key=lmbimaGejOOMZ3XwKkgRoqCJXKG2aoxles68Jv5U`
+      `https://api.nasa.gov/planetary/apod?api_key=${apiKey1}`
+      //`https://api.nasa.gov/planetary/apod?api_key=lmbimaGejOOMZ3XwKkgRoqCJXKG2aoxles68Jv5U`
     )
     const nasa = await res.json()
 
@@ -29,8 +31,9 @@ class MakeAssignment extends Component {
 
   render() {
     const {nasa} = this.state
+    console.log(nasa)
     if (!nasa) {
-      return null
+      return <h1>loading</h1>
     }
     return (
       <div>
