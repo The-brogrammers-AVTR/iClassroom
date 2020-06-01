@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import CourseCard from './CourseCard.js'
+import {Link} from 'react-router-dom'
 
 class Courses extends React.Component {
   constructor() {
@@ -12,7 +13,12 @@ class Courses extends React.Component {
     return (
       <div>
         <div>
-          <h1> Courses </h1>
+          <div className="courses-wrapper">
+            <h1> Courses </h1>
+            <Link className="add-button" to="/createCourse">
+              +
+            </Link>
+          </div>
           <div className="course-card-wrapper">
             {courses.map(course => {
               return <CourseCard key={course.id} {...course} />

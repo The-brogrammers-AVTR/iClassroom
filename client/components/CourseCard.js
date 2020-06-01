@@ -12,8 +12,11 @@ class ProductCard extends React.Component {
 
     return (
       <li key={id} className="course-card">
-        <p>{name}</p>
+        <h2>{name} - #### </h2>
+        <h4> Course Instructor </h4>
         <Link to={`/home/${id}`}>Enter Class</Link>
+        <br />
+        <button> Edit Course </button>
       </li>
     )
   }

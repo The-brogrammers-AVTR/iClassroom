@@ -16,10 +16,13 @@ async function seed() {
   const courses = await Promise.all([
     Course.create({name: 'English'}),
     Course.create({name: 'Math'}),
-    Course.create({name: 'Science'})
+    Course.create({name: 'Science'}),
+    Course.create({name: 'History'}),
+    Course.create({name: 'Art'}),
+    Course.create({name: 'Music'})
   ])
 
-  const [english, math, science] = courses
+  const [english, math, science, history, art, music] = courses
 
   const [teacher1] = await Promise.all([Teacher.create({name: 'Isaac Newton'})])
 
