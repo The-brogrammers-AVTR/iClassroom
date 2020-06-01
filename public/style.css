@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -10,49 +11,49 @@ label {
   display: block;
 }
 
-nav a {
-  /* display: inline-block; */
-  margin: 1em;
-}
-
-.google-login {
-  text-align: center;
-}
-
 /* courseHome */
 .course-home-wrapper {
   display: flex;
 }
+
 .course-sidebar {
   background-color: lightblue;
   width: 15%;
   height: 650px;
 }
+
 .course-info {
   margin: 1rem;
 }
+
 .course-navigation {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .course-navigation > button {
   margin: 1rem;
   height: 2rem;
   border-radius: 10px;
   background-color: white;
 }
+
 .course-navigation > button:hover {
   background-color: dodgerblue;
   cursor: pointer;
 }
+
 .course-content {
   width: 80%;
 }
+
 .course-content > h1 {
   text-align: center;
 }
+
 /* course-card */
+
 .course-card {
   display: flex;
   justify-content: space-evenly;
@@ -63,10 +64,12 @@ nav a {
   width: 30%;
   border-radius: 10px;
 }
+
 course-card-wrapper {
   display: flex;
   justify-content: space-between;
 }
+
 .course-card > a {
   background-color: tomato;
   padding: 1rem;
@@ -78,4 +81,23 @@ course-card-wrapper {
 .course-card > a:hover {
   cursor: pointer;
   background-color: firebrick;
+}
+
+/* navbar */
+nav a {
+  margin: 1rem;
+  color: white;
+  font-weight: bolder;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: #31409e;
+  padding-left: 1rem;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
 }
