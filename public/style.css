@@ -108,3 +108,19 @@ nav a {
   display: flex;
   align-items: center;
 }
+/* courses page */
+.add-button {
+  background-color: #59cbc0;
+  padding: 1rem;
+  border-radius: 50%;
+  font-weight: bolder;
+  color: white;
+}
+
+.courses-wrapper {
+  display: flex;
+  margin: 2rem;
+  justify-content: space-between;
+  height: 3rem;
+  align-items: center;
+}
