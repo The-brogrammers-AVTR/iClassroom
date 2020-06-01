@@ -19,12 +19,12 @@ class Courses extends React.Component {
     // }
 
     return (
-      <div className="search-bar">
-        <ul className="wrapper">
+      <div>
+        <div className="course-card-wrapper">
           {courses.map(course => {
             return <CourseCard key={course.id} {...course} />
           })}
-        </ul>
+        </div>
       </div>
     )
   }

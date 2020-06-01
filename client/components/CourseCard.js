@@ -11,9 +11,9 @@ class ProductCard extends React.Component {
     const {id, name} = this.props
 
     return (
-      <li key={id} className="card">
+      <li key={id} className="course-card">
         <p>{name}</p>
-        <Link to={`/courses/${id}`}>Enter Class</Link>
+        <Link to={`/home/${id}`}>Enter Class</Link>
       </li>
     )
   }
