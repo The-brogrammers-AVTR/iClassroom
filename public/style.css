@@ -32,15 +32,17 @@ label {
   justify-content: space-between;
 }
 
-.course-navigation > button {
+.course-navigation > a {
   margin: 1rem;
-  height: 2rem;
+  padding: 0.5rem;
   border-radius: 10px;
-  background-color: white;
+  background-color: #59cbc0;
+  color: white;
+  text-align: center;
 }
 
-.course-navigation > button:hover {
-  background-color: #59cbc0;
+.course-navigation > a:hover {
+  background-color: lightseagreen;
   cursor: pointer;
 }
 
