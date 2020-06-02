@@ -27,10 +27,10 @@ const _updateAssignment = assignment => {
   }
 }
 
-const _deleteAssignment = assignment => {
+const _deleteAssignment = id => {
   return {
     type: DELETE_ASSIGNMENT,
-    assignment
+    id
   }
 }
 
@@ -67,10 +67,10 @@ export const readAssignment = id => {
   }
 }
 
-export const deleteAssignment = assignment => {
+export const deleteAssignment = id => {
   return async dispatch => {
-    await axios.delete(`/api/assignments/${assignment.id}`)
-    dispatch(_deleteAssignment(assignment))
+    await axios.delete(`/api/assignments/${id}`)
+    dispatch(_deleteAssignment(id))
   }
 }
 
@@ -98,7 +98,7 @@ export default function(state = [], action) {
             : assignment
       )
     case DELETE_ASSIGNMENT:
-      return state.filter(assignment => assignment.id !== action.assignment.id)
+      return state.filter(assignment => assignment.id !== action.id)
     default:
       return state
   }
