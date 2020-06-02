@@ -12,12 +12,7 @@ class Assignments extends Component {
     this.props.load()
   }
 
-  // handleRemove(id) {
-  //   this.props.remove(id)
-  // }
-
   render() {
-    //const {handleRemove} = this
     const {remove} = this.props
     console.log(remove)
     if (!this.props.assignment) {
