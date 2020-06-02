@@ -33,5 +33,6 @@ module.exports = {
   User,
   Teacher,
   Assignment,
-  Image
+  Image,
+  Course
 }

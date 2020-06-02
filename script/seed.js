@@ -1,18 +1,28 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Teacher, Assignment} = require('../server/db/models')
+const {User, Teacher, Assignment, Course} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
+    User.create({email: 'tandid@gmail.com', password: '123', isTeacher: true}),
     User.create({email: 'murphy@email.com', password: '123'})
   ])
+  const [tandid, murphy] = users
 
-  console.log(`seeded ${users.length} users`)
+  const courses = await Promise.all([
+    Course.create({name: 'English'}),
+    Course.create({name: 'Math'}),
+    Course.create({name: 'Science'}),
+    Course.create({name: 'History'}),
+    Course.create({name: 'Art'}),
+    Course.create({name: 'Music'})
+  ])
+
+  const [english, math, science, history, art, music] = courses
 
   const [teacher1] = await Promise.all([Teacher.create({name: 'Isaac Newton'})])
 
@@ -40,6 +50,8 @@ async function seed() {
     })
   ])
 
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${courses.length} courses`)
   console.log(`seeded successfully`)
 }
 

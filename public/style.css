@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -10,11 +11,135 @@ label {
   display: block;
 }
 
-nav a {
-  /* display: inline-block; */
-  margin: 1em;
+/* courseHome */
+.course-home-wrapper {
+  display: flex;
 }
 
-.google-login {
+.course-sidebar {
+  background-color: #6576bb;
+  width: 15%;
+  height: 750px;
+}
+
+.course-info {
+  margin: 1rem;
+}
+
+.course-navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-navigation > a {
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: #59cbc0;
+  color: white;
   text-align: center;
+}
+
+.course-navigation > a:hover {
+  background-color: lightseagreen;
+  cursor: pointer;
+}
+
+.course-content {
+  width: 80%;
+}
+
+.course-content > h1 {
+  text-align: center;
+}
+
+/* course-card */
+
+.course-card-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #6576bb;
+  padding: 1rem;
+  list-style-type: none;
+  color: white;
+  align-items: center;
+  width: 25%;
+  border-radius: 5px;
+  margin: 1rem;
+}
+
+.course-card > a {
+  background-color: #59cbc0;
+  padding: 1rem;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+}
+
+.course-card > a:hover {
+  cursor: pointer;
+  background-color: lightseagreen;
+}
+
+.course-card > h2 {
+  text-align: center;
+  color: white;
+}
+
+.course-card > button {
+  border-radius: 10px;
+  background-color: white;
+}
+
+.course-card > button:hover {
+  cursor: pointer;
+  background-color: teal;
+}
+
+h1 {
+  text-align: center;
+  color: #6576bb;
+}
+/* navbar */
+nav a {
+  margin: 1rem;
+  color: #6576bb;
+  font-weight: bolder;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: lightblue;
+  padding-left: 1rem;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+/* courses page */
+.add-button {
+  background-color: #59cbc0;
+  padding: 1rem;
+  border-radius: 50%;
+  font-weight: bolder;
+  color: white;
+  width: 15px;
+}
+
+.courses-wrapper {
+  display: flex;
+  margin: 2rem;
+  justify-content: space-between;
+  height: 3rem;
+  align-items: center;
 }
