@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {readAssignments} from '../store/assignment'
+import {deleteAssignment} from '../store/assignment'
 
 class Assignments extends Component {
   constructor() {
@@ -12,13 +13,22 @@ class Assignments extends Component {
   }
 
   render() {
+    const {remove} = this.props
+    console.log(remove)
     if (!this.props.assignment) {
       return null
     }
     return (
       <ul>
         {this.props.assignment.map(assignment => (
-          <li key={assignment.id}>{assignment.name}</li>
+          <li key={assignment.id}>
+            <span>{assignment.name}</span>
+            <span>{assignment.category}</span>
+            <span>{assignment.description}</span>
+            <span>{assignment.teacherId}</span>
+            <button>Edit</button>
+            <button onClick={() => remove(assignment.id)}>Remove</button>
+          </li>
         ))}
       </ul>
     )
@@ -38,6 +48,9 @@ const mapDispatchToProps = dispatch => {
   return {
     load: () => {
       dispatch(readAssignments())
+    },
+    remove: id => {
+      dispatch(deleteAssignment(id))
     }
   }
 }

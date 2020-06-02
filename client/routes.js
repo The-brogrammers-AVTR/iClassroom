@@ -1,7 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Login, Signup, Courses, Assignments, CourseHome} from './components'
+import {
+  Login,
+  Signup,
+  Courses,
+  Assignments,
+  CourseHome,
+  AddCourse,
+  MakeAssignment
+} from './components'
 import {me, getCourses} from './store'
 
 class Routes extends Component {
@@ -17,12 +25,14 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/course" component={AddCourse} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={Courses} />
             <Route path="/course/:id/announcements" component={CourseHome} />
             <Route path="/assignments" component={Assignments} />
+            <Route path="/makeassignment" component={MakeAssignment} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
