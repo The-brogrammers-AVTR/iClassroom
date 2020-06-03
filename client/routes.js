@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {Login, Signup, Courses, Assignments, Announcements} from './components'
-import {me, getCourses} from './store'
+import {me, getCourses, getTeachers} from './store'
 
 class Routes extends Component {
   componentDidMount() {
@@ -49,6 +49,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
       dispatch(getCourses())
+      dispatch(getTeachers())
     }
   }
 }

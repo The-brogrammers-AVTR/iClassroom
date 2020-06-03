@@ -5,6 +5,8 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
+const GET_TEACHERS = 'GET_TEACHERS'
+
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -16,12 +18,21 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
+const _getTeachers = teachers => ({type: GET_TEACHERS, teachers})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
  * THUNK CREATORS
  */
-export const me = () => async dispatch => {
+
+const getTeachers = () => {
+  return async dispatch => {
+    const response = await axios.get('/api/users/teachers')
+    dispatch(_getTeachers(response.data))
+  }
+}
+
+const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
@@ -30,7 +41,7 @@ export const me = () => async dispatch => {
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+const auth = (email, password, method) => async dispatch => {
   let res
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
@@ -46,7 +57,7 @@ export const auth = (email, password, method) => async dispatch => {
   }
 }
 
-export const logout = () => async dispatch => {
+const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
@@ -59,7 +70,7 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+const user = (state = defaultUser, action) => {
   switch (action.type) {
     case GET_USER:
       return action.user
@@ -69,3 +80,13 @@ export default function(state = defaultUser, action) {
       return state
   }
 }
+const teachers = (state = [], action) => {
+  switch (action.type) {
+    case GET_TEACHERS:
+      return action.teachers
+    default:
+      return state
+  }
+}
+
+export {me, auth, logout, getTeachers, user, teachers}

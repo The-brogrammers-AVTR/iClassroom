@@ -6,26 +6,15 @@ import axios from 'axios'
 class CourseCard extends React.Component {
   constructor() {
     super()
-    this.state = {
-      instructors: []
-    }
-  }
-
-  async componentDidMount() {
-    const {UserCourses} = this.props
-    await axios.get('/api/users/teachers').then(response => {
-      const instructors = response.data.filter(teacher =>
-        UserCourses.find(usercourse => usercourse.userId === teacher.id)
-      )
-      this.setState({instructors})
-    })
   }
 
   render() {
-    const {instructors} = this.state
-    const {id, name, code} = this.props
+    const {id, name, code, teachers, UserCourses} = this.props
+    const instructor = teachers.find(teacher =>
+      UserCourses.find(usercourse => usercourse.userId === teacher.id)
+    )
 
-    if (!instructors) {
+    if (!instructor) {
       return null
     }
     return (
@@ -33,9 +22,7 @@ class CourseCard extends React.Component {
         <h2>
           {name} - {code}
         </h2>
-        {instructors.map(instructor => (
-          <h4 key={instructor.id}>Instructor: {instructor.firstName}</h4>
-        ))}
+        <h4 key={instructor.id}>Instructor: {instructor.firstName}</h4>
         <Link to={`/course/${id}/announcements`}>Enter Class</Link>
         <br />
         <button> Edit Course </button>
@@ -44,9 +31,10 @@ class CourseCard extends React.Component {
   }
 }
 
-const mapStateToProps = ({user}) => {
+const mapStateToProps = ({user, teachers}) => {
   return {
-    user
+    user,
+    teachers
   }
 }
 
