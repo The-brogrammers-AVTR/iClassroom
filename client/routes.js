@@ -6,11 +6,11 @@ import {
   Signup,
   Courses,
   Assignments,
-  CourseHome,
+  Announcements,
   Chat,
   MakeAssignment
 } from './components'
-import {me, getCourses} from './store'
+import {me, getCourses, getTeachers} from './store'
 
 class Routes extends Component {
   componentDidMount() {
@@ -25,12 +25,16 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/course" component={Chat} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={Courses} />
-            <Route path="/course/:id/announcements" component={CourseHome} />
+            <Route path="/course/:id/announcements" component={Announcements} />
+            <Route path="/course/:id/students" component={Announcements} />
+            <Route path="/course/:id/lessons" component={Announcements} />
+            <Route path="/course/:id/grades" component={Announcements} />
+            <Route path="/course/:id/videocall" component={Announcements} />
+            <Route path="/course/:id/chatroom" component={Chat} />
             <Route path="/assignments" component={Assignments} />
             <Route path="/makeassignment" component={MakeAssignment} />
           </Switch>
@@ -55,6 +59,7 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
       dispatch(getCourses())
+      dispatch(getTeachers())
     }
   }
 }
