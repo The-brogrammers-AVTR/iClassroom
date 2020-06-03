@@ -44,7 +44,7 @@ const createCourse = (course, push) => {
   return async dispatch => {
     const response = await axios.post('/api/courses', course)
     dispatch(_createCourse(response.data))
-    push('/home')
+    push('/')
   }
 }
 
@@ -55,7 +55,7 @@ const updateCourse = (course, push) => {
       course
     )
     dispatch(_updateCourse(updatedCourse))
-    push('/home')
+    push('/')
   }
 }
 

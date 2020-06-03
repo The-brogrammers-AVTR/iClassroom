@@ -1,15 +1,15 @@
 const router = require('express').Router()
-const {Course} = require('../db/models')
+const {Course, UserCourse} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  await Course.findAll()
+  await Course.findAll({include: UserCourse})
     .then(courses => res.send(courses))
     .catch(next)
 })
 
 router.get('/:id', async (req, res, next) => {
-  await Course.findByPk(req.params.id)
+  await Course.findByPk(req.params.id, {include: UserCourse})
     .then(course => res.send(course))
     .catch(next)
 })
@@ -31,7 +31,7 @@ router.delete('/:id', async (req, res, next) => {
 })
 
 router.put('/:id', (req, res, next) => {
-  Course.findByPk(req.params.id)
+  Course.findByPk(req.params.id, {include: UserCourse})
     .then(course =>
       course.update({
         name: req.body.name

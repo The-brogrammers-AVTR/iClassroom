@@ -9,8 +9,11 @@ const Image = require('./image')
 // blank models
 const UserCourse = db.define('UserCourse')
 
-User.belongsToMany(Course, {through: 'UserCourse'})
-Course.belongsToMany(User, {through: 'UserCourse'})
+User.belongsToMany(Course, {through: UserCourse})
+Course.belongsToMany(User, {through: UserCourse})
+
+Course.hasMany(UserCourse)
+UserCourse.belongsTo(Course)
 
 Course.hasMany(Assignment)
 Assignment.belongsTo(Course)
