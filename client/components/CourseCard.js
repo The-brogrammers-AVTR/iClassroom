@@ -13,9 +13,8 @@ class CourseCard extends React.Component {
 
   async componentDidMount() {
     const {UserCourses} = this.props
-    await axios.get('/api/users').then(response => {
-      const teachers = response.data.filter(user => user.isTeacher === true)
-      const instructors = teachers.filter(teacher =>
+    await axios.get('/api/users/teachers').then(response => {
+      const instructors = response.data.filter(teacher =>
         UserCourses.find(usercourse => usercourse.userId === teacher.id)
       )
       this.setState({instructors})
