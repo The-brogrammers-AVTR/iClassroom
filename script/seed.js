@@ -29,24 +29,27 @@ async function seed() {
   const [assignment1, assignment2, assignment3] = await Promise.all([
     Assignment.create({
       name: 'Discover Sun',
-      category: 'Science',
+      category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id
+      teacherId: teacher1.id,
+      courseId: science.id
     }),
     Assignment.create({
       name: 'Discover Moon',
-      category: 'Science',
+      category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id
+      teacherId: teacher1.id,
+      courseId: science.id
     }),
     Assignment.create({
       name: 'Discover Mars',
-      category: 'Science',
+      category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id
+      teacherId: teacher1.id,
+      courseId: science.id
     })
   ])
 
