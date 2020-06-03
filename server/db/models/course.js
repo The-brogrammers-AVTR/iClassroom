@@ -14,6 +14,11 @@ const Course = db.define('course', {
     validate: {
       notEmpty: true
     }
+  },
+  code: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 1111
   }
 })
 
