@@ -7,7 +7,8 @@ const {
   Course,
   UserCourse,
   Announcement,
-  Lesson
+  Lesson,
+  UserAssignment
 } = require('../server/db/models')
 
 async function seed() {
@@ -100,7 +101,14 @@ async function seed() {
     })
   ])
 
-  const [assignment1, assignment2, assignment3] = await Promise.all([
+  const [
+    assign1,
+    assign2,
+    assign3,
+    assign4,
+    assign5,
+    assign6
+  ] = await Promise.all([
     Assignment.create({
       name: 'Discover Sun',
       category: 'Astronomy',
@@ -151,11 +159,19 @@ async function seed() {
     })
   ])
 
+  const userassignment = await Promise.all([
+    UserAssignment.create({userId: student1.id, assignmentId: assign1.id}),
+    UserAssignment.create({userId: student1.id, assignmentId: assign2.id}),
+    UserAssignment.create({userId: student1.id, assignmentId: assign3.id}),
+    UserAssignment.create({userId: student2.id, assignmentId: assign1.id})
+  ])
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${courses.length} courses`)
   console.log(`seeded ${usercourses.length} userCourses`)
   console.log(`seeded ${announcement.length} announcements`)
   console.log(`seeded ${lesson.length} lessons`)
+  console.log(`seeded ${userassignment.length} userassignments`)
   console.log(`seeded successfully`)
 }
 
