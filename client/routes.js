@@ -42,7 +42,7 @@ class Routes extends Component {
             <Route path="/course/:id/grades" component={Announcements} />
             <Route path="/course/:id/videocall" component={Announcements} />
             <Route path="/course/:id/chatroom" component={Chat} />
-            <Route path="/assignments" component={Assignments} />
+            <Route path="/course/:id/assignments" component={Assignments} />
             <Route path="/makeassignment" component={MakeAssignment} />
           </Switch>
         )}
