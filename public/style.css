@@ -19,11 +19,12 @@ label {
 .course-sidebar {
   background-color: #6576bb;
   width: 15%;
-  height: 750px;
+  min-height: 900px;
 }
 
 .course-info {
   margin: 1rem;
+  text-align: center;
 }
 
 .course-navigation {
@@ -47,7 +48,7 @@ label {
 }
 
 .course-content {
-  width: 80%;
+  width: 100%;
 }
 
 .course-content > h1 {
@@ -142,4 +143,12 @@ nav a {
   justify-content: space-between;
   height: 3rem;
   align-items: center;
+}
+
+/* announcements */
+.announcement-card {
+  margin: 2rem;
+  padding: 1rem;
+  background-color: lightblue;
+  min-height: 150px;
 }

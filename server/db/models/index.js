@@ -28,5 +28,6 @@ module.exports = {
   Assignment,
   Image,
   Course,
-  UserCourse
+  UserCourse,
+  Announcement
 }

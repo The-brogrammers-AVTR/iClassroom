@@ -10,7 +10,7 @@ import {
   Chat,
   MakeAssignment
 } from './components'
-import {me, getCourses, getTeachers} from './store'
+import {me, getCourses, getTeachers, getAnnouncements} from './store'
 
 class Routes extends Component {
   componentDidMount() {
@@ -60,6 +60,7 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(getCourses())
       dispatch(getTeachers())
+      dispatch(getAnnouncements())
     }
   }
 }
