@@ -46,10 +46,10 @@ async function seed() {
   // userCourses
   const usercourses = await Promise.all([
     UserCourse.create({userId: tandid.id, courseId: science.id}),
-    // UserCourse.create({userId: tandid.id, courseId: math.id}),
-    // UserCourse.create({userId: tandid.id, courseId: english.id}),
-    // UserCourse.create({userId: tandid.id, courseId: art.id}),
-    // UserCourse.create({userId: murphy.id, courseId: math.id}),
+    UserCourse.create({userId: tandid.id, courseId: math.id}),
+    UserCourse.create({userId: tandid.id, courseId: english.id}),
+    UserCourse.create({userId: tandid.id, courseId: art.id}),
+    UserCourse.create({userId: student1.id, courseId: math.id}),
     UserCourse.create({userId: student1.id, courseId: science.id}),
     UserCourse.create({userId: student2.id, courseId: science.id}),
     UserCourse.create({userId: student3.id, courseId: science.id}),

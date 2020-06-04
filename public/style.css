@@ -40,6 +40,7 @@ label {
   background-color: #59cbc0;
   color: white;
   text-align: center;
+  box-shadow: 1px 1px 5px 1px black;
 }
 
 .course-navigation > a:hover {
@@ -94,6 +95,7 @@ label {
   text-decoration: none;
   color: white;
   border-radius: 10px;
+  box-shadow: 1px 1px 5px 1px black;
 }
 
 .course-card > a:hover {
@@ -132,6 +134,7 @@ nav a {
   justify-content: space-between;
   background-color: lightblue;
   padding-left: 1rem;
+  box-shadow: 1px 1px 5px 1px black;
 }
 
 .navbar {
@@ -147,6 +150,7 @@ nav a {
   color: white;
   width: 15px;
   height: 1rem;
+  box-shadow: 1px 1px 5px 1px black;
 }
 
 .courses-wrapper {
