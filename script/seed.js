@@ -6,13 +6,15 @@ const {
   Teacher,
   Assignment,
   Course,
-  UserCourse
+  UserCourse,
+  Announcement
 } = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  // users
   const users = await Promise.all([
     User.create({
       firstName: 'Tandid',
@@ -25,6 +27,7 @@ async function seed() {
   ])
   const [tandid, murphy] = users
 
+  // courses
   const courses = await Promise.all([
     Course.create({name: 'English'}),
     Course.create({name: 'Math'}),
@@ -36,6 +39,7 @@ async function seed() {
 
   const [english, math, science, history, art, music] = courses
 
+  // userCourses
   const usercourses = await Promise.all([
     UserCourse.create({userId: tandid.id, courseId: science.id}),
     UserCourse.create({userId: tandid.id, courseId: math.id}),
@@ -43,6 +47,20 @@ async function seed() {
     UserCourse.create({userId: tandid.id, courseId: art.id}),
     UserCourse.create({userId: murphy.id, courseId: math.id}),
     UserCourse.create({userId: murphy.id, courseId: science.id})
+  ])
+
+  // announcement
+  const announcement = await Promise.all([
+    Announcement.create({
+      title: 'No Class',
+      description: 'Hi all, there will be no class this Thursday!',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'Remote Class',
+      description: 'Hi all, due to Corona Virus, all classes will be remote!',
+      courseId: science.id
+    })
   ])
 
   const [teacher1] = await Promise.all([Teacher.create({name: 'Isaac Newton'})])
@@ -77,6 +95,7 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${courses.length} courses`)
   console.log(`seeded ${usercourses.length} userCourses`)
+  console.log(`seeded ${announcement.length} announcements`)
   console.log(`seeded successfully`)
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
-import axios from 'axios'
+import AnnouncementCard from './AnnouncementCard.js'
 
 class Announcements extends React.Component {
   constructor() {
@@ -9,7 +9,7 @@ class Announcements extends React.Component {
   }
 
   render() {
-    const {course, teachers} = this.props
+    const {course, teachers, filteredAnnouncements} = this.props
     const instructor = teachers.find(teacher =>
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
@@ -21,16 +21,22 @@ class Announcements extends React.Component {
       <div className="course-home-wrapper">
         <Sidebar {...course} instructor={instructor} />
         <div className="course-content">
-          <h1>Content Goes Here</h1>
+          <h1>Announcements</h1>
+          {filteredAnnouncements.map(announcement => {
+            return <AnnouncementCard key={announcement.id} {...announcement} />
+          })}
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({courses, teachers}, {match}) => {
+const mapStateToProps = ({courses, teachers, announcements}, {match}) => {
   const course = courses.find(_course => _course.id === Number(match.params.id))
-  return {course, teachers}
+  const filteredAnnouncements = announcements.filter(
+    announcement => announcement.courseId === Number(match.params.id)
+  )
+  return {course, teachers, filteredAnnouncements}
 }
 
 export default connect(mapStateToProps)(Announcements)

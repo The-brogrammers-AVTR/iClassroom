@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const {STRING, INTEGER} = Sequelize
+const {STRING, INTEGER, TEXT} = Sequelize
 
 const Announcement = db.define('announcement', {
   id: {
@@ -8,8 +8,17 @@ const Announcement = db.define('announcement', {
     primaryKey: true,
     autoIncrement: true
   },
-  name: {
+
+  title: {
     type: STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+
+  description: {
+    type: TEXT,
     allowNull: false,
     validate: {
       notEmpty: true
