@@ -21,13 +21,17 @@ class Assignments extends Component {
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
     //console.log('ins', instructor)
+    const assignmentsForCourse = this.props.assignment.filter(
+      assignment => assignment.courseId === course.id
+    )
+
     if (!this.props.assignment || !instructor) {
       return null
     }
     return (
       <div>
         <Sidebar {...course} instructor={instructor} />
-        <TableAssignments assignment={this.props.assignment} remove={remove} />
+        <TableAssignments assignment={assignmentsForCourse} remove={remove} />
       </div>
     )
   }
