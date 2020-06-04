@@ -1,6 +1,5 @@
 const db = require('../db')
 const User = require('./user')
-const Teacher = require('./teacher')
 const Assignment = require('./assignment')
 const Course = require('./course')
 const Announcement = require('./announcement')
@@ -26,7 +25,6 @@ Announcement.belongsTo(Course)
 
 module.exports = {
   User,
-  Teacher,
   Assignment,
   Image,
   Course,

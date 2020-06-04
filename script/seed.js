@@ -1,13 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {
-  User,
-  Teacher,
-  Assignment,
-  Course,
-  UserCourse
-} = require('../server/db/models')
+const {User, Assignment, Course, UserCourse} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -45,15 +39,13 @@ async function seed() {
     UserCourse.create({userId: murphy.id, courseId: science.id})
   ])
 
-  const [teacher1] = await Promise.all([Teacher.create({name: 'Isaac Newton'})])
-
   const [assignment1, assignment2, assignment3] = await Promise.all([
     Assignment.create({
       name: 'Discover Sun',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id,
+      teacherId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
@@ -61,7 +53,7 @@ async function seed() {
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id,
+      teacherId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
@@ -69,7 +61,7 @@ async function seed() {
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id,
+      teacherId: tandid.id,
       courseId: science.id
     })
   ])
