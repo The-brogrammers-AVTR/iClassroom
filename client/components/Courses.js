@@ -9,18 +9,21 @@ class Courses extends React.Component {
   }
 
   render() {
-    const {courses} = this.props
+    const {user, filteredCourses} = this.props
+
     return (
       <div>
         <div>
           <div className="courses-wrapper">
             <h1> Courses </h1>
-            <Link className="add-button" to="/createCourse">
-              +
-            </Link>
+            {user.isTeacher === true && (
+              <Link className="add-button" to="/createCourse">
+                +
+              </Link>
+            )}
           </div>
           <div className="course-card-wrapper">
-            {courses.map(course => {
+            {filteredCourses.map(course => {
               return <CourseCard key={course.id} {...course} />
             })}
           </div>
@@ -34,13 +37,14 @@ class Courses extends React.Component {
 }
 
 const mapStateToProps = ({courses, user}) => {
-  return {courses, user}
+  const filteredCourses = courses.filter(course => {
+    if (course.UserCourses.length > 0) {
+      return course.UserCourses.find(
+        usercourse => user.id === usercourse.userId
+      )
+    }
+  })
+  return {user, filteredCourses}
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    load: () => dispatch(getCourses())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Courses)
+export default connect(mapStateToProps)(Courses)

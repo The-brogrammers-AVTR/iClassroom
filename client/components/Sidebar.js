@@ -8,15 +8,18 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const {courses, user} = this.props
-    const id = 1
+    const {id, name, code, user, instructor} = this.props
+    console.log(instructor)
     return (
       <div className="course-sidebar">
         <div className="course-info">
-          <p>Course Name</p>
-          <p>Course Code</p>
-          <p>Instructor Name</p>
-          <p>Contact Info</p>
+          <p>
+            {name} - {code}
+          </p>
+          <p>
+            {instructor.firstName} {instructor.lastName}
+          </p>
+          <p>{instructor.email}</p>
           <p>Syllabus Link</p>
         </div>
         <div className="course-navigation">
@@ -28,6 +31,7 @@ class Sidebar extends React.Component {
           <Link to={`/course/${id}/assignments`}>Assignments</Link>
           <Link to={`/course/${id}/grades`}>Grades</Link>
           <Link to={`/course/${id}/videocall`}>Video Call</Link>
+          <Link to={`/course/${id}/chatroom`}>Chat Room</Link>
           <Link to="/"> Back to Courses</Link>
         </div>
       </div>
@@ -35,8 +39,8 @@ class Sidebar extends React.Component {
   }
 }
 
-const mapStateToProps = ({courses, user}) => {
-  return {courses, user}
+const mapStateToProps = ({user}) => {
+  return {user}
 }
 
 export default connect(mapStateToProps)(Sidebar)
