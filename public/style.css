@@ -85,6 +85,7 @@ label {
   width: 25%;
   border-radius: 5px;
   margin: 1rem;
+  box-shadow: 2px 2px 10px 2px black;
 }
 
 .course-card > a {
@@ -158,11 +159,12 @@ nav a {
 
 /* announcements */
 .announcement-card {
-  margin: 0 2rem 2rem 2rem;
+  margin: 2rem 2rem 2rem 2rem;
   padding: 1rem;
   background-color: lightblue;
   min-height: 150px;
   border-radius: 10px;
+  box-shadow: 2px 2px 10px 2px black;
 }
 
 /* studentlist */
@@ -183,6 +185,7 @@ table {
   border: solid 2px lightblue;
   border-collapse: collapse;
   width: 100%;
+  box-shadow: 2px 2px 10px 2px black;
 }
 
 thead {
