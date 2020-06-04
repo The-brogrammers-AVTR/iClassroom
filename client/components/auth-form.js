@@ -38,11 +38,6 @@ const LoginForm = props => {
   const {name, displayName, handleSubmit, error} = props
   const classes = useStyles()
 
-  const responseGoogle = response => {
-    console.log(response)
-    console.log(response.profileObj)
-  }
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

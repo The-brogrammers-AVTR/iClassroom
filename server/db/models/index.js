@@ -3,6 +3,7 @@ const User = require('./user')
 const Assignment = require('./assignment')
 const Course = require('./course')
 const Announcement = require('./announcement')
+const Lesson = require('./lesson')
 const Image = require('./image')
 
 // blank models
@@ -23,10 +24,15 @@ User.belongsToMany(Assignment, {through: 'UserAssignment'})
 Course.hasMany(Announcement)
 Announcement.belongsTo(Course)
 
+Course.hasMany(Lesson)
+Lesson.belongsTo(Course)
+
 module.exports = {
   User,
   Assignment,
   Image,
   Course,
-  UserCourse
+  UserCourse,
+  Announcement,
+  Lesson
 }

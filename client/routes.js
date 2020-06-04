@@ -8,10 +8,17 @@ import {
   Assignments,
   Announcements,
   Chat,
-  MakeAssignment
+  MakeAssignment,
+  Lessons
 } from './components'
-import {me, getCourses, getTeachers} from './store'
-import Sidebar from './components/Sidebar'
+
+import {
+  me,
+  getCourses,
+  getTeachers,
+  getAnnouncements,
+  getLessons
+} from './store'
 
 class Routes extends Component {
   componentDidMount() {
@@ -32,7 +39,7 @@ class Routes extends Component {
             <Route exact path="/" component={Courses} />
             <Route path="/course/:id/students" component={Announcements} />
             <Route path="/course/:id/announcements" component={Announcements} />
-            <Route path="/course/:id/lessons" component={Announcements} />
+            <Route path="/course/:id/lessons" component={Lessons} />
             <Route path="/course/:id/grades" component={Announcements} />
             <Route path="/course/:id/videocall" component={Announcements} />
             <Route path="/course/:id/chatroom" component={Chat} />
@@ -61,6 +68,8 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(getCourses())
       dispatch(getTeachers())
+      dispatch(getAnnouncements())
+      dispatch(getLessons())
     }
   }
 }

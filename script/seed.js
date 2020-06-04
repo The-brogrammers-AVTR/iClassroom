@@ -1,12 +1,20 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Assignment, Course, UserCourse} = require('../server/db/models')
+const {
+  User,
+  Assignment,
+  Course,
+  UserCourse,
+  Announcement,
+  Lesson
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  // users
   const users = await Promise.all([
     User.create({
       firstName: 'Tandid',
@@ -19,6 +27,7 @@ async function seed() {
   ])
   const [tandid, murphy] = users
 
+  // courses
   const courses = await Promise.all([
     Course.create({name: 'English'}),
     Course.create({name: 'Math'}),
@@ -30,6 +39,7 @@ async function seed() {
 
   const [english, math, science, history, art, music] = courses
 
+  // userCourses
   const usercourses = await Promise.all([
     UserCourse.create({userId: tandid.id, courseId: science.id}),
     UserCourse.create({userId: tandid.id, courseId: math.id}),
@@ -37,6 +47,49 @@ async function seed() {
     UserCourse.create({userId: tandid.id, courseId: art.id}),
     UserCourse.create({userId: murphy.id, courseId: math.id}),
     UserCourse.create({userId: murphy.id, courseId: science.id})
+  ])
+
+  // announcement
+  const announcement = await Promise.all([
+    Announcement.create({
+      title: 'No Class',
+      description: 'Hi all, there will be no class this Thursday! Thanks.',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'Remote Class',
+      description:
+        'Hi all, due to Corona Virus, all classes will be remote! Thanks.',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'No HW this week',
+      description: 'There will be no homework for this week. Thanks.',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'Test Rescheduled',
+      description: 'Hi all, test has been rescheduled for two weeks from now!',
+      courseId: science.id
+    })
+  ])
+  // lesson
+  const lesson = await Promise.all([
+    Lesson.create({
+      title: 'Lesson 1',
+      description: 'Chapter 1, Powerpoint',
+      courseId: science.id
+    }),
+    Lesson.create({
+      title: 'Lesson 2',
+      description: 'Chapter 2, Game',
+      courseId: science.id
+    }),
+    Lesson.create({
+      title: 'Lesson 3',
+      description: 'Chapter 3, Picture book',
+      courseId: science.id
+    })
   ])
 
   const [assignment1, assignment2, assignment3] = await Promise.all([
@@ -93,6 +146,8 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${courses.length} courses`)
   console.log(`seeded ${usercourses.length} userCourses`)
+  console.log(`seeded ${announcement.length} announcements`)
+  console.log(`seeded ${lesson.length} lessons`)
   console.log(`seeded successfully`)
 }
 

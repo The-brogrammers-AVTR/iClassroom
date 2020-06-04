@@ -19,11 +19,12 @@ label {
 .course-sidebar {
   background-color: #6576bb;
   width: 15%;
-  height: 750px;
+  min-height: 900px;
 }
 
 .course-info {
   margin: 1rem;
+  text-align: center;
 }
 
 .course-navigation {
@@ -46,8 +47,18 @@ label {
   cursor: pointer;
 }
 
+.course-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2rem;
+}
 .course-content {
-  width: 80%;
+  width: 100%;
+}
+.course-content > div:nth-child(2) {
+  overflow: scroll;
+  height: 800px;
 }
 
 .course-content > h1 {
@@ -134,6 +145,7 @@ nav a {
   font-weight: bolder;
   color: white;
   width: 15px;
+  height: 1rem;
 }
 
 .courses-wrapper {
@@ -142,4 +154,13 @@ nav a {
   justify-content: space-between;
   height: 3rem;
   align-items: center;
+}
+
+/* announcements */
+.announcement-card {
+  margin: 0 2rem 2rem 2rem;
+  padding: 1rem;
+  background-color: lightblue;
+  min-height: 150px;
+  border-radius: 10px;
 }
