@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const GET_TEACHERS = 'GET_TEACHERS'
+const GET_STUDENTS = 'GET_STUDENTS'
 
 const REMOVE_USER = 'REMOVE_USER'
 
@@ -19,6 +20,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const _getTeachers = teachers => ({type: GET_TEACHERS, teachers})
+const _getStudents = students => ({type: GET_STUDENTS, students})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -29,6 +31,12 @@ const getTeachers = () => {
   return async dispatch => {
     const response = await axios.get('/api/users/teachers')
     dispatch(_getTeachers(response.data))
+  }
+}
+const getStudents = () => {
+  return async dispatch => {
+    const response = await axios.get('/api/users/students')
+    dispatch(_getStudents(response.data))
   }
 }
 
@@ -80,6 +88,7 @@ const user = (state = defaultUser, action) => {
       return state
   }
 }
+
 const teachers = (state = [], action) => {
   switch (action.type) {
     case GET_TEACHERS:
@@ -89,4 +98,13 @@ const teachers = (state = [], action) => {
   }
 }
 
-export {me, auth, logout, getTeachers, user, teachers}
+const students = (state = [], action) => {
+  switch (action.type) {
+    case GET_STUDENTS:
+      return action.students
+    default:
+      return state
+  }
+}
+
+export {me, auth, logout, getTeachers, getStudents, user, teachers, students}

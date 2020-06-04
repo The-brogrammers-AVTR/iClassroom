@@ -25,3 +25,14 @@ router.get('/teachers', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/students', async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      where: {isTeacher: false}
+    })
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -2,7 +2,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import {user, teachers} from './user'
+import {user, teachers, students} from './user'
 import assignment from './assignment'
 import {announcements} from './announcement'
 import {lessons} from './lesson'
@@ -11,6 +11,7 @@ import {courses, course} from './course'
 const reducer = combineReducers({
   user,
   teachers,
+  students,
   assignment,
   course,
   courses,
