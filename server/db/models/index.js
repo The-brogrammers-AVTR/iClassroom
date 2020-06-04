@@ -8,6 +8,7 @@ const Image = require('./image')
 
 // blank models
 const UserCourse = db.define('UserCourse')
+const UserAssignment = db.define('UserAssignment')
 
 User.belongsToMany(Course, {through: UserCourse})
 Course.belongsToMany(User, {through: UserCourse})
@@ -18,8 +19,8 @@ UserCourse.belongsTo(Course)
 Course.hasMany(Assignment)
 Assignment.belongsTo(Course)
 
-Assignment.belongsToMany(User, {through: 'UserAssignment'})
-User.belongsToMany(Assignment, {through: 'UserAssignment'})
+Assignment.belongsToMany(User, {through: UserAssignment})
+User.belongsToMany(Assignment, {through: UserAssignment})
 
 Course.hasMany(Announcement)
 Announcement.belongsTo(Course)
@@ -34,5 +35,6 @@ module.exports = {
   Course,
   UserCourse,
   Announcement,
-  Lesson
+  Lesson,
+  UserAssignment
 }
