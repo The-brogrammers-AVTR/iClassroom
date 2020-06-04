@@ -11,6 +11,7 @@ import {
   MakeAssignment
 } from './components'
 import {me, getCourses, getTeachers} from './store'
+import Sidebar from './components/Sidebar'
 
 class Routes extends Component {
   componentDidMount() {
@@ -29,17 +30,14 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={Courses} />
-            <Route path="/course/:id/announcements" component={Announcements} />
             <Route path="/course/:id/students" component={Announcements} />
+            <Route path="/course/:id/announcements" component={Announcements} />
             <Route path="/course/:id/lessons" component={Announcements} />
             <Route path="/course/:id/grades" component={Announcements} />
             <Route path="/course/:id/videocall" component={Announcements} />
             <Route path="/course/:id/chatroom" component={Chat} />
             <Route path="/course/:id/assignments" component={Assignments} />
-            <Route
-              path="/course/:id/makeassignment"
-              component={MakeAssignment}
-            />
+            <Route path="/makeassignment" component={MakeAssignment} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

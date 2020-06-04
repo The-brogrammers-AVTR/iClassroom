@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {readAssignments} from '../store/assignment'
 import {deleteAssignment} from '../store/assignment'
 import TableAssignments from './TableAssignments'
+import Sidebar from './Sidebar'
 
 class Assignments extends Component {
   constructor() {
@@ -14,25 +15,27 @@ class Assignments extends Component {
   }
 
   render() {
-    const {remove} = this.props
-    if (!this.props.assignment) {
+    //console.log('props', this.props)
+    const {course, teachers, remove} = this.props
+    const instructor = teachers.find(teacher =>
+      course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
+    )
+    //console.log('ins', instructor)
+    if (!this.props.assignment || !instructor) {
       return null
     }
     return (
       <div>
+        <Sidebar {...course} instructor={instructor} />
         <TableAssignments assignment={this.props.assignment} remove={remove} />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({assignment}) => {
-  if (!assignment) {
-    return {}
-  }
-  return {
-    assignment
-  }
+const mapStateToProps = ({courses, teachers, assignment}, {match}) => {
+  const course = courses.find(_course => _course.id === Number(match.params.id))
+  return {course, teachers, assignment}
 }
 
 const mapDispatchToProps = dispatch => {
