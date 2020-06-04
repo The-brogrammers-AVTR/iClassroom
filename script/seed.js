@@ -23,9 +23,13 @@ async function seed() {
       password: '123',
       isTeacher: true
     }),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'student1@gmail.com', password: '123'}),
+    User.create({email: 'student2@gmail.com', password: '123'}),
+    User.create({email: 'student3@gmail.com', password: '123'}),
+    User.create({email: 'student4@gmail.com', password: '123'}),
+    User.create({email: 'student5@gmail.com', password: '123'})
   ])
-  const [tandid, murphy] = users
+  const [tandid, student1, student2, student3, student4, student5] = users
 
   // courses
   const courses = await Promise.all([
@@ -42,11 +46,15 @@ async function seed() {
   // userCourses
   const usercourses = await Promise.all([
     UserCourse.create({userId: tandid.id, courseId: science.id}),
-    UserCourse.create({userId: tandid.id, courseId: math.id}),
-    UserCourse.create({userId: tandid.id, courseId: english.id}),
-    UserCourse.create({userId: tandid.id, courseId: art.id}),
-    UserCourse.create({userId: murphy.id, courseId: math.id}),
-    UserCourse.create({userId: murphy.id, courseId: science.id})
+    // UserCourse.create({userId: tandid.id, courseId: math.id}),
+    // UserCourse.create({userId: tandid.id, courseId: english.id}),
+    // UserCourse.create({userId: tandid.id, courseId: art.id}),
+    // UserCourse.create({userId: murphy.id, courseId: math.id}),
+    UserCourse.create({userId: student1.id, courseId: science.id}),
+    UserCourse.create({userId: student2.id, courseId: science.id}),
+    UserCourse.create({userId: student3.id, courseId: science.id}),
+    UserCourse.create({userId: student4.id, courseId: science.id}),
+    UserCourse.create({userId: student5.id, courseId: science.id})
   ])
 
   // announcement

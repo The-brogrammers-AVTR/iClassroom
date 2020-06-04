@@ -9,12 +9,14 @@ import {
   Announcements,
   Chat,
   MakeAssignment,
-  Lessons
+  Lessons,
+  Students
 } from './components'
 import {
   me,
   getCourses,
   getTeachers,
+  getStudents,
   getAnnouncements,
   getLessons
 } from './store'
@@ -36,7 +38,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={Courses} />
-            <Route path="/course/:id/students" component={Announcements} />
+            <Route path="/course/:id/students" component={Students} />
             <Route path="/course/:id/announcements" component={Announcements} />
             <Route path="/course/:id/lessons" component={Lessons} />
             <Route path="/course/:id/grades" component={Announcements} />
@@ -67,6 +69,7 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(getCourses())
       dispatch(getTeachers())
+      dispatch(getStudents())
       dispatch(getAnnouncements())
       dispatch(getLessons())
     }

@@ -164,3 +164,42 @@ nav a {
   min-height: 150px;
   border-radius: 10px;
 }
+
+/* studentlist */
+.wrapper {
+  list-style-type: none;
+  text-align: center;
+  padding: 1rem;
+}
+
+.studentlist-table-wrapper {
+  display: flex;
+  overflow: auto;
+  align-content: center;
+}
+
+table {
+  margin: 2rem;
+  border: solid 2px lightblue;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: lightblue;
+  text-align: center;
+  padding: 1rem;
+}
+
+th {
+  padding: 5px;
+}
+
+td {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+tr:nth-child(even) {
+  background-color: lightblue;
+}
