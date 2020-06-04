@@ -9,7 +9,6 @@ router.get('/', async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
     })
-    console.log({User: users})
     res.json(users)
   } catch (err) {
     next(err)
@@ -21,7 +20,6 @@ router.get('/teachers', async (req, res, next) => {
     const users = await User.findAll({
       where: {isTeacher: true}
     })
-    console.log({User: users})
     res.json(users)
   } catch (err) {
     next(err)

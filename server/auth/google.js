@@ -4,7 +4,6 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy
 const {User} = require('../db/models')
 module.exports = router
 const keys = require('./keys.json')
-console.log(keys)
 
 /**
  * For OAuth keys and other secrets, your Node process will search
@@ -37,7 +36,7 @@ if (!keys.GOOGLE_CLIENT_ID || !keys.GOOGLE_CLIENT_SECRET) {
   const strategy = new GoogleStrategy(
     googleConfig,
     (token, refreshToken, profile, done) => {
-      console.log(profile)
+      // console.log(profile)
       const googleId = profile.id
       const email = profile.emails[0].value
       const imgUrl = profile.photos[0].value
