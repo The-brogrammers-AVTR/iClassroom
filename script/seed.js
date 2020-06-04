@@ -63,6 +63,30 @@ async function seed() {
       assignmentURL: null,
       teacherId: tandid.id,
       courseId: science.id
+    }),
+    Assignment.create({
+      name: 'Addition and Subtraction Challenge',
+      category: 'Arithmetic',
+      description: 'Group math game.',
+      assignmentURL: null,
+      teacherId: tandid.id,
+      courseId: math.id
+    }),
+    Assignment.create({
+      name: 'Spelling Bee Challenge',
+      category: 'Spelling',
+      description: 'Group spelling game.',
+      assignmentURL: null,
+      teacherId: tandid.id,
+      courseId: english.id
+    }),
+    Assignment.create({
+      name: 'Collaborative Painting',
+      category: 'Drawing',
+      description: 'Draw a picture creatively and collaboratively as a team.',
+      assignmentURL: null,
+      teacherId: tandid.id,
+      courseId: art.id
     })
   ])
 
