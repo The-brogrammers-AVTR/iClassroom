@@ -6,7 +6,8 @@ const {
   Assignment,
   Course,
   UserCourse,
-  Announcement
+  Announcement,
+  Lesson
 } = require('../server/db/models')
 
 async function seed() {
@@ -52,12 +53,41 @@ async function seed() {
   const announcement = await Promise.all([
     Announcement.create({
       title: 'No Class',
-      description: 'Hi all, there will be no class this Thursday!',
+      description: 'Hi all, there will be no class this Thursday! Thanks.',
       courseId: science.id
     }),
     Announcement.create({
       title: 'Remote Class',
-      description: 'Hi all, due to Corona Virus, all classes will be remote!',
+      description:
+        'Hi all, due to Corona Virus, all classes will be remote! Thanks.',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'No HW this week',
+      description: 'There will be no homework for this week. Thanks.',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'Test Rescheduled',
+      description: 'Hi all, test has been rescheduled for two weeks from now!',
+      courseId: science.id
+    })
+  ])
+  // lesson
+  const lesson = await Promise.all([
+    Lesson.create({
+      title: 'Lesson 1',
+      description: 'Chapter 1, Powerpoint',
+      courseId: science.id
+    }),
+    Lesson.create({
+      title: 'Lesson 2',
+      description: 'Chapter 2, Game',
+      courseId: science.id
+    }),
+    Lesson.create({
+      title: 'Lesson 3',
+      description: 'Chapter 3, Picture book',
       courseId: science.id
     })
   ])
@@ -93,6 +123,7 @@ async function seed() {
   console.log(`seeded ${courses.length} courses`)
   console.log(`seeded ${usercourses.length} userCourses`)
   console.log(`seeded ${announcement.length} announcements`)
+  console.log(`seeded ${lesson.length} lessons`)
   console.log(`seeded successfully`)
 }
 

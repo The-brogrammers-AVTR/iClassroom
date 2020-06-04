@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-class AnnouncementCard extends React.Component {
+class LessonCard extends React.Component {
   constructor() {
     super()
   }
@@ -23,4 +23,4 @@ const mapStateToProps = ({user}) => {
   return {user}
 }
 
-export default connect(mapStateToProps)(AnnouncementCard)
+export default connect(mapStateToProps)(LessonCard)

@@ -5,6 +5,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import {user, teachers} from './user'
 import assignment from './assignment'
 import {announcements} from './announcement'
+import {lessons} from './lesson'
 import {courses, course} from './course'
 
 const reducer = combineReducers({
@@ -13,7 +14,8 @@ const reducer = combineReducers({
   assignment,
   course,
   courses,
-  announcements
+  announcements,
+  lessons
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -24,3 +26,4 @@ export default store
 export * from './user'
 export * from './course'
 export * from './announcement'
+export * from './lesson'
