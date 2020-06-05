@@ -11,6 +11,16 @@ label {
   display: block;
 }
 
+.logo-name {
+  color: white;
+  text-shadow: 5px 5px 10px 1px black;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
 /* courseHome */
 .course-home-wrapper {
   display: flex;

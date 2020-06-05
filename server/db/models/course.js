@@ -19,6 +19,11 @@ const Course = db.define('course', {
     type: Sequelize.INTEGER,
     allowNull: false,
     defaultValue: 1111
+  },
+  isOpen: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: true
   }
 })
 
