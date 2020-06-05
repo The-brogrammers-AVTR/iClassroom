@@ -4,7 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {
   Login,
   Signup,
-  Courses,
+  Home,
   Assignments,
   Announcements,
   Chat,
@@ -38,7 +38,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/" component={Courses} />
+            <Route exact path="/" component={Home} />
             <Route path="/course/:id/students" component={Students} />
             <Route path="/course/:id/announcements" component={Announcements} />
             <Route path="/course/:id/lessons" component={Lessons} />

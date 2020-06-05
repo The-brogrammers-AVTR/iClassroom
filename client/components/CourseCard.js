@@ -18,7 +18,6 @@ class CourseCard extends React.Component {
       isOpen,
       user
     } = this.props
-    console.log(user, UserCourses)
     const instructor = teachers.find(teacher =>
       UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )

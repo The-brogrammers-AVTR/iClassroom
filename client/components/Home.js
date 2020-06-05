@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import MyCourses from './MyCourses'
 import FindCourses from './FindCourses'
 
-class Courses extends React.Component {
+class Home extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -46,6 +46,13 @@ class Courses extends React.Component {
           >
             Course Calendar
           </button>
+          <button
+            type="button"
+            className="default-button"
+            onClick={this.onClickTwo}
+          >
+            Report Card
+          </button>
         </div>
         {active ? <MyCourses /> : <FindCourses />}
       </div>
@@ -57,4 +64,4 @@ const mapStateToProps = ({user}) => {
   return {user}
 }
 
-export default connect(mapStateToProps)(Courses)
+export default connect(mapStateToProps)(Home)

@@ -1,15 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import CourseCard from './CourseCard.js'
-import {Link} from 'react-router-dom'
+import CreateCourse from './CreateCourse.js'
 
 class MyCourses extends React.Component {
   constructor() {
     super()
+    this.state = {
+      active: false
+    }
   }
 
   render() {
-    const {user, myCourses} = this.props
+    const {active} = this.state
+    const {user, myCourses, history} = this.props
 
     return (
       <div>
@@ -17,11 +21,16 @@ class MyCourses extends React.Component {
           <div className="courses-wrapper">
             <h1>My Courses</h1>
             {user.isTeacher && (
-              <Link className="add-button" to="/createCourse">
-                +
-              </Link>
+              <button
+                className="default-button"
+                type="button"
+                onClick={() => this.setState({active: !active})}
+              >
+                Create Course
+              </button>
             )}
           </div>
+          {this.state.active && <CreateCourse history={history} />}
           <div className="course-card-wrapper">
             {myCourses.map(course => {
               return <CourseCard key={course.id} {...course} />
@@ -33,7 +42,7 @@ class MyCourses extends React.Component {
   }
 }
 
-const mapStateToProps = ({courses, user}) => {
+const mapStateToProps = ({courses, user}, {history}) => {
   const myCourses = courses.filter(course => {
     if (course.UserCourses.length > 0) {
       return course.UserCourses.find(
@@ -42,7 +51,7 @@ const mapStateToProps = ({courses, user}) => {
     }
   })
 
-  return {user, myCourses}
+  return {user, myCourses, history}
 }
 
 export default connect(mapStateToProps)(MyCourses)
