@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
   margin: 0;
+  /* background-image: linear-gradient(to right, teal, #59cbc0); */
 }
 
 a {
@@ -13,7 +14,7 @@ label {
 
 .logo-name {
   color: white;
-  text-shadow: 5px 5px 10px 1px black;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .row {
@@ -50,7 +51,7 @@ label {
   background-color: #59cbc0;
   color: white;
   text-align: center;
-  box-shadow: 1px 1px 5px 1px black;
+  box-shadow: 1px 1px 5px black;
 }
 
 .course-navigation > a:hover {
@@ -96,7 +97,7 @@ label {
   width: 25%;
   border-radius: 5px;
   margin: 1rem;
-  box-shadow: 2px 2px 10px 2px black;
+  box-shadow: 2px 2px 10px black;
 }
 
 .course-card > a {
@@ -105,7 +106,7 @@ label {
   text-decoration: none;
   color: white;
   border-radius: 10px;
-  box-shadow: 1px 1px 5px 1px black;
+  box-shadow: 1px 1px 5px black;
 }
 
 .course-card > a:hover {
@@ -120,7 +121,10 @@ label {
 
 .course-card > button {
   border-radius: 10px;
-  background-color: white;
+  background-color: #59cbc0;
+  padding: 0.5rem;
+  color: white;
+  font-weight: bold;
 }
 
 .course-card > button:hover {
@@ -144,7 +148,7 @@ nav a {
   justify-content: space-between;
   background-color: lightblue;
   padding-left: 1rem;
-  box-shadow: 1px 1px 5px 1px black;
+  box-shadow: 1px 1px 5px black;
 }
 
 .navbar {
@@ -160,7 +164,7 @@ nav a {
   color: white;
   width: 15px;
   height: 1rem;
-  box-shadow: 1px 1px 5px 1px black;
+  box-shadow: 1px 1px 5px black;
 }
 
 .courses-wrapper {
@@ -178,7 +182,7 @@ nav a {
   background-color: lightblue;
   min-height: 150px;
   border-radius: 10px;
-  box-shadow: 2px 2px 10px 2px black;
+  box-shadow: 2px 2px 10px black;
 }
 
 /* studentlist */
@@ -199,7 +203,7 @@ table {
   border: solid 2px lightblue;
   border-collapse: collapse;
   width: 100%;
-  box-shadow: 2px 2px 10px 2px black;
+  box-shadow: 2px 2px 10px black;
 }
 
 thead {
@@ -219,4 +223,20 @@ td {
 
 tr:nth-child(even) {
   background-color: lightblue;
+}
+
+/* search-bar */
+
+.search-bar {
+  color: #6576bb;
+  font-weight: bolder;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 30%;
+  justify-content: space-around;
+}
+
+.search-bar > select {
+  height: 2rem;
 }

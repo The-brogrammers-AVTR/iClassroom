@@ -34,12 +34,34 @@ async function seed() {
 
   // courses
   const courses = await Promise.all([
-    Course.create({name: 'English'}),
-    Course.create({name: 'Math'}),
-    Course.create({name: 'Science'}),
-    Course.create({name: 'History'}),
-    Course.create({name: 'Art', isOpen: false}),
-    Course.create({name: 'Music', isOpen: false})
+    Course.create({
+      name: 'English',
+      subject: 'English',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({name: 'Math', subject: 'Math', gradeLevel: 'Elementary'}),
+    Course.create({
+      name: 'Science',
+      subject: 'Science',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'American History',
+      subject: 'Social Studies',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'Painting',
+      isOpen: false,
+      subject: 'Art',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'Piano',
+      isOpen: false,
+      subject: 'Music',
+      gradeLevel: 'Elementary'
+    })
   ])
 
   const [english, math, science, history, art, music] = courses

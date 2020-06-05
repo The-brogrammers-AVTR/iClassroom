@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const {STRING, INTEGER} = Sequelize
+const {STRING, INTEGER, BOOLEAN} = Sequelize
 
 const Course = db.define('course', {
   id: {
@@ -21,9 +21,17 @@ const Course = db.define('course', {
     defaultValue: 1111
   },
   isOpen: {
-    type: Sequelize.BOOLEAN,
+    type: BOOLEAN,
     allowNull: false,
     defaultValue: true
+  },
+  subject: {
+    type: STRING,
+    allowNull: false
+  },
+  gradeLevel: {
+    type: STRING,
+    allowNull: false
   }
 })
 
