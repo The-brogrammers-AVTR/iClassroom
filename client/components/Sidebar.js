@@ -31,7 +31,7 @@ class Sidebar extends React.Component {
           <Link to={`/course/${id}/lessons`}>Lessons</Link>
           <Link to={`/course/${id}/assignments`}>Assignments</Link>
           <Link to={`/course/${id}/grades`}>Grades</Link>
-          <Link to={`/course/${id}/videocall`}>Video Call</Link>
+          <Link to={`/course/${id}/canvas`}>White Board</Link>
           <Link
             to={`/course/${id}/chatroom?userName=${
               user.firstName
