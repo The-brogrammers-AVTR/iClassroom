@@ -2,16 +2,15 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-//import {logo} from '../../images/iClassroom.png'
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="nav-wrapper">
     <h1>
-      <Link to="/" className="logo-name">
-        iClassroom
+      <Link to="/">
+        <img className="logo-name" src="images/iClassroom.png" alt="logo" />
       </Link>
     </h1>
-    {/* <img src={logo} /> */}
+
     <nav className="navbar">
       {isLoggedIn ? (
         <div>

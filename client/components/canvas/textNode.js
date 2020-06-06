@@ -1,5 +1,5 @@
 import Konva from 'konva'
-const uuidv1 = require('uuid/v1')
+const uuidv1 = require('uuid')
 export const addTextNode = (stage, layer) => {
   const id = uuidv1()
   const textNode = new Konva.Text({
