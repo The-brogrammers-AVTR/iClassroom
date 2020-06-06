@@ -120,7 +120,7 @@ h1 {
   color: #6576bb;
 }
 /* navbar */
-nav a {
+/* nav a {
   margin: 1rem;
   color: #6576bb;
   font-weight: bolder;
@@ -136,7 +136,7 @@ nav a {
 .navbar {
   display: flex;
   align-items: center;
-}
+} */
 /* courses page */
 .add-button {
   background-color: #59cbc0;
