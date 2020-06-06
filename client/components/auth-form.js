@@ -38,11 +38,6 @@ const LoginForm = props => {
   const {name, displayName, handleSubmit, error} = props
   const classes = useStyles()
 
-  const responseGoogle = response => {
-    console.log(response)
-    console.log(response.profileObj)
-  }
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -94,11 +89,11 @@ const LoginForm = props => {
                 {displayName} with Google
               </Link>
             </Grid>
-            {/* <Grid item>
+            <Grid item>
               <Link href="/signup" variant="body2">
                 Don't have an account? Sign Up
               </Link>
-            </Grid> */}
+            </Grid>
           </Grid>
           {error && error.response && <div> {error.response.data} </div>}
         </form>

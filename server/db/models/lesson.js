@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const {STRING, INTEGER, TEXT} = Sequelize
 
-const Announcement = db.define('announcement', {
+const Lesson = db.define('lesson', {
   id: {
     type: INTEGER,
     primaryKey: true,
@@ -26,4 +26,4 @@ const Announcement = db.define('announcement', {
   }
 })
 
-module.exports = Announcement
+module.exports = Lesson

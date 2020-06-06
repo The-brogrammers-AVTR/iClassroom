@@ -4,8 +4,15 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
-export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
-export {default as Assignments} from './assignments'
 export {default as DrawArea} from './DrawArea'
 export {default as Canvas} from './Canvas'
+export {default as Chat} from './Chat'
+export {default as Home} from './Home'
+export {default as Announcements} from './Announcements'
+export {default as Assignments} from './Assignments'
+export {default as MakeAssignment} from './MakeAssignment'
+export {default as TableAssignments} from './TableAssignments'
+export {default as Sidebar} from './Sidebar'
+export {default as Students} from './Students'
+export {default as Lessons} from './Lessons'

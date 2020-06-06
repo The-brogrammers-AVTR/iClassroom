@@ -4,12 +4,25 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {
   Login,
   Signup,
-  UserHome,
   Assignments,
   DrawArea,
-  Canvas
+  Canvas,
+  Home,
+  Announcements,
+  Chat,
+  MakeAssignment,
+  Lessons,
+  Students
 } from './components'
-import {me} from './store'
+
+import {
+  me,
+  getCourses,
+  getTeachers,
+  getStudents,
+  getAnnouncements,
+  getLessons
+} from './store'
 
 class Routes extends Component {
   componentDidMount() {
@@ -27,10 +40,17 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-            <Route path="/assignments" component={Assignments} />
             <Route path="/drawarea" component={DrawArea} />
             <Route path="/canvas" component={Canvas} />
+            <Route exact path="/" component={Home} />
+            <Route path="/course/:id/students" component={Students} />
+            <Route path="/course/:id/announcements" component={Announcements} />
+            <Route path="/course/:id/lessons" component={Lessons} />
+            <Route path="/course/:id/grades" component={Announcements} />
+            <Route path="/course/:id/videocall" component={Chat} />
+            <Route path="/course/:id/chatroom" component={Chat} />
+            <Route path="/course/:id/assignments" component={Assignments} />
+            <Route path="/makeassignment" component={MakeAssignment} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -52,6 +72,11 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getCourses())
+      dispatch(getTeachers())
+      dispatch(getStudents())
+      dispatch(getAnnouncements())
+      dispatch(getLessons())
     }
   }
 }

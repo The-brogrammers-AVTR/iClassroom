@@ -1,0 +1,6 @@
+{
+  "GOOGLE_CLIENT_ID":
+    "1008588747303-ljut6o3hq2ahlha7hnlcif77eaann8vr.apps.googleusercontent.com",
+  "GOOGLE_CLIENT_SECRET": "XcTI14oq4tbjCHH9SfCqTnq6",
+  "GOOGLE_CALLBACK": "http://localhost:8080/auth/google/callback"
+}

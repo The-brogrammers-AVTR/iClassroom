@@ -27,10 +27,10 @@ const _updateAssignment = assignment => {
   }
 }
 
-const _deleteAssignment = assignment => {
+const _deleteAssignment = id => {
   return {
     type: DELETE_ASSIGNMENT,
-    assignment
+    id
   }
 }
 
@@ -42,7 +42,7 @@ const _readAssignments = assignments => {
 }
 
 //THUNK CREATORS
-const createAssignment = assignment => {
+export const createAssignment = assignment => {
   return async dispatch => {
     const createdAssignment = (await axios.post('/api/assignments', assignment))
       .data
@@ -50,7 +50,7 @@ const createAssignment = assignment => {
   }
 }
 
-const updateAssignment = assignment => {
+export const updateAssignment = assignment => {
   return async dispatch => {
     const updatedAssignment = (await axios.put(
       `/api/assignment/${assignment.id}`,
@@ -60,17 +60,17 @@ const updateAssignment = assignment => {
   }
 }
 
-const readAssignment = id => {
+export const readAssignment = id => {
   return async dispatch => {
     const _assignment = (await axios.get(`/api/assignments/${id}`)).data
     dispatch(_readAssignment(_assignment))
   }
 }
 
-const deleteAssignment = assignment => {
+export const deleteAssignment = id => {
   return async dispatch => {
-    await axios.delete(`/api/assignments/${assignment.id}`)
-    dispatch(_deleteAssignment(assignment))
+    await axios.delete(`/api/assignments/${id}`)
+    dispatch(_deleteAssignment(id))
   }
 }
 
@@ -98,7 +98,7 @@ export default function(state = [], action) {
             : assignment
       )
     case DELETE_ASSIGNMENT:
-      return state.filter(assignment => assignment.id !== action.assignment.id)
+      return state.filter(assignment => assignment.id !== action.id)
     default:
       return state
   }
