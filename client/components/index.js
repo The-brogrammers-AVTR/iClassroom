@@ -6,7 +6,7 @@
 export {default as Navbar} from './navbar'
 export {Login, Signup} from './auth-form'
 export {default as Chat} from './Chat'
-export {default as Courses} from './Courses'
+export {default as Home} from './Home'
 export {default as Announcements} from './Announcements'
 export {default as Assignments} from './Assignments'
 export {default as MakeAssignment} from './MakeAssignment'

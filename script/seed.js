@@ -34,12 +34,34 @@ async function seed() {
 
   // courses
   const courses = await Promise.all([
-    Course.create({name: 'English'}),
-    Course.create({name: 'Math'}),
-    Course.create({name: 'Science'}),
-    Course.create({name: 'History'}),
-    Course.create({name: 'Art'}),
-    Course.create({name: 'Music'})
+    Course.create({
+      name: 'English',
+      subject: 'English',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({name: 'Math', subject: 'Math', gradeLevel: 'Elementary'}),
+    Course.create({
+      name: 'Science',
+      subject: 'Science',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'American History',
+      subject: 'Social Studies',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'Painting',
+      isOpen: false,
+      subject: 'Art',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'Piano',
+      isOpen: false,
+      subject: 'Music',
+      gradeLevel: 'Elementary'
+    })
   ])
 
   const [english, math, science, history, art, music] = courses
@@ -47,12 +69,10 @@ async function seed() {
   // userCourses
   const usercourses = await Promise.all([
     UserCourse.create({userId: tandid.id, courseId: science.id}),
-    // UserCourse.create({userId: tandid.id, courseId: math.id}),
-    // UserCourse.create({userId: tandid.id, courseId: english.id}),
-    // UserCourse.create({userId: tandid.id, courseId: art.id}),
-    // UserCourse.create({userId: murphy.id, courseId: math.id}),
-    // UserCourse.create({userId: student1.id, courseId: english.id}),
-    // UserCourse.create({userId: student1.id, courseId: math.id}),
+    UserCourse.create({userId: tandid.id, courseId: math.id}),
+    UserCourse.create({userId: tandid.id, courseId: english.id}),
+    UserCourse.create({userId: tandid.id, courseId: art.id}),
+    UserCourse.create({userId: student1.id, courseId: math.id}),
     UserCourse.create({userId: student1.id, courseId: science.id}),
     UserCourse.create({userId: student2.id, courseId: science.id}),
     UserCourse.create({userId: student3.id, courseId: science.id}),

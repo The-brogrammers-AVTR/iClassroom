@@ -1,8 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import queryString from 'query-string'
-import axios from 'axios'
 
 class CourseCard extends React.Component {
   constructor() {
@@ -10,11 +8,22 @@ class CourseCard extends React.Component {
   }
 
   render() {
-    const {id, name, code, teachers, UserCourses, user} = this.props
+    const {
+      id,
+      name,
+      code,
+      gradeLevel,
+      teachers,
+      UserCourses,
+      isOpen,
+      user
+    } = this.props
     const instructor = teachers.find(teacher =>
       UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
-
+    const enrolled = UserCourses.some(
+      usercourse => usercourse.userId === user.id
+    )
     if (!instructor) {
       return null
     }
@@ -23,16 +32,20 @@ class CourseCard extends React.Component {
         <h2>
           {name} - {code}
         </h2>
-        <h4 key={instructor.id}>Instructor: {instructor.firstName}</h4>
-        <Link to={`/course/${id}/announcements`}>Enter Class</Link>
+        <p>Instructor: {instructor.firstName}</p>
+        <p>Grade Level: {gradeLevel}</p>
+
+        {enrolled ? (
+          <Link to={`/course/${id}/announcements`}>Enter</Link>
+        ) : isOpen === true ? (
+          <button className="default-button" type="button">
+            Request to Join
+          </button>
+        ) : (
+          'Closed'
+        )}
         <br />
-        {/* <Link
-          to={`/course/${id}/announcements?userName=${user.email}&room=${name}`}
-        >
-          ChatRoom
-        </Link> */}
-        <br />
-        <button> Edit Course </button>
+        {user.isTeacher && <button type="button"> Edit Course </button>}
       </li>
     )
   }
