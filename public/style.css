@@ -143,3 +143,113 @@ nav a {
   height: 3rem;
   align-items: center;
 }
+#messagesUsers {
+  border: solid navajowhite 5px;
+  width: 400px;
+  height: 350px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+#displayMessage {
+  display: flex;
+  overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+  width: 80%;
+  background: lightgreen;
+}
+#displayUsers {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  margin: 0;
+  width: 20%;
+  background: lightblue;
+}
+li {
+  list-style: none;
+}
+.container {
+  width: 70%;
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+.userName {
+  color: darkblue;
+}
+
+/* width */
+#messagesUsers ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#messagesUsers ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+#messagesUsers ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+#messagesUsers ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+#displayUsers ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#displayUsers ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+#displayUsers ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+#displayUsers ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

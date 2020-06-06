@@ -33,7 +33,7 @@ class Routes extends Component {
             <Route path="/course/:id/students" component={Announcements} />
             <Route path="/course/:id/lessons" component={Announcements} />
             <Route path="/course/:id/grades" component={Announcements} />
-            <Route path="/course/:id/videocall" component={Announcements} />
+            <Route path="/course/:id/videocall" component={Chat} />
             <Route path="/course/:id/chatroom" component={Chat} />
             <Route path="/assignments" component={Assignments} />
             <Route path="/makeassignment" component={MakeAssignment} />
