@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 // const Navbar = ({handleClick, isLoggedIn, user}) => (
@@ -44,14 +44,14 @@ import {
   makeStyles,
   Typography,
   Grid,
-  Link
+  Avatar,
+  Button
 } from '@material-ui/core'
 import {ThemeProvider} from '@material-ui/styles'
 import theme from './Theme'
 
 const useStyles = makeStyles({
   menuButton: {
-    cursor: 'pointer',
     margin: '1rem'
   }
 })
@@ -75,7 +75,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => {
       <ElevationScroll>
         <AppBar position="static" color="secondary">
           <Toolbar>
-            <Link href="/">
+            <Link to="/">
               <img
                 className="logo-name"
                 src="images/iClassroom.png"
@@ -89,23 +89,18 @@ const Navbar = ({handleClick, isLoggedIn, user}) => {
                 justify="flex-end"
                 alignItems="center"
               >
-                <Link href="/profile">
-                  <img className="navbar-pfp" src={user.imageURL} alt="pfp" />
+                <Link to="/profile">
+                  <Avatar alt="pfp" src={user.imageURL} />
                 </Link>
                 <Typography
                   variant="h6"
-                  className={classes.menuButton}
                   color="primary"
+                  className={classes.menuButton}
                 >
                   {`Hello, ${user.firstName}`}
                 </Typography>
-                <Typography
-                  variant="h6"
-                  color="primary"
-                  className={classes.menuButton}
-                  onClick={handleClick}
-                >
-                  Logout
+                <Typography variant="h6" color="primary" onClick={handleClick}>
+                  <Button color="primary">Logout</Button>
                 </Typography>
               </Grid>
             ) : (
@@ -116,11 +111,15 @@ const Navbar = ({handleClick, isLoggedIn, user}) => {
                 alignItems="center"
               >
                 <Typography variant="h6" className={classes.menuButton}>
-                  <Link to="/login">Login </Link>
+                  <Link to="/login">
+                    <Button color="primary">Login</Button>
+                  </Link>
                 </Typography>
 
                 <Typography variant="h6" className={classes.menuButton}>
-                  <Link to="/signup">Sign Up</Link>
+                  <Link to="/signup">
+                    <Button color="primary">Sign Up</Button>
+                  </Link>
                 </Typography>
               </Grid>
             )}
