@@ -11,7 +11,11 @@ import {
   MakeAssignment,
   Lessons,
   Students,
-  Canvas
+
+  Canvas,
+
+  Profile
+
 } from './components'
 
 import {
@@ -49,6 +53,7 @@ class Routes extends Component {
             <Route path="/course/:id/assignments" component={Assignments} />
             <Route path="/course/:id/canvas" component={Canvas} />
             <Route path="/makeassignment" component={MakeAssignment} />
+            <Route path="/profile" component={Profile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
