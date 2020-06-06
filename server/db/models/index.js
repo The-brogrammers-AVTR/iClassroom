@@ -4,13 +4,16 @@ const Assignment = require('./assignment')
 const Course = require('./course')
 const Announcement = require('./announcement')
 const Image = require('./image')
-
+const db = require('../db')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
  *
  *    BlogPost.belongsTo(User)
  */
+
+const UserCourse = db.define('UserCourse')
+
 User.belongsToMany(Course, {through: 'UserCourse'})
 Course.belongsToMany(User, {through: 'UserCourse'})
 
@@ -33,5 +36,7 @@ module.exports = {
   User,
   Teacher,
   Assignment,
-  Image
+  Image,
+  Course,
+  UserCourse
 }

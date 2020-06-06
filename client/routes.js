@@ -1,7 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Login, Signup, UserHome, Assignments} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  Assignments,
+  DrawArea,
+  Canvas
+} from './components'
 import {me} from './store'
 
 class Routes extends Component {
@@ -22,6 +29,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/assignments" component={Assignments} />
+            <Route path="/drawarea" component={DrawArea} />
+            <Route path="/canvas" component={Canvas} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

@@ -50,6 +50,7 @@
     "express-session": "^1.17.1",
     "googleapis": "^51.0.0",
     "history": "^4.10.1",
+    "immutable": "^4.0.0-rc.12",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
