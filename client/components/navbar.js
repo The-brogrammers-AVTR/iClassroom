@@ -37,35 +37,34 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
   </div>
 )
 
-// import AppBar from '@material-ui/core/AppBar'
-// import Toolbar from '@material-ui/core/Toolbar'
-// import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+// import {
+//   AppBar,
+//   Toolbar,
+//   useScrollTrigger,
+//   makeStyles,
+//   Typography,
+//   Grid,
+//   Link,
+// } from '@material-ui/core'
 // import {ThemeProvider} from '@material-ui/styles'
 // import theme from './Theme'
-// import {makeStyles} from '@material-ui/core/styles'
-// import Typography from '@material-ui/core/Typography'
 
 // const useStyles = makeStyles({
-//   title: {
-//     margin: '1rem',
-//     fontWeight: 'bold',
-//     flexGrow: 1
-//   },
-//   menu: {
+//   menuButton: {
 //     cursor: 'pointer',
-//     margin: '1rem'
-//   }
+//     margin: '1rem',
+//   },
 // })
 
 // function ElevationScroll(props) {
 //   const {children} = props
 //   const trigger = useScrollTrigger({
 //     disableHysteresis: true,
-//     threshold: 0
+//     threshold: 0,
 //   })
 
 //   return React.cloneElement(children, {
-//     elevation: trigger ? 4 : 0
+//     elevation: trigger ? 4 : 0,
 //   })
 // }
 
@@ -75,63 +74,65 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
 //     <ThemeProvider theme={theme}>
 //       <ElevationScroll>
 //         <AppBar position="fixed" color="primary">
-//           {isLoggedIn ? (
-//             <Toolbar>
-//               <Typography
-//                 variant="h4"
-//                 color="secondary"
-//                 className={classes.title}
+//           <Toolbar>
+//             <Link href="/">
+//               <img
+//                 className="logo-name"
+//                 src="images/iClassroom.png"
+//                 alt="logo"
+//               />
+//             </Link>
+//             {isLoggedIn ? (
+//               <Grid
+//                 container
+//                 direction="row"
+//                 justify="flex-end"
+//                 alignItems="center"
 //               >
-//                 <Link to="/">iClassroom</Link>
-//               </Typography>
-//               <Typography
-//                 variant="h6"
-//                 color="secondary"
-//                 className={classes.menu}
+//                 <Link href="/profile">
+//                   <img className="navbar-pfp" src={user.imageURL} alt="pfp" />
+//                 </Link>
+//                 <Typography
+//                   variant="h6"
+//                   color="secondary"
+//                   className={classes.menuButton}
+//                 >
+//                   {`Hello, ${user.firstName}`}
+//                 </Typography>
+//                 <Typography
+//                   variant="h6"
+//                   color="secondary"
+//                   className={classes.menuButton}
+//                   onClick={handleClick}
+//                 >
+//                   Logout
+//                 </Typography>
+//               </Grid>
+//             ) : (
+//               <Grid
+//                 container
+//                 direction="row"
+//                 justify="flex-end"
+//                 alignItems="center"
 //               >
-//                 {`Hello, ${user.firstName}`}
-//               </Typography>
-//               <Typography
-//                 variant="h6"
-//                 color="secondary"
-//                 className={classes.menu}
-//                 onClick={handleClick}
-//               >
-//                 Logout
-//               </Typography>
-//             </Toolbar>
-//           ) : (
-//             <Toolbar>
-//               <Typography
-//                 variant="h4"
-//                 color="secondary"
-//                 className={classes.title}
-//               >
-//                 <Link to="/">iClassroom</Link>
-//               </Typography>
-//               <Typography
-//                 variant="h6"
-//                 color="secondary"
-//                 className={classes.menu}
-//               >
-//                 <Link to="/login">Login</Link>
-//               </Typography>
-//               <Typography
-//                 variant="h6"
-//                 color="secondary"
-//                 className={classes.menu}
-//               >
-//                 <Link to="/signup">Sign Up</Link>
-//               </Typography>
-//               <Typography
-//                 variant="h6"
-//                 color="secondary"
-//                 className={classes.menu}
-//               >
-//                 <Link to="/course">Course</Link>
-//               </Typography>
-//             </Toolbar>
-//           )}
+//                 <Typography
+//                   variant="h6"
+//                   color="secondary"
+//                   className={classes.menuButton}
+//                 >
+//                   <Link to="/login">Login </Link>
+//                 </Typography>
+
+//                 <Typography
+//                   variant="h6"
+//                   color="secondary"
+//                   className={classes.menuButton}
+//                 >
+//                   <Link to="/signup">Sign Up</Link>
+//                 </Typography>
+//               </Grid>
+//             )}
+//           </Toolbar>
 //         </AppBar>
 //       </ElevationScroll>
 //     </ThemeProvider>

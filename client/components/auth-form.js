@@ -3,16 +3,18 @@ import {connect} from 'react-redux'
 import {auth} from '../store'
 
 // --- material-ui ---
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import Grid from '@material-ui/core/Grid' //acts as flexbox
-import Box from '@material-ui/core/Box' //acts as a div tag
-import Typography from '@material-ui/core/Typography' //acts as a h1 or p tag
-import {makeStyles} from '@material-ui/core/styles'
-import Container from '@material-ui/core/Container' //sets a maxwidth
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  makeStyles
+} from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   paper: {
