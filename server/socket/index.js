@@ -27,6 +27,18 @@ module.exports = io => {
         io.to(msg.room).emit('getUsers', roomUsers)
       })
     })
+    socket.on('circle', circle => {
+      //console.log('cirle', circle)
+      io.emit('circle', circle)
+    })
+    socket.on('rectangles', rectangles => {
+      //console.log('rectangles', rectangles)
+      io.emit('rectangles', rectangles)
+    })
+    socket.on('images', images => {
+      //console.log('images', images)
+      io.emit('images', images)
+    })
     // socket.on('getUsers', msg => {
     //   const user = getCurrentUser(socket.id)
     //   let roomUsers = usersForRoom(msg.room)

@@ -369,3 +369,10 @@ tr:nth-child(even) {
 .default-button:hover {
   background-color: teal;
 }
+
+.home-page {
+  width: 700px;
+  height: 800px;
+  border: solid black 7px;
+  background-color: rgb(245, 241, 241);
+}
