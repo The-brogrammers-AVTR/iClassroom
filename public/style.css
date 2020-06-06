@@ -155,6 +155,10 @@ nav a {
   display: flex;
   align-items: center;
 }
+
+.navbar-pfp {
+  height: 40px;
+}
 /* courses page */
 .add-button {
   background-color: #59cbc0;

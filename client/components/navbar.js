@@ -16,6 +16,9 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <div className="row">
+            <Link to="/profile">
+              <img className="navbar-pfp" src={user.imageURL} alt="pfp" />
+            </Link>
             <p>Hello, {user.firstName}</p>
             <a href="#" onClick={handleClick}>
               Logout

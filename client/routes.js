@@ -10,7 +10,8 @@ import {
   Chat,
   MakeAssignment,
   Lessons,
-  Students
+  Students,
+  Profile
 } from './components'
 
 import {
@@ -47,6 +48,7 @@ class Routes extends Component {
             <Route path="/course/:id/chatroom" component={Chat} />
             <Route path="/course/:id/assignments" component={Assignments} />
             <Route path="/makeassignment" component={MakeAssignment} />
+            <Route path="/profile" component={Profile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

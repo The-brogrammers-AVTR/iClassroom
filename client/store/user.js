@@ -7,7 +7,7 @@ import history from '../history'
 const GET_USER = 'GET_USER'
 const GET_TEACHERS = 'GET_TEACHERS'
 const GET_STUDENTS = 'GET_STUDENTS'
-
+const UPDATE_PROFILE = 'UPDATE_PROFILE'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -22,6 +22,7 @@ const getUser = user => ({type: GET_USER, user})
 const _getTeachers = teachers => ({type: GET_TEACHERS, teachers})
 const _getStudents = students => ({type: GET_STUDENTS, students})
 const removeUser = () => ({type: REMOVE_USER})
+const _updateProfile = user => ({type: UPDATE_PROFILE, user})
 
 /**
  * THUNK CREATORS
@@ -75,6 +76,14 @@ const logout = () => async dispatch => {
   }
 }
 
+const updateProfile = (user, push) => {
+  return async dispatch => {
+    const {data: updatedUser} = await axios.put(`/api/users/${user.id}`, user)
+    dispatch(_updateProfile(updatedUser))
+    push('/profile')
+  }
+}
+
 /**
  * REDUCER
  */
@@ -84,6 +93,8 @@ const user = (state = defaultUser, action) => {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case UPDATE_PROFILE:
+      return action.user
     default:
       return state
   }
@@ -107,4 +118,14 @@ const students = (state = [], action) => {
   }
 }
 
-export {me, auth, logout, getTeachers, getStudents, user, teachers, students}
+export {
+  me,
+  auth,
+  logout,
+  getTeachers,
+  getStudents,
+  user,
+  teachers,
+  students,
+  updateProfile
+}
