@@ -36,3 +36,24 @@ router.get('/students', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:id', async (req, res, next) => {
+  await User.findByPk(req.params.id)
+    .then(user => res.send(user))
+    .catch(next)
+})
+
+router.put('/:id', (req, res, next) => {
+  User.findByPk(req.params.id)
+    .then(user =>
+      user.update({
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        imageURL: req.body.imageURL,
+        admin: req.body.admin
+      })
+    )
+    .then(user => res.send(user))
+    .catch(next)
+})

@@ -38,6 +38,12 @@ const User = db.define('user', {
   isTeacher: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  imageURL: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue:
+      'https://t4.ftcdn.net/jpg/03/32/59/65/240_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'
   }
 })
 
