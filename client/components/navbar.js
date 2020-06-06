@@ -2,21 +2,25 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-// import {logo} from '../../images/iClassroom.png'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="nav-wrapper">
     <h1>
-      <Link to="/">iClassroom</Link>
+      <Link to="/" className="logo-name">
+        iClassroom
+      </Link>
     </h1>
     {/* <img src={logo} /> */}
     <nav className="navbar">
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+          <div className="row">
+            <p>Hello, {user.firstName}</p>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
         </div>
       ) : (
         <div>
@@ -30,9 +34,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   </div>
 )
 
-const mapState = state => {
+const mapState = ({user}) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!user.id,
+    user
   }
 }
 

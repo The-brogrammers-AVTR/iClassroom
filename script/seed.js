@@ -3,16 +3,19 @@
 const db = require('../server/db')
 const {
   User,
-  Teacher,
   Assignment,
   Course,
-  UserCourse
+  UserCourse,
+  Announcement,
+  Lesson,
+  UserAssignment
 } = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  // users
   const users = await Promise.all([
     User.create({
       firstName: 'Tandid',
@@ -21,39 +24,119 @@ async function seed() {
       password: '123',
       isTeacher: true
     }),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'student1@gmail.com', password: '123'}),
+    User.create({email: 'student2@gmail.com', password: '123'}),
+    User.create({email: 'student3@gmail.com', password: '123'}),
+    User.create({email: 'student4@gmail.com', password: '123'}),
+    User.create({email: 'student5@gmail.com', password: '123'})
   ])
-  const [tandid, murphy] = users
+  const [tandid, student1, student2, student3, student4, student5] = users
 
+  // courses
   const courses = await Promise.all([
-    Course.create({name: 'English'}),
-    Course.create({name: 'Math'}),
-    Course.create({name: 'Science'}),
-    Course.create({name: 'History'}),
-    Course.create({name: 'Art'}),
-    Course.create({name: 'Music'})
+    Course.create({
+      name: 'English',
+      subject: 'English',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({name: 'Math', subject: 'Math', gradeLevel: 'Elementary'}),
+    Course.create({
+      name: 'Science',
+      subject: 'Science',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'American History',
+      subject: 'Social Studies',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'Painting',
+      isOpen: false,
+      subject: 'Art',
+      gradeLevel: 'Elementary'
+    }),
+    Course.create({
+      name: 'Piano',
+      isOpen: false,
+      subject: 'Music',
+      gradeLevel: 'Elementary'
+    })
   ])
 
   const [english, math, science, history, art, music] = courses
 
+  // userCourses
   const usercourses = await Promise.all([
     UserCourse.create({userId: tandid.id, courseId: science.id}),
     UserCourse.create({userId: tandid.id, courseId: math.id}),
     UserCourse.create({userId: tandid.id, courseId: english.id}),
     UserCourse.create({userId: tandid.id, courseId: art.id}),
-    UserCourse.create({userId: murphy.id, courseId: math.id}),
-    UserCourse.create({userId: murphy.id, courseId: science.id})
+    UserCourse.create({userId: student1.id, courseId: math.id}),
+    UserCourse.create({userId: student1.id, courseId: science.id}),
+    UserCourse.create({userId: student2.id, courseId: science.id}),
+    UserCourse.create({userId: student3.id, courseId: science.id}),
+    UserCourse.create({userId: student4.id, courseId: science.id}),
+    UserCourse.create({userId: student5.id, courseId: science.id})
   ])
 
-  const [teacher1] = await Promise.all([Teacher.create({name: 'Isaac Newton'})])
+  // announcement
+  const announcement = await Promise.all([
+    Announcement.create({
+      title: 'No Class',
+      description: 'Hi all, there will be no class this Thursday! Thanks.',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'Remote Class',
+      description:
+        'Hi all, due to Corona Virus, all classes will be remote! Thanks.',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'No HW this week',
+      description: 'There will be no homework for this week. Thanks.',
+      courseId: science.id
+    }),
+    Announcement.create({
+      title: 'Test Rescheduled',
+      description: 'Hi all, test has been rescheduled for two weeks from now!',
+      courseId: science.id
+    })
+  ])
+  // lesson
+  const lesson = await Promise.all([
+    Lesson.create({
+      title: 'Lesson 1',
+      description: 'Chapter 1, Powerpoint',
+      courseId: science.id
+    }),
+    Lesson.create({
+      title: 'Lesson 2',
+      description: 'Chapter 2, Game',
+      courseId: science.id
+    }),
+    Lesson.create({
+      title: 'Lesson 3',
+      description: 'Chapter 3, Picture book',
+      courseId: science.id
+    })
+  ])
 
-  const [assignment1, assignment2, assignment3] = await Promise.all([
+  const [
+    assign1,
+    assign2,
+    assign3,
+    assign4,
+    assign5,
+    assign6
+  ] = await Promise.all([
     Assignment.create({
       name: 'Discover Sun',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id,
+      teacherId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
@@ -61,7 +144,7 @@ async function seed() {
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id,
+      teacherId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
@@ -69,14 +152,48 @@ async function seed() {
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: teacher1.id,
+      teacherId: tandid.id,
       courseId: science.id
+    }),
+    Assignment.create({
+      name: 'Addition and Subtraction Challenge',
+      category: 'Arithmetic',
+      description: 'Group math game.',
+      assignmentURL: null,
+      teacherId: tandid.id,
+      courseId: math.id
+    }),
+    Assignment.create({
+      name: 'Spelling Bee Challenge',
+      category: 'Spelling',
+      description: 'Group spelling game.',
+      assignmentURL: null,
+      teacherId: tandid.id,
+      courseId: english.id
+    }),
+    Assignment.create({
+      name: 'Collaborative Painting',
+      category: 'Drawing',
+      description: 'Draw a picture creatively and collaboratively as a team.',
+      assignmentURL: null,
+      teacherId: tandid.id,
+      courseId: art.id
     })
+  ])
+
+  const userassignment = await Promise.all([
+    UserAssignment.create({userId: student1.id, assignmentId: assign1.id}),
+    UserAssignment.create({userId: student1.id, assignmentId: assign2.id}),
+    UserAssignment.create({userId: student1.id, assignmentId: assign3.id}),
+    UserAssignment.create({userId: student2.id, assignmentId: assign1.id})
   ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${courses.length} courses`)
   console.log(`seeded ${usercourses.length} userCourses`)
+  console.log(`seeded ${announcement.length} announcements`)
+  console.log(`seeded ${lesson.length} lessons`)
+  console.log(`seeded ${userassignment.length} userassignments`)
   console.log(`seeded successfully`)
 }
 

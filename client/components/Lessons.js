@@ -1,26 +1,26 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
-import AnnouncementCard from './AnnouncementCard.js'
+import LessonCard from './LessonCard.js'
 import {Link} from 'react-router-dom'
 
-class Announcements extends React.Component {
+class Lessons extends React.Component {
   constructor() {
     super()
   }
 
   render() {
-    const {course, instructor, filteredAnnouncements, user} = this.props
+    const {course, instructor, filteredLessons, user} = this.props
 
-    if (!course || !instructor || !filteredAnnouncements) {
-      return <div>No Announcements</div>
+    if (!course || !instructor || !filteredLessons) {
+      return null
     }
     return (
       <div className="course-home-wrapper">
         <Sidebar {...course} instructor={instructor} />
         <div className="course-content">
           <div className="course-content-header">
-            <h1>Announcements</h1>
+            <h1>Lessons</h1>
             {user.isTeacher === true && (
               <Link className="add-button" to="/createAnnouncement">
                 +
@@ -28,10 +28,8 @@ class Announcements extends React.Component {
             )}
           </div>
           <div>
-            {filteredAnnouncements.map(announcement => {
-              return (
-                <AnnouncementCard key={announcement.id} {...announcement} />
-              )
+            {filteredLessons.map(lesson => {
+              return <LessonCard key={lesson.id} {...lesson} />
             })}
           </div>
         </div>
@@ -40,17 +38,17 @@ class Announcements extends React.Component {
   }
 }
 
-const mapStateToProps = ({courses, teachers, announcements, user}, {match}) => {
+const mapStateToProps = ({courses, teachers, lessons, user}, {match}) => {
   const course = courses.find(_course => _course.id === Number(match.params.id))
 
   const instructor = teachers.find(teacher =>
     course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
   )
 
-  const filteredAnnouncements = announcements.filter(
-    announcement => announcement.courseId === course.id
+  const filteredLessons = lessons.filter(
+    lesson => lesson.courseId === course.id
   )
-  return {course, instructor, filteredAnnouncements, user}
+  return {course, instructor, filteredLessons, user}
 }
 
-export default connect(mapStateToProps)(Announcements)
+export default connect(mapStateToProps)(Lessons)

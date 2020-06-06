@@ -4,13 +4,23 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {
   Login,
   Signup,
-  Courses,
+  Home,
   Assignments,
   Announcements,
   Chat,
-  MakeAssignment
+  MakeAssignment,
+  Lessons,
+  Students
 } from './components'
-import {me, getCourses, getTeachers} from './store'
+
+import {
+  me,
+  getCourses,
+  getTeachers,
+  getStudents,
+  getAnnouncements,
+  getLessons
+} from './store'
 
 class Routes extends Component {
   componentDidMount() {
@@ -28,14 +38,14 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/" component={Courses} />
+            <Route exact path="/" component={Home} />
+            <Route path="/course/:id/students" component={Students} />
             <Route path="/course/:id/announcements" component={Announcements} />
-            <Route path="/course/:id/students" component={Announcements} />
-            <Route path="/course/:id/lessons" component={Announcements} />
+            <Route path="/course/:id/lessons" component={Lessons} />
             <Route path="/course/:id/grades" component={Announcements} />
             <Route path="/course/:id/videocall" component={Chat} />
             <Route path="/course/:id/chatroom" component={Chat} />
-            <Route path="/assignments" component={Assignments} />
+            <Route path="/course/:id/assignments" component={Assignments} />
             <Route path="/makeassignment" component={MakeAssignment} />
           </Switch>
         )}
@@ -60,6 +70,9 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(getCourses())
       dispatch(getTeachers())
+      dispatch(getStudents())
+      dispatch(getAnnouncements())
+      dispatch(getLessons())
     }
   }
 }
