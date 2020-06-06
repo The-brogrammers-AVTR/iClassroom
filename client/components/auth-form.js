@@ -1,8 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {auth} from '../store'
-
-// --- material-ui ---
 import {
   Avatar,
   Button,
@@ -15,8 +13,13 @@ import {
   Container,
   makeStyles
 } from '@material-ui/core'
+import {ThemeProvider} from '@material-ui/styles'
+import theme from './Theme'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
+  gradient: {
+    backgroundColor: theme.palette.primary.main
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -28,22 +31,22 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1)
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
   }
-}))
+})
 
 const LoginForm = props => {
   const {name, displayName, handleSubmit, error} = props
   const classes = useStyles()
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs" className={classes.paper}>
+        <CssBaseline />
         <Avatar className={classes.avatar} />
         <Typography component="h1" variant="h5">
           Sign in
@@ -99,9 +102,9 @@ const LoginForm = props => {
           </Grid>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-      </div>
-      <Box mt={8} />
-    </Container>
+        <Box mt={8} />
+      </Container>
+    </ThemeProvider>
   )
 }
 
@@ -110,9 +113,9 @@ const SignupForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs" className={classes.paper}>
+        <CssBaseline />
         <Avatar className={classes.avatar} />
         <Typography component="h1" variant="h5">
           Sign up
@@ -195,19 +198,12 @@ const SignupForm = props => {
           </Grid>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-      </div>
-      <Box mt={5} />
-    </Container>
+        <Box mt={5} />
+      </Container>
+    </ThemeProvider>
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = state => {
   return {
     name: 'login',
