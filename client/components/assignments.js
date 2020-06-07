@@ -5,6 +5,7 @@ import {deleteAssignment} from '../store/assignment'
 import TableAssignments from './TableAssignments'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
+import ManageAssignments from './ManageAssignments'
 
 class Assignments extends Component {
   constructor() {
@@ -32,6 +33,9 @@ class Assignments extends Component {
     return (
       <Grid container>
         <Sidebar {...course} instructor={instructor} />
+        <Grid item xs={12} sm={9}>
+          <ManageAssignments assignment={assignmentsForCourse} />
+        </Grid>
         <Grid item xs={12} sm={9}>
           <TableAssignments assignment={assignmentsForCourse} remove={remove} />
         </Grid>
