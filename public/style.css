@@ -2,6 +2,13 @@ body {
   font-family: sans-serif;
   margin: 0;
   /* background-image: linear-gradient(to right, teal, #59cbc0); */
+  /* background: linear-gradient(
+    45deg,
+    rgba(28, 63, 90, 1) 21%,
+    rgba(37, 84, 107, 1) 50%,
+    rgba(59, 137, 153, 1) 100%,
+    rgba(25, 157, 184, 1) 100%
+  ); */
 }
 
 a {
@@ -13,8 +20,7 @@ label {
 }
 
 .logo-name {
-  color: white;
-  text-shadow: 2px 2px 4px #000000;
+  width: 200px;
 }
 
 .row {
@@ -154,6 +160,10 @@ nav a {
 .navbar {
   display: flex;
   align-items: center;
+}
+
+.navbar-pfp {
+  height: 40px;
 }
 /* courses page */
 .add-button {
@@ -368,4 +378,11 @@ tr:nth-child(even) {
 }
 .default-button:hover {
   background-color: teal;
+}
+
+.home-page {
+  width: 700px;
+  height: 800px;
+  border: solid black 7px;
+  background-color: rgb(245, 241, 241);
 }

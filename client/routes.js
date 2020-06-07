@@ -11,7 +11,9 @@ import {
   MakeAssignment,
   Lessons,
   Students,
-  ManageAssignments
+  ManageAssignments,
+  Canvas,
+  Profile
 } from './components'
 
 import {
@@ -47,8 +49,11 @@ class Routes extends Component {
             <Route path="/course/:id/videocall" component={Chat} />
             <Route path="/course/:id/chatroom" component={Chat} />
             <Route path="/course/:id/assignments" component={Assignments} />
+            <Route path="/course/:id/canvas" component={Canvas} />
             <Route path="/makeassignment" component={MakeAssignment} />
             <Route path="/manageassignments" component={ManageAssignments} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/test" component={Profile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
