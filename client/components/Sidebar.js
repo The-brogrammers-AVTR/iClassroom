@@ -44,7 +44,8 @@ import {Link, Route} from 'react-router-dom'
 // }
 
 import clsx from 'clsx'
-import {makeStyles, useTheme, ThemeProvider} from '@material-ui/core/styles'
+import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
+import theme from './Theme'
 import {
   Drawer,
   AppBar,
@@ -60,22 +61,23 @@ import {
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import MenuIcon from '@material-ui/icons/Menu'
-import AnnouncementIcon from '@material-ui/icons/Announcement' //announcement
-import EventNoteIcon from '@material-ui/icons/EventNote' //lessons
+import ContactsIcon from '@material-ui/icons/Contacts'
 import AssessmentIcon from '@material-ui/icons/Assessment' //student GPA
+import UpdateIcon from '@material-ui/icons/Update' //announcement
+import NoteIcon from '@material-ui/icons/Note'
 import AssignmentIcon from '@material-ui/icons/Assignment' //assignment
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd' //grade
-import CallIcon from '@material-ui/icons/Call' //videocall
-import VideocamIcon from '@material-ui/icons/Videocam' //videocall
-import ChatIcon from '@material-ui/icons/Chat' //chat
-import CastIcon from '@material-ui/icons/Cast' //broadcast
+import SmsIcon from '@material-ui/icons/Sms'
+import CastForEducationIcon from '@material-ui/icons/CastForEducation'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import OndemandVideoIcon from '@material-ui/icons/OndemandVideo' //broadcast
+import VideocamIcon from '@material-ui/icons/Videocam' //videocall
 import GroupIcon from '@material-ui/icons/Group' //groupwork
 import HelpIcon from '@material-ui/icons/Help' //help
 
 const drawerWidth = 240
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
     display: 'flex'
   },
@@ -106,6 +108,7 @@ const useStyles = makeStyles(theme => ({
     whiteSpace: 'nowrap'
   },
   drawerOpen: {
+    backgroundColor: theme.palette.secondary.main,
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -113,6 +116,7 @@ const useStyles = makeStyles(theme => ({
     })
   },
   drawerClose: {
+    backgroundColor: theme.palette.secondary.main,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -120,7 +124,7 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'hidden',
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1
+      width: theme.spacing(8)
     }
   },
   toolbar: {
@@ -135,11 +139,11 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3)
   }
-}))
+})
+
 const Sidebar = ({id, name, code, user, instructor}) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
-  const theme = useTheme()
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -198,12 +202,93 @@ const Sidebar = ({id, name, code, user, instructor}) => {
           </div>
           <Divider />
           <List>
-            <ListItem button>
+            <ListItem>
               <ListItemIcon>
-                <AnnouncementIcon />
+                <ContactsIcon />
               </ListItemIcon>
-              <ListItemText> Announcements </ListItemText>
+              <ListItemText>
+                {instructor.firstName} {instructor.lastName}
+              </ListItemText>
             </ListItem>
+            <ListItem>
+              <ListItemIcon />
+              <ListItemText> {instructor.email} </ListItemText>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon />
+              <ListItemText> Syllabus Link </ListItemText>
+            </ListItem>
+            <Divider />
+            {user.isTeacher === true && (
+              <Link to={`/course/${id}/students`}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <AssignmentIndIcon />
+                  </ListItemIcon>
+                  <ListItemText> Students </ListItemText>
+                </ListItem>
+              </Link>
+            )}
+            <Link to={`/course/${id}/announcements`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <UpdateIcon />
+                </ListItemIcon>
+                <ListItemText> Announcements </ListItemText>
+              </ListItem>
+            </Link>
+            <Link to={`/course/${id}/lessons`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <NoteIcon />
+                </ListItemIcon>
+                <ListItemText> Lessons </ListItemText>
+              </ListItem>
+            </Link>
+            <Link to={`/course/${id}/assignments`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText> Assignments </ListItemText>
+              </ListItem>
+            </Link>
+            <Link to={`/course/${id}/grades`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <AssessmentIcon />
+                </ListItemIcon>
+                <ListItemText> Grades </ListItemText>
+              </ListItem>
+            </Link>
+            <Link to={`/course/${id}/canvas`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <CastForEducationIcon />
+                </ListItemIcon>
+                <ListItemText> White Board </ListItemText>
+              </ListItem>
+            </Link>
+            <Link
+              to={`/course/${id}/chatroom?userName=${
+                user.firstName
+              }&room=${name}`}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  <SmsIcon />
+                </ListItemIcon>
+                <ListItemText> Chat Room </ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/">
+              <ListItem button>
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText> Back to Courses </ListItemText>
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
       </div>
