@@ -49,6 +49,7 @@ import theme from './Theme'
 import {
   Drawer,
   AppBar,
+  Grid,
   Toolbar,
   List,
   Typography,
@@ -173,9 +174,21 @@ const Sidebar = ({id, name, code, user, instructor}) => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              {name} - {code}
-            </Typography>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Typography variant="h6">
+                {name} - {code}
+              </Typography>
+              <Link to="/">
+                <IconButton>
+                  <ExitToAppIcon fontSize="large" />
+                </IconButton>
+              </Link>
+            </Grid>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -279,14 +292,6 @@ const Sidebar = ({id, name, code, user, instructor}) => {
                   <SmsIcon />
                 </ListItemIcon>
                 <ListItemText> Chat Room </ListItemText>
-              </ListItem>
-            </Link>
-            <Link to="/">
-              <ListItem button>
-                <ListItemIcon>
-                  <ExitToAppIcon />
-                </ListItemIcon>
-                <ListItemText> Back to Courses </ListItemText>
               </ListItem>
             </Link>
           </List>
