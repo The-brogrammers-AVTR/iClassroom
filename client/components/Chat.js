@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import socketIOClient from 'socket.io-client'
-const socket = socketIOClient('http://127.0.0.1:8080')
+const socket = socketIOClient('https://i-classroom.herokuapp.com')
+
 import {connect} from 'react-redux'
 import queryString from 'query-string'
 
