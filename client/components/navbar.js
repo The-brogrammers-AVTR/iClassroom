@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+//import {logo} from '../../images/iClassroom.png'
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="nav-wrapper">
@@ -16,6 +17,9 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <div className="row">
+            <Link to="/profile">
+              <img className="navbar-pfp" src={user.imageURL} alt="pfp" />
+            </Link>
             <p>Hello, {user.firstName}</p>
             <a href="#" onClick={handleClick}>
               Logout
@@ -33,6 +37,107 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
     </nav>
   </div>
 )
+
+// import AppBar from '@material-ui/core/AppBar'
+// import Toolbar from '@material-ui/core/Toolbar'
+// import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+// import {ThemeProvider} from '@material-ui/styles'
+// import theme from './Theme'
+// import {makeStyles} from '@material-ui/core/styles'
+// import Typography from '@material-ui/core/Typography'
+
+// const useStyles = makeStyles({
+//   title: {
+//     margin: '1rem',
+//     fontWeight: 'bold',
+//     flexGrow: 1
+//   },
+//   menu: {
+//     cursor: 'pointer',
+//     margin: '1rem'
+//   }
+// })
+
+// function ElevationScroll(props) {
+//   const {children} = props
+//   const trigger = useScrollTrigger({
+//     disableHysteresis: true,
+//     threshold: 0
+//   })
+
+//   return React.cloneElement(children, {
+//     elevation: trigger ? 4 : 0
+//   })
+// }
+
+// const Navbar = ({handleClick, isLoggedIn, user}) => {
+//   const classes = useStyles()
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <ElevationScroll>
+//         <AppBar position="fixed" color="primary">
+//           {isLoggedIn ? (
+//             <Toolbar>
+//               <Typography
+//                 variant="h4"
+//                 color="secondary"
+//                 className={classes.title}
+//               >
+//                 <Link to="/">iClassroom</Link>
+//               </Typography>
+//               <Typography
+//                 variant="h6"
+//                 color="secondary"
+//                 className={classes.menu}
+//               >
+//                 {`Hello, ${user.firstName}`}
+//               </Typography>
+//               <Typography
+//                 variant="h6"
+//                 color="secondary"
+//                 className={classes.menu}
+//                 onClick={handleClick}
+//               >
+//                 Logout
+//               </Typography>
+//             </Toolbar>
+//           ) : (
+//             <Toolbar>
+//               <Typography
+//                 variant="h4"
+//                 color="secondary"
+//                 className={classes.title}
+//               >
+//                 <Link to="/">iClassroom</Link>
+//               </Typography>
+//               <Typography
+//                 variant="h6"
+//                 color="secondary"
+//                 className={classes.menu}
+//               >
+//                 <Link to="/login">Login</Link>
+//               </Typography>
+//               <Typography
+//                 variant="h6"
+//                 color="secondary"
+//                 className={classes.menu}
+//               >
+//                 <Link to="/signup">Sign Up</Link>
+//               </Typography>
+//               <Typography
+//                 variant="h6"
+//                 color="secondary"
+//                 className={classes.menu}
+//               >
+//                 <Link to="/course">Course</Link>
+//               </Typography>
+//             </Toolbar>
+//           )}
+//         </AppBar>
+//       </ElevationScroll>
+//     </ThemeProvider>
+//   )
+// }
 
 const mapState = ({user}) => {
   return {
