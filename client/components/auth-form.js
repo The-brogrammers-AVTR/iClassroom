@@ -1,20 +1,25 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {auth} from '../store'
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  makeStyles
+} from '@material-ui/core'
+import {ThemeProvider} from '@material-ui/styles'
+import theme from './Theme'
 
-// --- material-ui ---
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import Grid from '@material-ui/core/Grid' //acts as flexbox
-import Box from '@material-ui/core/Box' //acts as a div tag
-import Typography from '@material-ui/core/Typography' //acts as a h1 or p tag
-import {makeStyles} from '@material-ui/core/styles'
-import Container from '@material-ui/core/Container' //sets a maxwidth
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
+  gradient: {
+    backgroundColor: theme.palette.primary.main
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -26,22 +31,22 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1)
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
   }
-}))
+})
 
 const LoginForm = props => {
   const {name, displayName, handleSubmit, error} = props
   const classes = useStyles()
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs" className={classes.paper}>
+        <CssBaseline />
         <Avatar className={classes.avatar} />
         <Typography component="h1" variant="h5">
           Sign in
@@ -97,9 +102,9 @@ const LoginForm = props => {
           </Grid>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-      </div>
-      <Box mt={8} />
-    </Container>
+        <Box mt={8} />
+      </Container>
+    </ThemeProvider>
   )
 }
 
@@ -108,9 +113,9 @@ const SignupForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs" className={classes.paper}>
+        <CssBaseline />
         <Avatar className={classes.avatar} />
         <Typography component="h1" variant="h5">
           Sign up
@@ -193,19 +198,12 @@ const SignupForm = props => {
           </Grid>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
-      </div>
-      <Box mt={5} />
-    </Container>
+        <Box mt={5} />
+      </Container>
+    </ThemeProvider>
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = state => {
   return {
     name: 'login',
