@@ -43,7 +43,10 @@
   "dependencies": {
     "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.10.0",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "canvas": "^2.6.1",
     "coffee-register": "^1.0.0",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.1.1",
@@ -54,6 +57,7 @@
     "googleapis": "^51.0.0",
     "history": "^4.10.1",
     "immutable": "^4.0.0-rc.12",
+    "konva": "^6.0.0",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
@@ -63,9 +67,11 @@
     "prop-types": "^15.7.2",
     "query-string": "^6.12.1",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-drawing-board": "^0.1.0",
     "react-google-login": "^5.1.20",
+    "react-konva": "^16.13.0-3",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
@@ -73,7 +79,9 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.21.11",
     "socket.io": "^2.3.0",
-    "talkjs": "^0.14.2"
+    "talkjs": "^0.14.2",
+    "use-image": "^1.0.5",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",
