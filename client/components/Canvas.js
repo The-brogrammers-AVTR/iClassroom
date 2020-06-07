@@ -23,7 +23,7 @@ function Canvas() {
   const getRandomInt = max => {
     return Math.floor(Math.random() * Math.floor(max))
   }
-  console.log('sstageEl', layerEl)
+  //console.log('sstageEl', useState)
   const addRectangle = () => {
     const rect = {
       x: getRandomInt(100),
@@ -54,9 +54,19 @@ function Canvas() {
     setShapes(shs)
   }
 
-  const drawLine = () => {
+  const drawLine = async () => {
     addLine(stageEl.current.getStage(), layerEl.current)
+    let a = await stageEl.current.getStage()
+    let b = await layerEl.current
+    console.log(layerEl.current, stageEl.current.getStage(), a, b)
+    let obj = {layer: a, line: b}
+    // socket.emit('line', obj)
   }
+  // socket.on('line', line => {
+  //   console.log('line from socket,', line)
+  //   console.log(JSON.parse(line.layer), JSON.parse(line.line))
+  //   addLine(JSON.parse(line.layer), JSON.parse(line.line))
+  // })
   const eraseLine = () => {
     addLine(stageEl.current.getStage(), layerEl.current, 'erase')
   }

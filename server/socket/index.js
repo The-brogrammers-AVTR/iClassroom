@@ -31,6 +31,11 @@ module.exports = io => {
       //console.log('cirle', circle)
       io.emit('circle', circle)
     })
+
+    socket.on('line', line => {
+      console.log('line', line)
+      io.emit('line', line)
+    })
     socket.on('rectangles', rectangles => {
       //console.log('rectangles', rectangles)
       io.emit('rectangles', rectangles)

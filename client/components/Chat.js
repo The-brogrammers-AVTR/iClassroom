@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import socketIOClient from 'socket.io-client'
-const socket = socketIOClient('http://127.0.0.1:8080')
+const location = `${window.location.hostname}:8080`
+const socket = socketIOClient()
 import {connect} from 'react-redux'
 import queryString from 'query-string'
 
@@ -81,7 +82,7 @@ class Chat extends Component {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
     //
-    console.log(userName, room)
+    console.log(userName, room, window.location.hostname, location)
     const {user} = this.props
 
     return (
