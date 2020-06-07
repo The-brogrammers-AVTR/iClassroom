@@ -5,7 +5,7 @@ const ManageAssignments = ({assignment, remove}) => {
   if (assignment.length === 0) {
     return null
   }
-  console.log('in', assignment)
+  //console.log('in', assignment)
 
   const dataAssign = assignment.map(assign => ({
     assignmentid: assign.courseId,
@@ -16,7 +16,7 @@ const ManageAssignments = ({assignment, remove}) => {
     teacher: assign.teacherId
   }))
 
-  console.log('process', dataAssign)
+  //console.log('process', dataAssign)
 
   const [state, setState] = useState({
     columns: [
@@ -30,11 +30,11 @@ const ManageAssignments = ({assignment, remove}) => {
     data: dataAssign
   })
 
-  console.log('statedata', state)
+  //console.log('statedata', state)
 
   return (
     <MaterialTable
-      title="Assignments"
+      title="Manage Assignments"
       columns={state.columns}
       data={state.data}
       editable={{

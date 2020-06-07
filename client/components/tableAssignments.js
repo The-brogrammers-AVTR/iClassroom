@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 })
 
 const TableAssignments = ({assignment, remove}) => {
-  console.log('table', assignment)
+  //console.log('table', assignment)
   const classes = useStyles()
   if (!assignment) {
     return null
