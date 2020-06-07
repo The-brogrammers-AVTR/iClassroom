@@ -61,14 +61,17 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Typography
+  Typography,
+  IconButton,
+  ButtonBase
 } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
 
 const useStyles = makeStyles({
   root: {
     minWidth: 400,
-    backgroundColor: theme.palette.secondary.main,
-    marginBottom: 2
+    // backgroundColor: theme.palette.secondary.main,
+    marginBottom: 50
   },
   media: {
     height: 140
@@ -96,7 +99,7 @@ const CourseCard = ({
   }
 
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
@@ -116,19 +119,24 @@ const CourseCard = ({
             </Typography>
           </CardContent>
         </CardActionArea>
+
         <CardActions>
           {enrolled ? (
             <Link to={`/course/${id}/announcements`}>
-              <Button>Enter</Button>
+              <Button variant="contained" color="primary">
+                Enter
+              </Button>
             </Link>
           ) : isOpen === true ? (
-            <Button className="default-button" type="button">
-              Request to Join
-            </Button>
+            <Button color="primary">Join</Button>
           ) : (
             'Closed'
           )}
-          {user.isTeacher && <Button> Edit Course </Button>}
+          {user.isTeacher && (
+            <IconButton>
+              <EditIcon color="primary">Edit Course</EditIcon>
+            </IconButton>
+          )}
         </CardActions>
       </Card>
     </ThemeProvider>
