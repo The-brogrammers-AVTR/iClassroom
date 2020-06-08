@@ -2,15 +2,26 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import AnnouncementCard from './AnnouncementCard.js'
+import CreateAnnouncement from './CreateAnnouncement.js'
 import {Link} from 'react-router-dom'
 
 class Announcements extends React.Component {
   constructor() {
     super()
+    this.state = {
+      toggle: false
+    }
   }
 
   render() {
-    const {course, instructor, filteredAnnouncements, user} = this.props
+    const {toggle} = this.state
+    const {
+      course,
+      instructor,
+      filteredAnnouncements,
+      user,
+      history
+    } = this.props
 
     if (!course || !instructor || !filteredAnnouncements) {
       return <div>No Announcements</div>
@@ -22,12 +33,14 @@ class Announcements extends React.Component {
           <div className="course-content-header">
             <h1>Announcements</h1>
             {user.isTeacher === true && (
-              <Link className="add-button" to="/createAnnouncement">
-                +
-              </Link>
+              <button
+                type="submit"
+                onClick={() => this.setState({toggle: !toggle})}
+              />
             )}
           </div>
           <div>
+            {toggle && <CreateAnnouncement {...course} {...history} />}
             {filteredAnnouncements.map(announcement => {
               return (
                 <AnnouncementCard key={announcement.id} {...announcement} />
