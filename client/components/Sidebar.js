@@ -183,9 +183,10 @@ const Sidebar = ({id, name, code, user, instructor}) => {
               <Typography variant="h6">
                 {name} - {code}
               </Typography>
+
               <Link to="/">
                 <IconButton>
-                  <ExitToAppIcon fontSize="large" />
+                  <ExitToAppIcon />
                 </IconButton>
               </Link>
             </Grid>
