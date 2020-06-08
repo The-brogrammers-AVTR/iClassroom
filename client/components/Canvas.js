@@ -9,7 +9,7 @@ import {addTextNode} from './canvas/textNode'
 import Image from './canvas/Image'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient('http://127.0.0.1:8080')
-const uuidv1 = require('uuid/v1')
+const uuidv1 = require('uuid')
 function Canvas() {
   const [rectangles, setRectangles] = useState([])
   const [circles, setCircles] = useState([])

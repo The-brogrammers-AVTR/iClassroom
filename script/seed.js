@@ -182,10 +182,30 @@ async function seed() {
   ])
 
   const userassignment = await Promise.all([
-    UserAssignment.create({userId: student1.id, assignmentId: assign1.id}),
-    UserAssignment.create({userId: student1.id, assignmentId: assign2.id}),
-    UserAssignment.create({userId: student1.id, assignmentId: assign3.id}),
-    UserAssignment.create({userId: student2.id, assignmentId: assign1.id})
+    UserAssignment.create({
+      userId: student1.id,
+      assignmentId: assign1.id,
+      grade: 90,
+      isComplete: true
+    }),
+    UserAssignment.create({
+      userId: student1.id,
+      assignmentId: assign2.id,
+      grade: null,
+      isComplete: false
+    }),
+    UserAssignment.create({
+      userId: student1.id,
+      assignmentId: assign3.id,
+      grade: 70,
+      isComplete: true
+    }),
+    UserAssignment.create({
+      userId: student2.id,
+      assignmentId: assign1.id,
+      grade: null,
+      isComplete: false
+    })
   ])
 
   console.log(`seeded ${users.length} users`)

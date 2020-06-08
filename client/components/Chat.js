@@ -2,20 +2,26 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import socketIOClient from 'socket.io-client'
 const location = `${window.location.hostname}:8080`
-const socket = socketIOClient()
+
+const socket = socketIOClient('http://127.0.0.1:8080')
+import 'emoji-mart/css/emoji-mart.css'
+import {Picker} from 'emoji-mart'
 import {connect} from 'react-redux'
 import queryString from 'query-string'
 
 import {Button, InputLabel, Input} from '@material-ui/core'
 import Icon from '@material-ui/core/Icon'
-
+let DisplayImoji
 class Chat extends Component {
   constructor() {
     super()
     this.state = {
       message: '',
-      user: ''
+      user: '',
+      imoji: false
     }
+    this.submit = this.submit.bind(this)
+    this.displayImoji = this.displayImoji.bind(this)
   }
   componentDidMount() {
     let userName = queryString.parse(this.props.location.search).userName
@@ -77,6 +83,42 @@ class Chat extends Component {
       //console.log(this.state.message)
     })
   }
+  submit(e) {
+    let userName = queryString.parse(this.props.location.search).userName
+    let room = queryString.parse(this.props.location.search).room
+    console.log('submiting')
+    e.preventDefault()
+    socket.emit('joinRoom', {userName, room})
+    socket.emit('chat message', this.state.message)
+    socket.emit('getUsers', {userName, room})
+    this.setState({message: ''})
+  }
+
+  displayImoji(e) {
+    e.preventDefault()
+    this.setState({emoji: !this.state.emoji})
+    console.log(this.state.emoji)
+    if (this.state.emoji) {
+      let button = document.getElementById('buttonEmoji')
+      button.innerText = 'Remove Emojis'
+      DisplayImoji = (
+        <Picker
+          style={{position: 'absolute', bottom: '20px', right: '20px'}}
+          title="Pick your emoji…"
+          emoji="point_up"
+          onClick={emoji => {
+            console.log(emoji)
+            this.setState({message: this.state.message + emoji.native})
+          }}
+        />
+      )
+    }
+    if (!this.state.emoji) {
+      let button = document.getElementById('buttonEmoji')
+      button.innerText = 'Add Imojis'
+      DisplayImoji = ''
+    }
+  }
 
   render() {
     let userName = queryString.parse(this.props.location.search).userName
@@ -100,19 +142,7 @@ class Chat extends Component {
           </div>
         </div>
 
-        <form
-          id="socket"
-          onSubmit={e => {
-            console.log('submiting')
-            e.preventDefault()
-            socket.emit('joinRoom', {userName, room})
-            socket.emit('chat message', this.state.message)
-            socket.emit('getUsers', {userName, room})
-
-            //this.a()
-            this.setState({message: ''})
-          }}
-        >
+        <form id="socket" onSubmit={e => this.submit(e)}>
           <div id="chatInput">
             <InputLabel htmlFor="my-input">message</InputLabel>
             <Input
@@ -132,6 +162,19 @@ class Chat extends Component {
             >
               Send
             </Button>
+          </div>
+          <div id="emojis">
+            {DisplayImoji}
+            <button id="buttonEmoji" onClick={this.displayImoji}>
+              Add Imojis
+            </button>
+            {/* <span>
+              <Picker
+                onSelect={this.addEmoji}
+                title="Pick your emoji…"
+                emoji="point_up"
+              />
+            </span> */}
           </div>
         </form>
       </div>

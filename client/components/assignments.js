@@ -5,6 +5,7 @@ import {deleteAssignment} from '../store/assignment'
 import TableAssignments from './TableAssignments'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
+import ManageAssignments from './ManageAssignments'
 
 class Assignments extends Component {
   constructor() {
@@ -17,32 +18,43 @@ class Assignments extends Component {
 
   render() {
     //console.log('props', this.props)
-    const {course, teachers, remove} = this.props
+    const {course, teachers, remove, user} = this.props
     const instructor = teachers.find(teacher =>
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
-    //console.log('ins', instructor)
+    //console.log('instructor', instructor)
+    //console.log('current user', user)
+    const isInstructor = instructor.id === user.id
+    //console.log(isInstructor)
     const assignmentsForCourse = this.props.assignment.filter(
       assignment => assignment.courseId === course.id
     )
-
     if (!this.props.assignment || !instructor) {
       return null
     }
     return (
       <Grid container>
         <Sidebar {...course} instructor={instructor} />
-        <Grid item xs={12} sm={9}>
-          <TableAssignments assignment={assignmentsForCourse} remove={remove} />
-        </Grid>
+        {isInstructor ? (
+          <Grid item xs={12} sm={9}>
+            <ManageAssignments assignment={assignmentsForCourse} />
+          </Grid>
+        ) : (
+          <Grid item xs={12} sm={9}>
+            <TableAssignments
+              assignment={assignmentsForCourse}
+              remove={remove}
+            />
+          </Grid>
+        )}
       </Grid>
     )
   }
 }
 
-const mapStateToProps = ({courses, teachers, assignment}, {match}) => {
+const mapStateToProps = ({courses, teachers, assignment, user}, {match}) => {
   const course = courses.find(_course => _course.id === Number(match.params.id))
-  return {course, teachers, assignment}
+  return {course, teachers, assignment, user}
 }
 
 const mapDispatchToProps = dispatch => {
