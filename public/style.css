@@ -386,3 +386,32 @@ tr:nth-child(even) {
   border: solid black 7px;
   background-color: rgb(245, 241, 241);
 }
+#imojis {
+  width: 100px;
+  height: 50px;
+}
+.emoji-mart-scroll {
+  display: flex;
+  flex-direction: row;
+  overflow-y: scroll;
+  width: 200px;
+  height: 200px;
+}
+.emoji-mart-scroll ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.emoji-mart-scroll ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.emoji-mart-scroll ::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.emoji-mart-scroll ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

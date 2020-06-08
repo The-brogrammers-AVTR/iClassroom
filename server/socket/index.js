@@ -19,6 +19,7 @@ module.exports = io => {
     })
     socket.emit('message', formatMessage(name, 'welcome'))
     socket.on('chat message', msg => {
+      console.log('cirle', msg)
       const user = getCurrentUser(socket.id)
       io.to(user.room).emit('message', formatMessage(user.userName, msg))
       socket.on('getUsers', msg => {
@@ -28,7 +29,7 @@ module.exports = io => {
       })
     })
     socket.on('circle', circle => {
-      //console.log('cirle', circle)
+      console.log('cirle', circle)
       io.emit('circle', circle)
     })
     socket.on('rectangles', rectangles => {
