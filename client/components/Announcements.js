@@ -3,7 +3,9 @@ import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import AnnouncementCard from './AnnouncementCard.js'
 import CreateAnnouncement from './CreateAnnouncement.js'
-import {Link} from 'react-router-dom'
+import {makeStyles} from '@material-ui/core/styles'
+import Fab from '@material-ui/core/Fab'
+import AddIcon from '@material-ui/icons/Add'
 
 class Announcements extends React.Component {
   constructor() {
@@ -33,10 +35,13 @@ class Announcements extends React.Component {
           <div className="course-content-header">
             <h1>Announcements</h1>
             {user.isTeacher === true && (
-              <button
-                type="submit"
+              <Fab
+                color="primary"
+                aria-label="add"
                 onClick={() => this.setState({toggle: !toggle})}
-              />
+              >
+                <AddIcon />
+              </Fab>
             )}
           </div>
           <div>
@@ -60,9 +65,9 @@ const mapStateToProps = ({courses, teachers, announcements, user}, {match}) => {
     course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
   )
 
-  const filteredAnnouncements = announcements.filter(
-    announcement => announcement.courseId === course.id
-  )
+  const filteredAnnouncements = announcements
+    .filter(announcement => announcement.courseId === course.id)
+    .reverse()
   return {course, instructor, filteredAnnouncements, user}
 }
 

@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core'
 import theme from './Theme'
 import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
+const moment = require('moment')
 
 // class AnnouncementCard extends React.Component {
 //   constructor() {
@@ -49,7 +49,9 @@ const useStyles = makeStyles({
   }
 })
 
-const AnnouncementCard = ({title, description, id}) => {
+const AnnouncementCard = ({title, description, id, createdAt, remove}) => {
+  const date = moment(createdAt).format('MMMM Do YYYY, h:mm a')
+  console.log(date)
   const classes = useStyles()
   return (
     <ThemeProvider theme={theme}>
@@ -58,12 +60,10 @@ const AnnouncementCard = ({title, description, id}) => {
         <Typography className={classes.body} variant="body1">
           {description}
         </Typography>
-        <Grid container justify="flex-end">
-          <IconButton>
-            <EditIcon />
-          </IconButton>
-          <IconButton>
-            <DeleteIcon onClick={() => this.props.remove(id)} />
+        <Grid container justify="space-between" alignItems="center">
+          <Typography variant="body2">{date}</Typography>
+          <IconButton onClick={() => remove(id)}>
+            <DeleteIcon />
           </IconButton>
         </Grid>
       </Paper>
