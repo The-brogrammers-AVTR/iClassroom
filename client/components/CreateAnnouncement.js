@@ -1,61 +1,80 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {createAnnouncement} from '../store/announcement'
+import {
+  IconButton,
+  makeStyles,
+  Paper,
+  TextField,
+  ThemeProvider,
+  Grid
+} from '@material-ui/core'
+import SendIcon from '@material-ui/icons/Send'
+import theme from './Theme'
 
-class CreateAnnouncement extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      title: '',
-      description: ''
-    }
-    this.onSubmit = this.onSubmit.bind(this)
+const useStyles = makeStyles({
+  root: {
+    margin: theme.spacing(2),
+    minWidth: theme.spacing(10),
+    minHeight: theme.spacing(20),
+    backgroundColor: theme.palette.white,
+    padding: theme.spacing(3)
+  },
+  body: {
+    minHeight: theme.spacing(10),
+    paddingTop: theme.spacing(3)
   }
+})
 
-  onSubmit(event) {
-    event.preventDefault()
-    const {id, push} = this.props
-    console.log({courseId: id})
-    this.props.post(
+const CreateAnnouncement = ({id, push, post}) => {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const classes = useStyles()
+
+  const onSubmit = ev => {
+    ev.preventDefault()
+    post(
       {
-        title: this.state.title,
-        description: this.state.description,
+        title: title,
+        description: description,
         courseId: id
       },
       push,
       id
     )
+    setTitle('')
+    setDescription('')
   }
 
-  render() {
-    const {title, description} = this.state
-    const {id} = this.props
-    console.log({courseId: id})
-    return (
-      <div className="form-wrapper">
-        <form className="new-form" onSubmit={this.onSubmit}>
-          <p className="row">
-            Title:
-            <input
-              value={title}
-              onChange={ev => this.setState({title: ev.target.value})}
-            />
-          </p>
-          <p className="row">
-            Description:
-            <input
-              value={description}
-              onChange={ev => this.setState({description: ev.target.value})}
-            />
-          </p>
+  return (
+    <ThemeProvider theme={theme}>
+      <Paper className={classes.root} elevation={3}>
+        <form>
+          <TextField
+            fullWidth
+            label="Title"
+            value={title}
+            onChange={ev => setTitle(ev.target.value)}
+          />
+          <TextField
+            fullWidth
+            multiline
+            className={classes.body}
+            rows="5"
+            variant="outlined"
+            value={description}
+            onChange={ev => setDescription(ev.target.value)}
+          />
 
-          <button type="submit" disabled={!title || !description}>
-            Post
-          </button>
+          <Grid container justify="flex-end" alignItems="center">
+            <IconButton onClick={onSubmit} disabled={!title || !description}>
+              <SendIcon color="primary" />
+            </IconButton>
+          </Grid>
         </form>
-      </div>
-    )
-  }
+      </Paper>
+    </ThemeProvider>
+  )
 }
 
 const mapStatetoProps = state => {

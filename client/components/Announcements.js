@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import AnnouncementCard from './AnnouncementCard.js'
 import CreateAnnouncement from './CreateAnnouncement.js'
-import {makeStyles} from '@material-ui/core/styles'
-import Fab from '@material-ui/core/Fab'
+import {ThemeProvider, Fab} from '@material-ui/core/'
+import theme from './Theme'
 import AddIcon from '@material-ui/icons/Add'
 
 class Announcements extends React.Component {
@@ -29,31 +29,33 @@ class Announcements extends React.Component {
       return <div>No Announcements</div>
     }
     return (
-      <div className="course-home-wrapper">
-        <Sidebar {...course} instructor={instructor} />
-        <div className="course-content">
-          <div className="course-content-header">
-            <h1>Announcements</h1>
-            {user.isTeacher === true && (
-              <Fab
-                color="primary"
-                aria-label="add"
-                onClick={() => this.setState({toggle: !toggle})}
-              >
-                <AddIcon />
-              </Fab>
-            )}
-          </div>
-          <div>
-            {toggle && <CreateAnnouncement {...course} {...history} />}
-            {filteredAnnouncements.map(announcement => {
-              return (
-                <AnnouncementCard key={announcement.id} {...announcement} />
-              )
-            })}
+      <ThemeProvider theme={theme}>
+        <div className="course-home-wrapper">
+          <Sidebar {...course} instructor={instructor} />
+          <div className="course-content">
+            <div className="course-content-header">
+              <h1>Announcements</h1>
+              {user.isTeacher === true && (
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => this.setState({toggle: !toggle})}
+                >
+                  <AddIcon />
+                </Fab>
+              )}
+            </div>
+            <div>
+              {toggle && <CreateAnnouncement {...course} {...history} />}
+              {filteredAnnouncements.map(announcement => {
+                return (
+                  <AnnouncementCard key={announcement.id} {...announcement} />
+                )
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      </ThemeProvider>
     )
   }
 }
