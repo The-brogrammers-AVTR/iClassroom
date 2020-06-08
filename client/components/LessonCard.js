@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   }
 })
 
-const LessonCard = ({title, description, id, remove}) => {
+const LessonCard = ({title, description, id, remove, idx}) => {
   const [expanded, setExpanded] = useState(false)
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false)
@@ -50,6 +50,13 @@ const LessonCard = ({title, description, id, remove}) => {
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
               >
+                <Typography
+                  className={classes.heading}
+                  color="primary"
+                  variant="h6"
+                >
+                  Lesson {idx + 1}
+                </Typography>
                 <Typography
                   className={classes.heading}
                   color="primary"

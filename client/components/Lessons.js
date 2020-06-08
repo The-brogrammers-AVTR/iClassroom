@@ -5,6 +5,7 @@ import LessonCard from './LessonCard.js'
 import {ThemeProvider, Fab} from '@material-ui/core/'
 import theme from './Theme'
 import AddIcon from '@material-ui/icons/Add'
+import CreateLesson from './CreateLesson.js'
 
 class Lessons extends React.Component {
   constructor() {
@@ -16,7 +17,7 @@ class Lessons extends React.Component {
   render() {
     const {toggle} = this.state
 
-    const {course, instructor, filteredLessons, user} = this.props
+    const {course, instructor, filteredLessons, user, history} = this.props
 
     if (!course || !instructor || !filteredLessons) {
       return null
@@ -39,8 +40,9 @@ class Lessons extends React.Component {
               )}
             </div>
             <div>
-              {filteredLessons.map(lesson => {
-                return <LessonCard key={lesson.id} {...lesson} />
+              {toggle && <CreateLesson {...course} {...history} />}
+              {filteredLessons.map((lesson, idx) => {
+                return <LessonCard key={lesson.id} idx={idx} {...lesson} />
               })}
             </div>
           </div>
