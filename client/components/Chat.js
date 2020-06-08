@@ -4,8 +4,9 @@ import socketIOClient from 'socket.io-client'
 const location = `${window.location.hostname}:8080`
 
 const socket = socketIOClient('http://127.0.0.1:8080')
-import 'emoji-mart/css/emoji-mart.css'
+
 import {Picker} from 'emoji-mart'
+//import 'emoji-mart/css/emoji-mart.css'
 import {connect} from 'react-redux'
 import queryString from 'query-string'
 
@@ -103,7 +104,6 @@ class Chat extends Component {
       button.innerText = 'Remove Emojis'
       DisplayImoji = (
         <Picker
-          style={{position: 'absolute', bottom: '20px', right: '20px'}}
           title="Pick your emoji…"
           emoji="point_up"
           onClick={emoji => {
