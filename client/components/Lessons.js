@@ -2,7 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import LessonCard from './LessonCard.js'
-import {Fab} from '@material-ui/core/'
+import {ThemeProvider, Fab} from '@material-ui/core/'
+import theme from './Theme'
 import AddIcon from '@material-ui/icons/Add'
 
 class Lessons extends React.Component {
@@ -21,28 +22,30 @@ class Lessons extends React.Component {
       return null
     }
     return (
-      <div className="course-home-wrapper">
-        <Sidebar {...course} instructor={instructor} />
-        <div className="course-content">
-          <div className="course-content-header">
-            <h1>Lessons</h1>
-            {user.isTeacher === true && (
-              <Fab
-                color="primary"
-                aria-label="add"
-                onClick={() => this.setState({toggle: !toggle})}
-              >
-                <AddIcon />
-              </Fab>
-            )}
-          </div>
-          <div>
-            {filteredLessons.map(lesson => {
-              return <LessonCard key={lesson.id} {...lesson} />
-            })}
+      <ThemeProvider theme={theme}>
+        <div className="course-home-wrapper">
+          <Sidebar {...course} instructor={instructor} />
+          <div className="course-content">
+            <div className="course-content-header">
+              <h1>Lessons</h1>
+              {user.isTeacher === true && (
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => this.setState({toggle: !toggle})}
+                >
+                  <AddIcon />
+                </Fab>
+              )}
+            </div>
+            <div>
+              {filteredLessons.map(lesson => {
+                return <LessonCard key={lesson.id} {...lesson} />
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      </ThemeProvider>
     )
   }
 }
