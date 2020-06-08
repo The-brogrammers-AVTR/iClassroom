@@ -5,10 +5,20 @@ const Course = require('./course')
 const Announcement = require('./announcement')
 const Lesson = require('./lesson')
 const Image = require('./image')
+const Sequelize = require('sequelize')
 
 // blank models
 const UserCourse = db.define('UserCourse')
-const UserAssignment = db.define('UserAssignment')
+const UserAssignment = db.define('UserAssignment', {
+  grade: {
+    type: Sequelize.INTEGER,
+    defaultValue: 80
+  },
+  isComplete: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
+})
 
 User.belongsToMany(Course, {through: UserCourse})
 Course.belongsToMany(User, {through: UserCourse})
