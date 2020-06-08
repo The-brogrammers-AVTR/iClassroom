@@ -2,14 +2,19 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import LessonCard from './LessonCard.js'
-import {Link} from 'react-router-dom'
+import {Fab} from '@material-ui/core/'
+import AddIcon from '@material-ui/icons/Add'
 
 class Lessons extends React.Component {
   constructor() {
     super()
+    this.state = {
+      toggle: false
+    }
   }
-
   render() {
+    const {toggle} = this.state
+
     const {course, instructor, filteredLessons, user} = this.props
 
     if (!course || !instructor || !filteredLessons) {
@@ -22,9 +27,13 @@ class Lessons extends React.Component {
           <div className="course-content-header">
             <h1>Lessons</h1>
             {user.isTeacher === true && (
-              <Link className="add-button" to="/createAnnouncement">
-                +
-              </Link>
+              <Fab
+                color="primary"
+                aria-label="add"
+                onClick={() => this.setState({toggle: !toggle})}
+              >
+                <AddIcon />
+              </Fab>
             )}
           </div>
           <div>

@@ -1,72 +1,76 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {removeLesson} from '../store'
 import {
   IconButton,
   makeStyles,
-  Paper,
   Typography,
   ThemeProvider,
-  Grid
+  Grid,
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary
 } from '@material-ui/core'
 import theme from './Theme'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
-
-// class LessonCard extends React.Component {
-//   constructor() {
-//     super()
-//   }
-
-//   render() {
-//     const {title, description, id} = this.props
-
-//     return (
-//       <div className="announcement-card">
-//         <h3>{title}</h3>
-//         <p>{description}</p>
-//         <IconButton>
-//           <EditIcon />
-//         </IconButton>
-//         <IconButton>
-//           <DeleteIcon onClick={() => this.props.remove(id)} />
-//         </IconButton>
-//       </div>
-//     )
-//   }
-// }
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 const useStyles = makeStyles({
   root: {
     margin: theme.spacing(2),
-    minWidth: theme.spacing(10),
-    minHeight: theme.spacing(20),
-    backgroundColor: theme.palette.white,
-    padding: theme.spacing(3)
+    padding: theme.spacing(2),
+    minWidth: theme.spacing(12)
   },
-  body: {
-    minHeight: theme.spacing(10)
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0
+    // color: theme.palette.primary.main,
   }
 })
 
-const LessonCard = ({title, description, id}) => {
+const LessonCard = ({title, description, id, remove}) => {
+  const [expanded, setExpanded] = useState(false)
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false)
+  }
   const classes = useStyles()
   return (
     <ThemeProvider theme={theme}>
-      <Paper className={classes.root} elevation={3}>
-        <Typography variant="h6">{title}</Typography>
-        <Typography className={classes.body} variant="body1">
-          {description}
-        </Typography>
-        <Grid container justify="flex-end">
+      <div className={classes.root}>
+        <Grid container direction="row" justify="space-between">
+          <Grid item xs={11}>
+            <ExpansionPanel
+              expanded={expanded === 'panel1'}
+              onChange={handleChange('panel1')}
+            >
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography
+                  className={classes.heading}
+                  color="primary"
+                  variant="h6"
+                >
+                  {title}
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Typography>{description}</Typography>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </Grid>
           <IconButton>
             <EditIcon />
           </IconButton>
           <IconButton>
-            <DeleteIcon onClick={() => this.props.remove(id)} />
+            <DeleteIcon onClick={() => remove(id)} />
           </IconButton>
         </Grid>
-      </Paper>
+      </div>
     </ThemeProvider>
   )
 }
