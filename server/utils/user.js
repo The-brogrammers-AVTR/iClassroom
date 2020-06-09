@@ -15,6 +15,7 @@ function userJoin(id, userName, room) {
   return user
 }
 function getCurrentUser(id) {
+  console.log('users from get user', users)
   return users.find(user => user.id === id)
 }
 function usersForRoom(room) {

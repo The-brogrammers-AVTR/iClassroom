@@ -18,7 +18,14 @@ module.exports = io => {
         .emit('message', formatMessage(userName, 'welcome'))
     })
     socket.emit('message', formatMessage(name, 'welcome'))
+    socket.on('userTyping', msg => {
+      console.log(socket.id)
+      const user = getCurrentUser(socket.id)
+      console.log('user drom user is typing', user, msg)
+      socket.broadcast.to(user.room).emit('userTyping', msg)
+    })
     socket.on('chat message', msg => {
+      console.log(socket.id)
       console.log('cirle', msg)
       const user = getCurrentUser(socket.id)
       io.to(user.room).emit('message', formatMessage(user.userName, msg))
