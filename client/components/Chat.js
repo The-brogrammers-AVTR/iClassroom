@@ -63,11 +63,20 @@ class Chat extends Component {
       //console.log(this.state.message)
     })
     socket.on('userTyping', function(msg) {
-      console.log('hello')
+      //console.log('hello')
       let label = document.getElementById('inputLabel')
       label.innerText = msg + ': ' + 'user is typing'
+
       // this.setState({action: msg + 'user is typing'})
     })
+    socket.on('userFinishTyping', function(msg) {
+      console.log('hello')
+      let label = document.getElementById('inputLabel')
+      label.innerText = 'message'
+
+      // this.setState({action: msg + 'user is typing'})
+    })
+
     // socket.on('joinRoom', function(msg) {
     //   console.log(msg)
     //   let mes = document.getElementsByClassName('message')
@@ -102,6 +111,7 @@ class Chat extends Component {
     //socket.emit('joinRoom', {userName, room})
     socket.emit('chat message', this.state.message)
     socket.emit('getUsers', {userName, room})
+    socket.emit('userFinishTyping', 'message')
     this.setState({message: ''})
     let label = document.getElementById('inputLabel')
     label.innerText = 'message'
