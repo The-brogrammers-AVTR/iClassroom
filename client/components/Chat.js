@@ -21,7 +21,8 @@ class Chat extends Component {
     this.state = {
       message: '',
       user: '',
-      imoji: false
+      imoji: false,
+      action: 'message'
     }
     this.submit = this.submit.bind(this)
     this.displayImoji = this.displayImoji.bind(this)
@@ -30,6 +31,7 @@ class Chat extends Component {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
     socket.emit('getUsers', {userName, room})
+    socket.emit('joinRoom', {userName, room})
     // socket.on('chat message', function(msg) {
     //   console.log(msg)
     //   let mes = document.getElementById('message')
@@ -59,6 +61,12 @@ class Chat extends Component {
       var chatList = document.getElementById('displayMessage')
       chatList.scrollTop = chatList.scrollHeight
       //console.log(this.state.message)
+    })
+    socket.on('userTyping', function(msg) {
+      console.log('hello')
+      let label = document.getElementById('inputLabel')
+      label.innerText = msg + ': ' + 'user is typing'
+      // this.setState({action: msg + 'user is typing'})
     })
     // socket.on('joinRoom', function(msg) {
     //   console.log(msg)
@@ -91,10 +99,12 @@ class Chat extends Component {
     let room = queryString.parse(this.props.location.search).room
     console.log('submiting')
     e.preventDefault()
-    socket.emit('joinRoom', {userName, room})
+    //socket.emit('joinRoom', {userName, room})
     socket.emit('chat message', this.state.message)
     socket.emit('getUsers', {userName, room})
     this.setState({message: ''})
+    let label = document.getElementById('inputLabel')
+    label.innerText = 'message'
   }
 
   displayImoji(e) {
@@ -125,7 +135,7 @@ class Chat extends Component {
   render() {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
-    //
+
     console.log(userName, room, window.location.hostname, location)
     const {user} = this.props
 
@@ -146,13 +156,16 @@ class Chat extends Component {
 
         <form id="socket" onSubmit={e => this.submit(e)}>
           <div id="chatInput">
-            <InputLabel htmlFor="my-input">message</InputLabel>
+            <InputLabel id="inputLabel" htmlFor="my-input">
+              {this.state.action}
+            </InputLabel>
             <Input
               value={this.state.message}
               id="my-input"
               aria-describedby="my-helper-text"
               onChange={e => {
                 this.setState({message: e.target.value})
+                socket.emit('userTyping', this.state.message)
               }}
             />
             <Button
