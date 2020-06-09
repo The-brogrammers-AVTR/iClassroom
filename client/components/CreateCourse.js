@@ -39,6 +39,10 @@ class CreateCourse extends React.Component {
       } catch (ex) {
         console.log(ex)
       }
+    } else {
+      this.setState({action: !this.state.action})
+      event.preventDefault()
+      
     }
   }
 
