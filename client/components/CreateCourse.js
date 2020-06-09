@@ -1,117 +1,88 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {createCourse} from '../store/course'
 import {withRouter} from 'react-router-dom'
 import {getUserCourses} from '../store'
 
-class CreateCourse extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      name: '',
-      code: '',
-      isOpen: true,
-      subject: '',
-      gradeLevel: '',
-      action: false
-    }
-    this.onSubmit = this.onSubmit.bind(this)
-  }
+const CreateCourse = ({user, save, load, history}) => {
+  const [name, setName] = useState('')
+  const [code, setCode] = useState(Math.ceil(Math.random() * 4000))
+  const [subject, setSubject] = useState('')
+  const [gradeLevel, setGradeLevel] = useState('')
+  const [action, setAction] = useState(false)
 
-  async onSubmit(event) {
-    this.setState({action: !this.state.action})
-    if (this.state.action) {
-      const {user} = this.props
+  const onSubmit = async ev => {
+    setAction(!action)
+    if (action) {
       console.log('user id', user.id)
-      event.preventDefault()
+      ev.preventDefault()
       try {
-        await this.props.save(
+        await load()
+        await save(
           {
-            name: this.state.name,
-            code: this.state.code,
-            isOpen: this.state.isOpen,
-            subject: this.state.subject,
-            gradeLevel: this.state.gradeLevel,
+            name: name,
+            code: code,
+            isOpen: true,
+            subject: subject,
+            gradeLevel: gradeLevel,
             userId: user.id
           },
-          this.props.history.push
+          history.push
         )
+        setName('')
+        setCode(Math.ceil(Math.random() * 4000))
+        setAction('')
       } catch (ex) {
         console.log(ex)
       }
     } else {
-      this.setState({action: !this.state.action})
-      event.preventDefault()
+      setAction(!action)
+      ev.preventDefault()
     }
   }
 
-  componentDidMount() {
-    this.props.load()
-  }
+  return (
+    <div className="form-wrapper">
+      <form className="new-form" onSubmit={onSubmit}>
+        <p className="row">
+          Name:
+          <input
+            value={name}
+            onChange={ev => setName(ev.target.value)}
+            placeholder="Name"
+          />
+        </p>
+        <p className="row">
+          Subject:
+          <select onChange={ev => setSubject(ev.target.value)}>
+            <option value="">--Select a Subject--</option>
+            <option value="English">English</option>
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="Social Studies">Social Studies</option>
+            <option value="Art">Art</option>
+            <option value="Music">Music</option>
+          </select>
+        </p>
+        <p className="row">
+          Grade Level:
+          <select onChange={ev => setGradeLevel(ev.target.value)}>
+            <option value="">--Select a Grade--</option>
+            <option value="Elementary">Elementary</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Honors">Honors</option>
+          </select>
+        </p>
 
-  render() {
-    const {name, code, subject, gradeLevel, error} = this.state
-
-    return (
-      <div className="form-wrapper">
-        <form className="new-form" onSubmit={this.onSubmit}>
-          {error}
-          <p className="row">
-            Name:
-            <input
-              value={name}
-              onChange={ev => this.setState({name: ev.target.value})}
-              placeholder="Name"
-            />
-          </p>
-          <p className="row">
-            Code:
-            <input
-              value={code}
-              onChange={() =>
-                this.setState({code: Math.ceil(Math.random() * 4000)})
-              }
-              placeholder="code"
-            />
-          </p>
-          <p className="row">
-            Subject:
-            <select
-              onChange={event => this.setState({subject: event.target.value})}
-            >
-              <option value="">--Select a Subject--</option>
-              <option value="English">English</option>
-              <option value="Math">Math</option>
-              <option value="Science">Science</option>
-              <option value="Social Studies">Social Studies</option>
-              <option value="Art">Art</option>
-              <option value="Music">Music</option>
-            </select>
-          </p>
-          <p className="row">
-            Grade Level:
-            <select
-              onChange={event =>
-                this.setState({gradeLevel: event.target.value})
-              }
-            >
-              <option value="">--Select a Grade--</option>
-              <option value="Elementary">Elementary</option>
-              <option value="Advanced">Advanced</option>
-              <option value="Honors">Honors</option>
-            </select>
-          </p>
-
-          <button
-            type="submit"
-            disabled={!name || !code || !subject || !gradeLevel}
-          >
-            Create Course
-          </button>
-        </form>
-      </div>
-    )
-  }
+        <button
+          type="submit"
+          disabled={!name || !code || !subject || !gradeLevel}
+        >
+          Create Course
+        </button>
+      </form>
+    </div>
+  )
 }
 
 const mapStatetoProps = ({user}) => {
