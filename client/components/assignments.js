@@ -6,6 +6,7 @@ import TableAssignments from './TableAssignments'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import ManageAssignments from './ManageAssignments'
+import {readUserassignments} from '../store/userassignment'
 
 class Assignments extends Component {
   constructor() {
@@ -22,10 +23,14 @@ class Assignments extends Component {
     const instructor = teachers.find(teacher =>
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
-    //console.log('instructor', instructor)
+
     console.log('current user', user)
     const isInstructor = instructor.id === user.id
-    //console.log(isInstructor)
+    const theUserassignments = this.props.userassignment.filter(
+      userassignment => userassignment.userId === user.id
+    )
+    console.log('current user assignments', theUserassignments)
+
     const assignmentsForCourse = this.props.assignment.filter(
       assignment => assignment.courseId === course.id
     )
@@ -52,15 +57,19 @@ class Assignments extends Component {
   }
 }
 
-const mapStateToProps = ({courses, teachers, assignment, user}, {match}) => {
+const mapStateToProps = (
+  {courses, teachers, assignment, user, userassignment},
+  {match}
+) => {
   const course = courses.find(_course => _course.id === Number(match.params.id))
-  return {course, teachers, assignment, user}
+  return {course, teachers, assignment, user, userassignment}
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     load: () => {
       dispatch(readAssignments())
+      dispatch(readUserassignments())
     },
     remove: id => {
       dispatch(deleteAssignment(id))
