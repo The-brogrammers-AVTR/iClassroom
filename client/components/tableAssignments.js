@@ -72,7 +72,7 @@ const TableAssignments = ({assignment, remove}) => {
                 <TableCell align="left">{assignment.courseId}</TableCell>
                 <TableCell align="left">{assignment.category}</TableCell>
                 <TableCell align="left">{assignment.description}</TableCell>
-                <TableCell align="left">{assignment.teacherId}</TableCell>
+                <TableCell align="left">{assignment.userId}</TableCell>
               </TableRow>
             ))}
           </TableBody>

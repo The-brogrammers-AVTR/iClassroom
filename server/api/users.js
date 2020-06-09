@@ -46,7 +46,16 @@ router.get('/students', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
-  await User.findByPk(req.params.id)
+  await User.findByPk(req.params.id, {
+    include: [
+      {
+        model: Assignment
+      },
+      {
+        model: Userassignment
+      }
+    ]
+  })
     .then(user => res.send(user))
     .catch(next)
 })

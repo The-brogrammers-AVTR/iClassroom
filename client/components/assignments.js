@@ -24,16 +24,18 @@ class Assignments extends Component {
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
 
-    console.log('current user', user)
+    //console.log('current user', user)
     const isInstructor = instructor.id === user.id
     const theUserassignments = this.props.userassignment.filter(
       userassignment => userassignment.userId === user.id
     )
-    console.log('current user assignments', theUserassignments)
+    //console.log('current user assignments', theUserassignments)
 
     const assignmentsForCourse = this.props.assignment.filter(
       assignment => assignment.courseId === course.id
     )
+    //console.log('assignments', assignmentsForCourse)
+
     if (!this.props.assignment || !instructor) {
       return null
     }
