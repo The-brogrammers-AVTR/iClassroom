@@ -29,6 +29,7 @@ UserCourse.belongsTo(Course)
 Course.hasMany(Assignment)
 Assignment.belongsTo(Course)
 
+User.hasMany(Assignment)
 Assignment.belongsToMany(User, {through: UserAssignment})
 User.belongsToMany(Assignment, {through: UserAssignment})
 

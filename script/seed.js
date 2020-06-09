@@ -191,18 +191,30 @@ async function seed() {
     UserAssignment.create({
       userId: student1.id,
       assignmentId: assign2.id,
-      grade: null,
-      isComplete: false
+      grade: 85,
+      isComplete: true
     }),
     UserAssignment.create({
       userId: student1.id,
       assignmentId: assign3.id,
-      grade: 70,
-      isComplete: true
+      grade: null,
+      isComplete: false
     }),
     UserAssignment.create({
       userId: student2.id,
       assignmentId: assign1.id,
+      grade: 80,
+      isComplete: true
+    }),
+    UserAssignment.create({
+      userId: student2.id,
+      assignmentId: assign2.id,
+      grade: 75,
+      isComplete: true
+    }),
+    UserAssignment.create({
+      userId: student2.id,
+      assignmentId: assign3.id,
       grade: null,
       isComplete: false
     })

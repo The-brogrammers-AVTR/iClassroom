@@ -23,7 +23,7 @@ class Assignments extends Component {
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
     //console.log('instructor', instructor)
-    //console.log('current user', user)
+    console.log('current user', user)
     const isInstructor = instructor.id === user.id
     //console.log(isInstructor)
     const assignmentsForCourse = this.props.assignment.filter(
@@ -36,11 +36,11 @@ class Assignments extends Component {
       <Grid container>
         <Sidebar {...course} instructor={instructor} />
         {isInstructor ? (
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={12} sm={11}>
             <ManageAssignments assignment={assignmentsForCourse} />
           </Grid>
         ) : (
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={12} sm={11}>
             <TableAssignments
               assignment={assignmentsForCourse}
               remove={remove}
