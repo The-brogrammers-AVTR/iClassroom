@@ -6,7 +6,7 @@
 export {default as Navbar} from './navbar'
 export {Login, Signup} from './auth-form'
 export {default as DrawArea} from './DrawArea'
-export {default as NavBar} from './NavBar'
+export {default as NavBar} from './navbar'
 export {default as Chat} from './Chat'
 export {default as Home} from './Home'
 export {default as Announcements} from './Announcements'

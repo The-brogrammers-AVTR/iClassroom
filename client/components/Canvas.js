@@ -1,112 +1,20 @@
-/* import React, {useEffect, useRef, useState} from 'react'
-
-const Canvas = () => {
-  const canvasRef = useRef(null)
-  const contextRef = useRef(null)
-  const [isDrawing, setIsDrawing] = useState(false)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    canvas.width = window.innerWidth * 2
-    canvas.height = window.innerHeight * 2
-    canvas.style.width = `${window.innerWidth}px`
-    canvas.style.height = `${window.innerHeight}px`
-
-    const context = canvas.getContext('2d')
-    context.scale(2, 2)
-    context.lineCap = 'round'
-    context.strokeStyle = 'black'
-    context.lineWidth = 5
-    contextRef.current = context
-  }, [])
-
-  const startDrawing = ({nativeEvent}) => {
-    const {offsetX, offsetY} = nativeEvent
-    contextRef.current.beginPath()
-    contextRef.current.moveTo(offsetX, offsetY)
-    setIsDrawing(true)
-  }
-
-  const finishDrawing = () => {
-    contextRef.current.closePath()
-    setIsDrawing(false)
-  }
-
-  const draw = ({nativeEvent}) => {
-    if (!isDrawing) {
-      return
-    }
-    const {offsetX, offsetY} = nativeEvent
-    contextRef.current.lineTo(offsetX, offsetY)
-    contextRef.current.stroke()
-  }
-
-  return (
-    <canvas
-      onMouseDown={startDrawing}
-      onMouseUp={finishDrawing}
-      onMouseMove={draw}
-      ref={canvasRef}
-    />
-  )
-}
-
-export default Canvas */
-
-/*  const draw=(ctx,newLocation)=>{
-        const {x,y}=newLocation;
-        ctx.fillRect(x,y, 100, 100); 
- }
-
-const Canvas=()=> {
-    const [locations, setLocations] = React.useState([])
-    const canvasRef = React.useRef(null)
-    React.useEffect(() => {
-        const canvas = canvasRef.current
-        const ctx = canvas.getContext('2d')
-        ctx.clearRect(0, 0, window.innerHeight, window.innerWidth)
-        locations.forEach(location => draw(ctx, location))
-      })
-
-      function handleCanvasClick(e) {
-        const newLocation = { x: e.clientX, y: e.clientY }
-        setLocations([...locations, newLocation])
-      }
-      function handleClear() {
-        setLocations([])
-      }
-      function handleUndo() {
-        setLocations(locations.slice(0, -1))
-      }
-      React.useEffect(() => {
-        localStorage.setItem('draw-app', JSON.stringify(locations))
-      })
-        return(
-            <div>
-            <button onClick={handleClear}>Clear</button>
-            <button onClick={handleUndo}>Undo</button>
-               <canvas ref={canvasRef} 
-               width={window.innerWidth}
-               height={window.innerHeight}
-               onClick={handleCanvasClick}>
-
-               </canvas>
-            </div>
-        )
-    } */
 import React, {useState, useRef} from 'react'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import {Stage, Layer} from 'react-konva'
 import Rectangle from './canvas/Rectangle'
 import Circle from './canvas/Circle'
-import {addLine} from './canvas/line'
+import {addLine} from './canvas/Line'
 import {addTextNode} from './canvas/textNode'
 import Image from './canvas/Image'
 import socketIOClient from 'socket.io-client'
+import {SwatchesPicker} from 'react-color'
+
 const socket = socketIOClient('http://127.0.0.1:8080')
 const uuidv1 = require('uuid')
 function Canvas() {
+  const [color, setColor] = useState('')
+  const [action, setAction] = useState(false)
   const [rectangles, setRectangles] = useState([])
   const [circles, setCircles] = useState([])
   const [images, setImages] = useState([])
@@ -120,13 +28,14 @@ function Canvas() {
     return Math.floor(Math.random() * Math.floor(max))
   }
   console.log('sstageEl', layerEl)
+
   const addRectangle = () => {
     const rect = {
       x: getRandomInt(100),
       y: getRandomInt(100),
       width: 100,
       height: 100,
-      fill: 'red',
+      fill: color,
       id: `rect${rectangles.length + 1}`
     }
     const rects = rectangles.concat([rect])
@@ -141,7 +50,7 @@ function Canvas() {
       y: getRandomInt(100),
       width: 100,
       height: 100,
-      fill: 'red',
+      fill: color,
       id: `circ${circles.length + 1}`
     }
     const circs = circles.concat([circ])
@@ -151,13 +60,13 @@ function Canvas() {
   }
 
   const drawLine = () => {
-    addLine(stageEl.current.getStage(), layerEl.current)
+    addLine(color, stageEl.current.getStage(), layerEl.current)
   }
   const eraseLine = () => {
     addLine(stageEl.current.getStage(), layerEl.current, 'erase')
   }
   const drawText = () => {
-    const id = addTextNode(stageEl.current.getStage(), layerEl.current)
+    const id = addTextNode(color, stageEl.current.getStage(), layerEl.current)
     const shs = shapes.concat([id])
     setShapes(shs)
     console.log(shs)
@@ -172,7 +81,7 @@ function Canvas() {
     reader.addEventListener(
       'load',
       () => {
-        const id = uuidv1()
+        const id = uuidv1
         images.push({
           content: reader.result,
           id
@@ -198,12 +107,12 @@ function Canvas() {
       setCircles(circles)
     }
     index = rectangles.findIndex(r => r.id == lastId)
-    if (index != -1) {
+    if (index !== -1) {
       rectangles.splice(index, 1)
       setRectangles(rectangles)
     }
     index = images.findIndex(r => r.id == lastId)
-    if (index != -1) {
+    if (index !== -1) {
       images.splice(index, 1)
       setImages(images)
     }
@@ -212,19 +121,19 @@ function Canvas() {
     forceUpdate()
   }
   document.addEventListener('keydown', ev => {
-    if (ev.code == 'Delete') {
-      let index = circles.findIndex(c => c.id == selectedId)
-      if (index != -1) {
+    if (ev.code === 'Delete') {
+      let index = circles.findIndex(c => c.id === selectedId)
+      if (index !== -1) {
         circles.splice(index, 1)
         setCircles(circles)
       }
-      index = rectangles.findIndex(r => r.id == selectedId)
-      if (index != -1) {
+      index = rectangles.findIndex(r => r.id === selectedId)
+      if (index !== -1) {
         rectangles.splice(index, 1)
         setRectangles(rectangles)
       }
-      index = images.findIndex(r => r.id == selectedId)
-      if (index != -1) {
+      index = images.findIndex(r => r.id === selectedId)
+      if (index !== -1) {
         images.splice(index, 1)
         setImages(images)
       }
@@ -244,6 +153,13 @@ function Canvas() {
     console.log('images from socket,', images)
     setImages(images)
   })
+  const handleChangeComplete = color => {
+    console.log(color)
+    setColor(color.hex)
+  }
+  const HandleClick = () => {
+    setAction(!action)
+  }
   return (
     <div className="home-page">
       <h1>Whiteboard</h1>
@@ -269,7 +185,16 @@ function Canvas() {
         <Button variant="primary" onClick={undo}>
           Undo
         </Button>
+        <Button variant="primary" onClick={HandleClick}>
+          Pick Color{' '}
+          {action ? (
+            <SwatchesPicker color={color} onChange={handleChangeComplete} />
+          ) : (
+            ''
+          )}
+        </Button>
       </ButtonGroup>
+
       <input
         style={{display: 'none'}}
         type="file"

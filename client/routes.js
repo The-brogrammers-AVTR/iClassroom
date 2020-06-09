@@ -42,8 +42,8 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={Home} />
-            <Route path="/drawarea" component={DrawArea} />
             <Route path="/canvas" component={Canvas} />
+            <Route path="/drawarea" component={DrawArea} />
 
             <Route path="/course/:id/students" component={Students} />
             <Route path="/course/:id/announcements" component={Announcements} />
