@@ -8,12 +8,12 @@ const ManageAssignments = ({assignment, remove}) => {
   //console.log('in', assignment)
 
   const dataAssign = assignment.map(assign => ({
-    assignmentid: assign.courseId,
+    assignmentid: assign.id,
     assignment: assign.name,
     course: assign.courseId,
     category: assign.category,
     description: assign.description,
-    teacher: assign.teacherId
+    teacher: assign.userId
   }))
 
   //console.log('process', dataAssign)

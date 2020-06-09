@@ -42,7 +42,6 @@ class CreateCourse extends React.Component {
     } else {
       this.setState({action: !this.state.action})
       event.preventDefault()
-      
     }
   }
 

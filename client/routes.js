@@ -13,7 +13,8 @@ import {
   Students,
   ManageAssignments,
   Canvas,
-  Profile
+  Profile,
+  Grades
 } from './components'
 
 import {
@@ -23,6 +24,7 @@ import {
   getStudents,
   getAnnouncements,
   getLessons,
+  readUserassignments,
   getUserCourses
 } from './store'
 
@@ -46,7 +48,7 @@ class Routes extends Component {
             <Route path="/course/:id/students" component={Students} />
             <Route path="/course/:id/announcements" component={Announcements} />
             <Route path="/course/:id/lessons" component={Lessons} />
-            <Route path="/course/:id/grades" component={Announcements} />
+            <Route path="/course/:id/grades" component={Grades} />
             <Route path="/course/:id/videocall" component={Chat} />
             <Route path="/course/:id/chatroom" component={Chat} />
             <Route path="/course/:id/assignments" component={Assignments} />
@@ -81,6 +83,7 @@ const mapDispatch = dispatch => {
       dispatch(getStudents())
       dispatch(getAnnouncements())
       dispatch(getLessons())
+      dispatch(readUserassignments())
       dispatch(getUserCourses())
     }
   }

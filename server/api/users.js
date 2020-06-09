@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, UserCourse} = require('../db/models')
+const {User, Assignment, Userassignment, UserCourse} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -9,6 +9,14 @@ router.get('/', async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
+      // include: [
+      //   {
+      //     model: Assignment
+      //   },
+      //   {
+      //     model: Userassignment
+      //   }
+      // ]
     })
     res.json(users)
   } catch (err) {
@@ -41,6 +49,14 @@ router.get('/students', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   await User.findByPk(req.params.id, {
+    // include: [
+    //   {
+    //     model: Assignment
+    //   },
+    //   {
+    //     model: Userassignment
+    //   }
+    // ]
     include: [UserCourse]
   })
     .then(user => res.send(user))

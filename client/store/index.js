@@ -7,6 +7,7 @@ import assignment from './assignment'
 import {announcements} from './announcement'
 import {lessons} from './lesson'
 import {courses, course} from './course'
+import userassignment from './userassignment'
 import {coursess} from './userCourses'
 
 const reducer = combineReducers({
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   courses,
   announcements,
   lessons,
+  userassignment,
   coursess
 })
 const middleware = composeWithDevTools(
@@ -30,4 +32,5 @@ export * from './user'
 export * from './course'
 export * from './announcement'
 export * from './lesson'
+export * from './userassignment'
 export * from './userCourses'
