@@ -4,7 +4,7 @@ import socketIOClient from 'socket.io-client'
 
 const location = `${window.location.hostname}:8080`
 
-const socket = socketIOClient('http://127.0.0.1:8080')
+const socket = socketIOClient('/')
 
 import {Picker} from 'emoji-mart'
 //import 'emoji-mart/css/emoji-mart.css'
@@ -59,6 +59,7 @@ class Chat extends Component {
       li.innerHTML = html
       mes.appendChild(li)
       var chatList = document.getElementById('displayMessage')
+
       chatList.scrollTop = chatList.scrollHeight
       //console.log(this.state.message)
     })

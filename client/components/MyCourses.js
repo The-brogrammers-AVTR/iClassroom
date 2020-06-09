@@ -10,13 +10,19 @@ class MyCourses extends React.Component {
       active: false
     }
   }
-
+  //componentDidMount() {
+  //   var chatList = document.getElementById('courseList')
+  //   console.log(chatList)
+  //   chatList.scrollTop = chatList.scrollHeight
+  // }
   render() {
     const {active} = this.state
     const {user, myCourses, history} = this.props
-
+    let chatList = document.getElementsByClassName('course-card-wrapper')
+    console.log(chatList)
+    chatList.scrollTop = chatList.scrollHeight
     return (
-      <div>
+      <div id="courseList">
         <div>
           <div className="courses-wrapper">
             <h1>My Courses</h1>
@@ -45,9 +51,7 @@ class MyCourses extends React.Component {
 const mapStateToProps = ({courses, user, coursess}, {history}) => {
   let myCourses = []
   let myIdsCourses = coursess.filter(cor => {
-    console.log('cor cor cor', cor)
     if (cor.userId === user.id) {
-      console.log(cor.userId === user.id, cor.userId, user.id, cor.courseId)
       return cor.courseId
     }
 
