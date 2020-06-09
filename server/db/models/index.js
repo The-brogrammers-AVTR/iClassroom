@@ -6,19 +6,20 @@ const Announcement = require('./announcement')
 const Lesson = require('./lesson')
 const Image = require('./image')
 const Sequelize = require('sequelize')
+const Userassignment = require('./userassignment')
 
 // blank models
 const UserCourse = db.define('UserCourse')
-const UserAssignment = db.define('UserAssignment', {
-  grade: {
-    type: Sequelize.INTEGER,
-    defaultValue: 80
-  },
-  isComplete: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
-  }
-})
+// const Userassignment = db.define('Userassignment', {
+//   grade: {
+//     type: Sequelize.INTEGER,
+//     defaultValue: 80
+//   },
+//   isComplete: {
+//     type: Sequelize.BOOLEAN,
+//     defaultValue: false
+//   }
+// })
 
 User.belongsToMany(Course, {through: UserCourse})
 Course.belongsToMany(User, {through: UserCourse})
@@ -30,8 +31,13 @@ Course.hasMany(Assignment)
 Assignment.belongsTo(Course)
 
 User.hasMany(Assignment)
-Assignment.belongsToMany(User, {through: UserAssignment})
-User.belongsToMany(Assignment, {through: UserAssignment})
+Assignment.belongsTo(User)
+User.hasMany(Userassignment)
+Userassignment.belongsTo(User)
+
+//Assignment.belongsToMany(User)
+//Assignment.belongsToMany(User, {through: UserAssignment})
+//User.belongsToMany(Assignment, {through: UserAssignment})
 
 Course.hasMany(Announcement)
 Announcement.belongsTo(Course)
@@ -47,5 +53,5 @@ module.exports = {
   UserCourse,
   Announcement,
   Lesson,
-  UserAssignment
+  Userassignment
 }
