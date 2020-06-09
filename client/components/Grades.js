@@ -9,7 +9,6 @@ class Grades extends Component {
   }
 
   render() {
-    //console.log('props', this.props)
     const {course, teachers, user} = this.props
     const oneUserassignments = this.props.userassignment.filter(
       userassign => userassign.userId === this.props.user.id
@@ -17,17 +16,23 @@ class Grades extends Component {
     const instructor = teachers.find(teacher =>
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
+    const userassignmentsForCourse = this.props.userassignment.filter(
+      userassignment => userassignment.courseId === course.id
+    )
     const isInstructor = instructor.id === user.id
-    console.log(isInstructor)
-
+    //console.log('course', course)
+    console.log('haha', userassignmentsForCourse)
     return (
       <Fragment>
         <h1>Grades</h1>
-        <h2>{`User Id: ${this.props.user.id}`}</h2>
+
         {isInstructor ? (
-          <TeacherGrades />
+          <TeacherGrades
+            userassignments={userassignmentsForCourse}
+            course={course}
+          />
         ) : (
-          <OneStudentGrades userassignments={oneUserassignments} />
+          <OneStudentGrades userassignments={oneUserassignments} user={user} />
         )}
       </Fragment>
 

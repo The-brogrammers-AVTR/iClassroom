@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   }
 })
 
-const OneStudentGrades = ({userassignments}) => {
+const OneStudentGrades = ({userassignments, user}) => {
   console.log('student', userassignments)
 
   const classes = useStyles()
@@ -30,6 +30,7 @@ const OneStudentGrades = ({userassignments}) => {
   }
   return (
     <Fragment>
+      <h2>{`User Id: ${user.id}`}</h2>
       <TableContainer>
         <Table
           className={classes.table}
