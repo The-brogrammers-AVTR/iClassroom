@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
+import OneStudentGrades from './OneStudentGrades'
 
 class Grades extends Component {
   constructor() {
@@ -13,6 +14,9 @@ class Grades extends Component {
   render() {
     console.log('props', this.props)
     console.log('userassignments', this.props.userassignment)
+    const oneUserassignments = this.props.userassignment.filter(
+      userassign => userassign.userId === this.props.user.id
+    )
 
     //   const {course, teachers, remove, user} = this.props
     //   const instructor = teachers.find(teacher =>
@@ -38,11 +42,12 @@ class Grades extends Component {
       <Fragment>
         <h1>Grades</h1>
         <h2>{`User Id: ${this.props.user.id}`}</h2>
-        <ul>
+        <OneStudentGrades userassignments={oneUserassignments} />
+        {/* <ul>
           {this.props.userassignment.map(assign => (
             <li key={assign.id}>{`${assign.assignmentId}: ${assign.grade}`}</li>
           ))}
-        </ul>
+        </ul> */}
       </Fragment>
 
       // <Grid container>
