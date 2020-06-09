@@ -45,7 +45,7 @@ const createUserCourse = (userId, courseId, push) => {
     console.log('create user courses ', response.data)
     dispatch(_createUserCourse(response.data))
     dispatch(getCourses())
-    push('/')
+    //push('/')
   }
 }
 // const getDetails = id => {

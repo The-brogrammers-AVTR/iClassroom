@@ -12,29 +12,33 @@ class CreateCourse extends React.Component {
       code: '',
       isOpen: true,
       subject: '',
-      gradeLevel: ''
+      gradeLevel: '',
+      action: false
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   async onSubmit(event) {
-    const {user} = this.props
-    console.log('user id', user.id)
-    event.preventDefault()
-    try {
-      await this.props.save(
-        {
-          name: this.state.name,
-          code: this.state.code,
-          isOpen: this.state.isOpen,
-          subject: this.state.subject,
-          gradeLevel: this.state.gradeLevel,
-          userId: user.id
-        },
-        this.props.history.push
-      )
-    } catch (ex) {
-      console.log(ex)
+    this.setState({action: !this.state.action})
+    if (this.state.action) {
+      const {user} = this.props
+      console.log('user id', user.id)
+      event.preventDefault()
+      try {
+        await this.props.save(
+          {
+            name: this.state.name,
+            code: this.state.code,
+            isOpen: this.state.isOpen,
+            subject: this.state.subject,
+            gradeLevel: this.state.gradeLevel,
+            userId: user.id
+          },
+          this.props.history.push
+        )
+      } catch (ex) {
+        console.log(ex)
+      }
     }
   }
 
