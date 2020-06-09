@@ -3,6 +3,35 @@ import {connect} from 'react-redux'
 import {createCourse} from '../store/course'
 import {withRouter} from 'react-router-dom'
 import {getUserCourses} from '../store'
+import {
+  ThemeProvider,
+  makeStyles,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  TextField,
+  Grid,
+  Button,
+  Paper,
+  Typography
+} from '@material-ui/core'
+import SendIcon from '@material-ui/icons/Send'
+import theme from './Theme'
+
+const useStyles = makeStyles({
+  root: {
+    margin: theme.spacing(10, 80),
+    padding: theme.spacing(2)
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  }
+})
 
 const CreateCourse = ({user, save, load, history}) => {
   const [name, setName] = useState('')
@@ -10,6 +39,8 @@ const CreateCourse = ({user, save, load, history}) => {
   const [subject, setSubject] = useState('')
   const [gradeLevel, setGradeLevel] = useState('')
   const [action, setAction] = useState(false)
+
+  const classes = useStyles()
 
   const onSubmit = async ev => {
     setAction(!action)
@@ -42,46 +73,50 @@ const CreateCourse = ({user, save, load, history}) => {
   }
 
   return (
-    <div className="form-wrapper">
-      <form className="new-form" onSubmit={onSubmit}>
-        <p className="row">
-          Name:
-          <input
-            value={name}
-            onChange={ev => setName(ev.target.value)}
-            placeholder="Name"
-          />
-        </p>
-        <p className="row">
-          Subject:
-          <select onChange={ev => setSubject(ev.target.value)}>
-            <option value="">--Select a Subject--</option>
-            <option value="English">English</option>
-            <option value="Math">Math</option>
-            <option value="Science">Science</option>
-            <option value="Social Studies">Social Studies</option>
-            <option value="Art">Art</option>
-            <option value="Music">Music</option>
-          </select>
-        </p>
-        <p className="row">
-          Grade Level:
-          <select onChange={ev => setGradeLevel(ev.target.value)}>
-            <option value="">--Select a Grade--</option>
-            <option value="Elementary">Elementary</option>
-            <option value="Advanced">Advanced</option>
-            <option value="Honors">Honors</option>
-          </select>
-        </p>
-
-        <button
-          type="submit"
-          disabled={!name || !code || !subject || !gradeLevel}
-        >
-          Create Course
-        </button>
-      </form>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Paper className={classes.root} elevation={3}>
+        <form>
+          <Grid container direction="column" alignItems="center">
+            <Typography variant="h5" color="primary">
+              Create Course
+            </Typography>
+            <TextField
+              value={name}
+              onChange={ev => setName(ev.target.value)}
+              label="Name"
+            />
+            <FormControl variant="filled" className={classes.formControl}>
+              <InputLabel>Subject</InputLabel>
+              <Select onChange={ev => setSubject(ev.target.value)}>
+                <MenuItem value="English">English</MenuItem>
+                <MenuItem value="Math">Math</MenuItem>
+                <MenuItem value="Science">Science</MenuItem>
+                <MenuItem value="Social Studies">Social Studies</MenuItem>
+                <MenuItem value="Art">Art</MenuItem>
+                <MenuItem value="Music">Music</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl variant="filled" className={classes.formControl}>
+              <InputLabel>Grade Level</InputLabel>
+              <Select onChange={ev => setGradeLevel(ev.target.value)}>
+                <MenuItem value="Elementary">Elementary</MenuItem>
+                <MenuItem value="Advanced">Advanced</MenuItem>
+                <MenuItem value="Honors">Honors</MenuItem>
+              </Select>
+            </FormControl>
+            <Button
+              variant="contained"
+              color="primary"
+              endIcon={<SendIcon>send</SendIcon>}
+              onClick={onSubmit}
+              disabled={!name || !subject || !gradeLevel}
+            >
+              Create
+            </Button>
+          </Grid>
+        </form>
+      </Paper>
+    </ThemeProvider>
   )
 }
 
