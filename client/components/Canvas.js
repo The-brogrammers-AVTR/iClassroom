@@ -101,12 +101,12 @@ function Canvas() {
   }
   const undo = () => {
     const lastId = shapes[shapes.length - 1]
-    let index = circles.findIndex(c => c.id == lastId)
-    if (index != -1) {
+    let index = circles.findIndex(c => c.id === lastId)
+    if (index !== -1) {
       circles.splice(index, 1)
       setCircles(circles)
     }
-    index = rectangles.findIndex(r => r.id == lastId)
+    index = rectangles.findIndex(r => r.id === lastId)
     if (index !== -1) {
       rectangles.splice(index, 1)
       setRectangles(rectangles)
