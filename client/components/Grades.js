@@ -1,53 +1,34 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import OneStudentGrades from './OneStudentGrades'
+import TeacherGrades from './TeacherGrades'
 
 class Grades extends Component {
   constructor() {
     super()
   }
 
-  // componentDidMount() {
-  //   this.props.load()
-  // }
-
   render() {
-    console.log('props', this.props)
-    console.log('userassignments', this.props.userassignment)
+    //console.log('props', this.props)
+    const {course, teachers, user} = this.props
     const oneUserassignments = this.props.userassignment.filter(
       userassign => userassign.userId === this.props.user.id
     )
+    const instructor = teachers.find(teacher =>
+      course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
+    )
+    const isInstructor = instructor.id === user.id
+    console.log(isInstructor)
 
-    //   const {course, teachers, remove, user} = this.props
-    //   const instructor = teachers.find(teacher =>
-    //     course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
-    //   )
-
-    //   //console.log('current user', user)
-    //   const isInstructor = instructor.id === user.id
-    //   const theUserassignments = this.props.userassignment.filter(
-    //     userassignment => userassignment.userId === user.id
-    //   )
-    //   //console.log('current user assignments', theUserassignments)
-
-    //   const assignmentsForCourse = this.props.assignment.filter(
-    //     assignment => assignment.courseId === course.id
-    //   )
-    //   //console.log('assignments', assignmentsForCourse)
-
-    //   if (!this.props.assignment || !instructor) {
-    //     return null
-    //   }
     return (
       <Fragment>
         <h1>Grades</h1>
         <h2>{`User Id: ${this.props.user.id}`}</h2>
-        <OneStudentGrades userassignments={oneUserassignments} />
-        {/* <ul>
-          {this.props.userassignment.map(assign => (
-            <li key={assign.id}>{`${assign.assignmentId}: ${assign.grade}`}</li>
-          ))}
-        </ul> */}
+        {isInstructor ? (
+          <TeacherGrades />
+        ) : (
+          <OneStudentGrades userassignments={oneUserassignments} />
+        )}
       </Fragment>
 
       // <Grid container>
@@ -69,27 +50,26 @@ class Grades extends Component {
   }
 }
 
-const mapStateToProps = ({userassignment, user}) => {
+const mapStateToProps = (
+  {userassignment, user, courses, teachers},
+  {match}
+) => {
   if (!userassignment) {
     return {}
   }
+  const course = courses.find(_course => _course.id === Number(match.params.id))
   return {
     userassignment,
-    user
+    user,
+    course,
+    teachers
   }
 }
 
-//   const mapStateToProps = (
-//     {courses, teachers, assignment, user, userassignment},
-//     {match}
-//   ) => {
-//     const course = courses.find(_course => _course.id === Number(match.params.id))
-//     return {course, teachers, assignment, user, userassignment}
-//   }
-
-//   const mapDispatchToProps = dispatch => {
-//     return {
-//     }
-//   }
-
 export default connect(mapStateToProps)(Grades)
+
+// {/* <ul>
+//           {this.props.userassignment.map(assign => (
+//             <li key={assign.id}>{`${assign.assignmentId}: ${assign.grade}`}</li>
+//           ))}
+//         </ul> */}
