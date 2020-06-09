@@ -19,7 +19,8 @@ const UserAssignment = db.define('UserAssignment', {
     defaultValue: false
   }
 })
-
+User.hasMany(UserCourse)
+UserCourse.belongsTo(User)
 User.belongsToMany(Course, {through: UserCourse})
 Course.belongsToMany(User, {through: UserCourse})
 
