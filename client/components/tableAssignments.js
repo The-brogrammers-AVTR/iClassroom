@@ -9,8 +9,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import Checkbox from '@material-ui/core/Checkbox'
-//import IconButton from '@material-ui/core/IconButton'
-//import DoneIcon from '@material-ui/icons/Done'
 
 const useStyles = makeStyles({
   table: {
@@ -30,7 +28,6 @@ const TableAssignments = ({assignment, remove}) => {
   if (!assignment) {
     return null
   }
-  //component={Paper}
   return (
     <Fragment>
       <h1>Assignments</h1>
@@ -75,7 +72,7 @@ const TableAssignments = ({assignment, remove}) => {
                 <TableCell align="left">{assignment.courseId}</TableCell>
                 <TableCell align="left">{assignment.category}</TableCell>
                 <TableCell align="left">{assignment.description}</TableCell>
-                <TableCell align="left">{assignment.teacherId}</TableCell>
+                <TableCell align="left">{assignment.userId}</TableCell>
               </TableRow>
             ))}
           </TableBody>

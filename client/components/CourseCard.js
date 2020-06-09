@@ -93,14 +93,14 @@ const CourseCard = ({
 }) => {
   const classes = useStyles()
 
-  const instructor = teachers.find(teacher =>
-    UserCourses.find(usercourse => usercourse.userId === teacher.id)
-  )
-  const enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
-  if (!instructor) {
-    return null
-  }
-
+  // const instructor = teachers.find(teacher =>
+  //   UserCourses.find(usercourse => usercourse.userId === teacher.id)
+  // )
+  // const enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
+  // if (!instructor) {
+  //   return null
+  // }
+  const enrolled = true
   return (
     <ThemeProvider theme={theme}>
       <Card className={classes.root}>
@@ -115,7 +115,7 @@ const CourseCard = ({
               {name} - {code}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Instructor: {instructor.firstName}
+              Instructor: {user.firstName}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Grade Level: {gradeLevel}

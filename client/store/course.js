@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {createUserCourse} from './userCourses'
 
 /**
  * ACTION TYPES ------------------------------------------------
@@ -29,6 +30,7 @@ const _removeCourse = id => ({type: REMOVE_COURSE, id})
 const getCourses = () => {
   return async dispatch => {
     const response = await axios.get('/api/courses')
+    console.log('get corses after create', response.data)
     dispatch(_getCourses(response.data))
   }
 }
@@ -43,8 +45,10 @@ const getDetails = id => {
 const createCourse = (course, push) => {
   return async dispatch => {
     const response = await axios.post('/api/courses', course)
+    console.log('created course', response.data)
     dispatch(_createCourse(response.data))
-    push('/')
+    dispatch(createUserCourse(course.userId, response.data.id, push))
+    //push('/')
   }
 }
 

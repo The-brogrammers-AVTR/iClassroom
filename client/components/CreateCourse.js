@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {createCourse} from '../store/course'
+import {withRouter} from 'react-router-dom'
+import {getUserCourses} from '../store'
 
 class CreateCourse extends React.Component {
   constructor() {
@@ -10,31 +12,46 @@ class CreateCourse extends React.Component {
       code: '',
       isOpen: true,
       subject: '',
-      gradeLevel: ''
+      gradeLevel: '',
+      action: false
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   async onSubmit(event) {
-    event.preventDefault()
-    try {
-      await this.props.save(
-        {
-          name: this.state.name,
-          code: this.state.code,
-          isOpen: this.state.isOpen,
-          subject: this.state.subject,
-          gradeLevel: this.state.gradeLevel
-        },
-        this.props.history.push
-      )
-    } catch (ex) {
-      console.log(ex)
+    this.setState({action: !this.state.action})
+    if (this.state.action) {
+      const {user} = this.props
+      console.log('user id', user.id)
+      event.preventDefault()
+      try {
+        await this.props.save(
+          {
+            name: this.state.name,
+            code: this.state.code,
+            isOpen: this.state.isOpen,
+            subject: this.state.subject,
+            gradeLevel: this.state.gradeLevel,
+            userId: user.id
+          },
+          this.props.history.push
+        )
+      } catch (ex) {
+        console.log(ex)
+      }
+    } else {
+      this.setState({action: !this.state.action})
+      event.preventDefault()
     }
+  }
+
+  componentDidMount() {
+    this.props.load()
   }
 
   render() {
     const {name, code, subject, gradeLevel, error} = this.state
+
     return (
       <div className="form-wrapper">
         <form className="new-form" onSubmit={this.onSubmit}>
@@ -97,16 +114,19 @@ class CreateCourse extends React.Component {
   }
 }
 
-const mapStatetoProps = state => {
+const mapStatetoProps = ({user}) => {
   return {
-    state: state
+    user
   }
 }
 
 const mapDispatchToProducts = dispatch => {
   return {
+    load: () => dispatch(getUserCourses()),
     save: (course, push) => dispatch(createCourse(course, push))
   }
 }
 
-export default connect(mapStatetoProps, mapDispatchToProducts)(CreateCourse)
+export default withRouter(
+  connect(mapStatetoProps, mapDispatchToProducts)(CreateCourse)
+)
