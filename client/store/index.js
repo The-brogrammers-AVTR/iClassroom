@@ -8,6 +8,7 @@ import {announcements} from './announcement'
 import {lessons} from './lesson'
 import {courses, course} from './course'
 import userassignment from './userassignment'
+import {coursess} from './userCourses'
 
 const reducer = combineReducers({
   user,
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   courses,
   announcements,
   lessons,
-  userassignment
+  userassignment,
+  coursess
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -31,3 +33,4 @@ export * from './course'
 export * from './announcement'
 export * from './lesson'
 export * from './userassignment'
+export * from './userCourses'

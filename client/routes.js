@@ -24,7 +24,8 @@ import {
   getStudents,
   getAnnouncements,
   getLessons,
-  readUserassignments
+  readUserassignments,
+  getUserCourses
 } from './store'
 
 class Routes extends Component {
@@ -83,6 +84,7 @@ const mapDispatch = dispatch => {
       dispatch(getAnnouncements())
       dispatch(getLessons())
       dispatch(readUserassignments())
+      dispatch(getUserCourses())
     }
   }
 }
