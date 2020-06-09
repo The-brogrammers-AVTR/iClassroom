@@ -40,11 +40,11 @@ const getLessons = () => {
   }
 }
 
-const createLesson = (lesson, push) => {
+const createLesson = (lesson, push, id) => {
   return async dispatch => {
     const response = await axios.post('/api/lessons', lesson)
     dispatch(_createLesson(response.data))
-    push('/')
+    push(`/course/${id}/lessons`)
   }
 }
 

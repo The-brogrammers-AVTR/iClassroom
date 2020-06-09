@@ -9,7 +9,8 @@ const Theme = createMuiTheme({
       main: '#ADD8E6'
     },
     white: 'white',
-    black: 'black'
+    black: 'black',
+    red: 'red'
   },
   status: {
     danger: 'orange'
