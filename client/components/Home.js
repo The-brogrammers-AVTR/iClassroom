@@ -1,63 +1,89 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import MyCourses from './MyCourses'
 import FindCourses from './FindCourses'
+import SwipeableViews from 'react-swipeable-views'
+import {
+  makeStyles,
+  ThemeProvider,
+  Tabs,
+  Tab,
+  Typography,
+  Box
+} from '@material-ui/core/'
+import theme from './Theme'
 
-class Home extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      active: true
-    }
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: theme.palette.white,
+    position: 'relative'
+  }
+})
 
-    this.onClick = this.onClick.bind(this)
+const TabPanel = props => {
+  const {children, value, index, ...other} = props
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  )
+}
+
+const Home = ({user}) => {
+  const [value, setValue] = useState(0)
+
+  const classes = useStyles()
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
   }
 
-  onClick() {
-    const {active} = this.state
-    this.setState({
-      active: !active
-    })
+  const handleChangeIndex = index => {
+    setValue(index)
   }
 
-  render() {
-    const {active} = this.state
-    const {user} = this.props
-
-    return (
-      <div>
-        <div className="button-wrapper">
-          <button
-            type="button"
-            className="default-button"
-            onClick={this.onClick}
-          >
-            {active ? 'Find Courses' : 'MyCourses'}
-          </button>
-          {/* {!user.isTeacher && (
-          <button onClick={this.onClick} type="button">
-            Find Courses
-          </button>
-        )} */}
-          <button
-            type="button"
-            className="default-button"
-            onClick={this.onClickTwo}
-          >
-            Course Calendar
-          </button>
-          <button
-            type="button"
-            className="default-button"
-            onClick={this.onClickTwo}
-          >
+  return (
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="primary"
+          variant="fullWidth"
+        >
+          <Tab label="My Courses" />
+          <Tab label="Find Courses" />
+          <Tab label="Class Calendar" />
+          <Tab label="Report Card" />
+        </Tabs>
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <MyCourses />
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <FindCourses />
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            Calendar Goes Here
+          </TabPanel>
+          <TabPanel value={value} index={3} dir={theme.direction}>
             Report Card
-          </button>
-        </div>
-        {active ? <MyCourses /> : <FindCourses />}
+          </TabPanel>
+        </SwipeableViews>
       </div>
-    )
-  }
+    </ThemeProvider>
+  )
 }
 
 const mapStateToProps = ({user}) => {
