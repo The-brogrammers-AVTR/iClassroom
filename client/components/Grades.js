@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 
 class Grades extends Component {
@@ -12,6 +12,8 @@ class Grades extends Component {
 
   render() {
     console.log('props', this.props)
+    console.log('userassignments', this.props.userassignment)
+
     //   const {course, teachers, remove, user} = this.props
     //   const instructor = teachers.find(teacher =>
     //     course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
@@ -33,7 +35,15 @@ class Grades extends Component {
     //     return null
     //   }
     return (
-      <h1>Grades here!!</h1>
+      <Fragment>
+        <h1>Grades</h1>
+        <h2>{`User Id: ${this.props.user.id}`}</h2>
+        <ul>
+          {this.props.userassignment.map(assign => (
+            <li key={assign.id}>{`${assign.assignmentId}: ${assign.grade}`}</li>
+          ))}
+        </ul>
+      </Fragment>
 
       // <Grid container>
       //   <Sidebar {...course} instructor={instructor} />
@@ -54,12 +64,13 @@ class Grades extends Component {
   }
 }
 
-const mapStateToProps = ({userassignment}) => {
+const mapStateToProps = ({userassignment, user}) => {
   if (!userassignment) {
     return {}
   }
   return {
-    userassignment
+    userassignment,
+    user
   }
 }
 
