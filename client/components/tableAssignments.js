@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react'
-
 //Material-UI
 import {makeStyles} from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
@@ -9,10 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
+import Checkbox from '@material-ui/core/Checkbox'
 
 const useStyles = makeStyles({
   table: {
@@ -27,7 +23,7 @@ const useStyles = makeStyles({
 })
 
 const TableAssignments = ({assignment, remove}) => {
-  console.log('table', assignment)
+  //console.log('table', assignment)
   const classes = useStyles()
   if (!assignment) {
     return null
@@ -35,7 +31,7 @@ const TableAssignments = ({assignment, remove}) => {
   return (
     <Fragment>
       <h1>Assignments</h1>
-      <TableContainer component={Paper}>
+      <TableContainer>
         <Table
           className={classes.table}
           size="medium"
@@ -43,8 +39,7 @@ const TableAssignments = ({assignment, remove}) => {
         >
           <TableHead>
             <TableRow>
-              <TableCell align="left" />
-              <TableCell align="left" />
+              <TableCell align="left">Done</TableCell>
               <TableCell align="left">Assignment ID</TableCell>
               <TableCell align="left">Assignment</TableCell>
               <TableCell align="left">Course</TableCell>
@@ -56,25 +51,28 @@ const TableAssignments = ({assignment, remove}) => {
           <TableBody>
             {assignment.map(assignment => (
               <TableRow key={assignment.id}>
-                <TableCell align="left" className={classes.cell}>
-                  <IconButton className={classes.button}>
-                    <EditIcon />
-                  </IconButton>
+                <TableCell padding="checkbox">
+                  <Checkbox />
                 </TableCell>
-                <TableCell align="left" className={classes.cell}>
+                {/* <TableCell align="left" className={classes.cell}>
+                  <IconButton className={classes.button}>
+                    <DoneIcon />
+                  </IconButton>
+                </TableCell> */}
+                {/* <TableCell align="left" className={classes.cell}>
                   <IconButton
                     className={classes.button}
                     onClick={() => remove(assignment.id)}
                   >
                     <DeleteIcon />
                   </IconButton>
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="left">{assignment.id}</TableCell>
                 <TableCell align="left">{assignment.name}</TableCell>
                 <TableCell align="left">{assignment.courseId}</TableCell>
                 <TableCell align="left">{assignment.category}</TableCell>
                 <TableCell align="left">{assignment.description}</TableCell>
-                <TableCell align="left">{assignment.teacherId}</TableCell>
+                <TableCell align="left">{assignment.userId}</TableCell>
               </TableRow>
             ))}
           </TableBody>

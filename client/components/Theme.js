@@ -7,7 +7,10 @@ const Theme = createMuiTheme({
     },
     secondary: {
       main: '#ADD8E6'
-    }
+    },
+    white: 'white',
+    black: 'black',
+    red: 'red'
   },
   status: {
     danger: 'orange'

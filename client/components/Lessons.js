@@ -2,38 +2,52 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import LessonCard from './LessonCard.js'
-import {Link} from 'react-router-dom'
+import {ThemeProvider, Fab} from '@material-ui/core/'
+import theme from './Theme'
+import AddIcon from '@material-ui/icons/Add'
+import CreateLesson from './CreateLesson.js'
 
 class Lessons extends React.Component {
   constructor() {
     super()
+    this.state = {
+      toggle: false
+    }
   }
-
   render() {
-    const {course, instructor, filteredLessons, user} = this.props
+    const {toggle} = this.state
+
+    const {course, instructor, filteredLessons, user, history} = this.props
 
     if (!course || !instructor || !filteredLessons) {
       return null
     }
     return (
-      <div className="course-home-wrapper">
-        <Sidebar {...course} instructor={instructor} />
-        <div className="course-content">
-          <div className="course-content-header">
-            <h1>Lessons</h1>
-            {user.isTeacher === true && (
-              <Link className="add-button" to="/createAnnouncement">
-                +
-              </Link>
-            )}
-          </div>
-          <div>
-            {filteredLessons.map(lesson => {
-              return <LessonCard key={lesson.id} {...lesson} />
-            })}
+      <ThemeProvider theme={theme}>
+        <div className="course-home-wrapper">
+          <Sidebar {...course} instructor={instructor} />
+          <div className="course-content">
+            <div className="course-content-header">
+              <h1>Lessons</h1>
+              {user.isTeacher === true && (
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => this.setState({toggle: !toggle})}
+                >
+                  <AddIcon />
+                </Fab>
+              )}
+            </div>
+            <div>
+              {toggle && <CreateLesson {...course} {...history} />}
+              {filteredLessons.map((lesson, idx) => {
+                return <LessonCard key={lesson.id} idx={idx} {...lesson} />
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      </ThemeProvider>
     )
   }
 }

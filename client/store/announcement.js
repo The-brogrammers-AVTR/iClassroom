@@ -40,11 +40,11 @@ const getAnnouncements = () => {
   }
 }
 
-const createAnnouncement = (announcement, push) => {
+const createAnnouncement = (announcement, push, id) => {
   return async dispatch => {
     const response = await axios.post('/api/announcements', announcement)
     dispatch(_createAnnouncement(response.data))
-    push('/')
+    push(`/course/${id}/announcements`)
   }
 }
 

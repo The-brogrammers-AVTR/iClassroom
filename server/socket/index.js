@@ -18,7 +18,21 @@ module.exports = io => {
         .emit('message', formatMessage(userName, 'welcome'))
     })
     socket.emit('message', formatMessage(name, 'welcome'))
+    socket.on('userTyping', msg => {
+      //console.log(socket.id)
+      const user = getCurrentUser(socket.id)
+      //console.log('user drom user is typing', user, msg)
+      socket.broadcast.to(user.room).emit('userTyping', msg)
+    })
+    socket.on('userFinishTyping', msg => {
+      // console.log(socket.id)
+      const user = getCurrentUser(socket.id)
+      console.log('user finished typing', user, msg)
+      socket.broadcast.to(user.room).emit('userFinishTyping', msg)
+    })
     socket.on('chat message', msg => {
+      //console.log(socket.id)
+      //console.log('cirle', msg)
       const user = getCurrentUser(socket.id)
       io.to(user.room).emit('message', formatMessage(user.userName, msg))
       socket.on('getUsers', msg => {
@@ -28,8 +42,13 @@ module.exports = io => {
       })
     })
     socket.on('circle', circle => {
-      //console.log('cirle', circle)
+      console.log('cirle', circle)
       io.emit('circle', circle)
+    })
+
+    socket.on('line', line => {
+      console.log('line', line)
+      io.emit('line', line)
     })
     socket.on('rectangles', rectangles => {
       //console.log('rectangles', rectangles)

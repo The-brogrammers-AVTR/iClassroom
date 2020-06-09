@@ -33,7 +33,7 @@ const Assignment = db.define('assignment', {
     type: STRING,
     allowNull: true
   },
-  teacherId: {
+  userId: {
     type: INTEGER,
     allowNull: false
   }

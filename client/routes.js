@@ -5,15 +5,16 @@ import {
   Login,
   Signup,
   Assignments,
-  DrawArea,
-  Canvas,
   Home,
   Announcements,
   Chat,
   MakeAssignment,
   Lessons,
   Students,
-  Profile
+  ManageAssignments,
+  Canvas,
+  Profile,
+  Grades
 } from './components'
 
 import {
@@ -22,7 +23,9 @@ import {
   getTeachers,
   getStudents,
   getAnnouncements,
-  getLessons
+  getLessons,
+  readUserassignments,
+  getUserCourses
 } from './store'
 
 class Routes extends Component {
@@ -42,18 +45,16 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={Home} />
-            <Route path="/canvas" component={Canvas} />
-            <Route path="/drawarea" component={DrawArea} />
-
             <Route path="/course/:id/students" component={Students} />
             <Route path="/course/:id/announcements" component={Announcements} />
             <Route path="/course/:id/lessons" component={Lessons} />
-            <Route path="/course/:id/grades" component={Announcements} />
+            <Route path="/course/:id/grades" component={Grades} />
             <Route path="/course/:id/videocall" component={Chat} />
             <Route path="/course/:id/chatroom" component={Chat} />
             <Route path="/course/:id/assignments" component={Assignments} />
             <Route path="/course/:id/canvas" component={Canvas} />
             <Route path="/makeassignment" component={MakeAssignment} />
+            <Route path="/manageassignments" component={ManageAssignments} />
             <Route path="/profile" component={Profile} />
             <Route path="/test" component={Profile} />
           </Switch>
@@ -82,6 +83,8 @@ const mapDispatch = dispatch => {
       dispatch(getStudents())
       dispatch(getAnnouncements())
       dispatch(getLessons())
+      dispatch(readUserassignments())
+      dispatch(getUserCourses())
     }
   }
 }

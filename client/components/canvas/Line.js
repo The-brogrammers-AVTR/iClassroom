@@ -2,6 +2,7 @@ import Konva from 'konva'
 export const addLine = (color, stage, layer, mode = 'brush') => {
   let isPaint = false
   let lastLine
+  //console.log('last line', lastLine)
   stage.on('mousedown touchstart', function(e) {
     isPaint = true
     let pos = stage.getPointerPosition()

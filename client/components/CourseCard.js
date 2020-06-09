@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {ThemeProvider} from '@material-ui/styles'
+import {removeCourse} from '../store'
 import theme from './Theme'
 
 // class CourseCard extends React.Component {
@@ -61,14 +62,17 @@ import {
   CardContent,
   CardMedia,
   Button,
-  Typography
+  Typography,
+  IconButton
 } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const useStyles = makeStyles({
   root: {
     minWidth: 400,
-    backgroundColor: theme.palette.secondary.main,
-    marginBottom: 2
+    // backgroundColor: theme.palette.secondary.main,
+    marginBottom: 50
   },
   media: {
     height: 140
@@ -83,20 +87,21 @@ const CourseCard = ({
   teachers,
   UserCourses,
   isOpen,
-  user
+  user,
+  remove
 }) => {
   const classes = useStyles()
 
-  const instructor = teachers.find(teacher =>
-    UserCourses.find(usercourse => usercourse.userId === teacher.id)
-  )
-  const enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
-  if (!instructor) {
-    return null
-  }
-
+  // const instructor = teachers.find(teacher =>
+  //   UserCourses.find(usercourse => usercourse.userId === teacher.id)
+  // )
+  // const enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
+  // if (!instructor) {
+  //   return null
+  // }
+  const enrolled = true
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
@@ -109,26 +114,36 @@ const CourseCard = ({
               {name} - {code}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Instructor: {instructor.firstName}
+              Instructor: {user.firstName}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Grade Level: {gradeLevel}
             </Typography>
           </CardContent>
         </CardActionArea>
+
         <CardActions>
           {enrolled ? (
             <Link to={`/course/${id}/announcements`}>
-              <Button>Enter</Button>
+              <Button variant="contained" color="primary">
+                Enter
+              </Button>
             </Link>
           ) : isOpen === true ? (
-            <Button className="default-button" type="button">
-              Request to Join
-            </Button>
+            <Button color="primary">Join</Button>
           ) : (
             'Closed'
           )}
-          {user.isTeacher && <Button> Edit Course </Button>}
+          {user.isTeacher && (
+            <div>
+              <IconButton>
+                <EditIcon color="primary">Edit Course</EditIcon>
+              </IconButton>
+              <IconButton onClick={() => remove(id)}>
+                <DeleteIcon />
+              </IconButton>
+            </div>
+          )}
         </CardActions>
       </Card>
     </ThemeProvider>
@@ -142,4 +157,12 @@ const mapStateToProps = ({user, teachers}) => {
   }
 }
 
-export default connect(mapStateToProps)(CourseCard)
+const mapDispatchToProps = dispatch => {
+  return {
+    remove: id => {
+      dispatch(removeCourse(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseCard)

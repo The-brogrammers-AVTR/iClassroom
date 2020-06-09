@@ -2,40 +2,60 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import AnnouncementCard from './AnnouncementCard.js'
-import {Link} from 'react-router-dom'
+import CreateAnnouncement from './CreateAnnouncement.js'
+import {ThemeProvider, Fab} from '@material-ui/core/'
+import theme from './Theme'
+import AddIcon from '@material-ui/icons/Add'
 
 class Announcements extends React.Component {
   constructor() {
     super()
+    this.state = {
+      toggle: false
+    }
   }
 
   render() {
-    const {course, instructor, filteredAnnouncements, user} = this.props
+    const {toggle} = this.state
+    const {
+      course,
+      instructor,
+      filteredAnnouncements,
+      user,
+      history
+    } = this.props
 
     if (!course || !instructor || !filteredAnnouncements) {
       return <div>No Announcements</div>
     }
     return (
-      <div className="course-home-wrapper">
-        <Sidebar {...course} instructor={instructor} />
-        <div className="course-content">
-          <div className="course-content-header">
-            <h1>Announcements</h1>
-            {user.isTeacher === true && (
-              <Link className="add-button" to="/createAnnouncement">
-                +
-              </Link>
-            )}
-          </div>
-          <div>
-            {filteredAnnouncements.map(announcement => {
-              return (
-                <AnnouncementCard key={announcement.id} {...announcement} />
-              )
-            })}
+      <ThemeProvider theme={theme}>
+        <div className="course-home-wrapper">
+          <Sidebar {...course} instructor={instructor} />
+          <div className="course-content">
+            <div className="course-content-header">
+              <h1>Announcements</h1>
+              {user.isTeacher === true && (
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => this.setState({toggle: !toggle})}
+                >
+                  <AddIcon />
+                </Fab>
+              )}
+            </div>
+            <div>
+              {toggle && <CreateAnnouncement {...course} {...history} />}
+              {filteredAnnouncements.map(announcement => {
+                return (
+                  <AnnouncementCard key={announcement.id} {...announcement} />
+                )
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      </ThemeProvider>
     )
   }
 }
@@ -47,9 +67,9 @@ const mapStateToProps = ({courses, teachers, announcements, user}, {match}) => {
     course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
   )
 
-  const filteredAnnouncements = announcements.filter(
-    announcement => announcement.courseId === course.id
-  )
+  const filteredAnnouncements = announcements
+    .filter(announcement => announcement.courseId === course.id)
+    .reverse()
   return {course, instructor, filteredAnnouncements, user}
 }
 

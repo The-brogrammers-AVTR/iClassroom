@@ -62,6 +62,11 @@ function Canvas() {
   const drawLine = () => {
     addLine(color, stageEl.current.getStage(), layerEl.current)
   }
+  // socket.on('line', line => {
+  //   console.log('line from socket,', line)
+  //   console.log(JSON.parse(line.layer), JSON.parse(line.line))
+  //   addLine(JSON.parse(line.layer), JSON.parse(line.line))
+  // })
   const eraseLine = () => {
     addLine(stageEl.current.getStage(), layerEl.current, 'erase')
   }

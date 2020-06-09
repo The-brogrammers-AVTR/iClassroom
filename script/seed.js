@@ -8,7 +8,7 @@ const {
   UserCourse,
   Announcement,
   Lesson,
-  UserAssignment
+  Userassignment
 } = require('../server/db/models')
 
 async function seed() {
@@ -136,7 +136,7 @@ async function seed() {
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: tandid.id,
+      userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
@@ -144,7 +144,7 @@ async function seed() {
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: tandid.id,
+      userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
@@ -152,7 +152,7 @@ async function seed() {
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       assignmentURL: null,
-      teacherId: tandid.id,
+      userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
@@ -160,7 +160,7 @@ async function seed() {
       category: 'Arithmetic',
       description: 'Group math game.',
       assignmentURL: null,
-      teacherId: tandid.id,
+      userId: tandid.id,
       courseId: math.id
     }),
     Assignment.create({
@@ -168,7 +168,7 @@ async function seed() {
       category: 'Spelling',
       description: 'Group spelling game.',
       assignmentURL: null,
-      teacherId: tandid.id,
+      userId: tandid.id,
       courseId: english.id
     }),
     Assignment.create({
@@ -176,16 +176,54 @@ async function seed() {
       category: 'Drawing',
       description: 'Draw a picture creatively and collaboratively as a team.',
       assignmentURL: null,
-      teacherId: tandid.id,
+      userId: tandid.id,
       courseId: art.id
     })
   ])
 
   const userassignment = await Promise.all([
-    UserAssignment.create({userId: student1.id, assignmentId: assign1.id}),
-    UserAssignment.create({userId: student1.id, assignmentId: assign2.id}),
-    UserAssignment.create({userId: student1.id, assignmentId: assign3.id}),
-    UserAssignment.create({userId: student2.id, assignmentId: assign1.id})
+    Userassignment.create({
+      userId: student1.id,
+      assignmentId: assign1.id,
+      courseId: science.id,
+      grade: 90,
+      isComplete: true
+    }),
+    Userassignment.create({
+      userId: student1.id,
+      assignmentId: assign2.id,
+      courseId: science.id,
+      grade: 85,
+      isComplete: true
+    }),
+    Userassignment.create({
+      userId: student1.id,
+      assignmentId: assign3.id,
+      courseId: science.id,
+      grade: null,
+      isComplete: false
+    }),
+    Userassignment.create({
+      userId: student2.id,
+      assignmentId: assign1.id,
+      courseId: science.id,
+      grade: 80,
+      isComplete: true
+    }),
+    Userassignment.create({
+      userId: student2.id,
+      assignmentId: assign2.id,
+      courseId: science.id,
+      grade: 75,
+      isComplete: true
+    }),
+    Userassignment.create({
+      userId: student2.id,
+      assignmentId: assign3.id,
+      courseId: science.id,
+      grade: null,
+      isComplete: false
+    })
   ])
 
   console.log(`seeded ${users.length} users`)
