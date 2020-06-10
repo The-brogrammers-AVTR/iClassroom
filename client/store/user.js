@@ -50,10 +50,41 @@ const me = () => async dispatch => {
   }
 }
 
-const auth = (email, password, method) => async dispatch => {
+const authLogin = (email, password) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post('/auth/login', {
+      email,
+      password
+    })
+  } catch (authError) {
+    return dispatch(getUser({error: authError}))
+  }
+
+  try {
+    dispatch(getUser(res.data))
+    history.push('/')
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
+  }
+}
+
+const authSignup = (
+  email,
+  password,
+  firstName,
+  lastName,
+  isTeacher
+) => async dispatch => {
+  let res
+  try {
+    res = await axios.post('/auth/signup', {
+      email,
+      password,
+      firstName,
+      lastName,
+      isTeacher
+    })
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
@@ -120,7 +151,8 @@ const students = (state = [], action) => {
 
 export {
   me,
-  auth,
+  authLogin,
+  authSignup,
   logout,
   getTeachers,
   getStudents,

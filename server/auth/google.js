@@ -36,17 +36,17 @@ if (!keys.GOOGLE_CLIENT_ID || !keys.GOOGLE_CLIENT_SECRET) {
   const strategy = new GoogleStrategy(
     googleConfig,
     (token, refreshToken, profile, done) => {
-      // console.log(profile)
+      console.log(profile)
       const googleId = profile.id
       const email = profile.emails[0].value
-      const imgUrl = profile.photos[0].value
+      const imageURL = profile.photos[0].value
       const firstName = profile.name.givenName
       const lastName = profile.name.familyName
       const fullName = profile.displayName
 
       User.findOrCreate({
         where: {googleId},
-        defaults: {email, imgUrl, firstName, lastName, fullName}
+        defaults: {email, imageURL, firstName, lastName, fullName}
       })
         .then(([user]) => done(null, user))
         .catch(done)
