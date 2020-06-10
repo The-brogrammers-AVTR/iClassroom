@@ -1,16 +1,16 @@
 import React, {useState, Fragment} from 'react'
 import MaterialTable from 'material-table'
 
-const TeacherGrades = ({userassignments, course}) => {
-  console.log(userassignments)
-  //   if (assignment.length === 0) {
-  //     return null
-  //   }
-  //console.log('in', assignment)
+const TeacherGrades = ({userassignments, course, assignment}) => {
+  console.log('teacher u', userassignments)
+  console.log('teacher a', assignment)
+  if (assignment.length === 0 || userassignments.length === 0) {
+    return null
+  }
 
-  const dataColunms = userassignments.map(assign => ({
-    title: `Assignment ${assign.assignmentId}`,
-    field: `${assign.assignmentId}`
+  const dataColunms = assignment.map(assign => ({
+    title: `Assignment ${assign.id}`,
+    field: `${assign.id}`
   }))
 
   //   const dataAssign = assignment.map(assign => ({
@@ -41,7 +41,8 @@ const TeacherGrades = ({userassignments, course}) => {
   return (
     <Fragment>
       <MaterialTable
-        title={course.name}
+        title={`Grades (Course: ${course.name})`}
+        style={{width: '80%', margin: 'auto'}}
         columns={state.columns}
         //   data={state.data}
         //   editable={{

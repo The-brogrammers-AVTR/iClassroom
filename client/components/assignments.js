@@ -44,7 +44,10 @@ class Assignments extends Component {
         <Sidebar {...course} instructor={instructor} />
         {isInstructor ? (
           <Grid item xs={12} sm={11}>
-            <ManageAssignments assignment={assignmentsForCourse} />
+            <ManageAssignments
+              assignment={assignmentsForCourse}
+              course={course}
+            />
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>

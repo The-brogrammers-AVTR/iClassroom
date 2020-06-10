@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import MaterialTable from 'material-table'
 
-const ManageAssignments = ({assignment, remove}) => {
+const ManageAssignments = ({assignment, remove, course}) => {
+  //const classes = useStyles()
   if (assignment.length === 0) {
     return null
   }
-  //console.log('in', assignment)
 
   const dataAssign = assignment.map(assign => ({
     assignmentid: assign.id,
@@ -15,8 +15,6 @@ const ManageAssignments = ({assignment, remove}) => {
     description: assign.description,
     teacher: assign.userId
   }))
-
-  //console.log('process', dataAssign)
 
   const [state, setState] = useState({
     columns: [
@@ -30,11 +28,10 @@ const ManageAssignments = ({assignment, remove}) => {
     data: dataAssign
   })
 
-  //console.log('statedata', state)
-
   return (
     <MaterialTable
-      title="Manage Assignments"
+      title={`Manage Assignments (Course: ${course.name})`}
+      style={{width: '80%', margin: 'auto'}}
       columns={state.columns}
       data={state.data}
       editable={{

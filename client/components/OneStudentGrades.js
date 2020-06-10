@@ -11,7 +11,9 @@ import {user} from '../store'
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650
+    minWidth: 650,
+    width: '50%',
+    margin: 'auto'
   },
   cell: {
     padding: 2
@@ -30,7 +32,7 @@ const OneStudentGrades = ({userassignments, user}) => {
   }
   return (
     <Fragment>
-      <h2>{`User Id: ${user.id}`}</h2>
+      <h1>{`Grade (User Id: ${user.id})`}</h1>
       <TableContainer>
         <Table
           className={classes.table}

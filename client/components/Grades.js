@@ -2,6 +2,8 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import OneStudentGrades from './OneStudentGrades'
 import TeacherGrades from './TeacherGrades'
+import Sidebar from './Sidebar'
+import {Grid} from '@material-ui/core'
 
 class Grades extends Component {
   constructor() {
@@ -19,44 +21,50 @@ class Grades extends Component {
     const userassignmentsForCourse = this.props.userassignment.filter(
       userassignment => userassignment.courseId === course.id
     )
+    const assignmentsForCourse = this.props.assignment.filter(
+      assign => assign.courseId === course.id
+    )
     const isInstructor = instructor.id === user.id
-    //console.log('course', course)
-    console.log('haha', userassignmentsForCourse)
+
     return (
-      <Fragment>
-        <h1>Grades</h1>
-
-        {isInstructor ? (
-          <TeacherGrades
-            userassignments={userassignmentsForCourse}
-            course={course}
-          />
-        ) : (
-          <OneStudentGrades userassignments={oneUserassignments} user={user} />
-        )}
-      </Fragment>
-
-      // <Grid container>
-      //   <Sidebar {...course} instructor={instructor} />
+      // <Fragment>
+      //   <h1>Grades</h1>
       //   {isInstructor ? (
-      //     <Grid item xs={12} sm={11}>
-      //       <ManageAssignments assignment={assignmentsForCourse} />
-      //     </Grid>
+      //     <TeacherGrades
+      //       assignment={assignmentsForCourse}
+      //       userassignments={userassignmentsForCourse}
+      //       course={course}
+      //     />
       //   ) : (
-      //     <Grid item xs={12} sm={11}>
-      //       <TableAssignments
-      //         assignment={assignmentsForCourse}
-      //         remove={remove}
-      //       />
-      //     </Grid>
+      //     <OneStudentGrades userassignments={oneUserassignments} user={user} />
       //   )}
-      // </Grid>
+      // </Fragment>
+
+      <Grid container>
+        <Sidebar {...course} instructor={instructor} />
+        {isInstructor ? (
+          <Grid item xs={12} sm={11}>
+            <TeacherGrades
+              assignment={assignmentsForCourse}
+              userassignments={userassignmentsForCourse}
+              course={course}
+            />
+          </Grid>
+        ) : (
+          <Grid item xs={12} sm={11}>
+            <OneStudentGrades
+              userassignments={oneUserassignments}
+              user={user}
+            />
+          </Grid>
+        )}
+      </Grid>
     )
   }
 }
 
 const mapStateToProps = (
-  {userassignment, user, courses, teachers},
+  {userassignment, user, courses, teachers, assignment},
   {match}
 ) => {
   if (!userassignment) {
@@ -67,14 +75,9 @@ const mapStateToProps = (
     userassignment,
     user,
     course,
-    teachers
+    teachers,
+    assignment
   }
 }
 
 export default connect(mapStateToProps)(Grades)
-
-// {/* <ul>
-//           {this.props.userassignment.map(assign => (
-//             <li key={assign.id}>{`${assign.assignmentId}: ${assign.grade}`}</li>
-//           ))}
-//         </ul> */}
