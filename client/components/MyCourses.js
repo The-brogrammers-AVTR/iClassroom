@@ -2,42 +2,45 @@ import React from 'react'
 import {connect} from 'react-redux'
 import CourseCard from './CourseCard.js'
 import CreateCourse from './CreateCourse.js'
+import {ThemeProvider, Fab} from '@material-ui/core/'
+import theme from './Theme'
+import AddIcon from '@material-ui/icons/Add'
 
 class MyCourses extends React.Component {
   constructor() {
     super()
     this.state = {
-      active: false
+      toggle: false
     }
   }
 
   render() {
-    const {active} = this.state
+    const {toggle} = this.state
     const {user, myCourses, history} = this.props
 
     return (
-      <div>
+      <ThemeProvider theme={theme}>
         <div>
           <div className="courses-wrapper">
             <h1>My Courses</h1>
             {user.isTeacher && (
-              <button
-                className="default-button"
-                type="button"
-                onClick={() => this.setState({active: !active})}
+              <Fab
+                color="primary"
+                aria-label="add"
+                onClick={() => this.setState({toggle: !toggle})}
               >
-                Create Course
-              </button>
+                <AddIcon />
+              </Fab>
             )}
           </div>
-          {this.state.active && <CreateCourse history={history} />}
+          {toggle && <CreateCourse history={history} />}
           <div className="course-card-wrapper">
             {myCourses.map(course => {
               return <CourseCard key={course.id} {...course} />
             })}
           </div>
         </div>
-      </div>
+      </ThemeProvider>
     )
   }
 }

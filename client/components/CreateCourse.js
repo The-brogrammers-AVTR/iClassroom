@@ -21,8 +21,9 @@ import theme from './Theme'
 
 const useStyles = makeStyles({
   root: {
-    margin: theme.spacing(10, 80),
-    padding: theme.spacing(2)
+    margin: theme.spacing(10, 53),
+    padding: theme.spacing(2),
+    width: theme.spacing(70)
   },
   formControl: {
     margin: theme.spacing(1),
@@ -76,7 +77,13 @@ const CreateCourse = ({user, save, load, history}) => {
     <ThemeProvider theme={theme}>
       <Paper className={classes.root} elevation={3}>
         <form>
-          <Grid container direction="column" alignItems="center">
+          <Grid
+            // className={classes.root}
+            container
+            direction="column"
+            alignItems="center"
+            justify="center"
+          >
             <Typography variant="h5" color="primary">
               Create Course
             </Typography>
