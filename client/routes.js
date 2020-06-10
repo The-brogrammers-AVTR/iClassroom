@@ -14,7 +14,8 @@ import {
   ManageAssignments,
   Canvas,
   Profile,
-  Grades
+  Grades,
+  Verification
 } from './components'
 
 import {
@@ -34,29 +35,41 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, user} = this.props
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
+
         {isLoggedIn && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route exact path="/" component={Home} />
-            <Route path="/course/:id/students" component={Students} />
-            <Route path="/course/:id/announcements" component={Announcements} />
-            <Route path="/course/:id/lessons" component={Lessons} />
-            <Route path="/course/:id/grades" component={Grades} />
-            <Route path="/course/:id/videocall" component={Chat} />
-            <Route path="/course/:id/chatroom" component={Chat} />
-            <Route path="/course/:id/assignments" component={Assignments} />
-            <Route path="/course/:id/canvas" component={Canvas} />
-            <Route path="/makeassignment" component={MakeAssignment} />
-            <Route path="/manageassignments" component={ManageAssignments} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/test" component={Profile} />
+            {user.isTeacher === null ? (
+              <Route exact path="/" component={Verification} />
+            ) : (
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/course/:id/students" component={Students} />
+                <Route
+                  path="/course/:id/announcements"
+                  component={Announcements}
+                />
+                <Route path="/course/:id/lessons" component={Lessons} />
+                <Route path="/course/:id/grades" component={Grades} />
+                <Route path="/course/:id/videocall" component={Chat} />
+                <Route path="/course/:id/chatroom" component={Chat} />
+                <Route path="/course/:id/assignments" component={Assignments} />
+                <Route path="/course/:id/canvas" component={Canvas} />
+                <Route path="/makeassignment" component={MakeAssignment} />
+                <Route
+                  path="/manageassignments"
+                  component={ManageAssignments}
+                />
+                <Route path="/profile" component={Profile} />
+                <Route path="/test" component={Profile} />
+              </Switch>
+            )}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -66,11 +79,12 @@ class Routes extends Component {
   }
 }
 
-const mapState = state => {
+const mapState = ({user}) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!user.id,
+    user
   }
 }
 

@@ -107,11 +107,11 @@ const logout = () => async dispatch => {
   }
 }
 
-const updateProfile = (user, push) => {
+const updateProfile = (user, id, push) => {
   return async dispatch => {
-    const {data: updatedUser} = await axios.put(`/api/users/${user.id}`, user)
+    const {data: updatedUser} = await axios.put(`/api/users/${id}`, user)
     dispatch(_updateProfile(updatedUser))
-    push('/profile')
+    push('/')
   }
 }
 
