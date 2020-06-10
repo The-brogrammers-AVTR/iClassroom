@@ -4,8 +4,8 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {
   Login,
   Signup,
-  Home,
   Assignments,
+  Home,
   Announcements,
   Chat,
   MakeAssignment,
