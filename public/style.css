@@ -383,7 +383,7 @@ tr:nth-child(even) {
 
 body {
   font: 14px 'Century Gothic', Futura, sans-serif;
-  margin: 20px;
+  margin: 0;
 }
 
 .drawArea {
