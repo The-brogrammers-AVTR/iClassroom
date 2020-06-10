@@ -41,13 +41,17 @@ const useStyles = makeStyles({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  center: {
+    alignItems: 'center',
+    width: 'inherit'
   }
 })
 
 const SignupForm = props => {
   const classes = useStyles()
   const {handleSubmit, error} = props
-  const [value, setValue] = useState('false')
+  const [value, setValue] = useState(null)
 
   const handleChange = event => {
     setValue(event.target.value)
@@ -114,24 +118,26 @@ const SignupForm = props => {
                 autoComplete="current-password"
               />
             </Grid>
-            <Grid item xs={12} display="flex" />
-            <FormControl>
+            <Grid container item xs={12} />
+            <FormControl className={classes.center}>
               <FormLabel>Are you a teacher?</FormLabel>
               <RadioGroup
                 name="isTeacher"
                 value={value}
                 onChange={handleChange}
               >
-                <FormControlLabel
-                  value="true"
-                  control={<Radio />}
-                  label="Yes"
-                />
-                <FormControlLabel
-                  value="false"
-                  control={<Radio />}
-                  label="No"
-                />
+                <Grid>
+                  <FormControlLabel
+                    value="true"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="false"
+                    control={<Radio />}
+                    label="No"
+                  />
+                </Grid>
               </RadioGroup>
             </FormControl>
           </Grid>
