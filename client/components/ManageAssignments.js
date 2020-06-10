@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import MaterialTable from 'material-table'
 
 const ManageAssignments = ({assignment, remove, course}) => {
-  //const classes = useStyles()
   if (assignment.length === 0) {
     return null
   }
