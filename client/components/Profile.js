@@ -18,15 +18,21 @@ import SaveIcon from '@material-ui/icons/Save'
 
 const useStyles = makeStyles({
   paper: {
-    margin: theme.spacing(10, 53),
+    margin: theme.spacing(5, 53),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(3),
     maxWidth: 500
   },
+  grid: {
+    alignText: 'center'
+  },
   button: {
-    width: 100
+    margin: theme.spacing(2, 20)
+  },
+  red: {
+    color: theme.palette.red
   }
 })
 
@@ -72,18 +78,23 @@ const Profile = ({user, update}) => {
   return (
     <ThemeProvider theme={theme}>
       <Paper className={classes.paper}>
-        <Typography variant="h4">User Profile</Typography>
+        <Typography color="primary" variant="h4">
+          User Profile
+        </Typography>
         <img src={imageURL} />
-        <IconButton onClick={() => setEdit(!edit)}>
-          {!edit ? <EditIcon /> : <HighlightOffIcon />}
+        <IconButton color="primary" onClick={() => setEdit(!edit)}>
+          {!edit ? <EditIcon /> : <HighlightOffIcon className={classes.red} />}
         </IconButton>
 
         {!edit ? (
-          <div>
+          <Grid className={classes.grid}>
             <Typography>First Name: {firstName}</Typography>
             <Typography>Last Name: {lastName}</Typography>
             <Typography>Email: {email}</Typography>
-          </div>
+            <Typography>
+              Status: {user.isTeacher ? 'Teacher' : 'Student'}
+            </Typography>
+          </Grid>
         ) : (
           <Grid container display="flex" direction="column">
             <TextField
