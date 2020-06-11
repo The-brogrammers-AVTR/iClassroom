@@ -37,6 +37,7 @@ User.hasMany(Assignment)
 Assignment.belongsTo(User)
 User.hasMany(Userassignment)
 Userassignment.belongsTo(User)
+Userassignment.belongsTo(Assignment)
 
 //Assignment.belongsToMany(User)
 //Assignment.belongsToMany(User, {through: UserAssignment})

@@ -41,14 +41,14 @@ const OneStudentGrades = ({userassignments, user}) => {
         >
           <TableHead>
             <TableRow>
-              <TableCell align="left">Assignment ID</TableCell>
+              <TableCell align="left">Assignment</TableCell>
               <TableCell align="left">Grade</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {userassignments.map(assign => (
               <TableRow key={assign.id}>
-                <TableCell align="left">{assign.assignmentId}</TableCell>
+                <TableCell align="left">{assign.assignment.name}</TableCell>
                 <TableCell align="left">{assign.grade}</TableCell>
               </TableRow>
             ))}
