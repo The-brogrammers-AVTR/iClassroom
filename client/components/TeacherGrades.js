@@ -2,45 +2,34 @@ import React, {useState, Fragment} from 'react'
 import MaterialTable from 'material-table'
 
 const TeacherGrades = ({userassignments, course, assignment}) => {
-  console.log('teacher u', userassignments)
-  console.log('teacher a', assignment)
+  //console.log('teacher u', userassignments)
+  //console.log('teacher a', assignment)
   if (assignment.length === 0 || userassignments.length === 0) {
     return null
   }
-  const dataColunms = assignment.map(assign => ({
-    title: `Assignment ${assign.id} (${assign.name})`,
-    field: `assign${assign.id}`
-  }))
-  console.log('col', dataColunms)
-  // const dataUserassign = assignment.map(assign => ({
-  //   assignmentid: assign.id,
-  //   assignment: assign.name,
-  //   course: assign.courseId,
-  //   category: assign.category,
-  //   description: assign.description,
-  //   teacher: assign.userId
+  // const dataColunms = assignment.map((assign,idx) => ({
+  //   title: `Assignment: ${assign.name}`,
+  //   field: `assign${idx+1}`
   // }))
-
-  const dataUserassign = [
-    {
-      studentid: 1,
-      studentname: 'Robert',
-      assign1: 60,
-      assign2: 70,
-      assign3: 80
-    }
-  ]
-  console.log('data', dataUserassign)
+  //console.log('col', dataColunms)
+  const dataUserassign = userassignments.map(userassign => ({
+    studentid: userassign.userId,
+    studentname: `${userassign.user.firstName} ${userassign.user.lastName}`,
+    assignment: userassign.assignment.name,
+    grade: userassign.grade
+  }))
+  //console.log('data', dataUserassign)
 
   const [state, setState] = useState({
     columns: [
       {title: 'Student ID', field: 'studentid'},
       {title: 'Student Name', field: 'studentname'},
-      ...dataColunms
+      {title: 'Assignment', field: 'assignment'},
+      {title: 'Grade', field: 'grade'}
     ],
     data: dataUserassign
   })
-  console.log('statedata', state)
+  //console.log('statedata', state)
   return (
     <Fragment>
       <MaterialTable
