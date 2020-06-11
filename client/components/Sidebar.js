@@ -1,48 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link, Route} from 'react-router-dom'
-
-// class Sidebar extends React.Component {
-//   constructor() {
-//     super()
-//   }
-
-//   render() {
-//     const {id, name, code, user, instructor} = this.props
-//     console.log(instructor, name, user)
-//     return (
-//       <div className="course-sidebar">
-//         <div className="course-info">
-//           <p>
-//             {name} - {code}
-//           </p>
-//           <p>
-//             {instructor.firstName} {instructor.lastName}
-//           </p>
-//           <p>{instructor.email}</p>
-//           <p>Syllabus Link</p>
-//         </div>
-//         <div className="course-navigation">
-//           {user.isTeacher === true && (
-//             <Link to={`/course/${id}/students`}>Students</Link>
-//           )}
-//           <Link to={`/course/${id}/announcements`}>Announcements</Link>
-//           <Link to={`/course/${id}/lessons`}>Lessons</Link>
-//           <Link to={`/course/${id}/assignments`}>Assignments</Link>
-//           <Link to={`/course/${id}/grades`}>Grades</Link>
-//           <Link to={`/course/${id}/canvas`}>White Board</Link>
-//           <Link
-//             to={`/course/${id}/chatroom?userName=${user.firstName}&room=${name}`}
-//           >
-//             Chat Room
-//           </Link>
-//           <Link to="/"> Back to Courses</Link>
-//         </div>
-//       </div>
-//     )
-//   }
-// }
-
 import clsx from 'clsx'
 import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
 import theme from './Theme'
@@ -71,10 +29,10 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd' //grade
 import SmsIcon from '@material-ui/icons/Sms'
 import CastForEducationIcon from '@material-ui/icons/CastForEducation'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import OndemandVideoIcon from '@material-ui/icons/OndemandVideo' //broadcast
-import VideocamIcon from '@material-ui/icons/Videocam' //videocall
-import GroupIcon from '@material-ui/icons/Group' //groupwork
-import HelpIcon from '@material-ui/icons/Help' //help
+// import OndemandVideoIcon from '@material-ui/icons/OndemandVideo' //broadcast
+// import VideocamIcon from '@material-ui/icons/Videocam' //videocall
+// import GroupIcon from '@material-ui/icons/Group' //groupwork
+// import HelpIcon from '@material-ui/icons/Help' //help
 
 const drawerWidth = 240
 

@@ -1,126 +1,143 @@
-import React, {Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {updateProfile} from '../store'
+import {
+  IconButton,
+  Button,
+  TextField,
+  makeStyles,
+  Paper,
+  Typography,
+  ThemeProvider,
+  Grid
+} from '@material-ui/core'
+import theme from './Theme'
+import EditIcon from '@material-ui/icons/Edit'
+import HighlightOffIcon from '@material-ui/icons/HighlightOff'
+import SaveIcon from '@material-ui/icons/Save'
 
-class Profile extends Component {
-  constructor(props) {
-    let firstName = ''
-    let lastName = ''
-    let email = ''
-    let imageURL = ''
-    if (props.user) {
-      if (props.user.firstName) {
-        firstName = props.user.firstName
-      }
-      if (props.user.lastName) {
-        lastName = props.user.lastName
-      }
-      if (props.user.email) {
-        email = props.user.email
-      }
-      if (props.user.imageURL) {
-        imageURL = props.user.imageURL
-      }
-    }
-    super()
-    this.state = {
-      firstName,
-      lastName,
-      email,
-      imageURL,
-      error: ''
-    }
-    this.onSubmit = this.onSubmit.bind(this)
+const useStyles = makeStyles({
+  paper: {
+    margin: theme.spacing(5, 53),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing(3),
+    maxWidth: 500
+  },
+  grid: {
+    alignText: 'center'
+  },
+  button: {
+    margin: theme.spacing(2, 20)
+  },
+  red: {
+    color: theme.palette.red
   }
+})
 
-  onSubmit(event) {
-    event.preventDefault()
+// eslint-disable-next-line complexity
+const Profile = ({user, update}) => {
+  const [firstName, setFirstName] = useState(
+    user.firstName ? user.firstName : ''
+  )
+  const [lastName, setLastName] = useState(user.lastName ? user.lastName : '')
+  const [email, setEmail] = useState(user.email ? user.email : '')
+  const [imageURL, setImageURL] = useState(user.imageURL ? user.imageURL : '')
+  const [error, setError] = useState('')
+  const [edit, setEdit] = useState(false)
+
+  const classes = useStyles()
+
+  const onSubmit = ev => {
+    ev.preventDefault()
     try {
-      this.props.update(
+      update(
         {
-          id: this.props.user.id,
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
-          email: this.state.email,
-          imageURL: this.state.imageURL
+          id: user.id,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          imageURL: imageURL
         },
-        this.props.history.push
+        user.id,
+        history.push
       )
     } catch (exception) {
-      this.setState({error: exception.response.data.message})
+      setError({error: exception.response.data.message})
     }
+    setEdit(!edit)
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps.user.firstName !== this.props.user.firstName) {
-      this.setState({firstName: this.props.user.firstName})
-    }
-    if (prevProps.user.lastName !== this.props.user.lastName) {
-      this.setState({lastName: this.props.user.lastName})
-    }
-    if (prevProps.user.email !== this.props.user.email) {
-      this.setState({email: this.props.user.email})
-    }
-    if (prevProps.user.imageURL !== this.props.user.imageURL) {
-      this.setState({imageURL: this.props.user.imageURL})
-    }
-  }
+  useEffect(
+    () => {
+      console.log(firstName, lastName, email, imageURL)
+    },
+    [firstName, lastName, email, imageURL]
+  )
 
-  render() {
-    const {onSubmit} = this
-    const {user} = this.props
-    const {firstName, lastName, email, imageURL} = this.state
-    return (
-      <div>
-        <div>
-          <h3>User Profile</h3>
-          <img src={imageURL} />
-        </div>
-        <div>
-          <p className="row">
-            First Name:
-            <input
+  return (
+    <ThemeProvider theme={theme}>
+      <Paper className={classes.paper}>
+        <Typography color="primary" variant="h4">
+          User Profile
+        </Typography>
+        <img src={imageURL} />
+        <IconButton color="primary" onClick={() => setEdit(!edit)}>
+          {!edit ? <EditIcon /> : <HighlightOffIcon className={classes.red} />}
+        </IconButton>
+
+        {!edit ? (
+          <Grid className={classes.grid}>
+            <Typography>First Name: {firstName}</Typography>
+            <Typography>Last Name: {lastName}</Typography>
+            <Typography>Email: {email}</Typography>
+            <Typography>
+              Status: {user.isTeacher ? 'Teacher' : 'Student'}
+            </Typography>
+          </Grid>
+        ) : (
+          <Grid container display="flex" direction="column">
+            <TextField
               value={firstName}
-              onChange={event => this.setState({firstName: event.target.value})}
+              onChange={event => setFirstName(event.target.value)}
+              label="First Name"
             />
-          </p>
-          <p className="row">
-            Last Name:
-            <input
+            <TextField
               value={lastName}
-              onChange={event => this.setState({lastName: event.target.value})}
+              onChange={event => setLastName(event.target.value)}
+              label="Last Name"
             />
-          </p>
-          <p className="row">
-            Email:
-            <input
+            <TextField
               value={email}
-              onChange={event => this.setState({email: event.target.value})}
+              onChange={event => setEmail(event.target.value)}
+              label="Email"
             />
-          </p>
-          <p className="row">
-            imageURL:
-            <input
+            <TextField
               value={imageURL}
-              onChange={event => this.setState({imageURL: event.target.value})}
+              onChange={event => setImageURL(event.target.value)}
+              label="ImageURL"
             />
-          </p>
-          <button
-            type="submit"
-            onClick={onSubmit}
-            disabled={
-              firstName === user.firstName &&
-              lastName === user.lastName &&
-              email === user.email &&
-              imageURL === user.imageURL
-            }
-          >
-            Update Profile
-          </button>
-        </div>
-      </div>
-    )
-  }
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={onSubmit}
+              disabled={
+                firstName === user.firstName &&
+                lastName === user.lastName &&
+                email === user.email &&
+                imageURL === user.imageURL
+              }
+              startIcon={<SaveIcon />}
+            >
+              Save
+            </Button>
+          </Grid>
+        )}
+      </Paper>
+    </ThemeProvider>
+  )
 }
 
 const mapStateToProps = ({user}) => {
@@ -131,7 +148,7 @@ const mapStateToProps = ({user}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    update: (user, push) => dispatch(updateProfile(user, push))
+    update: (user, id, push) => dispatch(updateProfile(user, id, push))
   }
 }
 

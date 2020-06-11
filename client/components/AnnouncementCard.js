@@ -13,29 +13,6 @@ import theme from './Theme'
 import DeleteIcon from '@material-ui/icons/Delete'
 const moment = require('moment')
 
-// class AnnouncementCard extends React.Component {
-//   constructor() {
-//     super()
-//   }
-
-//   render() {
-//     const {title, description, id} = this.props
-
-//     return (
-//       <div className="announcement-card">
-//         <h3>{title}</h3>
-//         <p>{description}</p>
-//         <IconButton>
-//           <EditIcon />
-//         </IconButton>
-//         <IconButton>
-//           <DeleteIcon onClick={() => this.props.remove(id)} />
-//         </IconButton>
-//       </div>
-//     )
-//   }
-// }
-
 const useStyles = makeStyles({
   root: {
     margin: theme.spacing(2),
