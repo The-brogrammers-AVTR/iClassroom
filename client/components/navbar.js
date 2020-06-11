@@ -19,6 +19,10 @@ import theme from './Theme'
 const useStyles = makeStyles({
   menuButton: {
     margin: '1rem'
+  },
+  row: {
+    display: 'flex',
+    alignItems: 'center'
   }
 })
 
@@ -55,16 +59,17 @@ const Navbar = ({handleClick, isLoggedIn, user}) => {
                 justify="flex-end"
                 alignItems="center"
               >
-                <Link to="/profile">
+                <Link className={classes.row} to="/profile">
                   <Avatar alt="pfp" src={user.imageURL} />
+
+                  <Typography
+                    variant="h6"
+                    color="primary"
+                    className={classes.menuButton}
+                  >
+                    {`Hello, ${user.firstName}`}
+                  </Typography>
                 </Link>
-                <Typography
-                  variant="h6"
-                  color="primary"
-                  className={classes.menuButton}
-                >
-                  {`Hello, ${user.firstName}`}
-                </Typography>
                 <Typography variant="h6" color="primary" onClick={handleClick}>
                   <Button color="primary">Logout</Button>
                 </Typography>
