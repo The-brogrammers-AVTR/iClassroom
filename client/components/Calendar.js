@@ -17,8 +17,10 @@ import {makeStyles, Paper} from '@material-ui/core'
 import theme from './Theme'
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: theme.spacing(95)
+  table: {
+    margin: theme.spacing(10, 0),
+    padding: theme.spacing(0),
+    width: '95%'
   }
 })
 
@@ -28,22 +30,24 @@ const Calendar = () => {
   //     const {data} = this.state
 
   return (
-    <Paper>
-      <Scheduler>
-        <ViewState
-          defaultCurrentDate="2018-07-27"
-          defaultCurrentViewName="Month"
-        />
-        <DayView startDayHour={9} endDayHour={18} />
-        <WeekView startDayHour={10} endDayHour={19} />
-        <MonthView className={classes.root} />
-        <Toolbar />
-        <ViewSwitcher />
-        <DateNavigator />
-        <TodayButton />
-        <Appointments />
-      </Scheduler>
-    </Paper>
+    <ThemeProvider theme={theme}>
+      <Paper>
+        <Scheduler>
+          <ViewState
+            defaultCurrentDate="2018-07-27"
+            defaultCurrentViewName="Month"
+          />
+          <DayView startDayHour={9} endDayHour={18} />
+          <WeekView startDayHour={10} endDayHour={19} />
+          <MonthView />
+          <Toolbar />
+          <ViewSwitcher />
+          <DateNavigator />
+          <TodayButton />
+          <Appointments />
+        </Scheduler>
+      </Paper>
+    </ThemeProvider>
   )
 }
 
