@@ -4,8 +4,8 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {
   Login,
   Signup,
-  Home,
   Assignments,
+  Home,
   Announcements,
   Chat,
   MakeAssignment,
@@ -14,7 +14,9 @@ import {
   ManageAssignments,
   Canvas,
   Profile,
-  Grades
+  Grades,
+  OneStudentGrades,
+  TeacherGrades
 } from './components'
 
 import {
@@ -25,7 +27,8 @@ import {
   getAnnouncements,
   getLessons,
   readUserassignments,
-  getUserCourses
+  getUserCourses,
+  readAssignments
 } from './store'
 
 class Routes extends Component {
@@ -85,6 +88,7 @@ const mapDispatch = dispatch => {
       dispatch(getLessons())
       dispatch(readUserassignments())
       dispatch(getUserCourses())
+      dispatch(readAssignments())
     }
   }
 }
