@@ -1,7 +1,36 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {updateProfile} from '../store'
+import {
+  IconButton,
+  Button,
+  TextField,
+  makeStyles,
+  Paper,
+  Typography,
+  ThemeProvider,
+  Grid
+} from '@material-ui/core'
+import theme from './Theme'
+import EditIcon from '@material-ui/icons/Edit'
+import HighlightOffIcon from '@material-ui/icons/HighlightOff'
+import SaveIcon from '@material-ui/icons/Save'
 
+const useStyles = makeStyles({
+  paper: {
+    margin: theme.spacing(10, 53),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing(3),
+    maxWidth: 500
+  },
+  button: {
+    width: 100
+  }
+})
+
+// eslint-disable-next-line complexity
 const Profile = ({user, update}) => {
   const [firstName, setFirstName] = useState(
     user.firstName ? user.firstName : ''
@@ -10,6 +39,9 @@ const Profile = ({user, update}) => {
   const [email, setEmail] = useState(user.email ? user.email : '')
   const [imageURL, setImageURL] = useState(user.imageURL ? user.imageURL : '')
   const [error, setError] = useState('')
+  const [edit, setEdit] = useState(false)
+
+  const classes = useStyles()
 
   const onSubmit = ev => {
     ev.preventDefault()
@@ -28,6 +60,7 @@ const Profile = ({user, update}) => {
     } catch (exception) {
       setError({error: exception.response.data.message})
     }
+    setEdit(!edit)
   }
   useEffect(
     () => {
@@ -37,54 +70,62 @@ const Profile = ({user, update}) => {
   )
 
   return (
-    <div>
-      <div>
-        <h3>User Profile</h3>
+    <ThemeProvider theme={theme}>
+      <Paper className={classes.paper}>
+        <Typography variant="h4">User Profile</Typography>
         <img src={imageURL} />
-      </div>
-      <div>
-        <p className="row">
-          First Name:
-          <input
-            value={firstName}
-            onChange={event => setFirstName(event.target.value)}
-          />
-        </p>
-        <p className="row">
-          Last Name:
-          <input
-            value={lastName}
-            onChange={event => setLastName(event.target.value)}
-          />
-        </p>
-        <p className="row">
-          Email:
-          <input
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-          />
-        </p>
-        <p className="row">
-          imageURL:
-          <input
-            value={imageURL}
-            onChange={event => setImageURL(event.target.value)}
-          />
-        </p>
-        <button
-          type="submit"
-          onClick={onSubmit}
-          disabled={
-            firstName === user.firstName &&
-            lastName === user.lastName &&
-            email === user.email &&
-            imageURL === user.imageURL
-          }
-        >
-          Update Profile
-        </button>
-      </div>
-    </div>
+        <IconButton onClick={() => setEdit(!edit)}>
+          {!edit ? <EditIcon /> : <HighlightOffIcon />}
+        </IconButton>
+
+        {!edit ? (
+          <div>
+            <Typography>First Name: {firstName}</Typography>
+            <Typography>Last Name: {lastName}</Typography>
+            <Typography>Email: {email}</Typography>
+          </div>
+        ) : (
+          <Grid container display="flex" direction="column">
+            <TextField
+              value={firstName}
+              onChange={event => setFirstName(event.target.value)}
+              label="First Name"
+            />
+            <TextField
+              value={lastName}
+              onChange={event => setLastName(event.target.value)}
+              label="Last Name"
+            />
+            <TextField
+              value={email}
+              onChange={event => setEmail(event.target.value)}
+              label="Email"
+            />
+            <TextField
+              value={imageURL}
+              onChange={event => setImageURL(event.target.value)}
+              label="ImageURL"
+            />
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={onSubmit}
+              disabled={
+                firstName === user.firstName &&
+                lastName === user.lastName &&
+                email === user.email &&
+                imageURL === user.imageURL
+              }
+              startIcon={<SaveIcon />}
+            >
+              Save
+            </Button>
+          </Grid>
+        )}
+      </Paper>
+    </ThemeProvider>
   )
 }
 
