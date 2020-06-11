@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {
+  Login,
+  Signup,
   LoginForm,
   SignupForm,
   Assignments,
@@ -15,6 +17,8 @@ import {
   Canvas,
   Profile,
   Grades,
+  OneStudentGrades,
+  TeacherGrades,
   Verification
 } from './components'
 
@@ -26,7 +30,8 @@ import {
   getAnnouncements,
   getLessons,
   readUserassignments,
-  getUserCourses
+  getUserCourses,
+  readAssignments
 } from './store'
 
 class Routes extends Component {
@@ -99,6 +104,7 @@ const mapDispatch = dispatch => {
       dispatch(getLessons())
       dispatch(readUserassignments())
       dispatch(getUserCourses())
+      dispatch(readAssignments())
     }
   }
 }
