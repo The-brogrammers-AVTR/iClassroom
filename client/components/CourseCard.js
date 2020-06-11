@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {ThemeProvider} from '@material-ui/styles'
+import {removeCourse} from '../store'
 import theme from './Theme'
 
 // class CourseCard extends React.Component {
@@ -62,10 +63,10 @@ import {
   CardMedia,
   Button,
   Typography,
-  IconButton,
-  ButtonBase
+  IconButton
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const useStyles = makeStyles({
   root: {
@@ -86,7 +87,8 @@ const CourseCard = ({
   teachers,
   UserCourses,
   isOpen,
-  user
+  user,
+  remove
 }) => {
   const classes = useStyles()
 
@@ -133,9 +135,14 @@ const CourseCard = ({
             'Closed'
           )}
           {user.isTeacher && (
-            <IconButton>
-              <EditIcon color="primary">Edit Course</EditIcon>
-            </IconButton>
+            <div>
+              <IconButton>
+                <EditIcon color="primary">Edit Course</EditIcon>
+              </IconButton>
+              <IconButton onClick={() => remove(id)}>
+                <DeleteIcon />
+              </IconButton>
+            </div>
           )}
         </CardActions>
       </Card>
@@ -150,4 +157,12 @@ const mapStateToProps = ({user, teachers}) => {
   }
 }
 
-export default connect(mapStateToProps)(CourseCard)
+const mapDispatchToProps = dispatch => {
+  return {
+    remove: id => {
+      dispatch(removeCourse(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CourseCard)

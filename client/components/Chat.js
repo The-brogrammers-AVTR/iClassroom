@@ -4,7 +4,7 @@ import socketIOClient from 'socket.io-client'
 
 const location = `${window.location.hostname}:8080`
 
-const socket = socketIOClient('http://127.0.0.1:8080')
+const socket = socketIOClient() //http://127.0.0.1:8080'
 
 import {Picker} from 'emoji-mart'
 //import 'emoji-mart/css/emoji-mart.css'

@@ -1,5 +1,5 @@
 const path = require('path')
-const express = require('express')
+const express = require('express') /*  */
 const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
@@ -92,12 +92,10 @@ const createApp = () => {
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
 }
-
+let server = require('http').Server(app)
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
-  )
+  server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
 
   // set up our socket control center
   const io = socketio(server)

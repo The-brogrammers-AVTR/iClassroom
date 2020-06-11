@@ -1,7 +1,7 @@
 import Konva from 'konva'
 const uuidv1 = require('uuid')
-export const addTextNode = (stage, layer) => {
-  const id = uuidv1()
+export const addTextNode = (color, stage, layer) => {
+  const id = uuidv1
   const textNode = new Konva.Text({
     text: 'type here',
     x: 50,
@@ -9,7 +9,8 @@ export const addTextNode = (stage, layer) => {
     fontSize: 20,
     draggable: true,
     width: 200,
-    id
+    id,
+    fill: color
   })
   layer.add(textNode)
   let tr = new Konva.Transformer({

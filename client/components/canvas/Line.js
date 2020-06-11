@@ -1,9 +1,5 @@
 import Konva from 'konva'
-import socketIOClient from 'socket.io-client'
-const socket = socketIOClient('http://127.0.0.1:8080')
-
-export const addLine = (stage, layer, mode = 'brush') => {
-  console.log('stage,layer', stage, layer)
+export const addLine = (color, stage, layer, mode = 'brush') => {
   let isPaint = false
   let lastLine
   //console.log('last line', lastLine)
@@ -11,7 +7,7 @@ export const addLine = (stage, layer, mode = 'brush') => {
     isPaint = true
     let pos = stage.getPointerPosition()
     lastLine = new Konva.Line({
-      stroke: mode == 'brush' ? 'black' : 'white',
+      stroke: mode == 'brush' ? color : 'white',
       strokeWidth: mode == 'brush' ? 5 : 20,
       globalCompositeOperation:
         mode === 'brush' ? 'source-over' : 'destination-out',
