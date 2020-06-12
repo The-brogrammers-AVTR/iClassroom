@@ -937,3 +937,7 @@ canvas {
 .emoji-mart-dark .emoji-mart-anchor-selected {
   color: #bfbfbf;
 }
+
+#crosshair {
+  cursor: crosshair;
+}
