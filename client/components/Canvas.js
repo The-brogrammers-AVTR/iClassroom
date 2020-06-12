@@ -10,10 +10,10 @@ import Image from './canvas/Image'
 import socketIOClient from 'socket.io-client'
 import {SwatchesPicker} from 'react-color'
 
-const socket = socketIOClient('http://127.0.0.1:8080')
+const socket = socketIOClient() //'http://127.0.0.1:8080')
 const uuidv1 = require('uuid')
 function Canvas() {
-  const [color, setColor] = useState('')
+  const [color, setColor] = useState('#000000')
   const [action, setAction] = useState(false)
   const [rectangles, setRectangles] = useState([])
   const [circles, setCircles] = useState([])
@@ -68,7 +68,8 @@ function Canvas() {
   //   addLine(JSON.parse(line.layer), JSON.parse(line.line))
   // })
   const eraseLine = () => {
-    addLine(stageEl.current.getStage(), layerEl.current, 'erase')
+    setColor('#ffff')
+    addLine(color, stageEl.current.getStage(), layerEl.current, 'erase')
   }
   const drawText = () => {
     const id = addTextNode(color, stageEl.current.getStage(), layerEl.current)
@@ -116,7 +117,7 @@ function Canvas() {
       rectangles.splice(index, 1)
       setRectangles(rectangles)
     }
-    index = images.findIndex(r => r.id == lastId)
+    index = images.findIndex(r => r.id === lastId)
     if (index !== -1) {
       images.splice(index, 1)
       setImages(images)
@@ -166,8 +167,9 @@ function Canvas() {
     setAction(!action)
   }
   return (
-    <div className="home-page">
+    <div className="home-page" id="crosshair">
       <h1>Whiteboard</h1>
+
       <ButtonGroup>
         <Button variant="primary" onClick={addRectangle}>
           Rectangle
@@ -199,7 +201,7 @@ function Canvas() {
           )}
         </Button>
       </ButtonGroup>
-
+      {console.log('Shape ', selectedId)}
       <input
         style={{display: 'none'}}
         type="file"
@@ -207,9 +209,16 @@ function Canvas() {
         onChange={fileChange}
       />
       <Stage
-        width={window.innerWidth * 0.9}
-        height={window.innerHeight - 150}
+        width={window.innerWidth}
+        height={window.innerHeight}
         ref={stageEl}
+        /* onMouseEnter={() =>{
+            console.log('mouse enter', stageEl.container)
+          // ='crosshair'cursor
+        }}
+        onMouseLeave={() =>{
+            //stageEl.cursor.cursor='default'
+        }} */
         onMouseDown={e => {
           // deselect when clicked on empty area
           const clickedOnEmpty = e.target === e.target.getStage()
