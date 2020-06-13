@@ -12,9 +12,10 @@ const TeacherGrades = ({userassignments, course, assignment}) => {
   //   field: `assign${idx+1}`
   // }))
   //console.log('col', dataColunms)
-  const dataUserassign = userassignments.map(userassign => ({
+  const dataUserassign = userassignments.map((userassign, idx) => ({
     studentid: userassign.userId,
     studentname: `${userassign.user.firstName} ${userassign.user.lastName}`,
+    //userassignNum: idx+1,
     assignment: userassign.assignment.name,
     grade: userassign.grade
   }))
@@ -24,6 +25,7 @@ const TeacherGrades = ({userassignments, course, assignment}) => {
     columns: [
       {title: 'Student ID', field: 'studentid'},
       {title: 'Student Name', field: 'studentname'},
+      //{title: 'Assignment#', field: 'userassignNum'},
       {title: 'Assignment', field: 'assignment'},
       {title: 'Grade', field: 'grade'}
     ],

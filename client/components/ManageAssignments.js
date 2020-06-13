@@ -1,28 +1,32 @@
 import React, {useState} from 'react'
 import MaterialTable from 'material-table'
 
-const ManageAssignments = ({assignment, remove, course}) => {
+const ManageAssignments = ({assignment, remove, course, save}) => {
   if (assignment.length === 0) {
     return null
   }
+  console.log(assignment)
+  console.log(save)
 
-  const dataAssign = assignment.map(assign => ({
+  const dataAssign = assignment.map((assign, idx) => ({
     assignmentid: assign.id,
-    assignment: assign.name,
-    course: assign.courseId,
+    assignNum: idx + 1,
+    name: assign.name,
+    courseId: assign.courseId,
     category: assign.category,
     description: assign.description,
-    teacher: assign.userId
+    userId: assign.userId
   }))
 
   const [state, setState] = useState({
     columns: [
       {title: 'Assignment ID', field: 'assignmentid'},
-      {title: 'Assignment', field: 'assignment'},
-      {title: 'Course', field: 'course'},
+      {title: 'Assignment#', field: 'assignNum'},
+      {title: 'Assignment', field: 'name'},
+      {title: 'Course', field: 'courseId'},
       {title: 'Category', field: 'category'},
       {title: 'Description', field: 'description'},
-      {title: 'Teacher', field: 'teacher'}
+      {title: 'Teacher', field: 'userId'}
     ],
     data: dataAssign
   })
@@ -34,17 +38,29 @@ const ManageAssignments = ({assignment, remove, course}) => {
       columns={state.columns}
       data={state.data}
       editable={{
+        // onRowAdd: newData =>
+        //   new Promise(resolve => {
+        //     setTimeout(() => {
+        //       resolve()
+        //       setState(prevState => {
+        //         const data = [...prevState.data]
+        //         data.push(newData)
+        //         return {...prevState, data}
+        //       })
+        //     }, 600)
+        //   }),
         onRowAdd: newData =>
           new Promise(resolve => {
-            setTimeout(() => {
-              resolve()
-              setState(prevState => {
-                const data = [...prevState.data]
-                data.push(newData)
-                return {...prevState, data}
-              })
-            }, 600)
+            console.log(newData)
+            save(newData)
+            resolve()
+            setState(prevState => {
+              const data = [...prevState.data]
+              data.push(newData)
+              return {...prevState, data}
+            })
           }),
+
         onRowUpdate: (newData, oldData) =>
           new Promise(resolve => {
             setTimeout(() => {
