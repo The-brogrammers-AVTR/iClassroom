@@ -7,6 +7,7 @@ import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import ManageAssignments from './ManageAssignments'
 import {readUserassignments} from '../store/userassignment'
+import {createAssignment} from '../store/assignment'
 
 class Assignments extends Component {
   constructor() {
@@ -19,7 +20,7 @@ class Assignments extends Component {
 
   render() {
     //console.log('props', this.props)
-    const {course, teachers, remove, user} = this.props
+    const {course, teachers, remove, user, save} = this.props
     const instructor = teachers.find(teacher =>
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
@@ -47,14 +48,13 @@ class Assignments extends Component {
             <ManageAssignments
               assignment={assignmentsForCourse}
               course={course}
+              remove={remove}
+              save={save}
             />
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>
-            <TableAssignments
-              assignment={assignmentsForCourse}
-              remove={remove}
-            />
+            <TableAssignments assignment={assignmentsForCourse} />
           </Grid>
         )}
       </Grid>
@@ -78,7 +78,8 @@ const mapDispatchToProps = dispatch => {
     },
     remove: id => {
       dispatch(deleteAssignment(id))
-    }
+    },
+    save: assignment => dispatch(createAssignment(assignment))
   }
 }
 

@@ -19,3 +19,14 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  const id = req.params.id
+  try {
+    const userassignment = await Product.findByPk(id)
+    userassignment.update(req.body)
+    res.status(200).send(userassignment)
+  } catch (err) {
+    next(err)
+  }
+})
