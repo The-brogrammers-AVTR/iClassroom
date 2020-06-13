@@ -319,11 +319,7 @@ li {
 }
 
 table {
-  margin: 2rem;
-  border: solid 2px lightblue;
-  border-collapse: collapse;
-  width: 100%;
-  box-shadow: 2px 2px 10px black;
+  margin: 0;
 }
 
 thead {
@@ -940,4 +936,8 @@ canvas {
 .emoji-mart-dark .emoji-mart-anchor:focus,
 .emoji-mart-dark .emoji-mart-anchor-selected {
   color: #bfbfbf;
+}
+
+#crosshair {
+  cursor: crosshair;
 }

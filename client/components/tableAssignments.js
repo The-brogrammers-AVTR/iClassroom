@@ -12,7 +12,9 @@ import Checkbox from '@material-ui/core/Checkbox'
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650
+    minWidth: 650,
+    width: '80%',
+    margin: 'auto'
   },
   cell: {
     padding: 2

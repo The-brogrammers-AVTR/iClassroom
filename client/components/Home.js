@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import MyCourses from './MyCourses'
 import FindCourses from './FindCourses'
+import Calendar from './Calendar'
+
 import SwipeableViews from 'react-swipeable-views'
 import {
   makeStyles,
@@ -75,7 +77,7 @@ const Home = ({user}) => {
             <FindCourses />
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            Calendar Goes Here
+            <Calendar />
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
             Report Card

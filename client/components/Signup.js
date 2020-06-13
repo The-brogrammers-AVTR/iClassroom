@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {auth} from '../store'
+import {authSignup} from '../store'
 import {
   Avatar,
   Button,
@@ -11,7 +11,12 @@ import {
   Box,
   Typography,
   Container,
-  makeStyles
+  makeStyles,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel
 } from '@material-ui/core'
 import {ThemeProvider} from '@material-ui/styles'
 import theme from './Theme'
@@ -36,81 +41,21 @@ const useStyles = makeStyles({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
+  },
+  center: {
+    alignItems: 'center',
+    width: 'inherit'
   }
 })
 
-const LoginForm = props => {
-  const {name, displayName, handleSubmit, error} = props
-  const classes = useStyles()
-
-  return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" className={classes.paper}>
-        <CssBaseline />
-        <Avatar className={classes.avatar} />
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit}
-          name={name}
-          noValidate
-        >
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            {displayName}
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/auth/google" variant="body2">
-                {displayName} with Google
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                Don't have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
-          {error && error.response && <div> {error.response.data} </div>}
-        </form>
-        <Box mt={8} />
-      </Container>
-    </ThemeProvider>
-  )
-}
-
 const SignupForm = props => {
   const classes = useStyles()
-  const {name, displayName, handleSubmit, error} = props
+  const {handleSubmit, error} = props
+  const [value, setValue] = useState(null)
+
+  const handleChange = event => {
+    setValue(event.target.value)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -123,7 +68,7 @@ const SignupForm = props => {
         <form
           className={classes.form}
           onSubmit={handleSubmit}
-          name={name}
+          name="signup"
           noValidate
         >
           <Grid container spacing={2}>
@@ -173,7 +118,28 @@ const SignupForm = props => {
                 autoComplete="current-password"
               />
             </Grid>
-            <Grid item xs={12} />
+            <Grid container item xs={12} />
+            <FormControl className={classes.center}>
+              <FormLabel>Are you a teacher?</FormLabel>
+              <RadioGroup
+                name="isTeacher"
+                value={value}
+                onChange={handleChange}
+              >
+                <Grid>
+                  <FormControlLabel
+                    value="true"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="false"
+                    control={<Radio />}
+                    label="No"
+                  />
+                </Grid>
+              </RadioGroup>
+            </FormControl>
           </Grid>
           <Button
             type="submit"
@@ -182,12 +148,12 @@ const SignupForm = props => {
             color="primary"
             className={classes.submit}
           >
-            {displayName}
+            Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item xs>
               <Link href="/auth/google" variant="body2">
-                {displayName} with Google
+                Sign Up with Google
               </Link>
             </Grid>
             <Grid item>
@@ -204,33 +170,24 @@ const SignupForm = props => {
   )
 }
 
-const mapLogin = state => {
+const mapStateToProps = state => {
   return {
-    name: 'login',
-    displayName: 'Login',
     error: state.user.error
   }
 }
 
-const mapSignup = state => {
-  return {
-    name: 'signup',
-    displayName: 'Sign Up',
-    error: state.user.error
-  }
-}
-
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      const firstName = evt.target.firstName.value
+      const lastName = evt.target.lastName.value
+      const isTeacher = evt.target.isTeacher.value
+      dispatch(authSignup(email, password, firstName, lastName, isTeacher))
     }
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(LoginForm)
-export const Signup = connect(mapSignup, mapDispatch)(SignupForm)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm)

@@ -23,6 +23,7 @@ const UserCourse = db.define('UserCourse')
 
 User.hasMany(UserCourse)
 UserCourse.belongsTo(User)
+
 User.belongsToMany(Course, {through: UserCourse})
 Course.belongsToMany(User, {through: UserCourse})
 
@@ -36,6 +37,7 @@ User.hasMany(Assignment)
 Assignment.belongsTo(User)
 User.hasMany(Userassignment)
 Userassignment.belongsTo(User)
+Userassignment.belongsTo(Assignment)
 
 //Assignment.belongsToMany(User)
 //Assignment.belongsToMany(User, {through: UserAssignment})
