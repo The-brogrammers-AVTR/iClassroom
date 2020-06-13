@@ -6,7 +6,6 @@
 export {default as Navbar} from './navbar'
 export {default as LoginForm} from './Login.js'
 export {default as SignupForm} from './Signup.js'
-export {default as DrawArea} from './DrawArea'
 export {default as NavBar} from './navbar'
 export {default as Chat} from './Chat'
 export {default as Home} from './Home'
