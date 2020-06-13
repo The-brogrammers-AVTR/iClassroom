@@ -32,24 +32,22 @@ const useStyles = makeStyles({
 })
 
 const Verification = ({user, update, history}) => {
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState(Boolean)
   const [error, setError] = useState('')
 
   const classes = useStyles()
 
   const handleChange = event => {
     setValue(event.target.value)
-    console.log({onChange: value})
   }
 
   const onSubmit = ev => {
     ev.preventDefault()
-    console.log({value})
+
     try {
       update(
         {
-          isTeacher: value,
-          firstName: 'Tyler'
+          isTeacher: value
         },
         user.id,
         history.push
@@ -57,16 +55,9 @@ const Verification = ({user, update, history}) => {
     } catch (exception) {
       setError(exception.response.data.message)
     }
-    console.log(user.isTeacher, user.firstName)
   }
 
-  useEffect(
-    () => {
-      console.log({useEffect: value})
-      console.log(user.isTeacher)
-    },
-    [value]
-  )
+  useEffect(() => {}, [value])
 
   return (
     <ThemeProvider theme={theme}>
@@ -94,7 +85,9 @@ const mapStateToProps = ({user}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    update: (user, id, push) => dispatch(updateProfile(user, id, push))
+    update: (user, id, push) => {
+      dispatch(updateProfile(user, id, push))
+    }
   }
 }
 
