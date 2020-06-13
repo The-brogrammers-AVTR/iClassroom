@@ -1,17 +1,14 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 import socketIOClient from 'socket.io-client'
-
+import Video from './Video'
 const location = `${window.location.hostname}:8080`
-
 const socket = socketIOClient() //http://127.0.0.1:8080'
-
 import {Picker} from 'emoji-mart'
 //import 'emoji-mart/css/emoji-mart.css'
-
 import {connect} from 'react-redux'
 import queryString from 'query-string'
-
 import {Button, InputLabel, Input} from '@material-ui/core'
 import Icon from '@material-ui/core/Icon'
 let DisplayImoji
@@ -193,6 +190,7 @@ class Chat extends Component {
             <button id="buttonEmoji" onClick={this.displayImoji}>
               Add Imojis
             </button>
+            <Link to="/video">video</Link>
             {/* <span>
               <Picker
                 onSelect={this.addEmoji}
