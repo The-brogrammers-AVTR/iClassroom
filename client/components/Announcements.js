@@ -26,7 +26,7 @@ class Announcements extends React.Component {
     } = this.props
 
     if (!course || !instructor || !filteredAnnouncements) {
-      return <div>No Announcements</div>
+      return <Sidebar {...course} instructor={instructor} />
     }
     return (
       <ThemeProvider theme={theme}>
