@@ -110,6 +110,7 @@ const logout = () => async dispatch => {
 const updateProfile = (user, id, push) => {
   return async dispatch => {
     const {data: updatedUser} = await axios.put(`/api/users/${id}`, user)
+    console.log('from store after data base', {data: updatedUser})
     dispatch(_updateProfile(updatedUser))
     push('/')
   }
