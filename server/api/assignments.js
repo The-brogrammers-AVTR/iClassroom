@@ -27,3 +27,12 @@ router.delete('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const assignment = await Assignment.create(req.body)
+    res.status(201).send(assignment)
+  } catch (err) {
+    next(err)
+  }
+})
