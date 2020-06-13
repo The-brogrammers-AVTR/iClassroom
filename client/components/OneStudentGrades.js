@@ -11,7 +11,9 @@ import {user} from '../store'
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650
+    minWidth: 650,
+    width: '50%',
+    margin: 'auto'
   },
   cell: {
     padding: 2
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
   }
 })
 
-const OneStudentGrades = ({userassignments}) => {
+const OneStudentGrades = ({userassignments, user}) => {
   console.log('student', userassignments)
 
   const classes = useStyles()
@@ -30,6 +32,7 @@ const OneStudentGrades = ({userassignments}) => {
   }
   return (
     <Fragment>
+      <h1>{`Grade (User Id: ${user.id})`}</h1>
       <TableContainer>
         <Table
           className={classes.table}
@@ -38,14 +41,14 @@ const OneStudentGrades = ({userassignments}) => {
         >
           <TableHead>
             <TableRow>
-              <TableCell align="left">Assignment ID</TableCell>
+              <TableCell align="left">Assignment</TableCell>
               <TableCell align="left">Grade</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {userassignments.map(assign => (
               <TableRow key={assign.id}>
-                <TableCell align="left">{assign.assignmentId}</TableCell>
+                <TableCell align="left">{assign.assignment.name}</TableCell>
                 <TableCell align="left">{assign.grade}</TableCell>
               </TableRow>
             ))}

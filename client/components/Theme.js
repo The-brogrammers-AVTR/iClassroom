@@ -14,6 +14,13 @@ const Theme = createMuiTheme({
   },
   status: {
     danger: 'orange'
+  },
+  overrides: {
+    MuiTable: {
+      root: {
+        width: '95%'
+      }
+    }
   }
 })
 

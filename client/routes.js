@@ -4,8 +4,8 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {
   Login,
   Signup,
-  Home,
   Assignments,
+  Home,
   Announcements,
   Chat,
   MakeAssignment,
@@ -14,7 +14,9 @@ import {
   ManageAssignments,
   Canvas,
   Profile,
-  Grades
+  Grades,
+  Video,
+  Video2
 } from './components'
 
 import {
@@ -57,6 +59,7 @@ class Routes extends Component {
             <Route path="/manageassignments" component={ManageAssignments} />
             <Route path="/profile" component={Profile} />
             <Route path="/test" component={Profile} />
+            <Route path="/video" component={Video2} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

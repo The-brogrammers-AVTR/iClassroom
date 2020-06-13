@@ -37,7 +37,7 @@ const User = db.define('user', {
   },
   isTeacher: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: null
   },
   imageURL: {
     type: Sequelize.STRING,

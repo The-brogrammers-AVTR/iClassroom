@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {readAssignments} from '../store/assignment'
 import {deleteAssignment} from '../store/assignment'
-import TableAssignments from './TableAssignments'
+import TableAssignments from './tableAssignments'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import ManageAssignments from './ManageAssignments'
@@ -44,7 +44,10 @@ class Assignments extends Component {
         <Sidebar {...course} instructor={instructor} />
         {isInstructor ? (
           <Grid item xs={12} sm={11}>
-            <ManageAssignments assignment={assignmentsForCourse} />
+            <ManageAssignments
+              assignment={assignmentsForCourse}
+              course={course}
+            />
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>
