@@ -30,18 +30,18 @@ function onReceiveStream(stream, element_id) {
   window.peer_stream = stream
 }
 
-requestLocalVideo({
-  success: function(stream) {
-    console.log(stream)
-    window.localStream = stream
-    console.log(stream)
-    onReceiveStream(stream, 'my-camera')
-  },
-  error: function(err) {
-    alert('Cannot get access to your camera and video !')
-    console.error(err)
-  }
-})
+// requestLocalVideo({
+//   success: function(stream) {
+//     console.log(stream)
+//     window.localStream = stream
+//     console.log(stream)
+//     onReceiveStream(stream, 'my-camera')
+//   },
+//   error: function(err) {
+//     alert('Cannot get access to your camera and video !')
+//     console.error(err)
+//   }
+// })
 
 export default class Video2 extends Component {
   constructor() {

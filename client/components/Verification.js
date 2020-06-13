@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 })
 
 const Verification = ({user, update, history}) => {
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState()
   const [error, setError] = useState('')
 
   const classes = useStyles()
@@ -75,8 +75,8 @@ const Verification = ({user, update, history}) => {
           <FormLabel>Are you a teacher?</FormLabel>
           <RadioGroup name="isTeacher" value={value} onChange={handleChange}>
             <Grid>
-              <FormControlLabel value="true" control={<Radio />} label="Yes" />
-              <FormControlLabel value="false" control={<Radio />} label="No" />
+              <FormControlLabel value={true} control={<Radio />} label="Yes" />
+              <FormControlLabel value={false} control={<Radio />} label="No" />
             </Grid>
             <Button onClick={onSubmit}> Submit</Button>
           </RadioGroup>
