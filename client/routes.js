@@ -14,7 +14,7 @@ import {
   Lessons,
   Students,
   ManageAssignments,
-  Canvas,
+  WhiteBoard,
   Profile,
   Grades,
   OneStudentGrades,
@@ -65,7 +65,7 @@ class Routes extends Component {
                 <Route path="/course/:id/videocall" component={Chat} />
                 <Route path="/course/:id/chatroom" component={Chat} />
                 <Route path="/course/:id/assignments" component={Assignments} />
-                <Route path="/course/:id/canvas" component={Canvas} />
+                <Route path="/course/:id/canvas" component={WhiteBoard} />
                 <Route path="/makeassignment" component={MakeAssignment} />
                 <Route
                   path="/manageassignments"
