@@ -64,8 +64,10 @@ function Canvas() {
   }
 
   const eraseLine = () => {
+    let tcolor = color
     setColor('#ffff')
     addLine(color, stageEl.current.getStage(), layerEl.current, 'erase')
+    setColor(tcolor)
   }
   const drawText = () => {
     const id = addTextNode(color, stageEl.current.getStage(), layerEl.current)
