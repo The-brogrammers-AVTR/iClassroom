@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const {STRING, INTEGER} = Sequelize
+const {STRING, INTEGER, DATEONLY} = Sequelize
 
 const Assignment = db.define('assignment', {
   id: {
@@ -28,6 +28,10 @@ const Assignment = db.define('assignment', {
     validate: {
       notEmpty: true
     }
+  },
+  dueDate: {
+    type: DATEONLY,
+    allowNull: true
   },
   assignmentURL: {
     type: STRING,
