@@ -4,8 +4,6 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {
   Login,
   Signup,
-  LoginForm,
-  SignupForm,
   Assignments,
   Home,
   Announcements,
@@ -17,9 +15,8 @@ import {
   Canvas,
   Profile,
   Grades,
-  OneStudentGrades,
-  TeacherGrades,
-  Verification
+  Video,
+  Video2
 } from './components'
 
 import {
@@ -30,8 +27,7 @@ import {
   getAnnouncements,
   getLessons,
   readUserassignments,
-  getUserCourses,
-  readAssignments
+  getUserCourses
 } from './store'
 
 class Routes extends Component {
@@ -40,56 +36,44 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, user} = this.props
+    const {isLoggedIn} = this.props
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={LoginForm} />
-        <Route path="/signup" component={SignupForm} />
-
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
         {isLoggedIn && (
           <Switch>
-            {user.isTeacher === null ? (
-              <Route exact path="/" component={Verification} />
-            ) : (
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/course/:id/students" component={Students} />
-                <Route
-                  path="/course/:id/announcements"
-                  component={Announcements}
-                />
-                <Route path="/course/:id/lessons" component={Lessons} />
-                <Route path="/course/:id/grades" component={Grades} />
-                <Route path="/course/:id/videocall" component={Chat} />
-                <Route path="/course/:id/chatroom" component={Chat} />
-                <Route path="/course/:id/assignments" component={Assignments} />
-                <Route path="/course/:id/canvas" component={Canvas} />
-                <Route path="/makeassignment" component={MakeAssignment} />
-                <Route
-                  path="/manageassignments"
-                  component={ManageAssignments}
-                />
-                <Route path="/profile" component={Profile} />
-                <Route path="/test" component={Profile} />
-              </Switch>
-            )}
+            {/* Routes placed here are only available after logging in */}
+            <Route exact path="/" component={Home} />
+            <Route path="/course/:id/students" component={Students} />
+            <Route path="/course/:id/announcements" component={Announcements} />
+            <Route path="/course/:id/lessons" component={Lessons} />
+            <Route path="/course/:id/grades" component={Grades} />
+            <Route path="/course/:id/videocall" component={Chat} />
+            <Route path="/course/:id/chatroom" component={Chat} />
+            <Route path="/course/:id/assignments" component={Assignments} />
+            <Route path="/course/:id/canvas" component={Canvas} />
+            <Route path="/makeassignment" component={MakeAssignment} />
+            <Route path="/manageassignments" component={ManageAssignments} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/test" component={Profile} />
+            <Route path="/video" component={Video2} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={LoginForm} />
+        <Route component={Login} />
       </Switch>
     )
   }
 }
 
-const mapState = ({user}) => {
+const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!user.id,
-    user
+    isLoggedIn: !!state.user.id
   }
 }
 
@@ -104,7 +88,6 @@ const mapDispatch = dispatch => {
       dispatch(getLessons())
       dispatch(readUserassignments())
       dispatch(getUserCourses())
-      dispatch(readAssignments())
     }
   }
 }

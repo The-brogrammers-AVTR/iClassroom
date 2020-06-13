@@ -1,12 +1,12 @@
-import React, {useState, useRef} from 'react'
+import React, {useState} from 'react'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import {Stage, Layer} from 'react-konva'
-import Rectangle from './canvas/Rectangle'
-import Circle from './canvas/Circle'
-import {addLine} from './canvas/Line'
-import {addTextNode} from './canvas/textNode'
-import Image from './canvas/Image'
+import Rectangle from './WBmodules/Rectangle'
+import Circle from './WBmodules/Circle'
+import {addLine} from './WBmodules/Line'
+import {addTextNode} from './WBmodules/textNode'
+import Image from './WBmodules/Image'
 import socketIOClient from 'socket.io-client'
 import {SwatchesPicker} from 'react-color'
 
@@ -62,14 +62,12 @@ function Canvas() {
   const drawLine = () => {
     addLine(color, stageEl.current.getStage(), layerEl.current)
   }
-  // socket.on('line', line => {
-  //   console.log('line from socket,', line)
-  //   console.log(JSON.parse(line.layer), JSON.parse(line.line))
-  //   addLine(JSON.parse(line.layer), JSON.parse(line.line))
-  // })
+
   const eraseLine = () => {
+    let tcolor = color
     setColor('#ffff')
     addLine(color, stageEl.current.getStage(), layerEl.current, 'erase')
+    setColor(tcolor)
   }
   const drawText = () => {
     const id = addTextNode(color, stageEl.current.getStage(), layerEl.current)
@@ -201,7 +199,6 @@ function Canvas() {
           )}
         </Button>
       </ButtonGroup>
-      {console.log('Shape ', selectedId)}
       <input
         style={{display: 'none'}}
         type="file"
@@ -212,13 +209,6 @@ function Canvas() {
         width={window.innerWidth}
         height={window.innerHeight}
         ref={stageEl}
-        /* onMouseEnter={() =>{
-            console.log('mouse enter', stageEl.container)
-          // ='crosshair'cursor
-        }}
-        onMouseLeave={() =>{
-            //stageEl.cursor.cursor='default'
-        }} */
         onMouseDown={e => {
           // deselect when clicked on empty area
           const clickedOnEmpty = e.target === e.target.getStage()
