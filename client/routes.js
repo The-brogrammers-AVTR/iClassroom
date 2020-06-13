@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {
-  Login,
-  Signup,
+  //Login,
+  //Signup,
   Assignments,
   Home,
   Announcements,
@@ -12,13 +12,15 @@ import {
   Lessons,
   Students,
   ManageAssignments,
-  Canvas,
   Profile,
   Grades,
-  Video,
-  Video2
+  Video
+  //Video2
 } from './components'
-
+import Canvas from './components/WhiteBoard'
+import Login from './components/Login'
+import Signup from './components/Signup'
+import Video2 from './components/Video2'
 import {
   me,
   getCourses,
