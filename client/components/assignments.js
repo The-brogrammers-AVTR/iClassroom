@@ -20,12 +20,12 @@ class Assignments extends Component {
 
   render() {
     //console.log('props', this.props)
-    const {course, teachers, remove, user, save} = this.props
+    const {course, teachers, remove, user, save, load} = this.props
     const instructor = teachers.find(teacher =>
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
 
-    //console.log('current user', user)
+    //console.log('load', load)
     const isInstructor = instructor.id === user.id
     const theUserassignments = this.props.userassignment.filter(
       userassignment => userassignment.userId === user.id
@@ -50,6 +50,7 @@ class Assignments extends Component {
               course={course}
               remove={remove}
               save={save}
+              load={load}
             />
           </Grid>
         ) : (
