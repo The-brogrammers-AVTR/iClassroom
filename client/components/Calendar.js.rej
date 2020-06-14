@@ -1,0 +1,9 @@
+diff a/client/components/Calendar.js b/client/components/Calendar.js	(rejected hunks)
+@@ -25 +25 @@ export const appointments = [
+-    endDate: new Date(2018, 6, 29),
++    endDate: new Date(2018, 6, 29)
+@@ -30,2 +30,2 @@ export const appointments = [
+-    endDate: new Date(2018, 6, 29),
+-  },
++    endDate: new Date(2018, 6, 29)
++  }

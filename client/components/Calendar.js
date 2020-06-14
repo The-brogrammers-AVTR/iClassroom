@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, {useState} from 'react'
 import {ViewState} from '@devexpress/dx-react-scheduler'
 import {connect} from 'react-redux'
 import {
@@ -18,32 +18,30 @@ import theme from './Theme'
 const moment = require('moment')
 const today = moment()
 
+const useStyles = makeStyles({
+  table: {
+    margin: theme.spacing(10, 0),
+    padding: theme.spacing(0),
+    width: '95%'
+  }
+})
+
 export const appointments = [
   {
-    title: 'Vacation',
-    startDate: new Date(2018, 6, 28),
-    endDate: new Date(2018, 6, 29)
+    title: 'Assignment',
+    startDate: new Date(2020, 6, 28),
+    endDate: new Date(2020, 6, 29)
   },
   {
-    title: 'Vacation',
-    startDate: new Date(2018, 6, 28),
-    endDate: new Date(2018, 6, 29)
+    title: 'Assignment',
+    startDate: new Date(2020, 6, 28),
+    endDate: new Date(2020, 6, 29)
   }
 ]
 
-// const useStyles = makeStyles({
-//   table: {
-//     margin: theme.spacing(10, 0),
-//     padding: theme.spacing(0),
-//     width: '95%',
-//   },
-// })
-
 const Calendar = () => {
-  // const classes = useStyles()
+  const classes = useStyles()
   const [data, setData] = useState(appointments)
-  //   render() {
-  //     const {data} = this.state
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,11 +54,11 @@ const Calendar = () => {
           <DayView startDayHour={9} endDayHour={18} />
           <WeekView startDayHour={10} endDayHour={19} />
           <MonthView />
+          <Appointments />
           <Toolbar />
           <ViewSwitcher />
           <DateNavigator />
           <TodayButton />
-          <Appointments />
         </Scheduler>
       </Paper>
     </ThemeProvider>
