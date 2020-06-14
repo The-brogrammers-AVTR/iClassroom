@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import {Stage, Layer} from 'react-konva'
@@ -8,11 +8,13 @@ import {addLine} from './WBmodules/Line'
 import {addTextNode} from './WBmodules/textNode'
 import Image from './WBmodules/Image'
 import socketIOClient from 'socket.io-client'
-import {SwatchesPicker} from 'react-color'
+import {SwatchesPicker, GithubPicker, TwitterPicker} from 'react-color'
+import {popover, cover} from './WBmodules/WBconstants'
 
 const socket = socketIOClient() //'http://127.0.0.1:8080')
 const uuidv1 = require('uuid')
-function Canvas() {
+
+function WhiteBoard() {
   const [color, setColor] = useState('#000000')
   const [action, setAction] = useState(false)
   const [rectangles, setRectangles] = useState([])
@@ -157,13 +159,19 @@ function Canvas() {
     console.log('images from socket,', images)
     setImages(images)
   })
+
   const handleChangeComplete = color => {
     console.log(color)
     setColor(color.hex)
   }
-  const HandleClick = () => {
+  const handleClick = () => {
     setAction(!action)
   }
+
+  const handleClose = () => {
+    setAction({action: false})
+  }
+
   return (
     <div className="home-page" id="crosshair">
       <h1>Whiteboard</h1>
@@ -190,14 +198,17 @@ function Canvas() {
         <Button variant="primary" onClick={undo}>
           Undo
         </Button>
-        <Button variant="primary" onClick={HandleClick}>
-          Pick Color{' '}
-          {action ? (
-            <SwatchesPicker color={color} onChange={handleChangeComplete} />
-          ) : (
-            ''
-          )}
+        <Button variant="primary" onClick={handleClick}>
+          Pick Color
         </Button>
+        {action ? (
+          <div style={popover}>
+            <div style={cover} onClick={handleClose} />
+            {/*  <SwatchesPicker color={color} onChange={handleChangeComplete} />
+               <GithubPicker color={color} onChange={handleChangeComplete} /> */}
+            <TwitterPicker color={color} onChange={handleChangeComplete} />
+          </div>
+        ) : null}
       </ButtonGroup>
       <input
         style={{display: 'none'}}
@@ -276,4 +287,4 @@ function Canvas() {
     </div>
   )
 }
-export default Canvas
+export default WhiteBoard
