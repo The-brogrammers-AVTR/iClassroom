@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {ViewState} from '@devexpress/dx-react-scheduler'
 import {connect} from 'react-redux'
 import {
@@ -14,6 +14,7 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui'
 import {ThemeProvider} from '@material-ui/styles'
 import {makeStyles, Paper} from '@material-ui/core'
+import axios from 'axios'
 import theme from './Theme'
 const moment = require('moment')
 const today = moment()
@@ -26,22 +27,30 @@ const useStyles = makeStyles({
   }
 })
 
-export const appointments = [
-  {
-    title: 'Assignment',
-    startDate: new Date(2020, 6, 28),
-    endDate: new Date(2020, 6, 29)
-  },
-  {
-    title: 'Assignment',
-    startDate: new Date(2020, 6, 28),
-    endDate: new Date(2020, 6, 29)
-  }
-]
+// const assignments = [
+//   {
+//     title: 'Assignment',
+//     startDate: '2020-06-01',
+//     endDate: '2020-06-02',
+//   },
+// ]
 
-const Calendar = () => {
+const Calendar = ({user}) => {
   const classes = useStyles()
-  const [data, setData] = useState(appointments)
+  const [data, setData] = useState([])
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/${user.id}`)
+      .then(res => {
+        console.log(res.data.assignments)
+        setData(res.data.assignments)
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -65,10 +74,10 @@ const Calendar = () => {
   )
 }
 
-const mapStateToProps = ({user, teachers}) => {
+const mapStateToProps = ({user, users}) => {
   return {
     user,
-    teachers
+    users
   }
 }
 

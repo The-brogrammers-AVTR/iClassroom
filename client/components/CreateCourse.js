@@ -46,7 +46,6 @@ const CreateCourse = ({user, save, load, history}) => {
   const onSubmit = async ev => {
     setAction(!action)
     if (action) {
-      console.log('user id', user.id)
       ev.preventDefault()
       try {
         await load()

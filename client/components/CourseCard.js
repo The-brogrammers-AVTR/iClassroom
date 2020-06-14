@@ -46,12 +46,10 @@ const CourseCard = ({
   const instructor = teachers.find(teacher =>
     UserCourses.find(usercourse => usercourse.userId === teacher.id)
   )
-
   const enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
   if (!instructor) {
     return null
   }
-  console.log('Instructor :', instructor, 'Enrolled :', enrolled)
   // const enrolled = true
   return (
     <ThemeProvider theme={theme}>
