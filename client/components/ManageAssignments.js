@@ -43,7 +43,6 @@ const ManageAssignments = ({assignment, remove, course, save, load}) => {
       editable={{
         onRowAdd: newData =>
           new Promise(resolve => {
-            console.log('newDate', newData)
             handleAdd(newData, resolve)
           }),
 
