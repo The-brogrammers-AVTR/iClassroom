@@ -71,7 +71,7 @@ router.put('/:id', (req, res, next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         imageURL: req.body.imageURL,
-        admin: req.body.admin
+        isTeacher: req.body.isTeacher
       })
     )
     .then(user => res.send(user))

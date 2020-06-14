@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {updateProfile} from '../store'
 import {
@@ -37,7 +38,7 @@ const useStyles = makeStyles({
 })
 
 // eslint-disable-next-line complexity
-const Profile = ({user, update}) => {
+const Profile = ({user, update, history}) => {
   const [firstName, setFirstName] = useState(
     user.firstName ? user.firstName : ''
   )
@@ -51,6 +52,7 @@ const Profile = ({user, update}) => {
 
   const onSubmit = ev => {
     ev.preventDefault()
+    console.log('props', history)
     try {
       update(
         {

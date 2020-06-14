@@ -10,6 +10,8 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+var PeerServer = require('peer').PeerServer
+
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -119,3 +121,16 @@ if (require.main === module) {
 } else {
   createApp()
 }
+
+////////////////////////////////////////////
+var peerServer = new PeerServer()
+peerServer.on('connection', function(id) {
+  io.emit(Topics.USER_CONNECTED, id)
+  console.log('User connected with #', id)
+})
+
+peerServer.on('disconnect', function(id) {
+  io.emit(Topics.USER_DISCONNECTED, id)
+  console.log('User disconnected with #', id)
+})
+var conn = peerServer.connect('dest-peer-id')

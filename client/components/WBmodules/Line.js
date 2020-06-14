@@ -4,6 +4,7 @@ export const addLine = (color, stage, layer, mode = 'brush') => {
   let lastLine
   //console.log('last line', lastLine)
   stage.on('mousedown touchstart', function(e) {
+    //document.getElementsByClassName('home-page').style.cursor = 'crosshair'
     isPaint = true
     let pos = stage.getPointerPosition()
     lastLine = new Konva.Line({

@@ -135,6 +135,7 @@ async function seed() {
       name: 'Discover Sun',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
+      dueDate: '2020-06-01',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
@@ -143,6 +144,7 @@ async function seed() {
       name: 'Discover Moon',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
+      dueDate: '2020-06-08',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
@@ -151,6 +153,7 @@ async function seed() {
       name: 'Discover Mars',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
+      dueDate: '2020-06-15',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
@@ -159,6 +162,7 @@ async function seed() {
       name: 'Addition and Subtraction Challenge',
       category: 'Arithmetic',
       description: 'Group math game.',
+      dueDate: '2020-06-07',
       assignmentURL: null,
       userId: tandid.id,
       courseId: math.id
@@ -167,6 +171,7 @@ async function seed() {
       name: 'Spelling Bee Challenge',
       category: 'Spelling',
       description: 'Group spelling game.',
+      dueDate: '2020-06-03',
       assignmentURL: null,
       userId: tandid.id,
       courseId: english.id
@@ -175,6 +180,7 @@ async function seed() {
       name: 'Collaborative Painting',
       category: 'Drawing',
       description: 'Draw a picture creatively and collaboratively as a team.',
+      dueDate: '2020-06-05',
       assignmentURL: null,
       userId: tandid.id,
       courseId: art.id

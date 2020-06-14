@@ -19,9 +19,9 @@ import {
   Grades,
   OneStudentGrades,
   TeacherGrades,
-  Verification
+  Verification,
+  Video2
 } from './components'
-
 import {
   me,
   getCourses,
@@ -33,21 +33,17 @@ import {
   getUserCourses,
   readAssignments
 } from './store'
-
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
-
   render() {
     const {isLoggedIn, user} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
-
         {isLoggedIn && (
           <Switch>
             {user.isTeacher === null ? (
@@ -73,6 +69,7 @@ class Routes extends Component {
                 />
                 <Route path="/profile" component={Profile} />
                 <Route path="/test" component={Profile} />
+                <Route path="/video" component={Video2} />
               </Switch>
             )}
           </Switch>
@@ -83,7 +80,6 @@ class Routes extends Component {
     )
   }
 }
-
 const mapState = ({user}) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
@@ -92,7 +88,6 @@ const mapState = ({user}) => {
     user
   }
 }
-
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
@@ -108,7 +103,6 @@ const mapDispatch = dispatch => {
     }
   }
 }
-
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
