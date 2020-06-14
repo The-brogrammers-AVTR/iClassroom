@@ -29,6 +29,10 @@ const Assignment = db.define('assignment', {
       notEmpty: true
     }
   },
+  startDate: {
+    type: DATEONLY,
+    allowNull: true
+  },
   dueDate: {
     type: DATEONLY,
     allowNull: true

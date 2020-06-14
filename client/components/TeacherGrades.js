@@ -1,14 +1,14 @@
 import React, {useState, Fragment} from 'react'
 import MaterialTable from 'material-table'
 
-const TeacherGrades = ({userassignments, course, assignment}) => {
+const TeacherGrades = ({userassignments, course, assignment, update}) => {
   //console.log('teacher u', userassignments)
   //console.log('teacher a', assignment)
   if (assignment.length === 0 || userassignments.length === 0) {
     return null
   }
 
-  const data = userassignments.map((userassign, idx) => ({
+  const data = userassignments.map(userassign => ({
     studentid: userassign.userId,
     studentname: `${userassign.user.firstName} ${userassign.user.lastName}`,
     assignment: userassign.assignment.name,
@@ -32,6 +32,11 @@ const TeacherGrades = ({userassignments, course, assignment}) => {
   //   data: dataUserassign
   // })
 
+  const handleUpdate = async (newData, resolve) => {
+    await update(newData)
+    resolve()
+  }
+
   return (
     <Fragment>
       <MaterialTable
@@ -53,6 +58,11 @@ const TeacherGrades = ({userassignments, course, assignment}) => {
           //       })
           //     }, 600)
           //   }),
+          // onRowUpdate: newData =>
+          // new Promise(resolve => {
+          //   console.log(newData)
+          //   handleUpdate(newData, resolve)
+          // }),
           onRowUpdate: (newData, oldData) =>
             new Promise(resolve => {
               setTimeout(() => {
