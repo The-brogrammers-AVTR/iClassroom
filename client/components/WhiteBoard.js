@@ -31,6 +31,27 @@ function WhiteBoard() {
   }
   console.log('sstageEl', layerEl)
 
+  function renderPicker(isVisible) {
+    if (isVisible) {
+      return (
+        <div
+          style={{
+            ...cover,
+            position: 'absolute',
+            top: '30px',
+            left: 0,
+            zIndex: 10,
+            display: `${action === true ? 'visible' : 'none'}`
+          }}
+          onClick={handleClose}
+        >
+          <TwitterPicker color={color} onChange={handleChangeComplete} />
+        </div>
+      )
+    }
+    return null
+  }
+
   const addRectangle = () => {
     const rect = {
       x: getRandomInt(100),
@@ -198,17 +219,14 @@ function WhiteBoard() {
         <Button variant="primary" onClick={undo}>
           Undo
         </Button>
-        <Button variant="primary" onClick={handleClick}>
+        <Button
+          style={{position: 'relative'}}
+          variant="primary"
+          onClick={handleClick}
+        >
           Pick Color
+          {renderPicker(action)}
         </Button>
-        {action ? (
-          //<div style={popover}>
-          <div style={cover} onClick={handleClose}>
-            {/*  <SwatchesPicker color={color} onChange={handleChangeComplete} />
-               <GithubPicker color={color} onChange={handleChangeComplete} /> */}
-            <TwitterPicker color={color} onChange={handleChangeComplete} />
-          </div>
-        ) : null}
       </ButtonGroup>
       <input
         style={{display: 'none'}}
