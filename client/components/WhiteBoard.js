@@ -202,8 +202,8 @@ function WhiteBoard() {
           Pick Color
         </Button>
         {action ? (
-          <div style={popover}>
-            <div style={cover} onClick={handleClose} />
+          //<div style={popover}>
+          <div style={cover} onClick={handleClose}>
             {/*  <SwatchesPicker color={color} onChange={handleChangeComplete} />
                <GithubPicker color={color} onChange={handleChangeComplete} /> */}
             <TwitterPicker color={color} onChange={handleChangeComplete} />
