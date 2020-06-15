@@ -28,19 +28,6 @@ class Grades extends Component {
     const isInstructor = instructor.id === user.id
 
     return (
-      // <Fragment>
-      //   <h1>Grades</h1>
-      //   {isInstructor ? (
-      //     <TeacherGrades
-      //       assignment={assignmentsForCourse}
-      //       userassignments={userassignmentsForCourse}
-      //       course={course}
-      //     />
-      //   ) : (
-      //     <OneStudentGrades userassignments={oneUserassignments} user={user} />
-      //   )}
-      // </Fragment>
-
       <Grid container>
         <Sidebar {...course} instructor={instructor} />
         {isInstructor ? (
@@ -84,17 +71,9 @@ const mapStateToProps = (
 
 const mapDispatchToProps = dispatch => {
   return {
-    update: userassignment => {
-      dispatch(updateUserassignment(userassignment))
+    update: (id, userassignment) => {
+      dispatch(updateUserassignment(id, userassignment))
     }
-    // load: () => {
-    //   dispatch(readAssignments())
-    //   dispatch(readUserassignments())
-    // },
-    // remove: id => {
-    //   dispatch(deleteAssignment(id))
-    // },
-    // save: assignment => dispatch(createAssignment(assignment))
   }
 }
 
