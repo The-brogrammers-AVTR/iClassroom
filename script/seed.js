@@ -196,20 +196,23 @@ async function seed() {
   const userassignment = await Promise.all([
     Userassignment.create({
       userId: student1.id,
+      userName: `${student1.firstName} ${student1.lastName}`,
       assignmentId: assign1.id,
       courseId: science.id,
-      grade: 90,
+      grade: '90',
       isComplete: true
     }),
     Userassignment.create({
       userId: student1.id,
+      userName: `${student1.firstName} ${student1.lastName}`,
       assignmentId: assign2.id,
       courseId: science.id,
-      grade: 85,
+      grade: '85',
       isComplete: true
     }),
     Userassignment.create({
       userId: student1.id,
+      userName: `${student1.firstName} ${student1.lastName}`,
       assignmentId: assign3.id,
       courseId: science.id,
       grade: null,
@@ -217,20 +220,23 @@ async function seed() {
     }),
     Userassignment.create({
       userId: student2.id,
+      userName: `${student2.firstName} ${student2.lastName}`,
       assignmentId: assign1.id,
       courseId: science.id,
-      grade: 80,
+      grade: '80',
       isComplete: true
     }),
     Userassignment.create({
       userId: student2.id,
+      userName: `${student2.firstName} ${student2.lastName}`,
       assignmentId: assign2.id,
       courseId: science.id,
-      grade: 75,
+      grade: '75',
       isComplete: true
     }),
     Userassignment.create({
       userId: student2.id,
+      userName: `${student2.firstName} ${student2.lastName}`,
       assignmentId: assign3.id,
       courseId: science.id,
       grade: null,

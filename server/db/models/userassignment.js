@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const {BOOLEAN, INTEGER} = Sequelize
+const {BOOLEAN, INTEGER, STRING} = Sequelize
 
 const Userassignment = db.define('userassignment', {
   id: {
@@ -9,7 +9,8 @@ const Userassignment = db.define('userassignment', {
     autoIncrement: true
   },
   grade: {
-    type: INTEGER,
+    //type: INTEGER,
+    type: STRING,
     allowNull: true
   },
   isComplete: {
@@ -22,6 +23,10 @@ const Userassignment = db.define('userassignment', {
   },
   userId: {
     type: INTEGER,
+    allowNull: false
+  },
+  userName: {
+    type: STRING,
     allowNull: false
   },
   assignmentId: {
