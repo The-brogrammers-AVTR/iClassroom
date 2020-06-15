@@ -132,61 +132,61 @@ async function seed() {
     assign6
   ] = await Promise.all([
     Assignment.create({
-      name: 'Discover Sun',
+      title: 'Discover Sun',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       startDate: '2020-06-01',
-      dueDate: '2020-06-03',
+      endDate: '2020-06-02',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
-      name: 'Discover Moon',
+      title: 'Discover Moon',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       startDate: '2020-06-05',
-      dueDate: '2020-06-08',
+      endDate: '2020-06-06',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
-      name: 'Discover Mars',
+      title: 'Discover Mars',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       startDate: '2020-06-10',
-      dueDate: '2020-06-15',
+      endDate: '2020-06-11',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
-      name: 'Addition and Subtraction Challenge',
+      title: 'Addition and Subtraction Challenge',
       category: 'Arithmetic',
       description: 'Group math game.',
       startDate: '2020-06-04',
-      dueDate: '2020-06-07',
+      endDate: '2020-06-05',
       assignmentURL: null,
       userId: tandid.id,
       courseId: math.id
     }),
     Assignment.create({
-      name: 'Spelling Bee Challenge',
+      title: 'Spelling Bee Challenge',
       category: 'Spelling',
       description: 'Group spelling game.',
       startDate: '2020-06-04',
-      dueDate: '2020-06-07',
+      endDate: '2020-06-05',
       assignmentURL: null,
       userId: tandid.id,
       courseId: english.id
     }),
     Assignment.create({
-      name: 'Collaborative Painting',
+      title: 'Collaborative Painting',
       category: 'Drawing',
       description: 'Draw a picture creatively and collaboratively as a team.',
       startDate: '2020-06-02',
-      dueDate: '2020-06-09',
+      endDate: '2020-06-03',
       assignmentURL: null,
       userId: tandid.id,
       courseId: art.id

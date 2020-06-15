@@ -5,14 +5,17 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      include: [UserCourse]
+      include: [
+        UserCourse,
+        {
+          model: Assignment
+        }
+      ]
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       // include: [
-      //   {
-      //     model: Assignment
-      //   },
+
       //   {
       //     model: Userassignment
       //   }
@@ -49,15 +52,12 @@ router.get('/students', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   await User.findByPk(req.params.id, {
-    // include: [
-    //   {
-    //     model: Assignment
-    //   },
-    //   {
-    //     model: Userassignment
-    //   }
-    // ]
-    include: [UserCourse]
+    include: [
+      UserCourse,
+      {
+        model: Assignment
+      }
+    ]
   })
     .then(user => res.send(user))
     .catch(next)
