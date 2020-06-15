@@ -16,7 +16,7 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
     studentname: userassign.userName,
     //assignment: userassign.assignment.name,
     assignment: assignment.find(assign => assign.id === userassign.assignmentId)
-      .name,
+      .title,
     isComplete: userassign.isComplete ? 'Yes' : 'No',
     grade: userassign.grade ? userassign.grade : undefined
   }))

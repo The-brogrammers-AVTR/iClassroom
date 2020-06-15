@@ -10,7 +10,7 @@ const ManageAssignments = ({assignment, remove, course, save, load}) => {
   const data = assignment.map((assign, idx) => ({
     assignmentid: assign.id,
     assignNum: idx + 1,
-    name: assign.name,
+    title: assign.title,
     courseId: assign.courseId,
     category: assign.category,
     description: assign.description,
@@ -22,7 +22,7 @@ const ManageAssignments = ({assignment, remove, course, save, load}) => {
   const columns = [
     {title: 'Assignment ID', field: 'assignmentid'},
     {title: 'Assignment#', field: 'assignNum'},
-    {title: 'Assignment', field: 'name'},
+    {title: 'Assignment', field: 'title'},
     {title: 'Course', field: 'courseId'},
     {title: 'Category', field: 'category'},
     {title: 'Description', field: 'description'},
