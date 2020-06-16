@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   const id = req.params.id
   try {
-    const userassignment = await Product.findByPk(id)
+    const userassignment = await Userassignment.findByPk(id)
     userassignment.update(req.body)
     res.status(200).send(userassignment)
   } catch (err) {

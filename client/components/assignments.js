@@ -1,41 +1,32 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {readAssignments} from '../store/assignment'
 import {deleteAssignment} from '../store/assignment'
 import TableAssignments from './tableAssignments'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import ManageAssignments from './ManageAssignments'
-import {readUserassignments} from '../store/userassignment'
 import {createAssignment} from '../store/assignment'
+import {updateUserassignment} from '../store/userassignment'
 
 class Assignments extends Component {
   constructor() {
     super()
   }
 
-  componentDidMount() {
-    this.props.load()
-  }
-
   render() {
-    //console.log('props', this.props)
-    const {course, teachers, remove, user, save} = this.props
+    const {course, teachers, remove, user, save, load, update} = this.props
     const instructor = teachers.find(teacher =>
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
 
-    //console.log('current user', user)
     const isInstructor = instructor.id === user.id
     const theUserassignments = this.props.userassignment.filter(
       userassignment => userassignment.userId === user.id
     )
-    //console.log('current user assignments', theUserassignments)
 
     const assignmentsForCourse = this.props.assignment.filter(
       assignment => assignment.courseId === course.id
     )
-    //console.log('assignments', assignmentsForCourse)
 
     if (!this.props.assignment || !instructor) {
       return null
@@ -50,11 +41,16 @@ class Assignments extends Component {
               course={course}
               remove={remove}
               save={save}
+              load={load}
             />
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>
-            <TableAssignments assignment={assignmentsForCourse} />
+            <TableAssignments
+              assignment={assignmentsForCourse}
+              update={update}
+              userassignment={theUserassignments}
+            />
           </Grid>
         )}
       </Grid>
@@ -72,14 +68,13 @@ const mapStateToProps = (
 
 const mapDispatchToProps = dispatch => {
   return {
-    load: () => {
-      dispatch(readAssignments())
-      dispatch(readUserassignments())
-    },
     remove: id => {
       dispatch(deleteAssignment(id))
     },
-    save: assignment => dispatch(createAssignment(assignment))
+    save: assignment => dispatch(createAssignment(assignment)),
+    update: (id, userassignment) => {
+      dispatch(updateUserassignment(id, userassignment))
+    }
   }
 }
 

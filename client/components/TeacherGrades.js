@@ -1,80 +1,80 @@
 import React, {useState, Fragment} from 'react'
 import MaterialTable from 'material-table'
 
-const TeacherGrades = ({userassignments, course, assignment}) => {
-  //console.log('teacher u', userassignments)
-  //console.log('teacher a', assignment)
+const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
+  // console.log('teacher u', userassignments)
+  // console.log('teacher a', assignment)
+
   if (assignment.length === 0 || userassignments.length === 0) {
     return null
   }
-  // const dataColunms = assignment.map((assign,idx) => ({
-  //   title: `Assignment: ${assign.name}`,
-  //   field: `assign${idx+1}`
-  // }))
-  //console.log('col', dataColunms)
-  const dataUserassign = userassignments.map((userassign, idx) => ({
-    studentid: userassign.userId,
-    studentname: `${userassign.user.firstName} ${userassign.user.lastName}`,
-    //userassignNum: idx+1,
-    assignment: userassign.assignment.name,
-    grade: userassign.grade
-  }))
-  //console.log('data', dataUserassign)
 
-  const [state, setState] = useState({
-    columns: [
-      {title: 'Student ID', field: 'studentid'},
-      {title: 'Student Name', field: 'studentname'},
-      //{title: 'Assignment#', field: 'userassignNum'},
-      {title: 'Assignment', field: 'assignment'},
-      {title: 'Grade', field: 'grade'}
-    ],
-    data: dataUserassign
-  })
-  //console.log('statedata', state)
+  const data = userassignments.map(userassign => ({
+    id: userassign.id,
+    userId: userassign.userId,
+    //studentname: `${userassign.user.firstName} ${userassign.user.lastName}`,
+    studentname: userassign.userName,
+    //assignment: userassign.assignment.name,
+    assignment: assignment.find(assign => assign.id === userassign.assignmentId)
+      .title,
+    isComplete: userassign.isComplete ? 'Yes' : 'No',
+    grade: userassign.grade ? userassign.grade : undefined
+  }))
+
+  //console.log('data', data)
+
+  const columns = [
+    {title: 'User Assignment ID', field: 'id'},
+    {title: 'Student ID', field: 'userId'},
+    {title: 'Student Name', field: 'studentname'},
+    {title: 'Assignment', field: 'assignment'},
+    {title: 'Complete', field: 'isComplete'},
+    {title: 'Grade', field: 'grade'}
+  ]
+
+  const handleUpdate = async (newData, resolve) => {
+    //console.log('in handle', newData)
+    const id = newData.id
+    const gradeObj = {grade: newData.grade}
+    await update(id, gradeObj)
+    resolve()
+  }
+
   return (
     <Fragment>
       <MaterialTable
         title={`Grades (Course: ${course.name})`}
         style={{width: '80%', margin: 'auto'}}
-        columns={state.columns}
-        data={state.data}
+        columns={columns}
+        data={data}
         editable={{
-          onRowAdd: newData =>
+          // onRowAdd: newData =>
+          //   new Promise(resolve => {
+          //     setTimeout(() => {
+          //       resolve()
+          //       setState(prevState => {
+          //         const data = [...prevState.data]
+          //         data.push(newData)
+          //         return {...prevState, data}
+          //       })
+          //     }, 600)
+          //   }),
+          onRowUpdate: newData =>
             new Promise(resolve => {
-              setTimeout(() => {
-                resolve()
-                setState(prevState => {
-                  const data = [...prevState.data]
-                  data.push(newData)
-                  return {...prevState, data}
-                })
-              }, 600)
-            }),
-          onRowUpdate: (newData, oldData) =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve()
-                if (oldData) {
-                  setState(prevState => {
-                    const data = [...prevState.data]
-                    data[data.indexOf(oldData)] = newData
-                    return {...prevState, data}
-                  })
-                }
-              }, 600)
-            }),
-          onRowDelete: oldData =>
-            new Promise(resolve => {
-              setTimeout(() => {
-                resolve()
-                setState(prevState => {
-                  const data = [...prevState.data]
-                  data.splice(data.indexOf(oldData), 1)
-                  return {...prevState, data}
-                })
-              }, 600)
+              //console.log('in on', newData)
+              handleUpdate(newData, resolve)
             })
+          // onRowDelete: oldData =>
+          //   new Promise(resolve => {
+          //     setTimeout(() => {
+          //       resolve()
+          //       setState(prevState => {
+          //         const data = [...prevState.data]
+          //         data.splice(data.indexOf(oldData), 1)
+          //         return {...prevState, data}
+          //       })
+          //     }, 600)
+          //   })
         }}
       />
     </Fragment>

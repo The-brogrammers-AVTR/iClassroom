@@ -24,9 +24,21 @@ async function seed() {
       password: '123',
       isTeacher: true
     }),
-    User.create({email: 'student1@gmail.com', password: '123'}),
-    User.create({email: 'student2@gmail.com', password: '123'}),
-    User.create({email: 'student3@gmail.com', password: '123'}),
+    User.create({
+      email: 'student1@gmail.com',
+      password: '123',
+      isTeacher: false
+    }),
+    User.create({
+      email: 'student2@gmail.com',
+      password: '123',
+      isTeacher: false
+    }),
+    User.create({
+      email: 'student3@gmail.com',
+      password: '123',
+      isTeacher: false
+    }),
     User.create({email: 'student4@gmail.com', password: '123'}),
     User.create({email: 'student5@gmail.com', password: '123'})
   ])
@@ -132,55 +144,61 @@ async function seed() {
     assign6
   ] = await Promise.all([
     Assignment.create({
-      name: 'Discover Sun',
+      title: 'Discover Sun',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
-      dueDate: '2020-06-01',
+      startDate: '2020-06-01',
+      endDate: '2020-06-02',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
-      name: 'Discover Moon',
+      title: 'Discover Moon',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
-      dueDate: '2020-06-08',
+      startDate: '2020-06-05',
+      endDate: '2020-06-06',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
-      name: 'Discover Mars',
+      title: 'Discover Mars',
       category: 'Astronomy',
       description: 'Read the text and answer the questions.',
-      dueDate: '2020-06-15',
+      startDate: '2020-06-10',
+      endDate: '2020-06-11',
       assignmentURL: null,
       userId: tandid.id,
       courseId: science.id
     }),
     Assignment.create({
-      name: 'Addition and Subtraction Challenge',
+      title: 'Addition and Subtraction Challenge',
       category: 'Arithmetic',
       description: 'Group math game.',
-      dueDate: '2020-06-07',
+      startDate: '2020-06-04',
+      endDate: '2020-06-05',
       assignmentURL: null,
       userId: tandid.id,
       courseId: math.id
     }),
     Assignment.create({
-      name: 'Spelling Bee Challenge',
+      title: 'Spelling Bee Challenge',
       category: 'Spelling',
       description: 'Group spelling game.',
-      dueDate: '2020-06-03',
+      startDate: '2020-06-04',
+      endDate: '2020-06-05',
       assignmentURL: null,
       userId: tandid.id,
       courseId: english.id
     }),
     Assignment.create({
-      name: 'Collaborative Painting',
+      title: 'Collaborative Painting',
       category: 'Drawing',
       description: 'Draw a picture creatively and collaboratively as a team.',
-      dueDate: '2020-06-05',
+      startDate: '2020-06-02',
+      endDate: '2020-06-03',
       assignmentURL: null,
       userId: tandid.id,
       courseId: art.id
@@ -190,20 +208,23 @@ async function seed() {
   const userassignment = await Promise.all([
     Userassignment.create({
       userId: student1.id,
+      userName: `${student1.firstName} ${student1.lastName}`,
       assignmentId: assign1.id,
       courseId: science.id,
-      grade: 90,
+      grade: '90',
       isComplete: true
     }),
     Userassignment.create({
       userId: student1.id,
+      userName: `${student1.firstName} ${student1.lastName}`,
       assignmentId: assign2.id,
       courseId: science.id,
-      grade: 85,
+      grade: '85',
       isComplete: true
     }),
     Userassignment.create({
       userId: student1.id,
+      userName: `${student1.firstName} ${student1.lastName}`,
       assignmentId: assign3.id,
       courseId: science.id,
       grade: null,
@@ -211,20 +232,23 @@ async function seed() {
     }),
     Userassignment.create({
       userId: student2.id,
+      userName: `${student2.firstName} ${student2.lastName}`,
       assignmentId: assign1.id,
       courseId: science.id,
-      grade: 80,
+      grade: '80',
       isComplete: true
     }),
     Userassignment.create({
       userId: student2.id,
+      userName: `${student2.firstName} ${student2.lastName}`,
       assignmentId: assign2.id,
       courseId: science.id,
-      grade: 75,
+      grade: '75',
       isComplete: true
     }),
     Userassignment.create({
       userId: student2.id,
+      userName: `${student2.firstName} ${student2.lastName}`,
       assignmentId: assign3.id,
       courseId: science.id,
       grade: null,

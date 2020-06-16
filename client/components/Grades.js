@@ -4,6 +4,7 @@ import OneStudentGrades from './OneStudentGrades'
 import TeacherGrades from './TeacherGrades'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
+import {updateUserassignment} from '../store/userassignment'
 
 class Grades extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class Grades extends Component {
   }
 
   render() {
-    const {course, teachers, user} = this.props
+    const {course, teachers, user, update} = this.props
     const oneUserassignments = this.props.userassignment.filter(
       userassign => userassign.userId === this.props.user.id
     )
@@ -27,19 +28,6 @@ class Grades extends Component {
     const isInstructor = instructor.id === user.id
 
     return (
-      // <Fragment>
-      //   <h1>Grades</h1>
-      //   {isInstructor ? (
-      //     <TeacherGrades
-      //       assignment={assignmentsForCourse}
-      //       userassignments={userassignmentsForCourse}
-      //       course={course}
-      //     />
-      //   ) : (
-      //     <OneStudentGrades userassignments={oneUserassignments} user={user} />
-      //   )}
-      // </Fragment>
-
       <Grid container>
         <Sidebar {...course} instructor={instructor} />
         {isInstructor ? (
@@ -48,6 +36,7 @@ class Grades extends Component {
               assignment={assignmentsForCourse}
               userassignments={userassignmentsForCourse}
               course={course}
+              update={update}
             />
           </Grid>
         ) : (
@@ -80,4 +69,12 @@ const mapStateToProps = (
   }
 }
 
-export default connect(mapStateToProps)(Grades)
+const mapDispatchToProps = dispatch => {
+  return {
+    update: (id, userassignment) => {
+      dispatch(updateUserassignment(id, userassignment))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Grades)

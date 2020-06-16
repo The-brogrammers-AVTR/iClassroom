@@ -28,7 +28,6 @@ const useStyles = makeStyles({
 
 const AnnouncementCard = ({title, description, id, createdAt, remove}) => {
   const date = moment(createdAt).format('MMMM Do YYYY, h:mm a')
-  console.log(date)
   const classes = useStyles()
   return (
     <ThemeProvider theme={theme}>
