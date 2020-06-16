@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
+import {me} from '../store/user'
+
 import {
   AppBar,
   Toolbar,
@@ -111,6 +113,7 @@ const mapState = ({user}) => {
 const mapDispatch = dispatch => {
   return {
     handleClick() {
+      dispatch(me())
       dispatch(logout())
     }
   }
