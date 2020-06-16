@@ -7,7 +7,6 @@ import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
 import Checkbox from '@material-ui/core/Checkbox'
 
 const useStyles = makeStyles({
@@ -24,12 +23,14 @@ const useStyles = makeStyles({
   }
 })
 
-const TableAssignments = ({assignment, remove}) => {
-  //console.log('table', assignment)
+const TableAssignments = ({assignment, userassignment, update}) => {
+  // console.log('table a', assignment)
+  // console.log('table u', userassignment)
   const classes = useStyles()
   if (!assignment) {
     return null
   }
+
   return (
     <Fragment>
       <h1>Assignments</h1>
@@ -43,6 +44,7 @@ const TableAssignments = ({assignment, remove}) => {
             <TableRow>
               <TableCell align="left">Done</TableCell>
               <TableCell align="left">Assignment ID</TableCell>
+              <TableCell align="left">Assignment#</TableCell>
               <TableCell align="left">Assignment</TableCell>
               <TableCell align="left">Course</TableCell>
               <TableCell align="left">Category</TableCell>
@@ -51,26 +53,26 @@ const TableAssignments = ({assignment, remove}) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {assignment.map(assignment => (
+            {assignment.map((assignment, idx) => (
               <TableRow key={assignment.id}>
                 <TableCell padding="checkbox">
-                  <Checkbox />
+                  <Checkbox
+                    checked={
+                      userassignment.find(
+                        userassign => userassign.assignmentId === assignment.id
+                      ).isComplete
+                    }
+                    onChange={ev => {
+                      const id = userassignment.find(
+                        userassign => userassign.assignmentId === assignment.id
+                      ).id
+                      update(id, {isComplete: ev.target.checked})
+                    }}
+                  />
                 </TableCell>
-                {/* <TableCell align="left" className={classes.cell}>
-                  <IconButton className={classes.button}>
-                    <DoneIcon />
-                  </IconButton>
-                </TableCell> */}
-                {/* <TableCell align="left" className={classes.cell}>
-                  <IconButton
-                    className={classes.button}
-                    onClick={() => remove(assignment.id)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell> */}
                 <TableCell align="left">{assignment.id}</TableCell>
-                <TableCell align="left">{assignment.name}</TableCell>
+                <TableCell align="left">{idx + 1}</TableCell>
+                <TableCell align="left">{assignment.title}</TableCell>
                 <TableCell align="left">{assignment.courseId}</TableCell>
                 <TableCell align="left">{assignment.category}</TableCell>
                 <TableCell align="left">{assignment.description}</TableCell>
