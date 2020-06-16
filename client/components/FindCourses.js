@@ -30,27 +30,22 @@ class FindCourses extends React.Component {
 
     return (
       <div>
-        <div>
-          <div className="courses-wrapper">
-            <h1> Find Courses</h1>
-          </div>
-          <div className="search-bar">
-            <p>Search by Subject</p>
-            <select onChange={this.onChange} value={subject}>
-              <option value="">All</option>
-              <option value="Math">Math</option>
-              <option value="Science">Science</option>
-              <option value="English">English</option>
-              <option value="Social Studies">Social Studies</option>
-              <option value="Music">Music</option>
-              <option value="Art">Art</option>
-            </select>
-          </div>
-          <div className="course-card-wrapper">
-            {filteredCourses.map(course => (
-              <CourseCard key={course.id} {...course} />
-            ))}
-          </div>
+        <div className="search-bar">
+          <p>Search by Subject</p>
+          <select onChange={this.onChange} value={subject}>
+            <option value="">All</option>
+            <option value="Math">Math</option>
+            <option value="Science">Science</option>
+            <option value="English">English</option>
+            <option value="Social Studies">Social Studies</option>
+            <option value="Music">Music</option>
+            <option value="Art">Art</option>
+          </select>
+        </div>
+        <div className="course-card-wrapper">
+          {filteredCourses.map(course => (
+            <CourseCard key={course.id} {...course} />
+          ))}
         </div>
       </div>
     )

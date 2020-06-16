@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {
-  Login,
-  Signup,
   LoginForm,
   SignupForm,
   Assignments,

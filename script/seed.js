@@ -24,9 +24,21 @@ async function seed() {
       password: '123',
       isTeacher: true
     }),
-    User.create({email: 'student1@gmail.com', password: '123'}),
-    User.create({email: 'student2@gmail.com', password: '123'}),
-    User.create({email: 'student3@gmail.com', password: '123'}),
+    User.create({
+      email: 'student1@gmail.com',
+      password: '123',
+      isTeacher: false
+    }),
+    User.create({
+      email: 'student2@gmail.com',
+      password: '123',
+      isTeacher: false
+    }),
+    User.create({
+      email: 'student3@gmail.com',
+      password: '123',
+      isTeacher: false
+    }),
     User.create({email: 'student4@gmail.com', password: '123'}),
     User.create({email: 'student5@gmail.com', password: '123'})
   ])
