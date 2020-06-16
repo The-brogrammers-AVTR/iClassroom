@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 })
 
 const OneStudentGrades = ({userassignments, user}) => {
-  console.log('student', userassignments)
+  //console.log('student', userassignments)
 
   const classes = useStyles()
   if (!userassignments) {
@@ -48,7 +48,7 @@ const OneStudentGrades = ({userassignments, user}) => {
           <TableBody>
             {userassignments.map(assign => (
               <TableRow key={assign.id}>
-                <TableCell align="left">{assign.assignment.name}</TableCell>
+                <TableCell align="left">{assign.assignment.title}</TableCell>
                 <TableCell align="left">{assign.grade}</TableCell>
               </TableRow>
             ))}
