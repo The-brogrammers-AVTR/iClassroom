@@ -17,8 +17,7 @@ import {
   Grades,
   OneStudentGrades,
   TeacherGrades,
-  Verification,
-  Video2
+  Verification
 } from './components'
 import {
   me,
@@ -31,6 +30,7 @@ import {
   getUserCourses,
   readAssignments
 } from './store'
+import Video2 from './components/video/Video2'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -89,7 +89,6 @@ const mapState = ({user}) => {
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      dispatch(me())
       dispatch(getCourses())
       dispatch(getTeachers())
       dispatch(getStudents())
@@ -98,6 +97,7 @@ const mapDispatch = dispatch => {
       dispatch(readUserassignments())
       dispatch(getUserCourses())
       dispatch(readAssignments())
+      dispatch(me())
     }
   }
 }

@@ -23,5 +23,9 @@ export {default as Grades} from './Grades'
 export {default as Verification} from './Verification'
 export {default as OneStudentGrades} from './OneStudentGrades'
 export {default as TeacherGrades} from './TeacherGrades'
+
+export {default as Video2} from './video/Video2'
+
 export {default as WBconstants} from './WBmodules/WBconstants'
-export {default as Video2} from './Video2'
+
+
