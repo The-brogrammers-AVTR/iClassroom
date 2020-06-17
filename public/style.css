@@ -936,7 +936,7 @@ body {
   flex-direction: column;
   margin-left: 6%;
   margin-top: 1%;
-  max-width: 40%;
+  max-width: 600px;
   border: solid 1px black;
 }
 
@@ -945,6 +945,11 @@ body {
 }
 
 .video-view {
+  display: flex;
+  justify-content: space-around;
+}
+
+.video-whiteboard-wrapper {
   display: flex;
   justify-content: space-around;
 }
