@@ -8,6 +8,7 @@ import {Grid} from '@material-ui/core'
 import ManageAssignments from './ManageAssignments'
 import {readUserassignments} from '../store/userassignment'
 import {createAssignment} from '../store/assignment'
+import {UploadExcel} from './UploadExcel'
 
 class Assignments extends Component {
   constructor() {
@@ -57,6 +58,8 @@ class Assignments extends Component {
             <TableAssignments assignment={assignmentsForCourse} />
           </Grid>
         )}
+        <UploadExcel />
+        <div id="displayExcel" />
       </Grid>
     )
   }
