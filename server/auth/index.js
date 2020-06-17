@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
-const UserCourse = require('../db/models/index')
+const Assignment = require('../db/models/assignment')
 
 module.exports = router
 
@@ -40,8 +40,13 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', async (req, res) => {
+  //res.json(req.user)
+
+  let asUser = await User.findByPk(req.user.id, {
+    include: [Assignment]
+  })
+  res.json(asUser)
 })
 
 router.use('/google', require('./google'))
