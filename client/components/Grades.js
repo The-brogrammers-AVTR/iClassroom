@@ -22,6 +22,7 @@ class Grades extends Component {
     const userassignmentsForCourse = this.props.userassignment.filter(
       userassignment => userassignment.courseId === course.id
     )
+    console.log(userassignmentsForCourse)
     const assignmentsForCourse = this.props.assignment.filter(
       assign => assign.courseId === course.id
     )

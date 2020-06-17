@@ -1,12 +1,21 @@
 import React from 'react'
 import MaterialTable from 'material-table'
 
-const ManageAssignments = ({assignment, remove, course, save, load}) => {
+const ManageAssignments = ({
+  assignment,
+  remove,
+  course,
+  save,
+  load,
+  create,
+  students
+}) => {
   if (assignment.length === 0) {
     return null
   }
-  //console.log('assigns', assignment)
-
+  console.log('students', students)
+  console.log('course', course)
+  console.log('assignment', assignment)
   const data = assignment.map((assign, idx) => ({
     assignmentid: assign.id,
     assignNum: idx + 1,
@@ -29,8 +38,13 @@ const ManageAssignments = ({assignment, remove, course, save, load}) => {
     {title: 'Teacher', field: 'userId'}
   ]
 
+  const handleCreateUserassignments = () => {
+    console.log('add userassignments')
+  }
+
   const handleAdd = async (newData, resolve) => {
     await save(newData)
+    await handleCreateUserassignments()
     resolve()
   }
 

@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {deleteAssignment} from '../store/assignment'
-import TableAssignments from './tableAssignments'
+import TableAssignments from './TableAssignments'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import ManageAssignments from './ManageAssignments'
 import {createAssignment} from '../store/assignment'
 import {updateUserassignment} from '../store/userassignment'
+import {createUserassignment} from '../store/userassignment'
 
 class Assignments extends Component {
   constructor() {
@@ -14,7 +15,17 @@ class Assignments extends Component {
   }
 
   render() {
-    const {course, teachers, remove, user, save, load, update} = this.props
+    const {
+      course,
+      teachers,
+      remove,
+      user,
+      save,
+      load,
+      update,
+      create,
+      filteredStudents
+    } = this.props
     const instructor = teachers.find(teacher =>
       course.UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
@@ -42,6 +53,8 @@ class Assignments extends Component {
               remove={remove}
               save={save}
               load={load}
+              create={create}
+              students={filteredStudents}
             />
           </Grid>
         ) : (
@@ -59,11 +72,14 @@ class Assignments extends Component {
 }
 
 const mapStateToProps = (
-  {courses, teachers, assignment, user, userassignment},
+  {courses, teachers, assignment, user, userassignment, students},
   {match}
 ) => {
   const course = courses.find(_course => _course.id === Number(match.params.id))
-  return {course, teachers, assignment, user, userassignment}
+  const filteredStudents = students.filter(student =>
+    course.UserCourses.find(usercourse => usercourse.userId === student.id)
+  )
+  return {course, teachers, assignment, user, userassignment, filteredStudents}
 }
 
 const mapDispatchToProps = dispatch => {
@@ -74,7 +90,8 @@ const mapDispatchToProps = dispatch => {
     save: assignment => dispatch(createAssignment(assignment)),
     update: (id, userassignment) => {
       dispatch(updateUserassignment(id, userassignment))
-    }
+    },
+    create: userassignment => dispatch(createUserassignment(userassignment))
   }
 }
 
