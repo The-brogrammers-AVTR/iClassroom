@@ -7,6 +7,7 @@ const Lesson = require('./lesson')
 const Image = require('./image')
 const Sequelize = require('sequelize')
 const Userassignment = require('./userassignment')
+const Test = require('./test')
 
 // blank models
 const UserCourse = db.define('UserCourse')
@@ -57,5 +58,6 @@ module.exports = {
   UserCourse,
   Announcement,
   Lesson,
-  Userassignment
+  Userassignment,
+  Test
 }

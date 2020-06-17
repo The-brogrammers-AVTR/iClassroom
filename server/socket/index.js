@@ -42,13 +42,13 @@ module.exports = io => {
       })
     })
     socket.on('circle', circle => {
-      console.log('cirle', circle)
+      //console.log('cirle', circle)
       io.emit('circle', circle)
     })
 
-    socket.on('line', line => {
-      console.log('line', line)
-      io.emit('line', line)
+    socket.on('line', layer => {
+      //console.log('line', layer)
+      io.emit('line', layer)
     })
     socket.on('rectangles', rectangles => {
       //console.log('rectangles', rectangles)
