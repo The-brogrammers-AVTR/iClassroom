@@ -18,8 +18,9 @@ export {default as Students} from './Students'
 export {default as Profile} from './Profile'
 export {default as Lessons} from './Lessons'
 export {default as ManageAssignments} from './ManageAssignments'
-export {default as WhiteBoard} from './WhiteBoard'
 export {default as Grades} from './Grades'
+export {default as WhiteBoard} from './WhiteBoard'
+export {default as Live} from './Live'
 export {default as Verification} from './Verification'
 export {default as OneStudentGrades} from './OneStudentGrades'
 export {default as TeacherGrades} from './TeacherGrades'
@@ -27,5 +28,3 @@ export {default as TeacherGrades} from './TeacherGrades'
 export {default as Video2} from './video/Video2'
 
 export {default as WBconstants} from './WBmodules/WBconstants'
-
-

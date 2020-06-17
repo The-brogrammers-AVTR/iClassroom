@@ -188,7 +188,7 @@ class Chat extends Component {
           <div id="emojis">
             {DisplayImoji}
             <button id="buttonEmoji" onClick={this.displayImoji}>
-              Add Imojis
+              Add Emojis
             </button>
             <Link to="/video">video</Link>
             {/* <span>
