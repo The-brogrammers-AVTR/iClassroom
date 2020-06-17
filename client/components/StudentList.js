@@ -1,48 +1,59 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
+import theme from './Theme'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from '@material-ui/core/'
 
-class StudentList extends React.Component {
-  constructor() {
-    super()
+const useStyles = makeStyles({
+  table: {
+    margin: theme.spacing(5)
   }
+})
 
-  render() {
-    const {filteredStudents} = this.props
-    return (
-      <div className="wrapper">
-        <div className="studentlist-table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Student ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Overall Grade</th>
-                <th>Student Report</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredStudents &&
-                filteredStudents.map(student => (
-                  <tr key={student.id}>
-                    <td>{student.id}</td>
-                    <td>{student.firstName}</td>
-                    <td>{student.lastName}</td>
-                    <td>{student.email}</td>
-                    <td>A</td>
-                    <td>
-                      <Link to="/"> Student Report</Link>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    )
-  }
+const StudentList = ({filteredStudents}) => {
+  const classes = useStyles()
+  return (
+    <ThemeProvider theme={theme}>
+      <TableContainer className={classes.table}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Student ID</TableCell>
+              <TableCell align="center">First Name</TableCell>
+              <TableCell align="center">Last Name</TableCell>
+              <TableCell align="center">Email</TableCell>
+              <TableCell align="center">Overall Grade</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {/* <Link to="/"> Student Report</Link>
+                  </td> */}
+
+            {filteredStudents &&
+              filteredStudents.map(student => (
+                <TableRow key={student.id}>
+                  <TableCell component="th" scope="row">
+                    {student.id}
+                  </TableCell>
+                  <TableCell align="center">{student.firstName}</TableCell>
+                  <TableCell align="center">{student.lastName}</TableCell>
+                  <TableCell align="center">{student.email}</TableCell>
+                  <TableCell align="center">A</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </ThemeProvider>
+  )
 }
 
 const mapStateToProps = ({students}) => {
