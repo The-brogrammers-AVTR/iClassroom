@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {
-  Login,
-  Signup,
   LoginForm,
   SignupForm,
   Assignments,
@@ -20,7 +18,7 @@ import {
   OneStudentGrades,
   TeacherGrades,
   Verification,
-  Video2
+  Live
 } from './components'
 import {
   me,
@@ -33,6 +31,7 @@ import {
   getUserCourses,
   readAssignments
 } from './store'
+import Video2 from './components/video/Video2'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -61,7 +60,7 @@ class Routes extends Component {
                 <Route path="/course/:id/videocall" component={Chat} />
                 <Route path="/course/:id/chatroom" component={Chat} />
                 <Route path="/course/:id/assignments" component={Assignments} />
-                <Route path="/course/:id/canvas" component={WhiteBoard} />
+                <Route path="/course/:id/canvas" component={Live} />
                 <Route path="/makeassignment" component={MakeAssignment} />
                 <Route
                   path="/manageassignments"
@@ -91,7 +90,6 @@ const mapState = ({user}) => {
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      dispatch(me())
       dispatch(getCourses())
       dispatch(getTeachers())
       dispatch(getStudents())
@@ -100,6 +98,7 @@ const mapDispatch = dispatch => {
       dispatch(readUserassignments())
       dispatch(getUserCourses())
       dispatch(readAssignments())
+      dispatch(me())
     }
   }
 }

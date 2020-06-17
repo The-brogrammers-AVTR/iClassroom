@@ -5,24 +5,24 @@ const ManageAssignments = ({assignment, remove, course, save, load}) => {
   if (assignment.length === 0) {
     return null
   }
-  console.log('assigns', assignment)
+  //console.log('assigns', assignment)
 
   const data = assignment.map((assign, idx) => ({
     assignmentid: assign.id,
     assignNum: idx + 1,
-    name: assign.name,
+    title: assign.title,
     courseId: assign.courseId,
     category: assign.category,
     description: assign.description,
     dueDate: assign.dueDate,
     userId: assign.userId
   }))
-  console.log('update', data)
+  //console.log('update', data)
 
   const columns = [
     {title: 'Assignment ID', field: 'assignmentid'},
     {title: 'Assignment#', field: 'assignNum'},
-    {title: 'Assignment', field: 'name'},
+    {title: 'Assignment', field: 'title'},
     {title: 'Course', field: 'courseId'},
     {title: 'Category', field: 'category'},
     {title: 'Description', field: 'description'},

@@ -8,7 +8,7 @@ const Assignment = db.define('assignment', {
     primaryKey: true,
     autoIncrement: true
   },
-  name: {
+  title: {
     type: STRING,
     allowNull: false,
     validate: {
@@ -33,7 +33,7 @@ const Assignment = db.define('assignment', {
     type: DATEONLY,
     allowNull: true
   },
-  dueDate: {
+  endDate: {
     type: DATEONLY,
     allowNull: true
   },
