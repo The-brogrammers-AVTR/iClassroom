@@ -28,7 +28,6 @@ const ManageAssignments = ({
     endDate: assign.endDate,
     userId: assign.userId
   }))
-  //console.log('update', data)
 
   const columns = [
     {title: 'Assignment ID', field: 'assignmentid'},
@@ -44,7 +43,6 @@ const ManageAssignments = ({
 
   const newAssignmentID = allAssignments.length + 1
   const handleCreateUserassignments = students => {
-    //console.log('add userassignments')
     students.forEach(student => {
       create({
         courseId: course.id,
