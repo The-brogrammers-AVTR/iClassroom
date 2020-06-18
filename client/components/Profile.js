@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {withRouter} from 'react-router-dom'
+// import {withRouter} from 'react-router-dom'
+import {storage} from '../firebase'
 import {connect} from 'react-redux'
 import {updateProfile} from '../store'
 import {
@@ -48,7 +49,42 @@ const Profile = ({user, update, history}) => {
   const [error, setError] = useState('')
   const [edit, setEdit] = useState(false)
 
+  const [image, setImage] = useState(null)
+  // const [url, setUrl] = useState('')
+  const [progress, setProgress] = useState(0)
+
   const classes = useStyles()
+
+  const handleChange = e => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0])
+    }
+  }
+
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image)
+    uploadTask.on(
+      'state_changed',
+      snapshot => {
+        const progress = Math.round(
+          snapshot.bytesTransferred / snapshot.totalBytes * 100
+        )
+        setProgress(progress)
+      },
+      error => {
+        console.log(error)
+      },
+      () => {
+        storage
+          .ref('images')
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            setImageURL(url)
+          })
+      }
+    )
+  }
 
   const onSubmit = ev => {
     ev.preventDefault()
@@ -83,7 +119,7 @@ const Profile = ({user, update, history}) => {
         <Typography color="primary" variant="h4">
           User Profile
         </Typography>
-        <img src={imageURL} />
+        <img className="image" src={imageURL} />
         <IconButton color="primary" onClick={() => setEdit(!edit)}>
           {!edit ? <EditIcon /> : <HighlightOffIcon className={classes.red} />}
         </IconButton>
@@ -114,11 +150,20 @@ const Profile = ({user, update, history}) => {
               onChange={event => setEmail(event.target.value)}
               label="Email"
             />
-            <TextField
+            {/* <TextField
               value={imageURL}
-              onChange={event => setImageURL(event.target.value)}
+              onChange={(event) => setImageURL(event.target.value)}
               label="ImageURL"
-            />
+            /> */}
+            <div>
+              <progress value={progress} max="100" />
+              <br />
+              <br />
+              <input type="file" onChange={handleChange} />
+              <button onClick={handleUpload}>Upload</button>
+              <br />
+              {imageURL}
+            </div>
             <Button
               className={classes.button}
               variant="contained"

@@ -844,3 +844,8 @@ body {
 #displayUsers ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.image {
+  width: 250px;
+  height: 250px;
+}
