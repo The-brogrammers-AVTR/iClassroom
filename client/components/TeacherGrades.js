@@ -2,8 +2,8 @@ import React, {useState, Fragment} from 'react'
 import MaterialTable from 'material-table'
 
 const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
-  // console.log('teacher u', userassignments)
-  // console.log('teacher a', assignment)
+  //console.log('teacher u', userassignments)
+  //console.log('teacher a', assignment)
 
   if (assignment.length === 0 || userassignments.length === 0) {
     return null
