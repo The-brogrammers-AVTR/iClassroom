@@ -28,3 +28,4 @@ export {default as TeacherGrades} from './TeacherGrades'
 export {default as Video2} from './video/Video2'
 
 export {default as WBconstants} from './WBmodules/WBconstants'
+export {default as ReportCard} from './ReportCard'
