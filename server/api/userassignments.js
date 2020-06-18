@@ -30,3 +30,12 @@ router.put('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const userassignment = await Userassignment.create(req.body)
+    res.status(201).send(userassignment)
+  } catch (err) {
+    next(err)
+  }
+})

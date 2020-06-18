@@ -4,6 +4,7 @@ import axios from 'axios'
 export const READ_USERASSIGNMENT = 'READ_USERASSIGNMENT'
 export const READ_USERASSIGNMENTS = 'READ_USERASSIGNMENTS'
 export const UPDATE_USERASSIGNMENT = 'UPDATE_USERASSIGNMENT'
+export const CREATE_USERASSIGNMENT = 'CREATE_USERASSIGNMENT'
 
 //ACTION CREATORS
 const _readUserassignment = userassignment => {
@@ -23,6 +24,13 @@ const _readUserassignments = userassignments => {
 const _updateUserassignment = userassignment => {
   return {
     type: UPDATE_USERASSIGNMENT,
+    userassignment
+  }
+}
+
+const _createUserassignment = userassignment => {
+  return {
+    type: CREATE_USERASSIGNMENT,
     userassignment
   }
 }
@@ -52,48 +60,21 @@ export const updateUserassignment = (id, userassignment) => {
   }
 }
 
-// const updateProfile = (user, id, push) => {
-//   return async dispatch => {
-//     const {data: updatedUser} = await axios.put(`/api/users/${id}`, user)
-//     console.log('from store after data base', {data: updatedUser}, this)
-//     dispatch(_updateProfile(updatedUser))
-//     //push('/')
-//   }
-// }
-
-// const updateItem = (orderId, quantity, cartId) => {
-//   return async dispatch => {
-//     if (cartId !== 'offline') {
-//       //handle logged in uder
-//       const updatedItem = (await axios.put(`/api/orderProducts/${orderId}`, {
-//         quantity
-//       })).data
-//       dispatch(_updateItem(updatedItem))
-//     } else {
-//       // handle logged out user
-//       console.log('updated item for logged out user')
-//       const cart = JSON.parse(sessionStorage.cart)
-//       const updatedOrderProducts = cart.orderProducts.map(orderProduct => {
-//         if (orderProduct.id === orderId) {
-//           orderProduct.quantity = quantity
-//           orderProduct.totalPrice = orderProduct.product.price * quantity
-//         }
-//         return orderProduct
-//       })
-//       cart.orderProducts = updatedOrderProducts
-//       sessionStorage.cart = JSON.stringify(cart)
-//       dispatch(
-//         _updateItem(
-//           updatedOrderProducts.find(orderProduct => orderProduct.id === orderId)
-//         )
-//       )
-//     }
-//   }
-// }
+export const createUserassignment = userassignment => {
+  return async dispatch => {
+    const createdUserassignment = (await axios.post(
+      '/api/userassignments',
+      userassignment
+    )).data
+    dispatch(_createUserassignment(createdUserassignment))
+  }
+}
 
 //REDUCER
 export default function(state = [], action) {
   switch (action.type) {
+    case CREATE_USERASSIGNMENT:
+      return [...state, action.userassignment]
     case READ_USERASSIGNMENT:
       return action.userassignment
     case READ_USERASSIGNMENTS:

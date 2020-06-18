@@ -5,6 +5,7 @@ import {Stage, Layer} from 'react-konva'
 import Rectangle from './WBmodules/Rectangle'
 import Circle from './WBmodules/Circle'
 import {addLine} from './WBmodules/Line'
+import {addLine2} from './WBmodules/Line2'
 import {addTextNode} from './WBmodules/textNode'
 import Image from './WBmodules/Image'
 import socketIOClient from 'socket.io-client'
@@ -29,7 +30,7 @@ function WhiteBoard() {
   const getRandomInt = max => {
     return Math.floor(Math.random() * Math.floor(max))
   }
-  console.log('sstageEl', layerEl)
+  //console.log('sstageEl', layerEl)
 
   const addRectangle = () => {
     const rect = {
@@ -62,7 +63,15 @@ function WhiteBoard() {
   }
 
   const drawLine = () => {
+    console.log('2', color, stageEl.current.getStage(), layerEl.current)
     addLine(color, stageEl.current.getStage(), layerEl.current)
+  }
+
+  const drawLine2 = line => {
+    // console.log(line)
+
+    console.log('1', line)
+    addLine2(color, stageEl.current.getStage(), layerEl.current, 'brush', line)
   }
 
   const eraseLine = () => {
@@ -148,25 +157,31 @@ function WhiteBoard() {
   })
 
   socket.on('circle', circle => {
-    console.log('cirles from socket,', circle)
+    //console.log('cirles from socket,', circle)
     setCircles(circle)
   })
   socket.on('rectangles', rectangles => {
-    console.log('rectengles from socket,', rectangles)
+    //console.log('rectengles from socket,', rectangles)
     setRectangles(rectangles)
   })
   socket.on('images', images => {
-    console.log('images from socket,', images)
+    //console.log('images from socket,', images)
     setImages(images)
   })
-
   const handleChangeComplete = color => {
-    console.log(color)
+    //console.log(color)
     setColor(color.hex)
   }
   const handleClick = () => {
     setAction(!action)
   }
+  // useEffect(() => {
+  //   // Update the document title using the browser API
+  //   document.querySelectorAll('canvas').addEventListener('change', () => {
+  //     console.log('hello')
+  //   })
+  //   //console.log('aaaaaaaaaaaaa', a)
+  // })
 
   const handleClose = () => {
     setAction({action: false})
@@ -228,8 +243,15 @@ function WhiteBoard() {
           }
         }}
       >
-        <Layer ref={layerEl}>
+        <Layer
+          ref={layerEl}
+          onChange={() => {
+            console.log('we changing')
+            socket.emit('layer', layer)
+          }}
+        >
           {rectangles.map((rect, i) => {
+            console.log(layerEl)
             return (
               <Rectangle
                 key={i}

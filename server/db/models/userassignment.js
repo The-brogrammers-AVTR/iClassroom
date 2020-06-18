@@ -9,9 +9,9 @@ const Userassignment = db.define('userassignment', {
     autoIncrement: true
   },
   grade: {
-    //type: INTEGER,
     type: STRING,
-    allowNull: true
+    allowNull: true,
+    defaultValue: null
   },
   isComplete: {
     type: BOOLEAN,
