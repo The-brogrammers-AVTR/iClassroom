@@ -38,8 +38,16 @@ const ManageAssignments = ({
     {title: 'Teacher', field: 'userId'}
   ]
 
+  const obj = {
+    courseId: course.id,
+    userId: students[0].id,
+    userName: `${students[0].firstName} ${students[0].lastName}`,
+    assignmentId: 7
+  }
+
   const handleCreateUserassignments = () => {
     console.log('add userassignments')
+    create(obj)
   }
 
   const handleAdd = async (newData, resolve) => {
