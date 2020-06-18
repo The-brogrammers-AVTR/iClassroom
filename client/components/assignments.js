@@ -34,7 +34,7 @@ class Assignments extends Component {
     const theUserassignments = this.props.userassignment.filter(
       userassignment => userassignment.userId === user.id
     )
-
+    const allAssignments = this.props.assignment
     const assignmentsForCourse = this.props.assignment.filter(
       assignment => assignment.courseId === course.id
     )
@@ -55,6 +55,7 @@ class Assignments extends Component {
               load={load}
               create={create}
               students={filteredStudents}
+              allAssignments={allAssignments}
             />
           </Grid>
         ) : (

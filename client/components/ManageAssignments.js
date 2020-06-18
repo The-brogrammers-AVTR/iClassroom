@@ -8,14 +8,15 @@ const ManageAssignments = ({
   save,
   load,
   create,
-  students
+  students,
+  allAssignments
 }) => {
   if (assignment.length === 0) {
     return null
   }
-  console.log('students', students)
-  console.log('course', course)
-  console.log('assignment', assignment)
+  //console.log('students', students)
+  //console.log('course', course)
+  //console.log('assignment', assignment)
   const data = assignment.map((assign, idx) => ({
     assignmentid: assign.id,
     assignNum: idx + 1,
@@ -38,21 +39,22 @@ const ManageAssignments = ({
     {title: 'Teacher', field: 'userId'}
   ]
 
-  const obj = {
-    courseId: course.id,
-    userId: students[0].id,
-    userName: `${students[0].firstName} ${students[0].lastName}`,
-    assignmentId: 7
-  }
-
-  const handleCreateUserassignments = () => {
-    console.log('add userassignments')
-    create(obj)
+  const newAssignmentID = allAssignments.length + 1
+  const handleCreateUserassignments = students => {
+    //console.log('add userassignments')
+    students.forEach(student => {
+      create({
+        courseId: course.id,
+        userId: student.id,
+        userName: `${student.firstName} ${student.lastName}`,
+        assignmentId: newAssignmentID
+      })
+    })
   }
 
   const handleAdd = async (newData, resolve) => {
     await save(newData)
-    await handleCreateUserassignments()
+    await handleCreateUserassignments(students)
     resolve()
   }
 
