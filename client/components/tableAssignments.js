@@ -24,8 +24,6 @@ const useStyles = makeStyles({
 })
 
 const TableAssignments = ({assignment, userassignment, update}) => {
-  // console.log('table a', assignment)
-  // console.log('table u', userassignment)
   const classes = useStyles()
   if (!assignment) {
     return null
