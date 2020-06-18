@@ -13,7 +13,7 @@ class Grades extends Component {
   }
 
   render() {
-    const {course, teachers, user, update} = this.props
+    const {course, teachers, user, update, students} = this.props
     const oneUserassignments = this.props.userassignment.filter(
       userassign => userassign.userId === this.props.user.id
     )
@@ -28,6 +28,10 @@ class Grades extends Component {
       assign => assign.courseId === course.id
     )
     const isInstructor = instructor.id === user.id
+    console.log(students)
+    const filteredStudents = students.filter(student =>
+      course.UserCourses.find(usercourse => usercourse.userId === student.id)
+    )
 
     return (
       <Grid container>
@@ -40,7 +44,10 @@ class Grades extends Component {
               course={course}
               update={update}
             /> */}
-            <TeacherGrading />
+            <TeacherGrading
+              students={filteredStudents}
+              userassignments={userassignmentsForCourse}
+            />
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>
@@ -56,7 +63,7 @@ class Grades extends Component {
 }
 
 const mapStateToProps = (
-  {userassignment, user, courses, teachers, assignment},
+  {userassignment, user, courses, teachers, assignment, students},
   {match}
 ) => {
   if (!userassignment) {
@@ -68,7 +75,8 @@ const mapStateToProps = (
     user,
     course,
     teachers,
-    assignment
+    assignment,
+    students
   }
 }
 

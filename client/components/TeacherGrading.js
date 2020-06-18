@@ -20,18 +20,24 @@ const useRowStyles = makeStyles({
     '& > *': {
       borderBottom: 'unset'
     }
+  },
+  table: {
+    minWidth: 650,
+    width: '80%',
+    margin: 'auto'
   }
 })
 
-function createData(name, id) {
+function createData(name, id, userassignments) {
   return {
     name,
-    id
-
-    // history: [
-    //   { date: '2020-01-05', customerId: '11091700', amount: 3 },
-    //   { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-    // ],
+    id,
+    assignments: userassignments.map(userassign => ({
+      date: userassign.assignment.startDate,
+      assignment: userassign.assignment.title,
+      complete: userassign.isComplete ? 'Yes' : 'No',
+      grade: userassign.grade
+    }))
   }
 }
 
@@ -52,10 +58,10 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell component="th" scope="row" align="left">
           {row.name}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
+        <TableCell align="left">{row.id}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
@@ -67,25 +73,25 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Assignment</TableCell>
-                    <TableCell align="right">Complete</TableCell>
-                    <TableCell align="right">Grade</TableCell>
+                    <TableCell align="left">Date</TableCell>
+                    <TableCell align="left">Assignment</TableCell>
+                    <TableCell align="left">Complete</TableCell>
+                    <TableCell align="left">Grade</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {/* {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                  {row.assignments.map((userassignRow, idx) => (
+                    <TableRow key={idx}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {userassignRow.date}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
+                      <TableCell>{userassignRow.assignment}</TableCell>
+                      <TableCell align="left">
+                        {userassignRow.complete}
                       </TableCell>
+                      <TableCell align="left">{userassignRow.grade}</TableCell>
                     </TableRow>
-                  ))} */}
+                  ))}
                 </TableBody>
               </Table>
             </Box>
@@ -114,24 +120,34 @@ function Row(props) {
 //   }).isRequired,
 // };
 
-const rows = [
-  createData('Robert Peng', 1001),
-  createData('Noah Peng', 1002)
-  //   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-]
+// const rows = [
+//   createData('Robert Peng', 1001),
+//   createData('Noah Peng', 1002)
+// ]
 
-const TeacherGrading = () => {
+const TeacherGrading = ({students, userassignments}) => {
+  const classes = useRowStyles()
+  console.log(students)
+  console.log(userassignments)
+  const rows = students.map(student =>
+    createData(
+      `${student.firstName} ${student.lastName}`,
+      student.id,
+      userassignments.filter(userassign => userassign.userId === student.id)
+    )
+  )
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
+    <TableContainer>
+      <Table aria-label="collapsible table" className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Student Name</TableCell>
-            <TableCell align="right">Student ID</TableCell>
+            <TableCell />
+            <TableCell align="left">Student Name</TableCell>
+            <TableCell align="left">Student ID</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => <Row key={row.name} row={row} />)}
+          {rows.map((row, idx) => <Row key={idx} row={row} />)}
         </TableBody>
       </Table>
     </TableContainer>
