@@ -24,8 +24,8 @@ const useStyles = makeStyles({
 })
 
 const OneStudentGrades = ({userassignments, user}) => {
-  console.log('student', userassignments)
-  console.log(user)
+  //console.log('student', userassignments)
+  //console.log(user)
   const classes = useStyles()
   if (!userassignments) {
     return null

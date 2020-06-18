@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import OneStudentGrades from './OneStudentGrades'
 import TeacherGrades from './TeacherGrades'
+import TeacherGrading from './TeacherGrading'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import {updateUserassignment} from '../store/userassignment'
@@ -33,12 +34,13 @@ class Grades extends Component {
         <Sidebar {...course} instructor={instructor} />
         {isInstructor ? (
           <Grid item xs={12} sm={11}>
-            <TeacherGrades
+            {/* <TeacherGrades
               assignment={assignmentsForCourse}
               userassignments={userassignmentsForCourse}
               course={course}
               update={update}
-            />
+            /> */}
+            <TeacherGrading />
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>
