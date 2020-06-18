@@ -2,24 +2,24 @@ import Konva from 'konva'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
 
-export const addLine = (color, stage, layer, mode = 'brush') => {
+export const addLine2 = (color, stage, layer, mode = 'brush', line) => {
   let isPaint = false
   let lastLine
-  //console.log({color: color, stage: stage, layer: layer, mode: mode})
-  //console.log('last line', line)
+
+  console.log('last line', line)
   //console.log(line ? true : false, line)
   stage.on('mousedown touchstart', function(e) {
     //document.getElementsByClassName('home-page').style.cursor = 'crosshair'
     isPaint = true
     let pos = stage.getPointerPosition()
-    //console.log(typeof line, line, typeof [pos.x, pos.y], [pos.x, pos.y])
+    //console.log(pos, typeof line, line, typeof [pos.x, pos.y], [pos.x, pos.y])
     socket.emit('line', [pos.x, pos.y])
     lastLine = new Konva.Line({
       stroke: mode == 'brush' ? color : 'white',
       strokeWidth: mode == 'brush' ? 5 : 20,
       globalCompositeOperation:
         mode === 'brush' ? 'source-over' : 'destination-out',
-      points: [pos.x, pos.y],
+      points: line,
       draggable: mode == 'brush'
     })
     layer.add(lastLine)
