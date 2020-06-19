@@ -26,5 +26,6 @@ export {default as OneStudentGrades} from './OneStudentGrades'
 export {default as TeacherGrades} from './TeacherGrades'
 export {default as TeacherGrading} from './TeacherGrading'
 export {default as Video2} from './video/Video2'
-
+export {default as UploadExcel} from './UploadExcel'
+//export {default as TestTeacher} from './test/TestTeacher'
 export {default as WBconstants} from './WBmodules/WBconstants'
