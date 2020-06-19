@@ -25,22 +25,40 @@ async function seed() {
       isTeacher: true
     }),
     User.create({
+      firstName: 'Aleksandr',
+      lastName: 'Kayner',
       email: 'student1@gmail.com',
       password: '123',
       isTeacher: false
     }),
     User.create({
+      firstName: 'Vinayak',
+      lastName: 'Khare',
       email: 'student2@gmail.com',
       password: '123',
       isTeacher: false
     }),
     User.create({
+      firstName: 'Robert',
+      lastName: 'Peng',
       email: 'student3@gmail.com',
       password: '123',
       isTeacher: false
     }),
-    User.create({email: 'student4@gmail.com', password: '123'}),
-    User.create({email: 'student5@gmail.com', password: '123'})
+    User.create({
+      firstName: 'Mark',
+      lastName: 'Bao',
+      email: 'student4@gmail.com',
+      password: '123',
+      isTeacher: false
+    }),
+    User.create({
+      firstName: 'Peet',
+      lastName: 'Klecha',
+      email: 'student5@gmail.com',
+      password: '123',
+      isTeacher: false
+    })
   ])
   const [tandid, student1, student2, student3, student4, student5] = users
 
@@ -89,6 +107,7 @@ async function seed() {
     UserCourse.create({userId: student2.id, courseId: science.id}),
     UserCourse.create({userId: student2.id, courseId: math.id}),
     UserCourse.create({userId: student3.id, courseId: science.id}),
+    UserCourse.create({userId: student3.id, courseId: math.id}),
     UserCourse.create({userId: student4.id, courseId: science.id}),
     UserCourse.create({userId: student5.id, courseId: science.id})
   ])
@@ -261,6 +280,38 @@ async function seed() {
       assignmentId: assign4.id,
       courseId: math.id,
       grade: '75',
+      isComplete: true
+    }),
+    Userassignment.create({
+      userId: student3.id,
+      userName: `${student3.firstName} ${student3.lastName}`,
+      assignmentId: assign1.id,
+      courseId: science.id,
+      grade: '75',
+      isComplete: true
+    }),
+    Userassignment.create({
+      userId: student3.id,
+      userName: `${student3.firstName} ${student3.lastName}`,
+      assignmentId: assign2.id,
+      courseId: science.id,
+      grade: '75',
+      isComplete: true
+    }),
+    Userassignment.create({
+      userId: student3.id,
+      userName: `${student3.firstName} ${student3.lastName}`,
+      assignmentId: assign3.id,
+      courseId: science.id,
+      grade: null,
+      isComplete: false
+    }),
+    Userassignment.create({
+      userId: student3.id,
+      userName: `${student3.firstName} ${student3.lastName}`,
+      assignmentId: assign4.id,
+      courseId: math.id,
+      grade: '70',
       isComplete: true
     })
   ])
