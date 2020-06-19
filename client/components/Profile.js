@@ -17,6 +17,7 @@ import theme from './Theme'
 import EditIcon from '@material-ui/icons/Edit'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import SaveIcon from '@material-ui/icons/Save'
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
 
 const useStyles = makeStyles({
   paper: {
@@ -35,6 +36,9 @@ const useStyles = makeStyles({
   },
   red: {
     color: theme.palette.red
+  },
+  input: {
+    display: 'none'
   }
 })
 
@@ -48,42 +52,37 @@ const Profile = ({user, update, history}) => {
   const [imageURL, setImageURL] = useState(user.imageURL ? user.imageURL : '')
   const [error, setError] = useState('')
   const [edit, setEdit] = useState(false)
-
-  const [image, setImage] = useState(null)
-  // const [url, setUrl] = useState('')
   const [progress, setProgress] = useState(0)
 
   const classes = useStyles()
 
-  const handleChange = e => {
+  const handleUpload = e => {
     if (e.target.files[0]) {
-      setImage(e.target.files[0])
-    }
-  }
+      const image = e.target.files[0]
 
-  const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image)
-    uploadTask.on(
-      'state_changed',
-      snapshot => {
-        const progress = Math.round(
-          snapshot.bytesTransferred / snapshot.totalBytes * 100
-        )
-        setProgress(progress)
-      },
-      error => {
-        console.log(error)
-      },
-      () => {
-        storage
-          .ref('images')
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            setImageURL(url)
-          })
-      }
-    )
+      const uploadTask = storage.ref(`images/${image.name}`).put(image)
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress = Math.round(
+            snapshot.bytesTransferred / snapshot.totalBytes * 100
+          )
+          setProgress(progress)
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          storage
+            .ref('images')
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              setImageURL(url)
+            })
+        }
+      )
+    }
   }
 
   const onSubmit = ev => {
@@ -150,20 +149,23 @@ const Profile = ({user, update, history}) => {
               onChange={event => setEmail(event.target.value)}
               label="Email"
             />
-            {/* <TextField
-              value={imageURL}
-              onChange={(event) => setImageURL(event.target.value)}
-              label="ImageURL"
-            /> */}
-            <div>
+
+            <div className="row">
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="icon-button-file"
+                type="file"
+                onChange={handleUpload}
+              />
+              <label htmlFor="icon-button-file">
+                <IconButton color="primary" component="span">
+                  <PhotoCamera />
+                </IconButton>
+              </label>
               <progress value={progress} max="100" />
-              <br />
-              <br />
-              <input type="file" onChange={handleChange} />
-              <button onClick={handleUpload}>Upload</button>
-              <br />
-              {imageURL}
             </div>
+
             <Button
               className={classes.button}
               variant="contained"

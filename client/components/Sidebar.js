@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Link, Route} from 'react-router-dom'
+import {updateCourse} from '../store'
 import clsx from 'clsx'
 import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
 import theme from './Theme'
@@ -35,6 +36,9 @@ import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty'
 // import GroupIcon from '@material-ui/icons/Group' //groupwork
 // import HelpIcon from '@material-ui/icons/Help' //help
 
+import {storage} from '../firebase'
+import AttachmentIcon from '@material-ui/icons/Attachment'
+import SaveAltIcon from '@material-ui/icons/SaveAlt'
 const drawerWidth = 240
 
 const useStyles = makeStyles({
@@ -98,12 +102,71 @@ const useStyles = makeStyles({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3)
+  },
+  input: {
+    display: 'none'
+  },
+  noPadding: {
+    padding: 0
   }
 })
 
-const Sidebar = ({id, name, code, syllabus, user, instructor}) => {
+const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  const [syllabusFile, setSyllabusFile] = useState(syllabus ? syllabus : '')
+  const [error, setError] = useState('')
+  const [progress, setProgress] = useState(0)
+
+  const onSubmit = ev => {
+    ev.preventDefault()
+    console.log('props', history)
+    try {
+      update(
+        {
+          syllabus: syllabusFile
+        },
+        id,
+        history.push
+      )
+    } catch (exception) {
+      setError({error: exception.response.data.message})
+    }
+  }
+
+  const handleUpload = e => {
+    if (e.target.files[0]) {
+      const file = e.target.files[0]
+
+      const uploadTask = storage.ref(`files/${file.name}`).put(file)
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress = Math.round(
+            snapshot.bytesTransferred / snapshot.totalBytes * 100
+          )
+          setProgress(progress)
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          storage
+            .ref('files')
+            .child(file.name)
+            .getDownloadURL()
+            .then(url => {
+              setSyllabusFile(url)
+            })
+        }
+      )
+    }
+  }
+
+  useEffect(() => {
+    console.log(syllabus)
+  }, [])
+
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -187,14 +250,50 @@ const Sidebar = ({id, name, code, syllabus, user, instructor}) => {
               <ListItemIcon />
               <ListItemText> {instructor.email} </ListItemText>
             </ListItem>
+
             <ListItem>
               <ListItemIcon />
               <ListItemText>
-                <a href={syllabus} rel="noreferrer" target="_blank" download>
-                  Syllabus
-                </a>
+                <div className="row">
+                  <a
+                    href={syllabusFile}
+                    rel="noreferrer"
+                    target="_blank"
+                    download
+                  >
+                    Syllabus
+                  </a>
+
+                  <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="icon-button-file"
+                    type="file"
+                    onChange={handleUpload}
+                  />
+                  <label htmlFor="icon-button-file">
+                    <IconButton component="span" color="primary">
+                      <AttachmentIcon />
+                    </IconButton>
+                  </label>
+                  <IconButton
+                    color="primary"
+                    onClick={onSubmit}
+                    disabled={syllabusFile === syllabus}
+                  >
+                    <SaveAltIcon />
+                  </IconButton>
+                </div>
               </ListItemText>
             </ListItem>
+
+            {/* <ListItem className={classes.noPadding}>
+              <ListItemIcon />
+              <ListItemText>
+                <progress value={progress} max="100" />
+              </ListItemText>
+            </ListItem> */}
+
             <Divider />
             {user.isTeacher === true && (
               <Link to={`/course/${id}/students`}>
@@ -246,14 +345,6 @@ const Sidebar = ({id, name, code, syllabus, user, instructor}) => {
                 <ListItemText> Grades </ListItemText>
               </ListItem>
             </Link>
-            <Link to={`/course/${id}/canvas`}>
-              <ListItem button>
-                <ListItemIcon>
-                  <CastForEducationIcon />
-                </ListItemIcon>
-                <ListItemText> White Board </ListItemText>
-              </ListItem>
-            </Link>
             <Link
               to={`/course/${id}/chatroom?userName=${
                 user.firstName
@@ -261,11 +352,21 @@ const Sidebar = ({id, name, code, syllabus, user, instructor}) => {
             >
               <ListItem button>
                 <ListItemIcon>
+                  <CastForEducationIcon />
+                </ListItemIcon>
+                <ListItemText> White Board </ListItemText>
+              </ListItem>
+            </Link>
+            {/* <Link
+              
+            >
+              <ListItem button>
+                <ListItemIcon>
                   <SmsIcon />
                 </ListItemIcon>
                 <ListItemText> Chat Room </ListItemText>
               </ListItem>
-            </Link>
+            </Link> */}
           </List>
         </Drawer>
       </div>
@@ -277,4 +378,10 @@ const mapStateToProps = ({user}) => {
   return {user}
 }
 
-export default connect(mapStateToProps)(Sidebar)
+const mapDispatchToProps = dispatch => {
+  return {
+    update: (course, id, push) => dispatch(updateCourse(course, id, push))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)
