@@ -10,6 +10,7 @@ import {
   AppBar,
   Grid,
   Toolbar,
+  Tooltip,
   List,
   Typography,
   Divider,
@@ -207,9 +208,11 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
               </Typography>
 
               <Link to="/">
-                <IconButton>
-                  <ExitToAppIcon />
-                </IconButton>
+                <Tooltip title="Return to Course Home">
+                  <IconButton>
+                    <ExitToAppIcon />
+                  </IconButton>
+                </Tooltip>
               </Link>
             </Grid>
           </Toolbar>
@@ -239,13 +242,16 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
           <Divider />
           <List>
             <ListItem>
-              <ListItemIcon>
-                <ContactsIcon />
-              </ListItemIcon>
+              <Tooltip title="Contact Info">
+                <ListItemIcon>
+                  <ContactsIcon />
+                </ListItemIcon>
+              </Tooltip>
               <ListItemText>
                 {instructor.firstName} {instructor.lastName}
               </ListItemText>
             </ListItem>
+
             <ListItem>
               <ListItemIcon />
               <ListItemText> {instructor.email} </ListItemText>
@@ -263,26 +269,33 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
                   >
                     Syllabus
                   </a>
-
-                  <input
-                    accept="image/*"
-                    className={classes.input}
-                    id="icon-button-file"
-                    type="file"
-                    onChange={handleUpload}
-                  />
-                  <label htmlFor="icon-button-file">
-                    <IconButton component="span" color="primary">
-                      <AttachmentIcon />
-                    </IconButton>
-                  </label>
-                  <IconButton
-                    color="primary"
-                    onClick={onSubmit}
-                    disabled={syllabusFile === syllabus}
-                  >
-                    <SaveAltIcon />
-                  </IconButton>
+                  {user.isTeacher === true && (
+                    <div className="row">
+                      <input
+                        accept="image/*"
+                        className={classes.input}
+                        id="icon-button-file"
+                        type="file"
+                        onChange={handleUpload}
+                      />
+                      <label htmlFor="icon-button-file">
+                        <Tooltip title="Add attachment">
+                          <IconButton component="span" color="primary">
+                            <AttachmentIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </label>
+                      <Tooltip title="Update Syllabus">
+                        <IconButton
+                          color="primary"
+                          onClick={onSubmit}
+                          disabled={syllabusFile === syllabus}
+                        >
+                          <SaveAltIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </div>
+                  )}
                 </div>
               </ListItemText>
             </ListItem>
@@ -298,62 +311,82 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
             {user.isTeacher === true && (
               <Link to={`/course/${id}/students`}>
                 <ListItem button>
-                  <ListItemIcon>
-                    <AssignmentIndIcon />
-                  </ListItemIcon>
+                  <Tooltip title="Students">
+                    <ListItemIcon>
+                      <AssignmentIndIcon />
+                    </ListItemIcon>
+                  </Tooltip>
                   <ListItemText> Students </ListItemText>
                 </ListItem>
               </Link>
             )}
+
             <Link to={`/course/${id}/announcements`}>
               <ListItem button>
-                <ListItemIcon>
-                  <UpdateIcon />
-                </ListItemIcon>
+                <Tooltip title="Announcements">
+                  <ListItemIcon>
+                    <UpdateIcon />
+                  </ListItemIcon>
+                </Tooltip>
                 <ListItemText> Announcements </ListItemText>
               </ListItem>
             </Link>
+
             <Link to={`/course/${id}/lessons`}>
               <ListItem button>
-                <ListItemIcon>
-                  <NoteIcon />
-                </ListItemIcon>
+                <Tooltip title="Lessons">
+                  <ListItemIcon>
+                    <NoteIcon />
+                  </ListItemIcon>
+                </Tooltip>
                 <ListItemText> Lessons </ListItemText>
               </ListItem>
             </Link>
+
             <Link to={`/course/${id}/assignments`}>
               <ListItem button>
-                <ListItemIcon>
-                  <AssignmentIcon />
-                </ListItemIcon>
+                <Tooltip title="Assignments">
+                  <ListItemIcon>
+                    <AssignmentIcon />
+                  </ListItemIcon>
+                </Tooltip>
                 <ListItemText> Assignments </ListItemText>
               </ListItem>
             </Link>
+
             <Link to={`/course/${id}/test`}>
               <ListItem button>
-                <ListItemIcon>
-                  <HourglassEmptyIcon />
-                </ListItemIcon>
+                <Tooltip title="Test">
+                  <ListItemIcon>
+                    <HourglassEmptyIcon />
+                  </ListItemIcon>
+                </Tooltip>
                 <ListItemText> Test </ListItemText>
               </ListItem>
             </Link>
+
             <Link to={`/course/${id}/grades`}>
               <ListItem button>
-                <ListItemIcon>
-                  <AssessmentIcon />
-                </ListItemIcon>
+                <Tooltip title="Grades">
+                  <ListItemIcon>
+                    <AssessmentIcon />
+                  </ListItemIcon>
+                </Tooltip>
                 <ListItemText> Grades </ListItemText>
               </ListItem>
             </Link>
+
             <Link
               to={`/course/${id}/chatroom?userName=${
                 user.firstName
               }&room=${name}`}
             >
               <ListItem button>
-                <ListItemIcon>
-                  <CastForEducationIcon />
-                </ListItemIcon>
+                <Tooltip title="Whiteboard">
+                  <ListItemIcon>
+                    <CastForEducationIcon />
+                  </ListItemIcon>
+                </Tooltip>
                 <ListItemText> White Board </ListItemText>
               </ListItem>
             </Link>
