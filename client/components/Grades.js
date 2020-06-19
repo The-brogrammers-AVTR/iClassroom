@@ -36,16 +36,16 @@ class Grades extends Component {
         <Sidebar {...course} instructor={instructor} />
         {isInstructor ? (
           <Grid item xs={12} sm={11}>
-            {/* <TeacherGrades
+            <TeacherGrades
               assignment={assignmentsForCourse}
               userassignments={userassignmentsForCourse}
               course={course}
               update={update}
-            /> */}
-            <TeacherGrading
+            />
+            {/* <TeacherGrading
               students={filteredStudents}
               userassignments={userassignmentsForCourse}
-            />
+            /> */}
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>

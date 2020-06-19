@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react'
+import React, {Fragment} from 'react'
 import MaterialTable from 'material-table'
 
 const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
@@ -22,7 +22,7 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
   const columns = [
     {title: 'User Assignment ID', field: 'id'},
     {title: 'Student ID', field: 'userId'},
-    {title: 'Student Name', field: 'studentname'},
+    {title: 'Student Name', field: 'studentname', defaultGroupOrder: 0},
     {title: 'Assignment', field: 'assignment'},
     {title: 'Complete', field: 'isComplete'},
     {title: 'Grade', field: 'grade'}
@@ -47,6 +47,9 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
             new Promise(resolve => {
               handleUpdate(newData, resolve)
             })
+        }}
+        options={{
+          grouping: true
         }}
       />
     </Fragment>

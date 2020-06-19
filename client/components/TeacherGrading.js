@@ -126,11 +126,6 @@ function Row(props) {
 //   }).isRequired,
 // };
 
-// const rows = [
-//   createData('Robert Peng', 1001),
-//   createData('Noah Peng', 1002)
-// ]
-
 const TeacherGrading = ({students, userassignments}) => {
   const classes = useRowStyles()
   console.log(students)
