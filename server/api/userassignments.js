@@ -20,6 +20,17 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  console.log(req.params.id)
+  try {
+    const userassignments = await Userassignment.findAll({
+      where: {userId: req.params.id}
+    })
+    res.json(userassignments)
+  } catch (err) {
+    next(err)
+  }
+})
 router.put('/:id', async (req, res, next) => {
   const id = req.params.id
   try {

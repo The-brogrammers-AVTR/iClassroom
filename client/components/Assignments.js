@@ -6,7 +6,7 @@ import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import ManageAssignments from './ManageAssignments'
 import {createAssignment} from '../store/assignment'
-import {UploadExcel} from './UploadExcel'
+import UploadExcel from './UploadExcel'
 import {updateUserassignment} from '../store/userassignment'
 import {createUserassignment} from '../store/userassignment'
 
@@ -68,8 +68,10 @@ class Assignments extends Component {
             />
           </Grid>
         )}
-        <UploadExcel />
-        <div id="displayExcel" />
+        {/* <div align="center">
+          <UploadExcel />
+          <div id="displayExcel" />
+        </div> */}
       </Grid>
     )
   }

@@ -11,9 +11,9 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
-import Paper from '@material-ui/core/Paper'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
+import EditIcon from '@material-ui/icons/Edit'
 
 const useRowStyles = makeStyles({
   root: {
@@ -77,6 +77,7 @@ function Row(props) {
                     <TableCell align="left">Assignment</TableCell>
                     <TableCell align="left">Complete</TableCell>
                     <TableCell align="left">Grade</TableCell>
+                    <TableCell align="left">Edit Grade</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -90,6 +91,11 @@ function Row(props) {
                         {userassignRow.complete}
                       </TableCell>
                       <TableCell align="left">{userassignRow.grade}</TableCell>
+                      <TableCell align="left">
+                        <IconButton>
+                          <EditIcon />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -119,11 +125,6 @@ function Row(props) {
 //     protein: PropTypes.number.isRequired,
 //   }).isRequired,
 // };
-
-// const rows = [
-//   createData('Robert Peng', 1001),
-//   createData('Noah Peng', 1002)
-// ]
 
 const TeacherGrading = ({students, userassignments}) => {
   const classes = useRowStyles()

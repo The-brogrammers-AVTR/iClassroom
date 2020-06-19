@@ -18,7 +18,8 @@ import {
   OneStudentGrades,
   TeacherGrades,
   Verification,
-  Live
+  Live,
+  ReportCard
 } from './components'
 import {
   me,
@@ -31,6 +32,7 @@ import {
   getUserCourses,
   readAssignments
 } from './store'
+import Test from './components/test/Test'
 import Video2 from './components/video/Video2'
 class Routes extends Component {
   componentDidMount() {
@@ -62,6 +64,7 @@ class Routes extends Component {
                 <Route path="/course/:id/assignments" component={Assignments} />
                 <Route path="/course/:id/canvas" component={Live} />
                 <Route path="/makeassignment" component={MakeAssignment} />
+                <Route path="/course/:id/test" component={Test} />
                 <Route
                   path="/manageassignments"
                   component={ManageAssignments}
@@ -69,6 +72,7 @@ class Routes extends Component {
                 <Route path="/profile" component={Profile} />
                 <Route path="/test" component={Profile} />
                 <Route path="/video" component={Video2} />
+                <Route path="/reportcard" component={ReportCard} />
               </Switch>
             )}
           </Switch>

@@ -87,6 +87,7 @@ async function seed() {
     UserCourse.create({userId: student1.id, courseId: math.id}),
     UserCourse.create({userId: student1.id, courseId: science.id}),
     UserCourse.create({userId: student2.id, courseId: science.id}),
+    UserCourse.create({userId: student2.id, courseId: math.id}),
     UserCourse.create({userId: student3.id, courseId: science.id}),
     UserCourse.create({userId: student4.id, courseId: science.id}),
     UserCourse.create({userId: student5.id, courseId: science.id})
@@ -253,6 +254,14 @@ async function seed() {
       courseId: science.id,
       grade: null,
       isComplete: false
+    }),
+    Userassignment.create({
+      userId: student2.id,
+      userName: `${student2.firstName} ${student2.lastName}`,
+      assignmentId: assign4.id,
+      courseId: math.id,
+      grade: '75',
+      isComplete: true
     })
   ])
 

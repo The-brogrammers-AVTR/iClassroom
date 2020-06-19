@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import OneStudentGrades from './OneStudentGrades'
 import TeacherGrades from './TeacherGrades'
@@ -23,12 +23,10 @@ class Grades extends Component {
     const userassignmentsForCourse = this.props.userassignment.filter(
       userassignment => userassignment.courseId === course.id
     )
-    //console.log(userassignmentsForCourse)
     const assignmentsForCourse = this.props.assignment.filter(
       assign => assign.courseId === course.id
     )
     const isInstructor = instructor.id === user.id
-    console.log(students)
     const filteredStudents = students.filter(student =>
       course.UserCourses.find(usercourse => usercourse.userId === student.id)
     )
@@ -38,16 +36,16 @@ class Grades extends Component {
         <Sidebar {...course} instructor={instructor} />
         {isInstructor ? (
           <Grid item xs={12} sm={11}>
-            {/* <TeacherGrades
+            <TeacherGrades
               assignment={assignmentsForCourse}
               userassignments={userassignmentsForCourse}
               course={course}
               update={update}
-            /> */}
-            <TeacherGrading
+            />
+            {/* <TeacherGrading
               students={filteredStudents}
               userassignments={userassignmentsForCourse}
-            />
+            /> */}
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>

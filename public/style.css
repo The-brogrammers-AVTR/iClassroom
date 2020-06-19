@@ -739,6 +739,15 @@ body {
   cursor: crosshair;
 }
 
+.quistionContainer {
+  display: list-item;
+  border: solid black 1px;
+  background-color: rgb(250, 224, 224);
+}
+.radioButtons {
+  display: flex;
+  justify-content: flex-end;
+}
 /* video */
 .video-wrapper {
   display: flex;

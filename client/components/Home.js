@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import MyCourses from './MyCourses'
 import FindCourses from './FindCourses'
 import Calendar from './Calendar'
+import ReportCard from './ReportCard'
 
 import SwipeableViews from 'react-swipeable-views'
 import {
@@ -37,7 +38,9 @@ const TabPanel = props => {
   )
 }
 
-const Home = ({user}) => {
+const Home = props => {
+  //console.log(props)
+  const userassignments = props.userassignment
   const [value, setValue] = useState(0)
 
   const classes = useStyles()
@@ -77,10 +80,10 @@ const Home = ({user}) => {
             <FindCourses />
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <Calendar />
+            <Calendar userassignments={userassignments} />
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            Report Card
+            <ReportCard />
           </TabPanel>
         </SwipeableViews>
       </div>
@@ -88,8 +91,20 @@ const Home = ({user}) => {
   )
 }
 
-const mapStateToProps = ({user}) => {
-  return {user}
+// const mapStateToProps = ({user, assignments, userassignments}) => {
+//   console.log('user', user)
+//   //console.log('map', assignments)
+//   return {user, assignments, userassignments}
+// }
+
+const mapStateToProps = ({userassignment, user}, {match}) => {
+  if (!userassignment) {
+    return {}
+  }
+  return {
+    user,
+    userassignment
+  }
 }
 
 export default connect(mapStateToProps)(Home)
