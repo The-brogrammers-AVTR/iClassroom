@@ -16,6 +16,7 @@ import {ThemeProvider} from '@material-ui/styles'
 import {makeStyles, Paper} from '@material-ui/core'
 import axios from 'axios'
 import theme from './Theme'
+import {setDate} from 'date-fns/esm'
 const moment = require('moment')
 const today = moment()
 
@@ -35,21 +36,31 @@ const useStyles = makeStyles({
 //   },
 // ]
 
-const Calendar = ({user}) => {
+const Calendar = ({user, userassignments}) => {
+  // console.log('In Cal user', user)
+  // console.log('In Cal assign', assignments)
+  // console.log('In Cal userassign', userassignments)
+
   const classes = useStyles()
   const [data, setData] = useState([])
   const [error, setError] = useState('')
 
   useEffect(() => {
-    axios
-      .get(`/api/users/${user.id}`)
-      .then(res => {
-        console.log(res.data.assignments)
-        setData(res.data.assignments)
-      })
-      .catch(err => {
-        setError(err.message)
-      })
+    //console.log('in effect', user)
+    user.isTeacher
+      ? axios
+          .get(`/api/users/${user.id}`)
+          .then(res => {
+            setData(res.data.assignments)
+          })
+          .catch(err => {
+            setError(err.message)
+          })
+      : setData(
+          userassignments
+            .filter(userassign => userassign.userId === user.id)
+            .map(assign => assign.assignment)
+        )
   }, [])
 
   return (
@@ -74,10 +85,9 @@ const Calendar = ({user}) => {
   )
 }
 
-const mapStateToProps = ({user, users}) => {
+const mapStateToProps = ({user}) => {
   return {
-    user,
-    users
+    user
   }
 }
 
