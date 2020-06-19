@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import LessonCard from './LessonCard.js'
-import {ThemeProvider, Fab} from '@material-ui/core/'
+import {ThemeProvider, Fab, Tooltip} from '@material-ui/core/'
 import theme from './Theme'
 import AddIcon from '@material-ui/icons/Add'
 import CreateLesson from './CreateLesson.js'
@@ -30,13 +30,15 @@ class Lessons extends React.Component {
             <div className="course-content-header">
               <h1>Lessons</h1>
               {user.isTeacher === true && (
-                <Fab
-                  color="primary"
-                  aria-label="add"
-                  onClick={() => this.setState({toggle: !toggle})}
-                >
-                  <AddIcon />
-                </Fab>
+                <Tooltip title="Add Lesson">
+                  <Fab
+                    color="primary"
+                    aria-label="add"
+                    onClick={() => this.setState({toggle: !toggle})}
+                  >
+                    <AddIcon />
+                  </Fab>
+                </Tooltip>
               )}
             </div>
             <div>

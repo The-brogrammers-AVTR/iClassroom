@@ -11,7 +11,8 @@ import {
   Paper,
   Typography,
   ThemeProvider,
-  Grid
+  Grid,
+  Tooltip
 } from '@material-ui/core'
 import theme from './Theme'
 import EditIcon from '@material-ui/icons/Edit'
@@ -119,8 +120,17 @@ const Profile = ({user, update, history}) => {
           User Profile
         </Typography>
         <img className="image" src={imageURL} />
+
         <IconButton color="primary" onClick={() => setEdit(!edit)}>
-          {!edit ? <EditIcon /> : <HighlightOffIcon className={classes.red} />}
+          {!edit ? (
+            <Tooltip title="Edit">
+              <EditIcon />
+            </Tooltip>
+          ) : (
+            <Tooltip title="Cancel">
+              <HighlightOffIcon className={classes.red} />
+            </Tooltip>
+          )}
         </IconButton>
 
         {!edit ? (
@@ -159,9 +169,11 @@ const Profile = ({user, update, history}) => {
                 onChange={handleUpload}
               />
               <label htmlFor="icon-button-file">
-                <IconButton color="primary" component="span">
-                  <PhotoCamera />
-                </IconButton>
+                <Tooltip title="Upload Image">
+                  <IconButton color="primary" component="span">
+                    <PhotoCamera />
+                  </IconButton>
+                </Tooltip>
               </label>
               <progress value={progress} max="100" />
             </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import CourseCard from './CourseCard.js'
 import CreateCourse from './CreateCourse.js'
-import {ThemeProvider, Fab} from '@material-ui/core/'
+import {ThemeProvider, Fab, Tooltip} from '@material-ui/core/'
 import theme from './Theme'
 import AddIcon from '@material-ui/icons/Add'
 
@@ -24,13 +24,15 @@ class MyCourses extends React.Component {
           <div className="courses-wrapper">
             <h1>My Courses</h1>
             {user.isTeacher && (
-              <Fab
-                color="primary"
-                aria-label="add"
-                onClick={() => this.setState({toggle: !toggle})}
-              >
-                <AddIcon />
-              </Fab>
+              <Tooltip title="Add Course">
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  onClick={() => this.setState({toggle: !toggle})}
+                >
+                  <AddIcon />
+                </Fab>
+              </Tooltip>
             )}
           </div>
           {toggle && <CreateCourse history={history} />}
