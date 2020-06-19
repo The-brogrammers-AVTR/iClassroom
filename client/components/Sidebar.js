@@ -29,6 +29,7 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd' //grade
 import SmsIcon from '@material-ui/icons/Sms'
 import CastForEducationIcon from '@material-ui/icons/CastForEducation'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty'
 // import OndemandVideoIcon from '@material-ui/icons/OndemandVideo' //broadcast
 // import VideocamIcon from '@material-ui/icons/Videocam' //videocall
 // import GroupIcon from '@material-ui/icons/Group' //groupwork
@@ -223,6 +224,14 @@ const Sidebar = ({id, name, code, user, instructor}) => {
                   <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText> Assignments </ListItemText>
+              </ListItem>
+            </Link>
+            <Link to={`/course/${id}/test`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <HourglassEmptyIcon />
+                </ListItemIcon>
+                <ListItemText> Test </ListItemText>
               </ListItem>
             </Link>
             <Link to={`/course/${id}/grades`}>
