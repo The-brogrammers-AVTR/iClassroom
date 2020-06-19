@@ -16,7 +16,7 @@ const ManageAssignments = ({
   }
   //console.log('students', students)
   //console.log('course', course)
-  //console.log('assignment', assignment)
+  console.log('assignment', assignment)
   const data = assignment.map((assign, idx) => ({
     assignmentid: assign.id,
     assignNum: idx + 1,
@@ -24,10 +24,10 @@ const ManageAssignments = ({
     courseId: assign.courseId,
     category: assign.category,
     description: assign.description,
-    dueDate: assign.dueDate,
+    startDate: assign.startDate,
+    endDate: assign.endDate,
     userId: assign.userId
   }))
-  //console.log('update', data)
 
   const columns = [
     {title: 'Assignment ID', field: 'assignmentid'},
@@ -36,12 +36,13 @@ const ManageAssignments = ({
     {title: 'Course', field: 'courseId'},
     {title: 'Category', field: 'category'},
     {title: 'Description', field: 'description'},
+    {title: 'Start Date', field: 'startDate'},
+    {title: 'Due Date', field: 'endDate'},
     {title: 'Teacher', field: 'userId'}
   ]
 
   const newAssignmentID = allAssignments.length + 1
   const handleCreateUserassignments = students => {
-    //console.log('add userassignments')
     students.forEach(student => {
       create({
         courseId: course.id,

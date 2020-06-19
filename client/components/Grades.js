@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import OneStudentGrades from './OneStudentGrades'
 import TeacherGrades from './TeacherGrades'
+import TeacherGrading from './TeacherGrading'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import {updateUserassignment} from '../store/userassignment'
@@ -12,7 +13,7 @@ class Grades extends Component {
   }
 
   render() {
-    const {course, teachers, user, update} = this.props
+    const {course, teachers, user, update, students} = this.props
     const oneUserassignments = this.props.userassignment.filter(
       userassign => userassign.userId === this.props.user.id
     )
@@ -22,11 +23,13 @@ class Grades extends Component {
     const userassignmentsForCourse = this.props.userassignment.filter(
       userassignment => userassignment.courseId === course.id
     )
-    //console.log(userassignmentsForCourse)
     const assignmentsForCourse = this.props.assignment.filter(
       assign => assign.courseId === course.id
     )
     const isInstructor = instructor.id === user.id
+    const filteredStudents = students.filter(student =>
+      course.UserCourses.find(usercourse => usercourse.userId === student.id)
+    )
 
     return (
       <Grid container>
@@ -39,6 +42,10 @@ class Grades extends Component {
               course={course}
               update={update}
             />
+            {/* <TeacherGrading
+              students={filteredStudents}
+              userassignments={userassignmentsForCourse}
+            /> */}
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>
@@ -54,7 +61,7 @@ class Grades extends Component {
 }
 
 const mapStateToProps = (
-  {userassignment, user, courses, teachers, assignment},
+  {userassignment, user, courses, teachers, assignment, students},
   {match}
 ) => {
   if (!userassignment) {
@@ -66,7 +73,8 @@ const mapStateToProps = (
     user,
     course,
     teachers,
-    assignment
+    assignment,
+    students
   }
 }
 
