@@ -50,7 +50,6 @@ const Profile = ({user, update, history}) => {
   const [edit, setEdit] = useState(false)
 
   const [image, setImage] = useState(null)
-  // const [url, setUrl] = useState('')
   const [progress, setProgress] = useState(0)
 
   const classes = useStyles()
