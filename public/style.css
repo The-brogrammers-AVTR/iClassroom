@@ -27,6 +27,7 @@ label {
 .row {
   display: flex;
   align-items: center;
+  padding-top: 0;
 }
 
 /* courseHome */

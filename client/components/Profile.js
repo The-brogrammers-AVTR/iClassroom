@@ -150,9 +150,7 @@ const Profile = ({user, update, history}) => {
               label="Email"
             />
 
-            <div>
-              <progress value={progress} max="100" />
-
+            <div className="row">
               <input
                 accept="image/*"
                 className={classes.input}
@@ -165,6 +163,7 @@ const Profile = ({user, update, history}) => {
                   <PhotoCamera />
                 </IconButton>
               </label>
+              <progress value={progress} max="100" />
             </div>
 
             <Button
