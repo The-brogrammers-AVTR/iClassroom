@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import MyCourses from './MyCourses'
 import FindCourses from './FindCourses'
 import Calendar from './Calendar'
+import ReportCard from './ReportCard'
 
 import SwipeableViews from 'react-swipeable-views'
 import {
@@ -82,7 +83,7 @@ const Home = props => {
             <Calendar userassignments={userassignments} />
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            Report Card
+            <ReportCard />
           </TabPanel>
         </SwipeableViews>
       </div>
