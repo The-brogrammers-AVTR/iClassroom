@@ -24,15 +24,13 @@ const useStyles = makeStyles({
 })
 
 const OneStudentGrades = ({userassignments, user}) => {
-  //console.log('student', userassignments)
-
   const classes = useStyles()
   if (!userassignments) {
     return null
   }
   return (
     <Fragment>
-      <h1>{`Grade (User Id: ${user.id})`}</h1>
+      <h1>{`Grade (Student: ${user.firstName} ${user.lastName})`}</h1>
       <TableContainer>
         <Table
           className={classes.table}

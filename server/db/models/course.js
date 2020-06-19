@@ -20,6 +20,11 @@ const Course = db.define('course', {
     allowNull: false,
     defaultValue: 1111
   },
+  syllabus: {
+    type: STRING,
+    defaultValue:
+      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+  },
   isOpen: {
     type: BOOLEAN,
     allowNull: false,

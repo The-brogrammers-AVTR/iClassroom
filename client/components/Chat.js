@@ -9,8 +9,10 @@ import {Picker} from 'emoji-mart'
 //import 'emoji-mart/css/emoji-mart.css'
 import {connect} from 'react-redux'
 import queryString from 'query-string'
-import {Button, InputLabel, Input} from '@material-ui/core'
-import Icon from '@material-ui/core/Icon'
+import {IconButton, TextField} from '@material-ui/core'
+import SendRoundedIcon from '@material-ui/icons/SendRounded'
+import EmojiEmotionsRoundedIcon from '@material-ui/icons/EmojiEmotionsRounded'
+
 let DisplayImoji
 class Chat extends Component {
   constructor() {
@@ -24,6 +26,7 @@ class Chat extends Component {
     this.submit = this.submit.bind(this)
     this.displayImoji = this.displayImoji.bind(this)
   }
+
   componentDidMount() {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
@@ -147,15 +150,13 @@ class Chat extends Component {
     const {user} = this.props
 
     return (
-      <div id="chatForm">
-        <div id="messagesUsers">
+      <div id="chat-wrapper">
+        <div id="message-wrapper">
           <div id="displayMessage">
             <div id="message" />
           </div>
           <div id="displayUsers">
-            <span style={{textDecoration: 'underline', fontWeight: 'bold'}}>
-              Users
-            </span>
+            <span style={{fontWeight: 'bold', alignText: 'center'}}>Users</span>
             <hr />
             <div id="users" />
           </div>
@@ -163,34 +164,53 @@ class Chat extends Component {
 
         <form id="socket" onSubmit={e => this.submit(e)}>
           <div id="chatInput">
-            <InputLabel id="inputLabel" htmlFor="my-input">
-              {this.state.action}
-            </InputLabel>
-            <Input
+            {/* <InputLabel id="inputLabel" htmlFor="my-input"></InputLabel> */}
+            {/* <Input
               value={this.state.message}
               id="my-input"
               aria-describedby="my-helper-text"
+              onChange={(e) => {
+                this.setState({message: e.target.value})
+                socket.emit('userTyping', this.state.message)
+              }}
+            /> */}
+            <TextField
+              multiline
+              rows={2}
+              defaultValue="Message goes here"
+              variant="outlined"
               onChange={e => {
                 this.setState({message: e.target.value})
                 socket.emit('userTyping', this.state.message)
               }}
+              value={this.state.message}
+              className="textfield"
+              size="small"
+              // id="my-input"
             />
-            <Button
+            <IconButton
+              type="submit"
+              variant="contained"
+              onClick={this.displayImoji}
+              //className={classes.button}
+            >
+              <EmojiEmotionsRoundedIcon className="emoji" />
+            </IconButton>
+            <IconButton
               type="submit"
               variant="contained"
               color="primary"
               //className={classes.button}
-              endIcon={<Icon>send</Icon>}
             >
-              Send
-            </Button>
+              <SendRoundedIcon />
+            </IconButton>
+            {/* <button id="buttonEmoji" onClick={this.displayImoji}>
+              Add Emojis
+            </button> */}
           </div>
           <div id="emojis">
             {DisplayImoji}
-            <button id="buttonEmoji" onClick={this.displayImoji}>
-              Add Imojis
-            </button>
-            <Link to="/video">video</Link>
+            {/* <Link to="/video">video</Link> */}
             {/* <span>
               <Picker
                 onSelect={this.addEmoji}

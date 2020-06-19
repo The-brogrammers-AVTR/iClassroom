@@ -188,7 +188,7 @@ function WhiteBoard() {
   }
 
   return (
-    <div className="home-page" id="crosshair">
+    <div className="whiteboard" id="crosshair">
       <h1>Whiteboard</h1>
 
       <ButtonGroup>

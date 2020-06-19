@@ -101,7 +101,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Sidebar = ({id, name, code, user, instructor}) => {
+const Sidebar = ({id, name, code, syllabus, user, instructor}) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   const handleDrawerOpen = () => {
@@ -189,7 +189,11 @@ const Sidebar = ({id, name, code, user, instructor}) => {
             </ListItem>
             <ListItem>
               <ListItemIcon />
-              <ListItemText> Syllabus Link </ListItemText>
+              <ListItemText>
+                <a href={syllabus} rel="noreferrer" target="_blank" download>
+                  Syllabus
+                </a>
+              </ListItemText>
             </ListItem>
             <Divider />
             {user.isTeacher === true && (
