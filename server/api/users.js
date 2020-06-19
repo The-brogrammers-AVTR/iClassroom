@@ -9,6 +9,9 @@ router.get('/', async (req, res, next) => {
         UserCourse,
         {
           model: Assignment
+        },
+        {
+          model: Userassignment
         }
       ]
       // explicitly select only the id and email fields - even though
@@ -56,6 +59,9 @@ router.get('/:id', async (req, res, next) => {
       UserCourse,
       {
         model: Assignment
+      },
+      {
+        model: Userassignment
       }
     ]
   })
