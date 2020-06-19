@@ -31,6 +31,7 @@ import {
   getUserCourses,
   readAssignments
 } from './store'
+import Test from './components/test/Test'
 import Video2 from './components/video/Video2'
 class Routes extends Component {
   componentDidMount() {
@@ -62,6 +63,7 @@ class Routes extends Component {
                 <Route path="/course/:id/assignments" component={Assignments} />
                 <Route path="/course/:id/canvas" component={Live} />
                 <Route path="/makeassignment" component={MakeAssignment} />
+                <Route path="/course/:id/test" component={Test} />
                 <Route
                   path="/manageassignments"
                   component={ManageAssignments}
