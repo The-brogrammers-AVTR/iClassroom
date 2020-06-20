@@ -846,3 +846,21 @@ body {
 #displayUsers ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.green {
+  width: 20px;
+  height: 20px;
+
+  background-color: greenyellow;
+}
+.red {
+  width: 20px;
+  height: 20px;
+
+  background-color: red;
+}
+
+.mark {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+}

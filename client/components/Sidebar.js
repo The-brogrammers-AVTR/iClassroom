@@ -101,12 +101,14 @@ const useStyles = makeStyles({
   }
 })
 
-const Sidebar = ({id, name, code, syllabus, user, instructor}) => {
+const Sidebar = ({id, name, code, syllabus, user, instructor, assignment}) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   const handleDrawerOpen = () => {
     setOpen(true)
   }
+
+  const assignmentId = assignment.find(as => as.title.toLowerCase() === 'test')
 
   const handleDrawerClose = () => {
     setOpen(false)
@@ -230,7 +232,11 @@ const Sidebar = ({id, name, code, syllabus, user, instructor}) => {
                 <ListItemText> Assignments </ListItemText>
               </ListItem>
             </Link>
-            <Link to={`/course/${id}/test`}>
+            <Link
+              to={`/course/${id}/test/${
+                assignmentId ? assignmentId.testId : 0
+              }`}
+            >
               <ListItem button>
                 <ListItemIcon>
                   <HourglassEmptyIcon />
@@ -273,8 +279,8 @@ const Sidebar = ({id, name, code, syllabus, user, instructor}) => {
   )
 }
 
-const mapStateToProps = ({user}) => {
-  return {user}
+const mapStateToProps = ({user, assignment}) => {
+  return {user, assignment}
 }
 
 export default connect(mapStateToProps)(Sidebar)

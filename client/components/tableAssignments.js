@@ -24,6 +24,7 @@ const useStyles = makeStyles({
 })
 
 const TableAssignments = ({assignment, userassignment, update}) => {
+  console.log(assignment, userassignment)
   const classes = useStyles()
   if (!assignment) {
     return null
@@ -55,11 +56,11 @@ const TableAssignments = ({assignment, userassignment, update}) => {
               <TableRow key={assignment.id}>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={
-                      userassignment.find(
-                        userassign => userassign.assignmentId === assignment.id
-                      ).isComplete
-                    }
+                    // checked={
+                    //   userassignment.find(
+                    //     userassign => userassign.assignmentId === assignment.id
+                    //   ).isComplete
+                    // }
                     onChange={ev => {
                       const id = userassignment.find(
                         userassign => userassign.assignmentId === assignment.id
