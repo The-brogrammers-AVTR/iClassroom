@@ -66,7 +66,7 @@ const Home = props => {
           <Tab label="My Courses" />
           <Tab label="Find Courses" />
           <Tab label="Class Calendar" />
-          <Tab label="Report Card" />
+          {!props.user.isTeacher ? <Tab label="Report Card" /> : null}
         </Tabs>
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
