@@ -57,6 +57,7 @@ class Assignments extends Component {
               create={create}
               students={filteredStudents}
               allAssignments={allAssignments}
+              instructor={instructor}
             />
           </Grid>
         ) : (
