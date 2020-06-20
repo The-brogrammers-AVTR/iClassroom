@@ -119,23 +119,23 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
   const [error, setError] = useState('')
   const [progress, setProgress] = useState(0)
 
-  const onSubmit = ev => {
-    ev.preventDefault()
-    console.log('props', history)
-    try {
-      update(
-        {
-          syllabus: syllabusFile
-        },
-        id,
-        history.push
-      )
-    } catch (exception) {
-      setError({error: exception.response.data.message})
-    }
-  }
+  // const onSubmit = (ev) => {
+  //   ev.preventDefault()
+  //   console.log('props', history)
+  //   try {
+  //     update(
+  //       {
+  //         syllabus: syllabusFile,
+  //       },
+  //       id,
+  //       history.push
+  //     )
+  //   } catch (exception) {
+  //     setError({error: exception.response.data.message})
+  //   }
+  // }
 
-  const handleUpload = e => {
+  const handleUpload = async e => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
 
@@ -157,7 +157,13 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
             .child(file.name)
             .getDownloadURL()
             .then(url => {
-              setSyllabusFile(url)
+              update(
+                {
+                  syllabus: url
+                },
+                id,
+                history.push
+              )
             })
         }
       )
@@ -272,7 +278,6 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
                   {user.isTeacher === true && (
                     <div className="row">
                       <input
-                        accept="image/*"
                         className={classes.input}
                         id="icon-button-file"
                         type="file"
@@ -285,27 +290,27 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
                           </IconButton>
                         </Tooltip>
                       </label>
-                      <Tooltip title="Update Syllabus">
+                      {/* <Tooltip title="Update Syllabus">
                         <IconButton
                           color="primary"
-                          onClick={onSubmit}
+                          // onClick={onSubmit}
                           disabled={syllabusFile === syllabus}
                         >
                           <SaveAltIcon />
                         </IconButton>
-                      </Tooltip>
+                      </Tooltip> */}
                     </div>
                   )}
                 </div>
               </ListItemText>
             </ListItem>
 
-            {/* <ListItem className={classes.noPadding}>
+            <ListItem className={classes.noPadding}>
               <ListItemIcon />
               <ListItemText>
                 <progress value={progress} max="100" />
               </ListItemText>
-            </ListItem> */}
+            </ListItem>
 
             <Divider />
             {user.isTeacher === true && (
