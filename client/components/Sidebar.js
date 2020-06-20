@@ -112,7 +112,16 @@ const useStyles = makeStyles({
   }
 })
 
-const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
+const Sidebar = ({
+  id,
+  name,
+  code,
+  syllabus,
+  user,
+  instructor,
+  update,
+  assignment
+}) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [syllabusFile, setSyllabusFile] = useState(syllabus ? syllabus : '')
@@ -177,6 +186,8 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
   const handleDrawerOpen = () => {
     setOpen(true)
   }
+
+  const assignmentId = assignment.find(as => as.title.toLowerCase() === 'test')
 
   const handleDrawerClose = () => {
     setOpen(false)
@@ -358,8 +369,11 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
                 <ListItemText> Assignments </ListItemText>
               </ListItem>
             </Link>
-
-            <Link to={`/course/${id}/test`}>
+            <Link
+              to={`/course/${id}/test/${
+                assignmentId ? assignmentId.testId : 0
+              }`}
+            >
               <ListItem button>
                 <Tooltip title="Test">
                   <ListItemIcon>
@@ -412,8 +426,8 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
   )
 }
 
-const mapStateToProps = ({user}) => {
-  return {user}
+const mapStateToProps = ({user, assignment}) => {
+  return {user, assignment}
 }
 
 const mapDispatchToProps = dispatch => {

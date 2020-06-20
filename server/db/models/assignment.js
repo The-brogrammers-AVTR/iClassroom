@@ -44,6 +44,11 @@ const Assignment = db.define('assignment', {
   userId: {
     type: INTEGER,
     allowNull: false
+  },
+  testId: {
+    type: INTEGER,
+    allowNull: true,
+    defaultValue: null
   }
 })
 

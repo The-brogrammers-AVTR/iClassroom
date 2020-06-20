@@ -5,6 +5,7 @@ const XLSX = require('xlsx')
  */
 const GET_TEST = 'GET_TEST'
 const CREATE_TEST = 'CREATE_TEST'
+const DELETE_TEST = 'DELETE_TEST'
 
 /**
  * INITIAL STATE --------------------------------------------------
@@ -19,13 +20,25 @@ const _getTest = test => ({
   test
 })
 const _createTest = test => ({
-  type: CREATE_LESSON,
+  type: CREATE_TEST,
   test
+})
+const _deleteTest = id => ({
+  type: DELETE_TEST,
+  id
 })
 
 /**
  * THUNK CREATORS -------------------------------------------------
  */
+
+export const deleteTest = id => {
+  return async dispatch => {
+    await axios.delete(`/api/test/${id}`)
+    dispatch(_deleteTest(id))
+  }
+}
+
 export const getTest = () => {
   console.log('hello from store')
   let rowObj
@@ -61,9 +74,9 @@ export const getTest = () => {
   }
 }
 
-const createTest = (lesson, push, id) => {
+export const createTest = testObj => {
   return async dispatch => {
-    const response = await axios.post('/api/test', lesson)
+    const response = await axios.post('/api/test', testObj)
     dispatch(_createTest(response.data))
   }
 }
@@ -77,7 +90,10 @@ export const test = (state = initialState, action) => {
       return action.test
 
     case CREATE_TEST:
-      return [...state, action.lesson]
+      return [...state, action.test]
+
+    case DELETE_TEST:
+      return state.filter(test => test.id !== action.id)
 
     default:
       return state

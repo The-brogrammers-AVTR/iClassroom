@@ -42,10 +42,12 @@ const _readAssignments = assignments => {
 }
 
 //THUNK CREATORS
-export const createAssignment = assignment => {
+export const createAssignment = (assignment, push) => {
+  console.log(assignment)
   return async dispatch => {
     const createdAssignment = (await axios.post('/api/assignments', assignment))
       .data
+    push(`/course/${assignment.courseId}/assignments`)
     dispatch(_createAssignment(createdAssignment))
   }
 }
