@@ -252,7 +252,7 @@ async function seed() {
     }),
     Userassignment.create({
       userId: student1.id,
-      userName: `${student3.firstName} ${student3.lastName}`,
+      userName: `${student1.firstName} ${student1.lastName}`,
       assignmentId: assign4.id,
       courseId: math.id,
       grade: '90',
