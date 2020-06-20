@@ -14,7 +14,8 @@ import {
   CardMedia,
   Button,
   Typography,
-  IconButton
+  IconButton,
+  Tooltip
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -87,12 +88,16 @@ const CourseCard = ({
           )}
           {user.isTeacher && (
             <div>
-              <IconButton>
-                <EditIcon color="primary">Edit Course</EditIcon>
-              </IconButton>
-              <IconButton onClick={() => remove(id)}>
-                <DeleteIcon />
-              </IconButton>
+              <Tooltip title="Edit">
+                <IconButton>
+                  <EditIcon color="primary">Edit Course</EditIcon>
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Delete">
+                <IconButton onClick={() => remove(id)}>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
             </div>
           )}
         </CardActions>

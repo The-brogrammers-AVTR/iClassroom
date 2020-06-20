@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Sidebar from './Sidebar.js'
 import AnnouncementCard from './AnnouncementCard.js'
 import CreateAnnouncement from './CreateAnnouncement.js'
-import {ThemeProvider, Fab} from '@material-ui/core/'
+import {ThemeProvider, Fab, Tooltip} from '@material-ui/core/'
 import theme from './Theme'
 import AddIcon from '@material-ui/icons/Add'
 
@@ -36,13 +36,15 @@ class Announcements extends React.Component {
             <div className="course-content-header">
               <h1>Announcements</h1>
               {user.isTeacher === true && (
-                <Fab
-                  color="primary"
-                  aria-label="add"
-                  onClick={() => this.setState({toggle: !toggle})}
-                >
-                  <AddIcon />
-                </Fab>
+                <Tooltip title="Add Announcement">
+                  <Fab
+                    color="primary"
+                    aria-label="add"
+                    onClick={() => this.setState({toggle: !toggle})}
+                  >
+                    <AddIcon />
+                  </Fab>
+                </Tooltip>
               )}
             </div>
             <div>

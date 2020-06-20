@@ -52,14 +52,11 @@ const createCourse = (course, push) => {
   }
 }
 
-const updateCourse = (course, push) => {
+const updateCourse = (course, id, push) => {
   return async dispatch => {
-    const {data: updatedCourse} = await axios.put(
-      `/api/courses/${course.id}`,
-      course
-    )
+    const {data: updatedCourse} = await axios.put(`/api/courses/${id}`, course)
     dispatch(_updateCourse(updatedCourse))
-    push('/')
+    // push('/')
   }
 }
 
