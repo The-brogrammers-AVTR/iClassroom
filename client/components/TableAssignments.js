@@ -25,10 +25,11 @@ const useStyles = makeStyles({
 
 const TableAssignments = ({assignment, userassignment, update}) => {
   const classes = useStyles()
-  if (!assignment) {
+  if (!assignment || !userassignment) {
     return null
   }
-
+  console.log('assign', assignment)
+  console.log('userassign', userassignment)
   return (
     <Fragment>
       <h1>Assignments</h1>

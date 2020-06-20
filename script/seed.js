@@ -251,6 +251,14 @@ async function seed() {
       isComplete: false
     }),
     Userassignment.create({
+      userId: student1.id,
+      userName: `${student3.firstName} ${student3.lastName}`,
+      assignmentId: assign4.id,
+      courseId: math.id,
+      grade: '90',
+      isComplete: true
+    }),
+    Userassignment.create({
       userId: student2.id,
       userName: `${student2.firstName} ${student2.lastName}`,
       assignmentId: assign1.id,
