@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   }
 })
 
-const OneStudentGrades = ({userassignments, user}) => {
+const OneStudentGrades = ({userassignments, user, course}) => {
   const classes = useStyles()
   if (!userassignments) {
     return null
@@ -44,12 +44,14 @@ const OneStudentGrades = ({userassignments, user}) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {userassignments.map(assign => (
-              <TableRow key={assign.id}>
-                <TableCell align="left">{assign.assignment.title}</TableCell>
-                <TableCell align="left">{assign.grade}</TableCell>
-              </TableRow>
-            ))}
+            {userassignments
+              .filter(userassign => userassign.courseId === course.id)
+              .map(assign => (
+                <TableRow key={assign.id}>
+                  <TableCell align="left">{assign.assignment.title}</TableCell>
+                  <TableCell align="left">{assign.grade}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
