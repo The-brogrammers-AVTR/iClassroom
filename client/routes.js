@@ -18,7 +18,8 @@ import {
   OneStudentGrades,
   TeacherGrades,
   Verification,
-  Live
+  Live,
+  ReportCard
 } from './components'
 import {
   me,
@@ -81,6 +82,7 @@ class Routes extends Component {
                 <Route path="/profile" component={Profile} />
                 <Route path="/test" component={Profile} />
                 <Route path="/video" component={Video2} />
+                <Route path="/reportcard" component={ReportCard} />
               </Switch>
             )}
           </Switch>

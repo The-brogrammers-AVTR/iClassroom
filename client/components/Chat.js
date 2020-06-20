@@ -47,13 +47,17 @@ class Chat extends Component {
       console.log('mes', mes)
 
       //mes.innerHTML = msg.userName + ' ' + msg.message + ' ' + msg.time
-      let html = `<div  style="width:100%;" class="container">
-                 <img src="/images/ninja.png" alt="Avatar" style="width:100%;" className={
-                 userName == msg.userName ? 'rigth' : 'rigth'
-                 } >
-                 <p className="userName">USER NAME: -- ${msg.userName} -- </p>
-                 <p>${msg.message}</p>
-                 <span class="time-right">${msg.time}</span>
+      let html = `<div class="container">
+                <div class="messageUser">
+                  <img src="/images/ninja.png" alt="Avatar" className={
+                  userName == msg.userName ? 'rigth' : 'rigth'
+                  } >
+                  <p class="userName">${msg.userName}</p>
+                  <h6 class="time-right">${msg.time}</h6>
+                  </div>
+                  
+                  <p>${msg.message}</p>
+                
                  </div>`
       let li = document.createElement('li')
       li.innerHTML = html
@@ -177,7 +181,6 @@ class Chat extends Component {
             <TextField
               multiline
               rows={2}
-              defaultValue="Message goes here"
               variant="outlined"
               onChange={e => {
                 this.setState({message: e.target.value})

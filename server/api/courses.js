@@ -34,7 +34,8 @@ router.put('/:id', (req, res, next) => {
   Course.findByPk(req.params.id, {include: UserCourse})
     .then(course =>
       course.update({
-        name: req.body.name
+        name: req.body.name,
+        syllabus: req.body.syllabus
       })
     )
     .then(course => res.send(course))

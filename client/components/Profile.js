@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {withRouter} from 'react-router-dom'
+// import {withRouter} from 'react-router-dom'
+import {storage} from '../firebase'
 import {connect} from 'react-redux'
 import {updateProfile} from '../store'
 import {
@@ -10,12 +11,14 @@ import {
   Paper,
   Typography,
   ThemeProvider,
-  Grid
+  Grid,
+  Tooltip
 } from '@material-ui/core'
 import theme from './Theme'
 import EditIcon from '@material-ui/icons/Edit'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 import SaveIcon from '@material-ui/icons/Save'
+import PhotoCamera from '@material-ui/icons/PhotoCamera'
 
 const useStyles = makeStyles({
   paper: {
@@ -34,6 +37,9 @@ const useStyles = makeStyles({
   },
   red: {
     color: theme.palette.red
+  },
+  input: {
+    display: 'none'
   }
 })
 
@@ -47,8 +53,38 @@ const Profile = ({user, update, history}) => {
   const [imageURL, setImageURL] = useState(user.imageURL ? user.imageURL : '')
   const [error, setError] = useState('')
   const [edit, setEdit] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   const classes = useStyles()
+
+  const handleUpload = e => {
+    if (e.target.files[0]) {
+      const image = e.target.files[0]
+
+      const uploadTask = storage.ref(`images/${image.name}`).put(image)
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress = Math.round(
+            snapshot.bytesTransferred / snapshot.totalBytes * 100
+          )
+          setProgress(progress)
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          storage
+            .ref('images')
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              setImageURL(url)
+            })
+        }
+      )
+    }
+  }
 
   const onSubmit = ev => {
     ev.preventDefault()
@@ -83,9 +119,18 @@ const Profile = ({user, update, history}) => {
         <Typography color="primary" variant="h4">
           User Profile
         </Typography>
-        <img src={imageURL} />
+        <img className="image" src={imageURL} />
+
         <IconButton color="primary" onClick={() => setEdit(!edit)}>
-          {!edit ? <EditIcon /> : <HighlightOffIcon className={classes.red} />}
+          {!edit ? (
+            <Tooltip title="Edit">
+              <EditIcon />
+            </Tooltip>
+          ) : (
+            <Tooltip title="Cancel">
+              <HighlightOffIcon className={classes.red} />
+            </Tooltip>
+          )}
         </IconButton>
 
         {!edit ? (
@@ -114,11 +159,25 @@ const Profile = ({user, update, history}) => {
               onChange={event => setEmail(event.target.value)}
               label="Email"
             />
-            <TextField
-              value={imageURL}
-              onChange={event => setImageURL(event.target.value)}
-              label="ImageURL"
-            />
+
+            <div className="row">
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="icon-button-file"
+                type="file"
+                onChange={handleUpload}
+              />
+              <label htmlFor="icon-button-file">
+                <Tooltip title="Upload Image">
+                  <IconButton color="primary" component="span">
+                    <PhotoCamera />
+                  </IconButton>
+                </Tooltip>
+              </label>
+              <progress value={progress} max="100" />
+            </div>
+
             <Button
               className={classes.button}
               variant="contained"

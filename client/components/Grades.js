@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import OneStudentGrades from './OneStudentGrades'
 import TeacherGrades from './TeacherGrades'
@@ -52,6 +52,7 @@ class Grades extends Component {
             <OneStudentGrades
               userassignments={oneUserassignments}
               user={user}
+              course={course}
             />
           </Grid>
         )}
