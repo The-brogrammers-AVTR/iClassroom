@@ -53,6 +53,7 @@ class Grades extends Component {
               userassignments={oneUserassignments}
               user={user}
               course={course}
+              assignment={assignmentsForCourse}
             />
           </Grid>
         )}
