@@ -30,7 +30,7 @@ const ManageAssignments = ({
   }))
 
   const columns = [
-    {title: 'Assignment ID', field: 'assignmentid', editable: 'never'},
+    // {title: 'Assignment ID', field: 'assignmentid', editable: 'never'},
     {title: 'Assignment#', field: 'assignNum', editable: 'never'},
     {title: 'Assignment', field: 'title'},
     {title: 'Course', field: 'courseId'},

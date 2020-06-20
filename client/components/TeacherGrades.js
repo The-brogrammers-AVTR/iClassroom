@@ -20,7 +20,7 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
   }))
 
   const columns = [
-    {title: 'User Assignment ID', field: 'id', editable: 'never'},
+    // {title: 'User Assignment ID', field: 'id', editable: 'never'},
     {title: 'Student ID', field: 'userId', editable: 'never'},
     {
       title: 'Student Name',
