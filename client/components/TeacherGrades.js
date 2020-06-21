@@ -30,7 +30,7 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
     },
     {title: 'Assignment', field: 'assignment', editable: 'never'},
     {title: 'Complete', field: 'isComplete', editable: 'never'},
-    {title: 'Grade', field: 'grade'}
+    {title: 'Grade', field: 'grade', type: 'numeric'}
   ]
 
   const handleUpdate = async (newData, resolve) => {
