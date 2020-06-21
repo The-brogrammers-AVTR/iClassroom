@@ -26,10 +26,18 @@ const Lesson = db.define('lesson', {
   },
 
   documents: {
-    type: ARRAY(TEXT),
+    type: ARRAY(Sequelize.JSON),
     defaultValue: [
-      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+      {
+        name: 'Example 1',
+        link:
+          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+      },
+      {
+        name: 'Example 2',
+        link:
+          'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+      }
     ]
   }
 })
