@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-const {STRING, INTEGER, TEXT} = Sequelize
+const {STRING, INTEGER, TEXT, ARRAY} = Sequelize
 
 const Lesson = db.define('lesson', {
   id: {
@@ -23,6 +23,14 @@ const Lesson = db.define('lesson', {
     validate: {
       notEmpty: true
     }
+  },
+
+  documents: {
+    type: ARRAY(TEXT),
+    defaultValue: [
+      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+    ]
   }
 })
 

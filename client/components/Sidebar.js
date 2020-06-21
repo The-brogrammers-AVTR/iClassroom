@@ -119,23 +119,7 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
   const [error, setError] = useState('')
   const [progress, setProgress] = useState(0)
 
-  // const onSubmit = (ev) => {
-  //   ev.preventDefault()
-  //   console.log('props', history)
-  //   try {
-  //     update(
-  //       {
-  //         syllabus: syllabusFile,
-  //       },
-  //       id,
-  //       history.push
-  //     )
-  //   } catch (exception) {
-  //     setError({error: exception.response.data.message})
-  //   }
-  // }
-
-  const handleUpload = async e => {
+  const handleUpload = e => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
 

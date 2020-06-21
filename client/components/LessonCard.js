@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {removeLesson} from '../store'
 import {
   IconButton,
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
   }
 })
 
-const LessonCard = ({title, description, id, remove, idx}) => {
+const LessonCard = ({title, description, id, documents, remove, idx}) => {
   const [expanded, setExpanded] = useState(false)
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false)
@@ -68,6 +69,19 @@ const LessonCard = ({title, description, id, remove, idx}) => {
               <ExpansionPanelDetails>
                 <Typography>{description}</Typography>
               </ExpansionPanelDetails>
+              {documents.length > 0 &&
+                documents.map(document => (
+                  <ExpansionPanelDetails>
+                    <a
+                      href={document}
+                      rel="noreferrer"
+                      target="_blank"
+                      download
+                    >
+                      Link
+                    </a>
+                  </ExpansionPanelDetails>
+                ))}
             </ExpansionPanel>
           </Grid>
           <IconButton>
