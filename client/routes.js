@@ -30,16 +30,19 @@ import {
   getLessons,
   readUserassignments,
   getUserCourses,
-  readAssignments
+  readAssignments,
+  getTest
 } from './store'
 import Test from './components/test/Test'
 import Video2 from './components/video/Video2'
+import TestStudent from './components/test/TestStudent'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
   render() {
-    const {isLoggedIn, user} = this.props
+    const {isLoggedIn, user, isTeacher} = this.props
+
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -64,7 +67,14 @@ class Routes extends Component {
                 <Route path="/course/:id/assignments" component={Assignments} />
                 <Route path="/course/:id/canvas" component={Live} />
                 <Route path="/makeassignment" component={MakeAssignment} />
-                <Route path="/course/:id/test" component={Test} />
+                {isTeacher ? (
+                  <Route path="/course/:id/test/:testId" component={Test} />
+                ) : (
+                  <Route
+                    path="/course/:id/test/:testId"
+                    component={TestStudent}
+                  />
+                )}
                 <Route
                   path="/manageassignments"
                   component={ManageAssignments}
@@ -88,12 +98,14 @@ const mapState = ({user}) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!user.id,
+    isTeacher: !!user.isTeacher,
     user
   }
 }
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
+      dispatch(getTest())
       dispatch(getCourses())
       dispatch(getTeachers())
       dispatch(getStudents())
@@ -102,6 +114,7 @@ const mapDispatch = dispatch => {
       dispatch(readUserassignments())
       dispatch(getUserCourses())
       dispatch(readAssignments())
+
       dispatch(me())
     }
   }

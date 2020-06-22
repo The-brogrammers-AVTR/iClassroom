@@ -21,7 +21,7 @@ const UserCourse = db.define('UserCourse')
 //     defaultValue: false
 //   }
 // })
-
+Assignment.hasMany(Test)
 User.hasMany(UserCourse)
 UserCourse.belongsTo(User)
 

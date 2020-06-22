@@ -9,7 +9,8 @@ const ManageAssignments = ({
   load,
   create,
   students,
-  allAssignments
+  allAssignments,
+  instructor
 }) => {
   if (assignment.length === 0) {
     return null
@@ -30,15 +31,15 @@ const ManageAssignments = ({
   }))
 
   const columns = [
-    {title: 'Assignment ID', field: 'assignmentid'},
-    {title: 'Assignment#', field: 'assignNum'},
+    // {title: 'Assignment ID', field: 'assignmentid', editable: 'never'},
+    {title: 'Assignment#', field: 'assignNum', editable: 'never'},
     {title: 'Assignment', field: 'title'},
-    {title: 'Course', field: 'courseId'},
+    {title: 'Course', field: 'courseId', initialEditValue: course.id},
     {title: 'Category', field: 'category'},
     {title: 'Description', field: 'description'},
     {title: 'Start Date', field: 'startDate'},
     {title: 'Due Date', field: 'endDate'},
-    {title: 'Teacher', field: 'userId'}
+    {title: 'Teacher', field: 'userId', initialEditValue: instructor.id}
   ]
 
   const newAssignmentID = allAssignments.length + 1

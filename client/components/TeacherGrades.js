@@ -20,12 +20,17 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
   }))
 
   const columns = [
-    {title: 'User Assignment ID', field: 'id'},
-    {title: 'Student ID', field: 'userId'},
-    {title: 'Student Name', field: 'studentname', defaultGroupOrder: 0},
-    {title: 'Assignment', field: 'assignment'},
-    {title: 'Complete', field: 'isComplete'},
-    {title: 'Grade', field: 'grade'}
+    // {title: 'User Assignment ID', field: 'id', editable: 'never'},
+    {title: 'Student ID', field: 'userId', editable: 'never'},
+    {
+      title: 'Student Name',
+      field: 'studentname',
+      defaultGroupOrder: 0,
+      editable: 'never'
+    },
+    {title: 'Assignment', field: 'assignment', editable: 'never'},
+    {title: 'Complete', field: 'isComplete', editable: 'never'},
+    {title: 'Grade', field: 'grade', type: 'numeric'}
   ]
 
   const handleUpdate = async (newData, resolve) => {

@@ -63,21 +63,38 @@ function WhiteBoard() {
   }
 
   const drawLine = () => {
-    console.log('2', color, stageEl.current.getStage(), layerEl.current)
-    addLine(color, stageEl.current.getStage(), layerEl.current)
+    console.log(
+      '2',
+      color,
+      stageEl.current.getStage(),
+      layerEl.current.children
+    )
+    addLine(
+      color,
+      stageEl.current.getStage(),
+      layerEl.current,
+      'brush',
+      layerEl.current.children
+    )
   }
 
-  const drawLine2 = line => {
-    // console.log(line)
+  // const drawLine2 = line => {
+  //   // console.log(line)
 
-    console.log('1', line)
-    addLine2(color, stageEl.current.getStage(), layerEl.current, 'brush', line)
-  }
+  //   console.log('1', line)
+  //   addLine2(color, stageEl.current.getStage(), layerEl.current, 'brush', line)
+  // }
 
   const eraseLine = () => {
     let tcolor = color
     setColor('#ffff')
-    addLine(color, stageEl.current.getStage(), layerEl.current, 'erase')
+    addLine(
+      color,
+      stageEl.current.getStage(),
+      layerEl.current,
+      'erase',
+      layerEl.current.children
+    )
     setColor(tcolor)
   }
   const drawText = () => {
@@ -156,6 +173,12 @@ function WhiteBoard() {
     }
   })
 
+  socket.on('line', collection => {
+    console.log(collection)
+    for (let i = 0; i < collection.length; i++) {
+      console.log(JSON.parse(collection[i]))
+    }
+  })
   socket.on('circle', circle => {
     //console.log('cirles from socket,', circle)
     setCircles(circle)
@@ -186,7 +209,7 @@ function WhiteBoard() {
   const handleClose = () => {
     setAction({action: false})
   }
-
+  console.log(stageEl)
   return (
     <div className="whiteboard" id="crosshair">
       <h1>Whiteboard</h1>
