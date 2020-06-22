@@ -299,13 +299,13 @@ const Sidebar = ({
                 </div>
               </ListItemText>
             </ListItem>
-
+            {/* 
             <ListItem className={classes.noPadding}>
               <ListItemIcon />
               <ListItemText>
                 <progress value={progress} max="100" />
               </ListItemText>
-            </ListItem>
+            </ListItem> */}
 
             <Divider />
             {user.isTeacher === true && (
