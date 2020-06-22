@@ -19,7 +19,8 @@ import {
   TeacherGrades,
   Verification,
   Live,
-  ReportCard
+  ReportCard,
+  TestStudent
 } from './components'
 import {
   me,
@@ -35,7 +36,7 @@ import {
 } from './store'
 import Test from './components/test/Test'
 import Video2 from './components/video/Video2'
-import TestStudent from './components/test/TestStudent'
+//import TestStudent from './components/TestStudent'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()

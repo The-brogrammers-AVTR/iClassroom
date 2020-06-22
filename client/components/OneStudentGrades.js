@@ -46,12 +46,17 @@ const OneStudentGrades = ({userassignments, user, course}) => {
           <TableBody>
             {userassignments
               .filter(userassign => userassign.courseId === course.id)
-              .map(assign => (
-                <TableRow key={assign.id}>
-                  <TableCell align="left">{assign.assignment.title}</TableCell>
-                  <TableCell align="left">{assign.grade}</TableCell>
-                </TableRow>
-              ))}
+              .map(assign => {
+                console.log(assign)
+                return (
+                  <TableRow key={assign.id}>
+                    <TableCell align="left">
+                      {assign.assignment.title}
+                    </TableCell>
+                    <TableCell align="left">{assign.grade}</TableCell>
+                  </TableRow>
+                )
+              })}
           </TableBody>
         </Table>
       </TableContainer>
