@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
-import {removeLesson} from '../store'
+import {storage} from '../firebase'
+import {removeLesson, updateLesson} from '../store'
 import {
   IconButton,
   makeStyles,
   Typography,
   ThemeProvider,
   Grid,
+  Tooltip,
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary
@@ -16,6 +17,7 @@ import theme from './Theme'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import AttachmentIcon from '@material-ui/icons/Attachment'
 
 const useStyles = makeStyles({
   root: {
@@ -28,15 +30,95 @@ const useStyles = makeStyles({
     flexBasis: '33.33%',
     flexShrink: 0
     // color: theme.palette.primary.main,
+  },
+  input: {
+    display: 'none'
   }
 })
 
-const LessonCard = ({title, description, id, documents, remove, idx}) => {
+const LessonCard = ({
+  title,
+  description,
+  id,
+  documents,
+  remove,
+  idx,
+  user,
+  update
+}) => {
   const [expanded, setExpanded] = useState(false)
+  const [docs, setDocs] = useState(documents.length ? documents : [])
+  const [progress, setProgress] = useState(0)
+  const [error, setError] = useState('')
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false)
   }
+
+  const handleUpload = e => {
+    console.log(e.target.files)
+    const links = []
+    if (e.target.files) {
+      const attachments = e.target.files
+      Object.values(attachments).map(attachment => {
+        const attachmentInfo = {}
+        attachmentInfo.name = attachment.name
+        const uploadTask = storage
+          .ref(`lessons/${attachment.name}`)
+          .put(attachment)
+        return uploadTask.on(
+          'state_changed',
+          snapshot => {
+            const progressBar = Math.round(
+              snapshot.bytesTransferred / snapshot.totalBytes * 100
+            )
+            setProgress(progressBar)
+          },
+          error => {
+            console.log(error)
+          },
+          () => {
+            storage
+              .ref('lessons')
+              .child(attachment.name)
+              .getDownloadURL()
+              .then(URL => {
+                console.log(URL)
+                attachmentInfo.link = URL
+                links.push(attachmentInfo)
+              })
+          }
+        )
+      })
+      console.log({links: links})
+      setDocs(links)
+
+      console.log('docs', docs)
+    }
+  }
+
+  const onSubmit = ev => {
+    ev.preventDefault()
+    try {
+      update(
+        {
+          documents: docs
+        },
+        id,
+        history.push
+      )
+    } catch (exception) {
+      setError({error: exception.response.data.message})
+    }
+  }
+
+  useEffect(
+    () => {
+      console.log('useEffect', docs)
+    },
+    [docs]
+  )
+
   const classes = useStyles()
   return (
     <ThemeProvider theme={theme}>
@@ -70,14 +152,37 @@ const LessonCard = ({title, description, id, documents, remove, idx}) => {
               <ExpansionPanelDetails>
                 <Typography>{description}</Typography>
               </ExpansionPanelDetails>
-              {documents.length > 0 &&
-                documents.map((document, idx) => (
+
+              {docs.length > 0 &&
+                docs.map((doc, idx) => (
                   <ExpansionPanelDetails key={idx}>
-                    <a href={document.link} rel="noreferrer" target="_blank">
-                      {document.name}
+                    <a href={doc.link} rel="noreferrer" target="_blank">
+                      {doc.name}
                     </a>
                   </ExpansionPanelDetails>
                 ))}
+
+              {user.isTeacher && (
+                <ExpansionPanelDetails>
+                  <div className="row">
+                    <input
+                      // className={classes.input}
+                      id="icon-button-lessons"
+                      multiple
+                      type="file"
+                      onChange={handleUpload}
+                    />
+                    <progress value={progress} max="100" />
+                    <button
+                      type="submit"
+                      disabled={documents === docs}
+                      onClick={onSubmit}
+                    >
+                      Replace Files
+                    </button>
+                  </div>
+                </ExpansionPanelDetails>
+              )}
             </ExpansionPanel>
           </Grid>
           <IconButton>
@@ -97,9 +202,8 @@ const mapStateToProps = ({user}) => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    remove: id => {
-      dispatch(removeLesson(id))
-    }
+    remove: id => dispatch(removeLesson(id)),
+    update: (lesson, id, push) => dispatch(updateLesson(lesson, id, push))
   }
 }
 
