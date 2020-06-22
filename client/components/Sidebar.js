@@ -112,30 +112,23 @@ const useStyles = makeStyles({
   }
 })
 
-const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
+const Sidebar = ({
+  id,
+  name,
+  code,
+  syllabus,
+  user,
+  instructor,
+  update,
+  assignment
+}) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const [syllabusFile, setSyllabusFile] = useState(syllabus ? syllabus : '')
   const [error, setError] = useState('')
   const [progress, setProgress] = useState(0)
 
-  // const onSubmit = (ev) => {
-  //   ev.preventDefault()
-  //   console.log('props', history)
-  //   try {
-  //     update(
-  //       {
-  //         syllabus: syllabusFile,
-  //       },
-  //       id,
-  //       history.push
-  //     )
-  //   } catch (exception) {
-  //     setError({error: exception.response.data.message})
-  //   }
-  // }
-
-  const handleUpload = async e => {
+  const handleUpload = e => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
 
@@ -177,6 +170,8 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
   const handleDrawerOpen = () => {
     setOpen(true)
   }
+
+  const assignmentId = assignment.find(as => as.title.toLowerCase() === 'test')
 
   const handleDrawerClose = () => {
     setOpen(false)
@@ -304,13 +299,13 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
                 </div>
               </ListItemText>
             </ListItem>
-
+            {/* 
             <ListItem className={classes.noPadding}>
               <ListItemIcon />
               <ListItemText>
                 <progress value={progress} max="100" />
               </ListItemText>
-            </ListItem>
+            </ListItem> */}
 
             <Divider />
             {user.isTeacher === true && (
@@ -358,8 +353,11 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
                 <ListItemText> Assignments </ListItemText>
               </ListItem>
             </Link>
-
-            <Link to={`/course/${id}/test`}>
+            <Link
+              to={`/course/${id}/test/${
+                assignmentId ? assignmentId.testId : 0
+              }`}
+            >
               <ListItem button>
                 <Tooltip title="Test">
                   <ListItemIcon>
@@ -412,8 +410,8 @@ const Sidebar = ({id, name, code, syllabus, user, instructor, update}) => {
   )
 }
 
-const mapStateToProps = ({user}) => {
-  return {user}
+const mapStateToProps = ({user, assignment}) => {
+  return {user, assignment}
 }
 
 const mapDispatchToProps = dispatch => {

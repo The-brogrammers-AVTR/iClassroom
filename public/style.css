@@ -30,6 +30,14 @@ label {
   padding-top: 0;
 }
 
+#row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0;
+  width: 100%;
+}
+
 /* courseHome */
 .course-home-wrapper {
   display: flex;
@@ -854,7 +862,24 @@ body {
 #displayUsers ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.green {
+  width: 20px;
+  height: 20px;
 
+  background-color: greenyellow;
+}
+.red {
+  width: 20px;
+  height: 20px;
+
+  background-color: red;
+}
+
+.mark {
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+}
 .image {
   width: 250px;
   height: 250px;
