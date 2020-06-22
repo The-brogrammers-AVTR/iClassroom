@@ -30,9 +30,6 @@ const useStyles = makeStyles({
     flexBasis: '33.33%',
     flexShrink: 0
     // color: theme.palette.primary.main,
-  },
-  input: {
-    display: 'none'
   }
 })
 
@@ -124,7 +121,7 @@ const LessonCard = ({
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <Grid container direction="row" justify="space-between">
-          <Grid item xs={11}>
+          <Grid item xs={12}>
             <ExpansionPanel
               expanded={expanded === 'panel1'}
               onChange={handleChange('panel1')}
@@ -134,13 +131,13 @@ const LessonCard = ({
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
               >
-                <Typography
+                {/* <Typography
                   className={classes.heading}
                   color="primary"
                   variant="h6"
                 >
                   Lesson {idx + 1}
-                </Typography>
+                </Typography> */}
                 <Typography
                   className={classes.heading}
                   color="primary"
@@ -164,33 +161,39 @@ const LessonCard = ({
 
               {user.isTeacher && (
                 <ExpansionPanelDetails>
-                  <div className="row">
-                    <input
-                      // className={classes.input}
-                      id="icon-button-lessons"
-                      multiple
-                      type="file"
-                      onChange={handleUpload}
-                    />
-                    <progress value={progress} max="100" />
-                    <button
-                      type="submit"
-                      disabled={documents === docs}
-                      onClick={onSubmit}
-                    >
-                      Replace Files
-                    </button>
+                  <div id="row">
+                    <div className="row">
+                      <input
+                        // className={classes.input}
+                        id="icon-button-lessons"
+                        multiple
+                        type="file"
+                        onChange={handleUpload}
+                      />
+
+                      {progress === 100 ? (
+                        <button
+                          type="submit"
+                          disabled={documents === docs}
+                          onClick={onSubmit}
+                        >
+                          Replace Files
+                        </button>
+                      ) : (
+                        <progress value={progress} max="100" />
+                      )}
+                    </div>
+
+                    <Tooltip title="Delete Lesson">
+                      <IconButton>
+                        <DeleteIcon onClick={() => remove(id)} />
+                      </IconButton>
+                    </Tooltip>
                   </div>
                 </ExpansionPanelDetails>
               )}
             </ExpansionPanel>
           </Grid>
-          <IconButton>
-            <EditIcon />
-          </IconButton>
-          <IconButton>
-            <DeleteIcon onClick={() => remove(id)} />
-          </IconButton>
         </Grid>
       </div>
     </ThemeProvider>
