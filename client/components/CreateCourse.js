@@ -48,7 +48,6 @@ const CreateCourse = ({user, save, load, history}) => {
     if (action) {
       ev.preventDefault()
       try {
-        await load()
         await save(
           {
             name: name,
@@ -60,6 +59,7 @@ const CreateCourse = ({user, save, load, history}) => {
           },
           history.push
         )
+        await load()
         setName('')
         setCode(Math.ceil(Math.random() * 4000))
         setAction('')

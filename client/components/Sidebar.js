@@ -128,23 +128,7 @@ const Sidebar = ({
   const [error, setError] = useState('')
   const [progress, setProgress] = useState(0)
 
-  // const onSubmit = (ev) => {
-  //   ev.preventDefault()
-  //   console.log('props', history)
-  //   try {
-  //     update(
-  //       {
-  //         syllabus: syllabusFile,
-  //       },
-  //       id,
-  //       history.push
-  //     )
-  //   } catch (exception) {
-  //     setError({error: exception.response.data.message})
-  //   }
-  // }
-
-  const handleUpload = async e => {
+  const handleUpload = e => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
 
@@ -315,13 +299,13 @@ const Sidebar = ({
                 </div>
               </ListItemText>
             </ListItem>
-
+            {/* 
             <ListItem className={classes.noPadding}>
               <ListItemIcon />
               <ListItemText>
                 <progress value={progress} max="100" />
               </ListItemText>
-            </ListItem>
+            </ListItem> */}
 
             <Divider />
             {user.isTeacher === true && (

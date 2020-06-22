@@ -88,6 +88,15 @@ export const createAssignmentTest = (assignment, push) => {
     })
     console.log(students)
     push(`/course/${assignment.courseId}/assignments`)
+    //export const createAssignment = (assignment, push) => {
+    // return async dispatch => {
+    //   const createdAssignment = (await axios.post('/api/assignments', assignment))
+    //     .data
+    // if (push) {
+    //   push(`/course/${assignment.courseId}/assignments`)
+    // } else {
+    //   null
+    // }
     dispatch(_createAssignment(createdAssignment))
   }
 }

@@ -48,14 +48,11 @@ const createLesson = (lesson, push, id) => {
   }
 }
 
-const updateLesson = (lesson, push) => {
+const updateLesson = (lesson, id, push) => {
   return async dispatch => {
-    const {data: updatedLesson} = await axios.put(
-      `/api/lessons/${lesson.id}`,
-      lesson
-    )
+    const {data: updatedLesson} = await axios.put(`/api/lessons/${id}`, lesson)
     dispatch(_updateLesson(updatedLesson))
-    push('/')
+    // push('/')
   }
 }
 
