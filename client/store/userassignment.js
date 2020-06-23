@@ -5,6 +5,7 @@ export const READ_USERASSIGNMENT = 'READ_USERASSIGNMENT'
 export const READ_USERASSIGNMENTS = 'READ_USERASSIGNMENTS'
 export const UPDATE_USERASSIGNMENT = 'UPDATE_USERASSIGNMENT'
 export const CREATE_USERASSIGNMENT = 'CREATE_USERASSIGNMENT'
+export const DELETE_USERASSIGNMENT = 'DELETE_USERASSIGNMENT'
 
 //ACTION CREATORS
 const _readUserassignment = userassignment => {
@@ -32,6 +33,13 @@ const _createUserassignment = userassignment => {
   return {
     type: CREATE_USERASSIGNMENT,
     userassignment
+  }
+}
+
+const _deleteUserassignment = id => {
+  return {
+    type: DELETE_USERASSIGNMENT,
+    id
   }
 }
 
@@ -70,6 +78,13 @@ export const createUserassignment = userassignment => {
   }
 }
 
+export const deleteUserassignment = id => {
+  return async dispatch => {
+    await axios.delete(`/api/userassignments/${id}`)
+    dispatch(_deleteUserassignment(id))
+  }
+}
+
 //REDUCER
 export default function(state = [], action) {
   switch (action.type) {
@@ -86,6 +101,8 @@ export default function(state = [], action) {
             ? action.userassignment
             : userassignment
       )
+    case DELETE_USERASSIGNMENT:
+      return state.filter(userassign => userassign.id !== action.id)
     default:
       return state
   }

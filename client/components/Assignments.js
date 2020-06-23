@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {deleteAssignment} from '../store/assignment'
+import {deleteUserassignment} from '../store/userassignment'
 import TableAssignments from './TableAssignments'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
@@ -19,7 +20,8 @@ class Assignments extends Component {
     const {
       course,
       teachers,
-      remove,
+      removeAssign,
+      removeUserassign,
       user,
       save,
       load,
@@ -32,6 +34,7 @@ class Assignments extends Component {
     )
 
     const isInstructor = instructor.id === user.id
+    const allUserassignments = this.props.userassignment
     const theUserassignments = this.props.userassignment.filter(
       userassignment => userassignment.userId === user.id
     )
@@ -51,13 +54,15 @@ class Assignments extends Component {
             <ManageAssignments
               assignment={assignmentsForCourse}
               course={course}
-              remove={remove}
+              removeAssign={removeAssign}
+              removeUserassign={removeUserassign}
               save={save}
               load={load}
               create={create}
               students={filteredStudents}
               allAssignments={allAssignments}
               instructor={instructor}
+              allUserassignments={allUserassignments}
             />
           </Grid>
         ) : (
@@ -91,8 +96,13 @@ const mapStateToProps = (
 
 const mapDispatchToProps = dispatch => {
   return {
-    remove: id => {
+    removeAssign: id => {
+      console.log('deleting assign', id)
       dispatch(deleteAssignment(id))
+    },
+    removeUserassign: id => {
+      console.log('deleting userassign', id)
+      dispatch(deleteUserassignment(id))
     },
     save: assignment => dispatch(createAssignment(assignment)),
     update: (id, userassignment) => {
