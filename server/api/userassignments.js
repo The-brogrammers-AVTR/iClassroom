@@ -50,3 +50,14 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  const id = req.params.id
+  try {
+    const userassignment = await Userassignment.findByPk(id)
+    userassignment.destroy()
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
