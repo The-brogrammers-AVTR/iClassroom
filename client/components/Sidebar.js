@@ -32,10 +32,7 @@ import SmsIcon from '@material-ui/icons/Sms'
 import CastForEducationIcon from '@material-ui/icons/CastForEducation'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty'
-// import OndemandVideoIcon from '@material-ui/icons/OndemandVideo' //broadcast
-// import VideocamIcon from '@material-ui/icons/Videocam' //videocall
-// import GroupIcon from '@material-ui/icons/Group' //groupwork
-// import HelpIcon from '@material-ui/icons/Help' //help
+import VideoLabelIcon from '@material-ui/icons/VideoLabel'
 
 import {storage} from '../firebase'
 import AttachmentIcon from '@material-ui/icons/Attachment'
@@ -385,24 +382,14 @@ const Sidebar = ({
               }&room=${name}`}
             >
               <ListItem button>
-                <Tooltip title="Whiteboard">
+                <Tooltip title="Video Classroom">
                   <ListItemIcon>
-                    <CastForEducationIcon />
+                    <VideoLabelIcon />
                   </ListItemIcon>
                 </Tooltip>
-                <ListItemText> White Board </ListItemText>
+                <ListItemText> Classroom </ListItemText>
               </ListItem>
             </Link>
-            {/* <Link
-              
-            >
-              <ListItem button>
-                <ListItemIcon>
-                  <SmsIcon />
-                </ListItemIcon>
-                <ListItemText> Chat Room </ListItemText>
-              </ListItem>
-            </Link> */}
           </List>
         </Drawer>
       </div>

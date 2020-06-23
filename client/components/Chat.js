@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import socketIOClient from 'socket.io-client'
 
 const location = `${window.location.hostname}:8080`
@@ -30,6 +30,7 @@ class Chat extends Component {
   componentDidMount() {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
+
     socket.emit('getUsers', {userName, room})
     socket.emit('joinRoom', {userName, room})
     // socket.on('chat message', function(msg) {
@@ -232,4 +233,4 @@ const mapState = ({user}) => {
   return {user}
 }
 
-export default connect(mapState)(Chat)
+export default withRouter(connect(mapState)(Chat))

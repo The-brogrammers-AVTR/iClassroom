@@ -31,9 +31,11 @@ class Live extends React.Component {
         <div>
           <Sidebar {...course} instructor={instructor} />
           <div className="video-whiteboard-wrapper">
-            <Video2 />
+            <div className="video-chat-wrapper">
+              <Video2 />
+              <Chat />
+            </div>
             <Whiteboard />
-            {/* <Chat /> */}
           </div>
         </div>
       </ThemeProvider>
