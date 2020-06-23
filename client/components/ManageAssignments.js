@@ -42,8 +42,8 @@ const ManageAssignments = ({
     {title: 'Teacher', field: 'userId', initialEditValue: instructor.id}
   ]
 
-  //const newAssignmentID = Math.max(...allAssignments.map(assign => assign.id))
-  //console.log('new ass id', newAssignmentID)
+  // const newAssignmentID = Math.max(...allAssignments.map(assign => assign.id))
+  // console.log('new ass id', newAssignmentID)
   const newAssignmentID = allAssignments.length + 1
   const handleCreateUserassignments = students => {
     students.forEach(student => {
@@ -65,7 +65,7 @@ const ManageAssignments = ({
   const handleDeleteUserassignments = (assignid, callback) => {
     allUserassignments.forEach(userassign => {
       if (userassign.assignmentId === assignid) {
-        console.log(userassign.id)
+        //console.log(userassign.id)
         removeUserassign(userassign.id)
       }
     })
@@ -74,7 +74,10 @@ const ManageAssignments = ({
 
   const handleAdd = async (newData, resolve, callback) => {
     await save(newData)
-    await callback(students)
+    setTimeout(function() {
+      //console.log('in handleAdd', newAssignmentID)
+      callback(students)
+    }, 500)
     resolve()
   }
 
