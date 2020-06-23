@@ -6,7 +6,24 @@ import {connect} from 'react-redux'
 import {v4} from 'uuid'
 import {updateUserassignment} from '../store/userassignment'
 const moment = require('moment')
-import Timer from 'timer-component'
+import Countdown from 'react-countdown'
+
+const renderer = ({hours, minutes, seconds, completed}) => {
+  if (completed) {
+    document.getElementById('testSubmit').disabled = true
+    // Render a completed state
+    return <Completionist />
+  } else {
+    // Render a countdown
+    return (
+      <span>
+        {hours}:{minutes}:{seconds}
+      </span>
+    )
+  }
+}
+
+const Completionist = () => <h1>Test Is Done</h1>
 
 class TestStudent extends Component {
   constructor(props) {
@@ -14,7 +31,7 @@ class TestStudent extends Component {
     console.log('props', props)
     this.state = {
       answers: new Set(),
-      grade: 0,
+      grade: null,
       submit: 0,
       allRows: [],
       count: 0
@@ -27,12 +44,12 @@ class TestStudent extends Component {
   generateTest() {
     let testNumber = this.props.match.params.testId
     const {test} = this.props
-    if (test) {
-      console.log(test)
+    if (test.length > 0) {
+      //console.log(test)
       let found = test.find(elem => {
         return elem.id === testNumber * 1
       })
-      console.log(found, this.props.match.params.testId)
+      //console.log(found, this.props.match.params.testId)
 
       let rowObj
       let allRows = []
@@ -47,13 +64,13 @@ class TestStudent extends Component {
         allRows.push(rowObj)
       })
       this.setState({allRows: allRows})
-      console.log('all rows', allRows)
+      //console.log('all rows', allRows)
     }
   }
   findUserAssignment() {
     const {userassignment, user} = this.props
     const {id, testId} = this.props.match.params
-    console.log(id, testId)
+    //console.log(id, testId)
     let oneUserAssignment = userassignment.find(ua => {
       if (
         ua.courseId == id &&
@@ -69,75 +86,85 @@ class TestStudent extends Component {
   }
 
   submit() {
+    let index = 0
     let grade = 0
     let userAssignment = this.findUserAssignment()
-    const {user, assignment, userassignment} = this.props
-    console.log(this.state.submit, userAssignment)
-    if (this.state.submit < 1) {
-      const {allRows} = this.state
-
-      let c = document.getElementsByClassName('a')
-
-      for (let i = 0; i < c.length; i++) {
-        if (c[i].checked) {
-          if (c[i].value === c[i].placeholder) {
-            c[i].innerHTML = ' <div className="green">hello</div>'
-            this.setState(
-              this.state.answers.add({
-                a: c[i].value,
-                b: c[i].placeholder,
-                isCorrect: true
-              })
-            )
-          } else if (c[i].value !== c[i].placeholder) {
-            this.setState(
-              this.state.answers.add({
-                a: c[i].value,
-                b: c[i].placeholder,
-                isCorrect: false
-              })
-            )
+    if (userAssignment) {
+      const {user, assignment, userassignment} = this.props
+      //console.log(this.state.submit, userAssignment)
+      if (this.state.submit < 1) {
+        const {allRows} = this.state
+        let d = document.getElementsByClassName('quistionContainer')
+        let c = document.getElementsByClassName('a')
+        console.log('c', c, 'd', d)
+        for (let i = 0; i < c.length; i++) {
+          if (c[i].checked) {
+            if (c[i].value === c[i].placeholder) {
+              d[index].style.backgroundColor = 'green'
+              this.setState(
+                this.state.answers.add({
+                  a: c[i].value,
+                  b: c[i].placeholder,
+                  isCorrect: true
+                })
+              )
+              index++
+            } else if (c[i].value !== c[i].placeholder) {
+              d[index].style.backgroundColor = 'red'
+              this.setState(
+                this.state.answers.add({
+                  a: c[i].value,
+                  b: c[i].placeholder,
+                  isCorrect: false
+                })
+              )
+              index++
+            }
           }
         }
+        let count = 0
+        //console.log(allRows)
+        let totalQ = allRows[0].length
+        let correct = this.state.answers.forEach(ans => {
+          if (ans.isCorrect) {
+            count++
+            return ans
+          }
+        })
+        grade = 100 / totalQ * count * 1
+        this.setState({grade: grade})
+        //console.log(this.state.answers, grade, correct)
+        this.setState(prevState => {
+          return {submit: prevState.submit + 1}
+        })
       }
-      let count = 0
-      console.log(allRows)
-      let totalQ = allRows[0].length
-      let correct = this.state.answers.forEach(ans => {
-        if (ans.isCorrect) {
-          count++
-          return ans
-        }
-      })
-      grade = 100 / totalQ * count * 1
-      this.setState({grade: grade})
-      console.log(this.state.answers, grade, correct)
       this.setState(prevState => {
         return {submit: prevState.submit + 1}
       })
-    }
-    this.setState(prevState => {
-      return {submit: prevState.submit + 1}
-    })
-    console.log(this.state.submit)
-    let id = assignment.find(as => as.testId == this.props.match.params.testId)
-      .id
+      //console.log(this.state.submit)
+      let id = assignment.find(
+        as => as.testId == this.props.match.params.testId
+      ).id
 
-    console.log(
-      this.state.submit,
-      id,
-      assignment,
-      this.props.match.params.testId,
-      userAssignment.id
-    )
-    this.props.completeAssignment(userAssignment.id * 1, {
-      grade: grade,
-      isComplete: true,
-      courseId: this.props.match.params.id,
-      userId: user.id,
-      assignmentId: id,
-      userName: `${user.firstName}  ${user.lastName}`
-    })
+      // console.log(
+      //   this.state.submit,
+      //   id,
+      //   assignment,
+      //   this.props.match.params.testId,
+      //   userAssignment
+      // )
+
+      this.props.completeAssignment(userAssignment.id * 1, {
+        grade: grade,
+        isComplete: true,
+        courseId: this.props.match.params.id,
+        userId: user.id,
+        assignmentId: id,
+        userName: `${user.firstName}  ${user.lastName}`
+      })
+    } else {
+      this.setState({grade: null})
+    }
   }
   checkStudent() {
     const {test, isTest, userassignment} = this.props
@@ -177,38 +204,11 @@ class TestStudent extends Component {
     //   console.log(true)
     // }
   }
-  timer(timer) {
-    //var timer = 8000, //in seconds for now
-    if (this.state.count === 0) {
-      this.setState(prevState => {
-        return {count: prevState.count++}
-      })
-      console.log(this.state.count)
-      let minutes, seconds
-      setInterval(function() {
-        if (document.getElementById('safeTimerDisplay')) {
-          minutes = parseInt(timer / 60, 10)
-          seconds = parseInt(timer % 60, 10)
 
-          minutes = minutes < 10 ? '0' + minutes : minutes
-          seconds = seconds < 10 ? '0' + seconds : seconds
-
-          document.getElementById('safeTimerDisplay').textContent =
-            minutes + ':' + seconds
-
-          if (--timer < 0) {
-            timer = 0
-            // timer = duration; // uncomment this line to reset timer automatically after reaching 0
-          }
-        }
-      }, 1000)
-    }
-  }
   // componentWillUnmount() {
   //   this.timer(0)
   // }
   componentDidMount() {
-    this.timer(8000)
     this.generateTest()
   }
   render() {
@@ -221,9 +221,13 @@ class TestStudent extends Component {
       <div>
         {!isTest ? (
           <div>
-            {grade > 0 ? <h1>{grade}</h1> : ''}
+            {grade > 0 ? (
+              <h1>{grade !== null ? grade : ' this test not for you '}</h1>
+            ) : (
+              ''
+            )}
             <div id="safeTimerDisplay" />
-            <Timer seconds={60} />
+            <Countdown date={Date.now() + 60000} renderer={renderer} />
             <h1>TEST: {test.name}</h1>
             <form
               // action="/course/3/assignments"
@@ -282,7 +286,7 @@ class TestStudent extends Component {
                     )
                   })
                 : ''}
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Submit" id="testSubmit" />
             </form>
           </div>
         ) : (
