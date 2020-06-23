@@ -3,9 +3,9 @@ import {withRouter} from 'react-router-dom'
 import axios from 'axios'
 const XLSX = require('xlsx')
 import TestTeacher from './test/TestTeacher'
-import TestStudent from './test/TestStudent'
+import TestStudent from './TestStudent'
 import {getTest, createTest, deleteTest} from '../store/tests'
-import {createAssignment} from '../store/assignment'
+import {createAssignmentTest} from '../store/assignment'
 import {connect} from 'react-redux'
 const moment = require('moment')
 
@@ -229,7 +229,7 @@ const mapDispatch = dispatch => {
       dispatch(createTest(testObj))
     },
     createTest: (testObj, push) => {
-      dispatch(createAssignment(testObj, push))
+      dispatch(createAssignmentTest(testObj, push))
     },
     delete: id => {
       dispatch(deleteTest(id))
