@@ -65,6 +65,7 @@ export const updateUserassignment = (id, userassignment) => {
       userassignment
     )).data
     dispatch(_updateUserassignment(updatedUserassignment))
+    dispatch(readUserassignments())
   }
 }
 
@@ -75,6 +76,7 @@ export const createUserassignment = userassignment => {
       userassignment
     )).data
     dispatch(_createUserassignment(createdUserassignment))
+    dispatch(readUserassignments())
   }
 }
 

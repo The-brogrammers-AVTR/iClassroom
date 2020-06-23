@@ -30,6 +30,14 @@ label {
   padding-top: 0;
 }
 
+#row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0;
+  width: 100%;
+}
+
 /* courseHome */
 .course-home-wrapper {
   display: flex;
@@ -204,9 +212,8 @@ body {
   height: 100%;
 }
 .whiteboard {
-  width: 50%;
-  height: 100%;
-  border: solid black 7px;
+  border: solid black 5px;
+  margin: 1%;
 }
 
 /* #imojis {
@@ -751,12 +758,10 @@ body {
 }
 /* video */
 .video-wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-left: 6%;
-  margin-top: 1%;
-  max-width: 600px;
-  border: solid 1px black;
+  margin: 1%;
+  border: solid 5px black;
+  border-radius: 10px;
+  width: 600px;
 }
 
 .video-header {
@@ -770,15 +775,24 @@ body {
 
 .video-whiteboard-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+.video-chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
 }
 
 /* chat */
 
 #chat-wrapper {
-  border: solid 2px black;
+  margin: 1%;
+  border: solid 5px black;
+  border-radius: 10px;
   width: 600px;
 }
+
 #message-wrapper {
   height: 350px;
   display: flex;

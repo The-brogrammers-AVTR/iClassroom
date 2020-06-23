@@ -1,5 +1,6 @@
 import axios from 'axios'
-
+import store from './index'
+import {createUserassignment} from './userassignment'
 //ACTION TYPES
 export const CREATE_ASSIGNMENT = 'CREATE_ASSIGNMENT'
 export const READ_ASSIGNMENT = 'READ_ASSIGNMENT'
@@ -43,10 +44,54 @@ const _readAssignments = assignments => {
 
 //THUNK CREATORS
 export const createAssignment = assignment => {
-  //export const createAssignment = (assignment, push) => {
+  console.log(assignment)
   return async dispatch => {
     const createdAssignment = (await axios.post('/api/assignments', assignment))
       .data
+    dispatch(_createAssignment(createdAssignment))
+  }
+}
+
+export const createAssignmentTest = (assignment, push) => {
+  console.log(assignment)
+  return async dispatch => {
+    const createdAssignment = (await axios.post('/api/assignments', assignment))
+      .data
+
+    const courses = await store.getState().courses
+    let studentNames = await store.getState().students
+
+    const students = courses.find(course => {
+      return course.id === assignment.courseId
+    })
+    let a = students.UserCourses.filter(stud =>
+      studentNames.find(s => stud.userId === s.id)
+    )
+    console.log({
+      students: students,
+      courses: courses,
+      a: a,
+      studentNames: studentNames
+    })
+
+    students.UserCourses.map((student, index) => {
+      //console.log(studentNames[index].firstName)
+      dispatch(
+        createUserassignment({
+          isComplete: false,
+          courseId: student.courseId,
+          userId: student.userId,
+          assignmentId: createdAssignment.id,
+          userName: studentNames[index].firstName
+        })
+      )
+    })
+    console.log(students)
+    push(`/course/${assignment.courseId}/assignments`)
+    //export const createAssignment = (assignment, push) => {
+    // return async dispatch => {
+    //   const createdAssignment = (await axios.post('/api/assignments', assignment))
+    //     .data
     // if (push) {
     //   push(`/course/${assignment.courseId}/assignments`)
     // } else {

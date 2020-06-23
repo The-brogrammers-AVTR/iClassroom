@@ -28,7 +28,8 @@ router.put('/:id', (req, res, next) => {
   Lesson.findByPk(req.params.id)
     .then(lesson =>
       lesson.update({
-        name: req.body.name
+        name: req.body.name,
+        documents: req.body.documents
       })
     )
     .then(lesson => res.send(lesson))

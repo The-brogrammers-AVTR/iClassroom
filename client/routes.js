@@ -19,7 +19,8 @@ import {
   TeacherGrades,
   Verification,
   Live,
-  ReportCard
+  ReportCard,
+  TestStudent
 } from './components'
 import {
   me,
@@ -35,7 +36,7 @@ import {
 } from './store'
 import Test from './components/test/Test'
 import Video2 from './components/video/Video2'
-import TestStudent from './components/test/TestStudent'
+//import TestStudent from './components/TestStudent'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -62,10 +63,8 @@ class Routes extends Component {
                 />
                 <Route path="/course/:id/lessons" component={Lessons} />
                 <Route path="/course/:id/grades" component={Grades} />
-                <Route path="/course/:id/videocall" component={Chat} />
-                <Route path="/course/:id/chatroom" component={Chat} />
                 <Route path="/course/:id/assignments" component={Assignments} />
-                <Route path="/course/:id/canvas" component={Live} />
+                <Route path="/course/:id/chatroom" component={Live} />
                 <Route path="/makeassignment" component={MakeAssignment} />
                 {isTeacher ? (
                   <Route path="/course/:id/test/:testId" component={Test} />
