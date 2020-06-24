@@ -21,7 +21,7 @@ class TestTeacher extends Component {
     if (this.state.submit < 1) {
       const {test, allRows} = this.props
 
-      let c = document.getElementsByClassName('a')
+      let c = document.getElementsByClassName('radio')
       for (let i = 0; i < c.length; i++) {
         if (c[i].checked) {
           if (c[i].value === c[i].placeholder) {

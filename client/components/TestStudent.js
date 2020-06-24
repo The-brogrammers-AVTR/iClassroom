@@ -95,7 +95,7 @@ class TestStudent extends Component {
       if (this.state.submit < 1) {
         const {allRows} = this.state
         let d = document.getElementsByClassName('quistionContainer')
-        let c = document.getElementsByClassName('a')
+        let c = document.getElementsByClassName('radio')
         console.log('c', c, 'd', d)
         for (let i = 0; i < c.length; i++) {
           if (c[i].checked) {
