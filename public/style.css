@@ -757,7 +757,7 @@ body {
 .quistionContainer {
   /* display: list-item; */
   border: solid white 1px;
-  background-color: rgb(250, 224, 224);
+  background-color: #add8e6;
   width: 80%;
   margin: 0 auto;
   font-size: 1.2rem;

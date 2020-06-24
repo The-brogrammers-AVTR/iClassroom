@@ -100,7 +100,8 @@ class TestStudent extends Component {
         for (let i = 0; i < c.length; i++) {
           if (c[i].checked) {
             if (c[i].value === c[i].placeholder) {
-              d[index].style.backgroundColor = 'green'
+              d[index].style.backgroundColor = '#c8e6c9'
+              //green
               this.setState(
                 this.state.answers.add({
                   a: c[i].value,
@@ -110,7 +111,8 @@ class TestStudent extends Component {
               )
               index++
             } else if (c[i].value !== c[i].placeholder) {
-              d[index].style.backgroundColor = 'red'
+              d[index].style.backgroundColor = '#ffcdd2'
+              //red
               this.setState(
                 this.state.answers.add({
                   a: c[i].value,
@@ -222,7 +224,11 @@ class TestStudent extends Component {
         {!isTest ? (
           <div>
             {grade > 0 ? (
-              <h1>{grade !== null ? grade : ' this test not for you '}</h1>
+              <h1>
+                {grade !== null
+                  ? `Your Grade: ${grade}`
+                  : ' this test not for you '}
+              </h1>
             ) : (
               ''
             )}
