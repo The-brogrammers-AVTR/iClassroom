@@ -781,6 +781,20 @@ body {
   height: 1.2rem;
   width: 1.2rem;
 }
+.btnContainer {
+  margin: 1rem auto;
+  text-align: center;
+}
+.submitBtn {
+  background-color: #6576bb;
+  color: white;
+  font-size: 2rem;
+  width: 200px;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+}
 
 /* video */
 .video-wrapper {

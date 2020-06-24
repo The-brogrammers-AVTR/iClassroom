@@ -228,7 +228,7 @@ class TestStudent extends Component {
             )}
             <div className="countDown">
               <span>Remaining Time: </span>
-              <Countdown date={Date.now() + 180000} renderer={renderer} />
+              <Countdown date={Date.now() + 120000} renderer={renderer} />
             </div>
             <h1>TEST: {test.name}</h1>
             <form
@@ -298,7 +298,14 @@ class TestStudent extends Component {
                     )
                   })
                 : ''}
-              <input type="submit" value="Submit" id="testSubmit" />
+              <div className="btnContainer">
+                <input
+                  type="submit"
+                  value="Submit"
+                  id="testSubmit"
+                  className="submitBtn"
+                />
+              </div>
             </form>
           </div>
         ) : (
