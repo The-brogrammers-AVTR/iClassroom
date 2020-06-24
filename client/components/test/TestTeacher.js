@@ -85,49 +85,57 @@ class TestTeacher extends Component {
                 //console.log(row)
                 return (
                   <div className="quistionContainer" key={i}>
-                    <h3>{row.question}</h3>
+                    <h3 className="question">{`${i + 1}. ${row.question}`}</h3>
                     <div className="radioButtons">
-                      <input
-                        placeholder={row.answer}
-                        type="radio"
-                        name={id}
-                        value={row.a}
-                        className="a"
-                      />
-                      <label htmlFor="a">{row.a}</label>
+                      <div className="choice">
+                        <input
+                          placeholder={row.answer}
+                          type="radio"
+                          name={id}
+                          value={row.a}
+                          className="radio"
+                        />
+                        <label htmlFor="a">{`a. ${row.a}`}</label>
+                      </div>
 
-                      <input
-                        placeholder={row.answer}
-                        type="radio"
-                        className="a"
-                        name={id}
-                        value={row.b}
-                      />
-                      <label htmlFor="b">{row.b}</label>
+                      <div className="choice">
+                        <input
+                          placeholder={row.answer}
+                          type="radio"
+                          className="radio"
+                          name={id}
+                          value={row.b}
+                        />
+                        <label htmlFor="b">{`b. ${row.b}`}</label>
+                      </div>
 
-                      <input
-                        placeholder={row.answer}
-                        type="radio"
-                        className="a"
-                        name={id}
-                        value={row.c}
-                      />
-                      <label htmlFor="c">{row.c}</label>
+                      <div className="choice">
+                        <input
+                          placeholder={row.answer}
+                          type="radio"
+                          className="radio"
+                          name={id}
+                          value={row.c}
+                        />
+                        <label htmlFor="c">{`c. ${row.c}`}</label>
+                      </div>
 
-                      <input
-                        placeholder={row.answer}
-                        type="radio"
-                        className="a"
-                        name={id}
-                        value={row.d}
-                      />
-                      <label htmlFor="d">{row.d}</label>
+                      <div className="choice">
+                        <input
+                          placeholder={row.answer}
+                          type="radio"
+                          className="radio"
+                          name={id}
+                          value={row.d}
+                        />
+                        <label htmlFor="d">{`d. ${row.d}`}</label>
+                      </div>
                     </div>
                   </div>
                 )
               })
             : ''}
-          <input type="submit" value="Submit" />
+          {/* <input type="submit" value="Submit" /> */}
         </form>
       </div>
     )
