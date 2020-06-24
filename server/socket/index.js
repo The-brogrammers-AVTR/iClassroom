@@ -58,6 +58,10 @@ module.exports = io => {
       //console.log('images', images)
       io.emit('images', images)
     })
+    socket.on('teacherPeerId', peerId => {
+      //console.log('cirle', circle)
+      io.emit('circle', peerId)
+    })
     // socket.on('getUsers', msg => {
     //   const user = getCurrentUser(socket.id)
     //   let roomUsers = usersForRoom(msg.room)

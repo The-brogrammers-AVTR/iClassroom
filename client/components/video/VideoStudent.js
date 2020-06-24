@@ -7,6 +7,8 @@ let conn
 let peer
 import {connect} from 'react-redux'
 import VideoTeacher from './VideoTeacher'
+import socketIOClient from 'socket.io-client'
+const socket = socketIOClient()
 
 function requestLocalVideo(callbacks) {
   // Monkeypatch for crossbrowser geusermedia
@@ -92,6 +94,9 @@ class VideoStudent extends Component {
   }
 
   async componentDidMount() {
+    socket.on('teacherPeerId', peerId => {
+      console.log(peerId)
+    })
     const {user} = this.props
     requestLocalVideo({
       success: function(stream) {
