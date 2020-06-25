@@ -37,7 +37,7 @@ const Assignment = db.define('assignment', {
     type: DATEONLY,
     allowNull: true
   },
-  assignmentURL: {
+  URL: {
     type: STRING,
     allowNull: true
   },

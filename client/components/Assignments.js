@@ -8,8 +8,10 @@ import {Grid} from '@material-ui/core'
 import ManageAssignments from './ManageAssignments'
 import {createAssignment} from '../store/assignment'
 import UploadExcel from './UploadExcel'
-import {updateUserassignment} from '../store/userassignment'
-import {createUserassignment} from '../store/userassignment'
+import {
+  updateUserassignment,
+  createUserassignment
+} from '../store/userassignment'
 
 class Assignments extends Component {
   constructor() {
@@ -58,6 +60,7 @@ class Assignments extends Component {
               removeUserassign={removeUserassign}
               save={save}
               load={load}
+              update={update}
               create={create}
               students={filteredStudents}
               allAssignments={allAssignments}
@@ -88,6 +91,7 @@ const mapStateToProps = (
   {match}
 ) => {
   const course = courses.find(_course => _course.id === Number(match.params.id))
+
   const filteredStudents = students.filter(student =>
     course.UserCourses.find(usercourse => usercourse.userId === student.id)
   )
@@ -100,14 +104,18 @@ const mapDispatchToProps = dispatch => {
       console.log('deleting assign', id)
       dispatch(deleteAssignment(id))
     },
+
     removeUserassign: id => {
       console.log('deleting userassign', id)
       dispatch(deleteUserassignment(id))
     },
+
     save: assignment => dispatch(createAssignment(assignment)),
+
     update: (id, userassignment) => {
       dispatch(updateUserassignment(id, userassignment))
     },
+
     create: userassignment => dispatch(createUserassignment(userassignment))
   }
 }

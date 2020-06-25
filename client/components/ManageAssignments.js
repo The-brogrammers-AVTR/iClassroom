@@ -1,5 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MaterialTable from 'material-table'
+import {storage} from '../firebase'
+import {connect} from 'react-redux'
+import {updateCourse} from '../store'
 
 const ManageAssignments = ({
   assignment,
@@ -7,43 +10,41 @@ const ManageAssignments = ({
   removeUserassign,
   course,
   save,
+
   create,
   students,
   allAssignments,
-  instructor,
   allUserassignments
 }) => {
   if (assignment.length === 0) {
     return null
   }
+
+  const [_url, setUrl] = useState(assignment.URL ? assignment.URL : '')
+  const [error, setError] = useState('')
+  const [progress, setProgress] = useState(0)
+
   console.log('allAssign', allAssignments)
   console.log('allUserassign', allUserassignments)
-  const data = assignment.map((assign, idx) => ({
-    assignmentid: assign.id,
-    //assignNum: idx + 1,
-    title: assign.title,
-    courseId: assign.courseId,
-    category: assign.category,
-    description: assign.description,
-    startDate: assign.startDate,
-    endDate: assign.endDate,
-    userId: assign.userId
-  }))
 
   const columns = [
-    // {title: 'Assignment ID', field: 'assignmentid', editable: 'never'},
-    //{title: 'Assignment#', field: 'assignNum', editable: 'never'},
     {title: 'Assignment', field: 'title'},
-    {title: 'Course', field: 'courseId', initialEditValue: course.id},
-    {title: 'Category', field: 'category'},
     {title: 'Description', field: 'description'},
+    {title: 'URL', field: 'URL'},
     {title: 'Start Date', field: 'startDate'},
-    {title: 'Due Date', field: 'endDate'},
-    {title: 'Teacher', field: 'userId', initialEditValue: instructor.id}
+    {title: 'Due Date', field: 'endDate'}
   ]
 
+  const data = assignment.map((assign, idx) => ({
+    // assignmentid: assign.id,
+    title: assign.title,
+    description: assign.description,
+    URL: assign.URL,
+    startDate: assign.startDate,
+    endDate: assign.endDate
+  }))
+
   // const newAssignmentID = Math.max(...allAssignments.map(assign => assign.id))
-  // console.log('new ass id', newAssignmentID)
   const newAssignmentID = allAssignments.length + 1
   const handleCreateUserassignments = students => {
     students.forEach(student => {
@@ -72,6 +73,41 @@ const ManageAssignments = ({
     callback(assignid)
   }
 
+  const handleUpload = e => {
+    if (e.target.files[0]) {
+      const file = e.target.files[0]
+
+      const uploadTask = storage.ref(`assignments/${file.name}`).put(file)
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress = Math.round(
+            snapshot.bytesTransferred / snapshot.totalBytes * 100
+          )
+          setProgress(progress)
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          storage
+            .ref('assignments')
+            .child(file.name)
+            .getDownloadURL()
+            .then(url => {
+              update(
+                {
+                  URL: url
+                },
+                assignment.id,
+                history.push
+              )
+            })
+        }
+      )
+    }
+  }
+
   const handleAdd = async (newData, resolve, callback) => {
     await save(newData)
     setTimeout(function() {
@@ -90,36 +126,69 @@ const ManageAssignments = ({
   }
 
   return (
-    <MaterialTable
-      title={`Manage Assignments (Course: ${course.name})`}
-      style={{width: '80%', margin: 'auto'}}
-      columns={columns}
-      data={data}
-      editable={{
-        onRowAdd: newData =>
-          new Promise(resolve => {
-            handleAdd(newData, resolve, handleCreateUserassignments)
-          }),
-        // onRowUpdate: (newData, oldData) =>
-        //   new Promise(resolve => {
-        //     setTimeout(() => {
-        //       resolve()
-        //       if (oldData) {
-        //         setState(prevState => {
-        //           const data = [...prevState.data]
-        //           data[data.indexOf(oldData)] = newData
-        //           return {...prevState, data}
-        //         })
-        //       }
-        //     }, 600)
-        //   }),
-        onRowDelete: oldData =>
-          new Promise(resolve => {
-            handleDelete(oldData, resolve)
-          })
-      }}
-    />
+    <div>
+      <h1>Assignments</h1>
+      <MaterialTable
+        title={`Manage Assignments (Course: ${course.name})`}
+        style={{marginLeft: '5%', padding: '2%'}}
+        columns={columns}
+        data={data}
+        actions={[
+          {
+            icon: 'attachment',
+            tooltip: 'Add attachment',
+            onClick: (event, rowData) => alert('You saved ' + rowData.name),
+            render: rowData => {
+              return (
+                <div>
+                  <input
+                    // className={classes.input}
+                    // id="icon-button-file"
+                    type="file"
+                    onChange={handleUpload}
+                  />
+                  rowData
+                </div>
+              )
+            }
+          }
+        ]}
+        editable={{
+          onRowAdd: newData =>
+            new Promise(resolve => {
+              handleAdd(newData, resolve, handleCreateUserassignments)
+            }),
+          // onRowUpdate: (newData, oldData) =>
+          //   new Promise(resolve => {
+          //     setTimeout(() => {
+          //       resolve()
+          //       if (oldData) {
+          //         setState(prevState => {
+          //           const data = [...prevState.data]
+          //           data[data.indexOf(oldData)] = newData
+          //           return {...prevState, data}
+          //         })
+          //       }
+          //     }, 600)
+          //   }),
+          onRowDelete: oldData =>
+            new Promise(resolve => {
+              handleDelete(oldData, resolve)
+            })
+        }}
+      />
+    </div>
   )
 }
 
-export default ManageAssignments
+const mapStateToProps = ({user}) => {
+  return {user}
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    update: (course, id, push) => dispatch(updateCourse(course, id, push))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageAssignments)
