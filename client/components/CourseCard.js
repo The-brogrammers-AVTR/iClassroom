@@ -43,11 +43,13 @@ const CourseCard = ({
   remove
 }) => {
   const classes = useStyles()
-
-  const instructor = teachers.find(teacher =>
-    UserCourses.find(usercourse => usercourse.userId === teacher.id)
-  )
-  const enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
+  let instructor, enrolled
+  if (UserCourses && teachers) {
+    instructor = teachers.find(teacher =>
+      UserCourses.find(usercourse => usercourse.userId === teacher.id)
+    )
+    enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
+  }
   if (!instructor) {
     return null
   }
@@ -106,10 +108,11 @@ const CourseCard = ({
   )
 }
 
-const mapStateToProps = ({user, teachers}) => {
+const mapStateToProps = ({user, teachers, UserCourses}) => {
   return {
     user,
     teachers
+    // UserCourses,
   }
 }
 
