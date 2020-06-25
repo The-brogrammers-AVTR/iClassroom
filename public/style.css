@@ -747,6 +747,49 @@ body {
   cursor: crosshair;
 }
 
+/* below are for UploadExcel (tests) */
+
+.uploadTestContainer {
+  font-size: 1.5rem;
+  color: #6576bb;
+  text-align: center;
+}
+.uploadSection {
+  display: flex;
+  width: 60%;
+  height: 3rem;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 1rem auto;
+}
+.createTestSection {
+  display: flex;
+  width: 80%;
+  height: 3rem;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 1rem auto 2rem;
+}
+
+.testInput {
+  color: #6576bb;
+  height: 2rem;
+  font-size: 1.2rem;
+  width: 8rem;
+}
+
+.testSelect {
+  width: 14rem;
+}
+
+.testInputShort {
+  width: 4rem;
+}
+
+.testInputLong {
+  width: 18rem;
+}
+
 /* below are for student tests */
 .countDown {
   color: #6576bb;
