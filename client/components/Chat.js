@@ -21,20 +21,26 @@ class Chat extends Component {
     this.state = {
       message: '',
       user: '',
-      imoji: false,
+      emoji: true,
       action: 'message'
     }
     this.submit = this.submit.bind(this)
     this.displayImoji = this.displayImoji.bind(this)
   }
-
-  componentDidMount() {
-    console.log('hello from mount', socket)
+  getUsers() {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
     socket.emit('getUsers', {userName, room})
-    socket.emit('joinRoom', {userName, room})
+  }
+  componentDidMount() {
     socket.connect()
+    console.log('hello from mount', socket)
+    let userName = queryString.parse(this.props.location.search).userName
+    let room = queryString.parse(this.props.location.search).room
+    this.getUsers()
+    //socket.emit('getUsers', {userName, room})
+    socket.emit('joinRoom', {userName, room})
+
     // socket.on('chat message', function(msg) {
     //   console.log(msg)
     //   let mes = document.getElementById('message')
@@ -62,7 +68,7 @@ class Chat extends Component {
                  </div>`
       let li = document.createElement('li')
       li.innerHTML = html
-      mes.appendChild(li)
+      mes.append(li)
       var chatList = document.getElementById('displayMessage')
       chatList.scrollTop = chatList.scrollHeight
       //console.log(this.state.message)
@@ -116,19 +122,18 @@ class Chat extends Component {
     //socket.emit('joinRoom', {userName, room})
     socket.emit('chat message', this.state.message)
     socket.emit('getUsers', {userName, room})
-    socket.emit('userFinishTyping', 'message')
+    //socket.emit('userFinishTyping', 'message')
     this.setState({message: ''})
     // let label = document.getElementById('inputLabel')
     // label.innerText = 'user typing...'
   }
 
   displayImoji(e) {
+    console.log('from emoji')
     e.preventDefault()
     this.setState({emoji: !this.state.emoji})
     console.log(this.state.emoji)
     if (this.state.emoji) {
-      let button = document.getElementById('buttonEmoji')
-      button.innerText = 'Remove Emojis'
       DisplayImoji = (
         <Picker
           title="Pick your emoji…"
@@ -141,8 +146,6 @@ class Chat extends Component {
       )
     }
     if (!this.state.emoji) {
-      let button = document.getElementById('buttonEmoji')
-      button.innerText = 'Add Imojis'
       DisplayImoji = ''
     }
   }
@@ -177,7 +180,7 @@ class Chat extends Component {
         <form id="socket" onSubmit={e => this.submit(e)}>
           <div id="chatInput">
             {/* //<Label id="inputLabel" htmlFor="my-input"></Label> */}
-            {/* <Input
+            {/* <input
               value={this.state.message}
               id="my-input"
               aria-describedby="my-helper-text"
@@ -188,7 +191,7 @@ class Chat extends Component {
             /> */}
             <TextField
               id="my-input"
-              multiline
+              //multiline
               rows={2}
               variant="outlined"
               onChange={e => {
@@ -201,7 +204,7 @@ class Chat extends Component {
               // id="my-input"
             />
             <IconButton
-              type="submit"
+              // type="submit"
               variant="contained"
               onClick={this.displayImoji}
               //className={classes.button}
@@ -216,20 +219,10 @@ class Chat extends Component {
             >
               <SendRoundedIcon />
             </IconButton>
-            {/* <button id="buttonEmoji" onClick={this.displayImoji}>
-              Add Emojis
-            </button> */}
           </div>
           <div id="emojis">
             {DisplayImoji}
             {/* <Link to="/video">video</Link> */}
-            {/* <span>
-              <Picker
-                onSelect={this.addEmoji}
-                title="Pick your emoji…"
-                emoji="point_up"
-              />
-            </span> */}
           </div>
         </form>
       </div>

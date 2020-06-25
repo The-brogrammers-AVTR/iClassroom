@@ -77,7 +77,7 @@ module.exports = io => {
     // })
 
     socket.on('disconnect', msg => {
-      console.log('disconnect:', msg)
+      console.log('disconnect:', msg, socket.id)
       removeUser(socket.id)
       io.emit('message', formatMessage(name, `user disconected ${name}`))
     })
