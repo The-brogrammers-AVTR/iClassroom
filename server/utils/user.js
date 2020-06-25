@@ -12,11 +12,11 @@ function userJoin(id, userName, room) {
       room: users.find(u => u.id === id).room
     }
   })
+
   return user
 }
 function getCurrentUser(id) {
-  console.log('users from get user', users)
-  return users.find(user => user.id === id)
+  return users.find(user => user.id == id)
 }
 function usersForRoom(room) {
   return users.filter(user => {
@@ -27,6 +27,7 @@ function removeUser(id) {
   users = users.filter(user => {
     return user.id !== id
   })
+  console.log('user from remove', users)
 }
 module.exports = {
   userJoin,
