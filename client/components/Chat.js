@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import socketIOClient from 'socket.io-client'
 
 const location = `${window.location.hostname}:8080`
-const socket = socketIOClient() //http://127.0.0.1:8080'
+const socket = socketIOClient.connect() //http://127.0.0.1:8080'
 import {Picker} from 'emoji-mart'
 //import 'emoji-mart/css/emoji-mart.css'
 import {connect} from 'react-redux'
@@ -12,6 +12,7 @@ import queryString from 'query-string'
 import {IconButton, TextField} from '@material-ui/core'
 import SendRoundedIcon from '@material-ui/icons/SendRounded'
 import EmojiEmotionsRoundedIcon from '@material-ui/icons/EmojiEmotionsRounded'
+import {Label} from 'react-konva'
 
 let DisplayImoji
 class Chat extends Component {
@@ -28,10 +29,12 @@ class Chat extends Component {
   }
 
   componentDidMount() {
+    console.log('hello from mount', socket)
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
     socket.emit('getUsers', {userName, room})
     socket.emit('joinRoom', {userName, room})
+    socket.connect()
     // socket.on('chat message', function(msg) {
     //   console.log(msg)
     //   let mes = document.getElementById('message')
@@ -42,7 +45,7 @@ class Chat extends Component {
     // })
 
     socket.on('message', function(msg) {
-      console.log(msg.userName, userName)
+      console.log(msg.userName, userName, msg)
       let mes = document.getElementById('message')
       console.log('mes', mes)
 
@@ -55,9 +58,7 @@ class Chat extends Component {
                   <p class="userName">${msg.userName}</p>
                   <h6 class="time-right">${msg.time}</h6>
                   </div>
-                  
-                  <p>${msg.message}</p>
-                
+                  <p>${msg.message}</p>              
                  </div>`
       let li = document.createElement('li')
       li.innerHTML = html
@@ -117,8 +118,8 @@ class Chat extends Component {
     socket.emit('getUsers', {userName, room})
     socket.emit('userFinishTyping', 'message')
     this.setState({message: ''})
-    let label = document.getElementById('inputLabel')
-    label.innerText = 'message'
+    // let label = document.getElementById('inputLabel')
+    // label.innerText = 'user typing...'
   }
 
   displayImoji(e) {
@@ -146,10 +147,17 @@ class Chat extends Component {
     }
   }
 
+  componentWillUnmount() {
+    let userName = queryString.parse(this.props.location.search).userName
+    let room = queryString.parse(this.props.location.search).room
+    socket.emit('disconnect', {userName: userName, room: room})
+    console.log('from unmount')
+    socket.close()
+  }
   render() {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
-
+    //console.log('this.props message', this.state.message)
     console.log(userName, room, window.location.hostname, location)
     const {user} = this.props
 
@@ -168,17 +176,18 @@ class Chat extends Component {
 
         <form id="socket" onSubmit={e => this.submit(e)}>
           <div id="chatInput">
-            {/* <InputLabel id="inputLabel" htmlFor="my-input"></InputLabel> */}
+            {/* //<Label id="inputLabel" htmlFor="my-input"></Label> */}
             {/* <Input
               value={this.state.message}
               id="my-input"
               aria-describedby="my-helper-text"
-              onChange={(e) => {
+              onChange={e => {
                 this.setState({message: e.target.value})
                 socket.emit('userTyping', this.state.message)
               }}
             /> */}
             <TextField
+              id="my-input"
               multiline
               rows={2}
               variant="outlined"
