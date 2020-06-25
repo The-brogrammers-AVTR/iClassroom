@@ -156,42 +156,46 @@ class VideoStudent extends Component {
   render() {
     //console.log('video teacher', VideoTeacher.call, this.props)
     return (
-      <div>
-        <h1>Student</h1>
-        <h1>{window.localStorage.getItem('peerId')}</h1>
-        <input
-          placeholder="peer id"
-          onChange={e => {
-            this.setState({inputId: e.target.value})
-          }}
-        />
+      <div className="video-wrapper">
+        <div className="video-header">
+          <h6>Student</h6>
+          <h6>{window.localStorage.getItem('peerId')}</h6>
+          <input
+            placeholder="peer id"
+            onChange={e => {
+              this.setState({inputId: e.target.value})
+            }}
+          />
 
-        <button onClick={() => this.connctToPeer(this.state.inputId)}>
-          connect
-        </button>
-        <button onClick={this.call}>call</button>
-        <video
-          id="my-camera"
-          width="300"
-          height="300"
-          autoPlay="autoplay"
-          muted="true"
-          className="center-block"
-        />
-        <video
-          id="peer-camera"
-          width="300"
-          height="300"
-          autoPlay="autoplay"
-          className="center-block"
-        />
-        {/* <video
+          <button onClick={() => this.connctToPeer(this.state.inputId)}>
+            connect
+          </button>
+          <button onClick={this.call}>call</button>
+        </div>
+        <div className="video-view">
+          <video
+            id="my-camera"
+            width="250"
+            height="250"
+            autoPlay="autoplay"
+            muted="true"
+            className="center-block"
+          />
+          <video
+            id="peer-camera"
+            width="250"
+            height="250"
+            autoPlay="autoplay"
+            className="center-block"
+          />
+          {/* <video
           id="rVideo"
           width="300"
           height="300"
           autoPlay="autoplay"
           className="center-block"
         /> */}
+        </div>
       </div>
     )
   }

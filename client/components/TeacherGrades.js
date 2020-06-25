@@ -42,9 +42,10 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
 
   return (
     <Fragment>
+      <h1>Student Grades</h1>
       <MaterialTable
         title={`Grades (Course: ${course.name})`}
-        style={{width: '80%', margin: 'auto'}}
+        style={{marginLeft: '5%', padding: '2%'}}
         columns={columns}
         data={data}
         editable={{
