@@ -76,37 +76,46 @@ class UploadExcel extends Component {
     const {test, user} = this.props
     console.log(this.props, user)
     return (
-      <div>
-        <input type="file" onChange={this.upload} />
+      <div className="uploadTestContainer">
+        <h2>Upload Excel File For Creating A Test</h2>
+        <h3>Step 1: Upload Excel</h3>
+        <div className="uploadSection">
+          <input
+            type="file"
+            onChange={this.upload}
+            className="testInput testInputLong"
+          />
 
-        <select onChange={this.generateTest}>
-          <option>--select test--</option>
-          {test
-            ? test.map(t => {
-                return (
-                  <option key={t.id} value={t.name}>
-                    {t.name}
-                  </option>
-                )
-              })
-            : ''}
-        </select>
-        <select onChange={this.delete}>
-          <option>--select delete--</option>
-          {test
-            ? test.map(t => {
-                return (
-                  <option
-                    key={t.id}
-                    value={t.id}
-                    style={{backgroundColor: 'orange'}}
-                  >
-                    {t.name}
-                  </option>
-                )
-              })
-            : ''}
-        </select>
+          <select onChange={this.generateTest} className="testInput testSelect">
+            <option>--select test--</option>
+            {test
+              ? test.map(t => {
+                  return (
+                    <option key={t.id} value={t.name}>
+                      {t.name}
+                    </option>
+                  )
+                })
+              : ''}
+          </select>
+          <select onChange={this.delete} className="testInput testSelect">
+            <option>--select delete--</option>
+            {test
+              ? test.map(t => {
+                  return (
+                    <option
+                      key={t.id}
+                      value={t.id}
+                      style={{backgroundColor: 'orange'}}
+                    >
+                      {t.name}
+                    </option>
+                  )
+                })
+              : ''}
+          </select>
+        </div>
+
         <TestTeacher allRows={this.state.allRows} />
         <div>
           <form
@@ -114,98 +123,109 @@ class UploadExcel extends Component {
               e.preventDefault()
             }}
           >
-            <h2>Create Test</h2>
-            <input
-              type="text"
-              value={this.state.assignmentName}
-              placeholder="test name"
-              onChange={e => {
-                this.setState({assignmentName: e.target.value})
-              }}
-            />
-            <input
-              type="text"
-              value={this.props.match.params.id}
-              placeholder="id"
-              onChange={e => {
-                this.setState({courseId: e.target.value})
-              }}
-            />
-            <input
-              type="text"
-              value={this.state.category}
-              placeholder="category"
-              onChange={e => {
-                this.setState({category: e.target.value})
-              }}
-            />
-            <input
-              type="text"
-              value={this.state.description}
-              placeholder="description"
-              onChange={e => {
-                this.setState({description: e.target.value})
-              }}
-            />
-            <input
-              type="text"
-              value={moment().format('YYYY-MM-DD')}
-              placeholder="start date"
-              onChange={e => {
-                this.setState({startDate: e.target.value})
-              }}
-            />
-            <input
-              type="text"
-              value={this.state.endDate}
-              placeholder="end date"
-              onChange={e => {
-                this.setState({endDate: e.target.value})
-              }}
-            />
-            <input
-              type="text"
-              value={this.props.user.id}
-              placeholder="teacher id"
-              onChange={e => {
-                this.setState({teacherId: e.target.value})
-              }}
-            />
-            <select
-              onChange={e => {
-                this.setState({testId: e.target.value})
-              }}
-            >
-              <option>--Upload Test--</option>
-              {test
-                ? test.map(t => {
-                    return (
-                      <option key={t.id} value={t.id}>
-                        {t.name}
-                      </option>
-                    )
-                  })
-                : ''}
-            </select>
-            <button
-              onClick={() =>
-                this.props.createTest(
-                  {
-                    title: this.state.assignmentName,
-                    category: this.state.category,
-                    description: this.state.description,
-                    startDate: moment().format('YYYY-MM-DD'),
-                    endDate: this.state.endDate,
-                    userId: this.props.user.id,
-                    courseId: this.props.match.params.id * 1,
-                    testId: this.state.testId
-                  },
-                  this.props.history.push
-                )
-              }
-            >
-              create
-            </button>
+            <h3>Step 3: Create Test</h3>
+            <div className="createTestSection">
+              <input
+                type="text"
+                value={this.state.assignmentName}
+                placeholder="test name"
+                onChange={e => {
+                  this.setState({assignmentName: e.target.value})
+                }}
+                className="testInput"
+              />
+              <input
+                type="text"
+                value={this.props.match.params.id}
+                placeholder="id"
+                onChange={e => {
+                  this.setState({courseId: e.target.value})
+                }}
+                className="testInput testInputShort"
+              />
+              <input
+                type="text"
+                value={this.state.category}
+                placeholder="category"
+                onChange={e => {
+                  this.setState({category: e.target.value})
+                }}
+                className="testInput"
+              />
+              <input
+                type="text"
+                value={this.state.description}
+                placeholder="description"
+                onChange={e => {
+                  this.setState({description: e.target.value})
+                }}
+                className="testInput"
+              />
+              <input
+                type="text"
+                value={moment().format('YYYY-MM-DD')}
+                placeholder="start date"
+                onChange={e => {
+                  this.setState({startDate: e.target.value})
+                }}
+                className="testInput"
+              />
+              <input
+                type="text"
+                value={this.state.endDate}
+                placeholder="end date"
+                onChange={e => {
+                  this.setState({endDate: e.target.value})
+                }}
+                className="testInput"
+              />
+              <input
+                type="text"
+                value={this.props.user.id}
+                placeholder="teacher id"
+                onChange={e => {
+                  this.setState({teacherId: e.target.value})
+                }}
+                className="testInput testInputShort"
+              />
+              <select
+                onChange={e => {
+                  this.setState({testId: e.target.value})
+                }}
+                className="testInput testSelect"
+              >
+                <option>--Upload Test--</option>
+                {test
+                  ? test.map(t => {
+                      return (
+                        <option key={t.id} value={t.id}>
+                          {t.name}
+                        </option>
+                      )
+                    })
+                  : ''}
+              </select>
+              <button
+                onClick={() =>
+                  this.props.createTest(
+                    {
+                      title: this.state.assignmentName,
+                      category: this.state.category,
+                      description: this.state.description,
+                      startDate: moment().format('YYYY-MM-DD'),
+                      endDate: this.state.endDate,
+                      userId: this.props.user.id,
+                      courseId: this.props.match.params.id * 1,
+                      testId: this.state.testId
+                    },
+                    this.props.history.push
+                  )
+                }
+                className="testInput"
+              >
+                create
+              </button>
+            </div>
           </form>
         </div>
       </div>

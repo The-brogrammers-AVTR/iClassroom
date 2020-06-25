@@ -21,7 +21,7 @@ class TestTeacher extends Component {
     if (this.state.submit < 1) {
       const {test, allRows} = this.props
 
-      let c = document.getElementsByClassName('a')
+      let c = document.getElementsByClassName('radio')
       for (let i = 0; i < c.length; i++) {
         if (c[i].checked) {
           if (c[i].value === c[i].placeholder) {
@@ -70,7 +70,7 @@ class TestTeacher extends Component {
     return (
       <div>
         {grade > 0 ? <h1>{grade}</h1> : ''}
-        <h1>TEST: {test.name}</h1>
+        <h3>Step 2: Confirm Uploaded TEST: {test.name}</h3>
         <form
           // action="/course/3/assignments"
           onSubmit={e => {
@@ -85,49 +85,57 @@ class TestTeacher extends Component {
                 //console.log(row)
                 return (
                   <div className="quistionContainer" key={i}>
-                    <h3>{row.question}</h3>
+                    <h3 className="question">{`${i + 1}. ${row.question}`}</h3>
                     <div className="radioButtons">
-                      <input
-                        placeholder={row.answer}
-                        type="radio"
-                        name={id}
-                        value={row.a}
-                        className="a"
-                      />
-                      <label htmlFor="a">{row.a}</label>
+                      <div className="choice">
+                        <input
+                          placeholder={row.answer}
+                          type="radio"
+                          name={id}
+                          value={row.a}
+                          className="radio"
+                        />
+                        <label htmlFor="a">{`a. ${row.a}`}</label>
+                      </div>
 
-                      <input
-                        placeholder={row.answer}
-                        type="radio"
-                        className="a"
-                        name={id}
-                        value={row.b}
-                      />
-                      <label htmlFor="b">{row.b}</label>
+                      <div className="choice">
+                        <input
+                          placeholder={row.answer}
+                          type="radio"
+                          className="radio"
+                          name={id}
+                          value={row.b}
+                        />
+                        <label htmlFor="b">{`b. ${row.b}`}</label>
+                      </div>
 
-                      <input
-                        placeholder={row.answer}
-                        type="radio"
-                        className="a"
-                        name={id}
-                        value={row.c}
-                      />
-                      <label htmlFor="c">{row.c}</label>
+                      <div className="choice">
+                        <input
+                          placeholder={row.answer}
+                          type="radio"
+                          className="radio"
+                          name={id}
+                          value={row.c}
+                        />
+                        <label htmlFor="c">{`c. ${row.c}`}</label>
+                      </div>
 
-                      <input
-                        placeholder={row.answer}
-                        type="radio"
-                        className="a"
-                        name={id}
-                        value={row.d}
-                      />
-                      <label htmlFor="d">{row.d}</label>
+                      <div className="choice">
+                        <input
+                          placeholder={row.answer}
+                          type="radio"
+                          className="radio"
+                          name={id}
+                          value={row.d}
+                        />
+                        <label htmlFor="d">{`d. ${row.d}`}</label>
+                      </div>
                     </div>
                   </div>
                 )
               })
             : ''}
-          <input type="submit" value="Submit" />
+          {/* <input type="submit" value="Submit" /> */}
         </form>
       </div>
     )
