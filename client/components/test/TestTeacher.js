@@ -70,7 +70,7 @@ class TestTeacher extends Component {
     return (
       <div>
         {grade > 0 ? <h1>{grade}</h1> : ''}
-        <h1>TEST: {test.name}</h1>
+        <h3>Step 2: Confirm Uploaded TEST: {test.name}</h3>
         <form
           // action="/course/3/assignments"
           onSubmit={e => {
