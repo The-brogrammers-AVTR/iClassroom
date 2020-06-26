@@ -63,10 +63,12 @@ class TestTeacher extends Component {
     })
     console.log(this.state.submit)
   }
+
   render() {
     const {test, isTest, allRows} = this.props
     const {grade} = this.state
-    console.log(test, isTest, this.props, allRows[0])
+    //console.log(test, isTest, this.props, allRows[0])
+
     return (
       <div>
         {grade > 0 ? <h1>{grade}</h1> : ''}

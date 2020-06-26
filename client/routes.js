@@ -20,7 +20,9 @@ import {
   Verification,
   Live,
   ReportCard,
-  TestStudent
+  TestStudent,
+  TestTeacher,
+  UploadExcel
 } from './components'
 import {
   me,
@@ -67,7 +69,10 @@ class Routes extends Component {
                 <Route path="/course/:id/chatroom" component={Live} />
                 <Route path="/makeassignment" component={MakeAssignment} />
                 {isTeacher ? (
-                  <Route path="/course/:id/test/:testId" component={Test} />
+                  <Route
+                    path="/course/:id/test/:testId"
+                    component={UploadExcel}
+                  />
                 ) : (
                   <Route
                     path="/course/:id/test/:testId"
