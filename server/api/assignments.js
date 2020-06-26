@@ -37,3 +37,10 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:id', (req, res, next) => {
+  Assignment.findByPk(req.params.id)
+    .then(assign => assign.update(req.body))
+    .then(assign => res.send(assign))
+    .catch(next)
+})

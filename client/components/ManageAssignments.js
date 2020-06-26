@@ -10,6 +10,7 @@ const ManageAssignments = ({
   removeUserassign,
   course,
   save,
+  updateAssign,
   create,
   students,
   allAssignments,
@@ -34,6 +35,7 @@ const ManageAssignments = ({
     // {title: 'Course', field: 'courseId', initialEditValue: course.id},
     // {title: 'Category', field: 'category'},
     {title: 'Description', field: 'description'},
+    {title: 'URL', field: 'URL', editable: 'never'},
     {title: 'Start Date', field: 'startDate'},
     {title: 'Due Date', field: 'endDate'}
     // {title: 'Teacher', field: 'userId', initialEditValue: instructor.id},
@@ -46,6 +48,7 @@ const ManageAssignments = ({
     courseId: assign.courseId,
     // category: assign.category,
     description: assign.description,
+    URL: assign.URL,
     startDate: assign.startDate,
     endDate: assign.endDate,
     userId: assign.userId
@@ -80,7 +83,7 @@ const ManageAssignments = ({
     callback(assignid)
   }
 
-  const handleUpload = e => {
+  const handleUpload = (e, id) => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
       console.log(file)
@@ -103,12 +106,11 @@ const ManageAssignments = ({
             .child(file.name)
             .getDownloadURL()
             .then(url => {
-              update(
+              updateAssign(
                 {
                   URL: url
                 },
-                assignment.id,
-                history.push
+                id
               )
             })
         }
@@ -141,26 +143,21 @@ const ManageAssignments = ({
         style={{marginLeft: '5%', padding: '2%'}}
         columns={columns}
         data={data}
-        actions={[
-          {
-            icon: 'attachment',
-            tooltip: 'Add attachment',
-
-            render: rowData => {
-              return (
-                <div>
-                  <input
-                    // className={classes.input}
-                    // id="icon-button-file"
-                    type="file"
-                    onChange={handleUpload}
-                  />
-                  {rowData}
-                </div>
-              )
-            }
-          }
-        ]}
+        detailPanel={rowData => {
+          console.log(rowData)
+          return (
+            <div>
+              <input
+                // className={classes.input}
+                // id="icon-button-file"
+                type="file"
+                onChange={e => {
+                  handleUpload(e, rowData.assignmentid)
+                }}
+              />
+            </div>
+          )
+        }}
         editable={{
           onRowAdd: newData =>
             new Promise(resolve => {
@@ -200,8 +197,7 @@ const mapStateToProps = ({user}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    update: (assignment, id, push) =>
-      dispatch(updateAssignment(assignment, id, push))
+    updateAssign: (assignment, id) => dispatch(updateAssignment(assignment, id))
   }
 }
 
