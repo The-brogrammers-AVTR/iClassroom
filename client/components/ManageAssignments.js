@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import MaterialTable from 'material-table'
 import {storage} from '../firebase'
 import {connect} from 'react-redux'
-import {updateCourse} from '../store'
+import {updateCourse, updateAssignment} from '../store'
 
 const ManageAssignments = ({
   assignment,
@@ -10,11 +10,11 @@ const ManageAssignments = ({
   removeUserassign,
   course,
   save,
-
   create,
   students,
   allAssignments,
-  allUserassignments
+  allUserassignments,
+  instructor
 }) => {
   if (assignment.length === 0) {
     return null
@@ -28,20 +28,27 @@ const ManageAssignments = ({
   console.log('allUserassign', allUserassignments)
 
   const columns = [
+    // {title: 'Assignment ID', field: 'assignmentid', editable: 'never'},
+    //{title: 'Assignment#', field: 'assignNum', editable: 'never'},
     {title: 'Assignment', field: 'title'},
+    // {title: 'Course', field: 'courseId', initialEditValue: course.id},
+    // {title: 'Category', field: 'category'},
     {title: 'Description', field: 'description'},
-    {title: 'URL', field: 'URL'},
     {title: 'Start Date', field: 'startDate'},
     {title: 'Due Date', field: 'endDate'}
+    // {title: 'Teacher', field: 'userId', initialEditValue: instructor.id},
   ]
 
   const data = assignment.map((assign, idx) => ({
-    // assignmentid: assign.id,
+    assignmentid: assign.id,
+    //assignNum: idx + 1,
     title: assign.title,
+    courseId: assign.courseId,
+    // category: assign.category,
     description: assign.description,
-    URL: assign.URL,
     startDate: assign.startDate,
-    endDate: assign.endDate
+    endDate: assign.endDate,
+    userId: assign.userId
   }))
 
   // const newAssignmentID = Math.max(...allAssignments.map(assign => assign.id))
@@ -76,6 +83,7 @@ const ManageAssignments = ({
   const handleUpload = e => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
+      console.log(file)
 
       const uploadTask = storage.ref(`assignments/${file.name}`).put(file)
       uploadTask.on(
@@ -111,7 +119,7 @@ const ManageAssignments = ({
   const handleAdd = async (newData, resolve, callback) => {
     await save(newData)
     setTimeout(function() {
-      //console.log('in handleAdd', newAssignmentID)
+      console.log('in handleAdd', newData)
       callback(students)
     }, 500)
     resolve()
@@ -137,7 +145,7 @@ const ManageAssignments = ({
           {
             icon: 'attachment',
             tooltip: 'Add attachment',
-            onClick: (event, rowData) => alert('You saved ' + rowData.name),
+
             render: rowData => {
               return (
                 <div>
@@ -147,7 +155,7 @@ const ManageAssignments = ({
                     type="file"
                     onChange={handleUpload}
                   />
-                  rowData
+                  {rowData}
                 </div>
               )
             }
@@ -156,7 +164,12 @@ const ManageAssignments = ({
         editable={{
           onRowAdd: newData =>
             new Promise(resolve => {
-              handleAdd(newData, resolve, handleCreateUserassignments)
+              const updatedData = {
+                ...newData,
+                courseId: course.id,
+                userId: instructor.id
+              }
+              handleAdd(updatedData, resolve, handleCreateUserassignments)
             }),
           // onRowUpdate: (newData, oldData) =>
           //   new Promise(resolve => {
@@ -187,7 +200,8 @@ const mapStateToProps = ({user}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    update: (course, id, push) => dispatch(updateCourse(course, id, push))
+    update: (assignment, id, push) =>
+      dispatch(updateAssignment(assignment, id, push))
   }
 }
 

@@ -17,7 +17,7 @@ class UploadExcel extends Component {
       assignmentName: '',
       courseId: '',
       teacherId: '',
-      category: '',
+      // category: '',
       description: '',
       startDate: '',
       endDate: '',
@@ -143,7 +143,7 @@ class UploadExcel extends Component {
                 }}
                 className="testInput testInputShort"
               />
-              <input
+              {/* <input
                 type="text"
                 value={this.state.category}
                 placeholder="category"
@@ -151,7 +151,7 @@ class UploadExcel extends Component {
                   this.setState({category: e.target.value})
                 }}
                 className="testInput"
-              />
+              /> */}
               <input
                 type="text"
                 value={this.state.description}
@@ -210,7 +210,7 @@ class UploadExcel extends Component {
                   this.props.createTest(
                     {
                       title: this.state.assignmentName,
-                      category: this.state.category,
+                      // category: this.state.category,
                       description: this.state.description,
                       startDate: moment().format('YYYY-MM-DD'),
                       endDate: this.state.endDate,
