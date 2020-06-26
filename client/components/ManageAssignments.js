@@ -86,7 +86,6 @@ const ManageAssignments = ({
   const handleUpload = (e, id) => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
-      console.log(file)
 
       const uploadTask = storage.ref(`assignments/${file.name}`).put(file)
       uploadTask.on(
@@ -143,21 +142,28 @@ const ManageAssignments = ({
         style={{marginLeft: '5%', padding: '2%'}}
         columns={columns}
         data={data}
-        detailPanel={rowData => {
-          console.log(rowData)
-          return (
-            <div>
-              <input
-                // className={classes.input}
-                // id="icon-button-file"
-                type="file"
-                onChange={e => {
-                  handleUpload(e, rowData.assignmentid)
-                }}
-              />
-            </div>
-          )
-        }}
+        detailPanel={[
+          {
+            icon: 'attachment',
+            tooltip: 'Add attachment',
+            // eslint-disable-next-line react/display-name
+            render: rowData => {
+              console.log(rowData)
+              return (
+                <div>
+                  <input
+                    // className={classes.input}
+                    // id="icon-button-file"
+                    type="file"
+                    onChange={e => {
+                      handleUpload(e, rowData.assignmentid)
+                    }}
+                  />
+                </div>
+              )
+            }
+          }
+        ]}
         editable={{
           onRowAdd: newData =>
             new Promise(resolve => {

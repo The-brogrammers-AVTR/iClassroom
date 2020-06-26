@@ -49,6 +49,8 @@ const TableAssignments = ({assignment, userassignment, update}) => {
               {/* <TableCell align="left">Course</TableCell> */}
               {/* <TableCell align="left">Category</TableCell> */}
               <TableCell align="left">Description</TableCell>
+              <TableCell align="left">Link</TableCell>
+              <TableCell align="left">Submission</TableCell>
               {/* <TableCell align="left">Teacher</TableCell> */}
             </TableRow>
           </TableHead>
@@ -76,6 +78,27 @@ const TableAssignments = ({assignment, userassignment, update}) => {
                 {/* <TableCell align="left">{assignment.courseId}</TableCell> */}
                 {/* <TableCell align="left">{assignment.category}</TableCell> */}
                 <TableCell align="left">{assignment.description}</TableCell>
+                <TableCell align="left">
+                  {assignment.URL && (
+                    <a
+                      className="link"
+                      href={assignment.URL}
+                      rel="noreferrer"
+                      target="_blank"
+                      download
+                    >
+                      Open Assignment
+                    </a>
+                  )}
+                </TableCell>
+                <TableCell align="left">
+                  <input
+                    // className={classes.input}
+                    // id="icon-button-file"
+                    type="file"
+                    // onChange={handleUpload}
+                  />
+                </TableCell>
                 {/* <TableCell align="left">{assignment.userId}</TableCell> */}
               </TableRow>
             ))}

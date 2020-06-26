@@ -260,6 +260,7 @@ const Sidebar = ({
               <ListItemText>
                 <div className="row">
                   <a
+                    className="link"
                     href={syllabusFile}
                     rel="noreferrer"
                     target="_blank"
