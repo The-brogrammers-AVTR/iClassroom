@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {ThemeProvider} from '@material-ui/styles'
-import {removeCourse} from '../store'
+import {removeCourse, joinUserCourse} from '../store'
 import theme from './Theme'
 
 import {
@@ -40,15 +40,21 @@ const CourseCard = ({
   UserCourses,
   isOpen,
   user,
-  remove
+  remove,
+  join
 }) => {
   const classes = useStyles()
-  let instructor, enrolled
+  let instructor, enrolled, pending
+  const userId = user.id
+  console.log('CourseCard userid:', userId)
   if (UserCourses && teachers) {
     instructor = teachers.find(teacher =>
       UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
     enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
+    pending = UserCourses.some(
+      usercourse => usercourse.userId === user.id && usercourse.admit === false
+    )
   }
   if (!instructor) {
     return null
@@ -77,14 +83,18 @@ const CourseCard = ({
         </CardActionArea>
 
         <CardActions>
-          {enrolled ? (
+          {pending ? (
+            'Pending'
+          ) : enrolled ? (
             <Link to={`/course/${id}/announcements`}>
               <Button variant="contained" color="primary">
                 Enter
               </Button>
             </Link>
           ) : isOpen === true ? (
-            <Button color="primary">Join</Button>
+            <Button color="primary" onClick={() => join(id, user.id)}>
+              Join
+            </Button>
           ) : (
             'Closed'
           )}
@@ -108,11 +118,10 @@ const CourseCard = ({
   )
 }
 
-const mapStateToProps = ({user, teachers, UserCourses}) => {
+const mapStateToProps = ({user, teachers}) => {
   return {
     user,
     teachers
-    // UserCourses,
   }
 }
 
@@ -120,6 +129,10 @@ const mapDispatchToProps = dispatch => {
   return {
     remove: id => {
       dispatch(removeCourse(id))
+    },
+    join: (courseId, userId) => {
+      console.log('mapDispatch -- join', courseId, userId)
+      dispatch(joinUserCourse(courseId, userId))
     }
   }
 }

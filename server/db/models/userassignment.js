@@ -17,6 +17,10 @@ const Userassignment = db.define('userassignment', {
     type: BOOLEAN,
     defaultValue: false
   },
+  submissionURL: {
+    type: STRING,
+    allowNull: true
+  },
   courseId: {
     type: INTEGER,
     allowNull: false

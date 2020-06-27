@@ -67,7 +67,6 @@ class Routes extends Component {
                 <Route path="/course/:id/grades" component={Grades} />
                 <Route path="/course/:id/assignments" component={Assignments} />
                 <Route path="/course/:id/chatroom" component={Live} />
-                <Route path="/makeassignment" component={MakeAssignment} />
                 {isTeacher ? (
                   <Route
                     path="/course/:id/test/:testId"
