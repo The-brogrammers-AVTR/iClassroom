@@ -15,13 +15,7 @@ const Assignment = db.define('assignment', {
       notEmpty: true
     }
   },
-  category: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
+
   description: {
     type: STRING,
     allowNull: false,

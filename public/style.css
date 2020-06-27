@@ -973,3 +973,8 @@ body {
   width: 250px;
   height: 250px;
 }
+
+.link {
+  text-decoration-line: underline;
+  color: #6576bb;
+}

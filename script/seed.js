@@ -165,7 +165,7 @@ async function seed() {
   ] = await Promise.all([
     Assignment.create({
       title: 'Discover Sun',
-      category: 'Astronomy',
+      // category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       startDate: '2020-06-01',
       endDate: '2020-06-02',
@@ -175,7 +175,7 @@ async function seed() {
     }),
     Assignment.create({
       title: 'Discover Moon',
-      category: 'Astronomy',
+      // category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       startDate: '2020-06-05',
       endDate: '2020-06-06',
@@ -185,7 +185,7 @@ async function seed() {
     }),
     Assignment.create({
       title: 'Discover Mars',
-      category: 'Astronomy',
+      // category: 'Astronomy',
       description: 'Read the text and answer the questions.',
       startDate: '2020-06-10',
       endDate: '2020-06-11',
@@ -195,7 +195,7 @@ async function seed() {
     }),
     Assignment.create({
       title: 'Addition and Subtraction Challenge',
-      category: 'Arithmetic',
+      // category: 'Arithmetic',
       description: 'Group math game.',
       startDate: '2020-06-04',
       endDate: '2020-06-05',
@@ -205,7 +205,7 @@ async function seed() {
     }),
     Assignment.create({
       title: 'Spelling Bee Challenge',
-      category: 'Spelling',
+      // category: 'Spelling',
       description: 'Group spelling game.',
       startDate: '2020-06-04',
       endDate: '2020-06-05',
@@ -215,7 +215,7 @@ async function seed() {
     }),
     Assignment.create({
       title: 'Collaborative Painting',
-      category: 'Drawing',
+      // category: 'Drawing',
       description: 'Draw a picture creatively and collaboratively as a team.',
       startDate: '2020-06-02',
       endDate: '2020-06-03',

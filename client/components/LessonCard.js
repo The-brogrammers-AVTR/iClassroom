@@ -107,6 +107,7 @@ const LessonCard = ({
     } catch (exception) {
       setError({error: exception.response.data.message})
     }
+    setProgress(0)
   }
 
   useEffect(
@@ -153,7 +154,12 @@ const LessonCard = ({
               {docs.length > 0 &&
                 docs.map((doc, idx) => (
                   <ExpansionPanelDetails key={idx}>
-                    <a href={doc.link} rel="noreferrer" target="_blank">
+                    <a
+                      className="link"
+                      href={doc.link}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
                       {doc.name}
                     </a>
                   </ExpansionPanelDetails>
