@@ -48,7 +48,19 @@ const ManageAssignments = ({
     courseId: assign.courseId,
     // category: assign.category,
     description: assign.description,
-    URL: assign.URL,
+    URL: assign.URL ? (
+      <a
+        className="link"
+        href={assign.URL}
+        rel="noreferrer"
+        target="_blank"
+        download
+      >
+        Open Assignment
+      </a>
+    ) : (
+      ''
+    ),
     startDate: assign.startDate,
     endDate: assign.endDate,
     userId: assign.userId
@@ -174,23 +186,14 @@ const ManageAssignments = ({
               }
               handleAdd(updatedData, resolve, handleCreateUserassignments)
             }),
-          // onRowUpdate: (newData, oldData) =>
-          //   new Promise(resolve => {
-          //     setTimeout(() => {
-          //       resolve()
-          //       if (oldData) {
-          //         setState(prevState => {
-          //           const data = [...prevState.data]
-          //           data[data.indexOf(oldData)] = newData
-          //           return {...prevState, data}
-          //         })
-          //       }
-          //     }, 600)
-          //   }),
+
           onRowDelete: oldData =>
             new Promise(resolve => {
               handleDelete(oldData, resolve)
             })
+        }}
+        options={{
+          actionsColumnIndex: -1
         }}
       />
     </div>
