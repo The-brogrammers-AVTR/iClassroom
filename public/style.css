@@ -975,3 +975,9 @@ l
 .link {
   color: #6576bb;
 }
+
+.assignment-link {
+  padding: 1rem;
+  font-weight: bold;
+  margin-left: 5%;
+}

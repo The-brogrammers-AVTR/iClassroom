@@ -186,23 +186,14 @@ const ManageAssignments = ({
               }
               handleAdd(updatedData, resolve, handleCreateUserassignments)
             }),
-          // onRowUpdate: (newData, oldData) =>
-          //   new Promise(resolve => {
-          //     setTimeout(() => {
-          //       resolve()
-          //       if (oldData) {
-          //         setState(prevState => {
-          //           const data = [...prevState.data]
-          //           data[data.indexOf(oldData)] = newData
-          //           return {...prevState, data}
-          //         })
-          //       }
-          //     }, 600)
-          //   }),
+
           onRowDelete: oldData =>
             new Promise(resolve => {
               handleDelete(oldData, resolve)
             })
+        }}
+        options={{
+          actionsColumnIndex: -1
         }}
       />
     </div>
