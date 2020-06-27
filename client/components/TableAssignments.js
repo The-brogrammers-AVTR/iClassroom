@@ -55,7 +55,8 @@ const TableAssignments = ({assignment, userassignment, update}) => {
             .getDownloadURL()
             .then(url => {
               update(id, {
-                submissionURL: url
+                submissionURL: url,
+                isComplete: true
               })
             })
         }

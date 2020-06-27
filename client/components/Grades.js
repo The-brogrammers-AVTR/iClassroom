@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import OneStudentGrades from './OneStudentGrades'
 import TeacherGrades from './TeacherGrades'
-import TeacherGrading from './TeacherGrading'
 import Sidebar from './Sidebar'
 import {Grid} from '@material-ui/core'
 import {updateUserassignment} from '../store/userassignment'
@@ -42,10 +41,6 @@ class Grades extends Component {
               course={course}
               update={update}
             />
-            {/* <TeacherGrading
-              students={filteredStudents}
-              userassignments={userassignmentsForCourse}
-            /> */}
           </Grid>
         ) : (
           <Grid item xs={12} sm={11}>
