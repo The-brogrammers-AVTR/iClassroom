@@ -6,6 +6,8 @@ let feedProviderId = v4()
 let conn
 let peer
 import {connect} from 'react-redux'
+import socketIOClient from 'socket.io-client'
+const socket = socketIOClient()
 
 function requestLocalVideo(callbacks) {
   // Monkeypatch for crossbrowser geusermedia
@@ -101,6 +103,7 @@ class VideoTeacher extends Component {
     peer = this.initialize()
     if (user.isTeacher) {
       window.localStorage.setItem('peerId', peer.id)
+      socket.emit('teacherPeerId', peer.id)
     }
     // console.log(window.localStorage.getItem('peerId'))
     this.setState({peerId: peer.id})

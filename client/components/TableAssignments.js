@@ -43,13 +43,15 @@ const TableAssignments = ({assignment, userassignment, update}) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Done</TableCell>
-              <TableCell align="left">Assignment ID</TableCell>
+              {/* <TableCell align="left">Assignment ID</TableCell> */}
               <TableCell align="left">Assignment#</TableCell>
               <TableCell align="left">Assignment</TableCell>
-              <TableCell align="left">Course</TableCell>
-              <TableCell align="left">Category</TableCell>
+              {/* <TableCell align="left">Course</TableCell> */}
+              {/* <TableCell align="left">Category</TableCell> */}
               <TableCell align="left">Description</TableCell>
-              <TableCell align="left">Teacher</TableCell>
+              <TableCell align="left">Link</TableCell>
+              <TableCell align="left">Submission</TableCell>
+              {/* <TableCell align="left">Teacher</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -71,12 +73,33 @@ const TableAssignments = ({assignment, userassignment, update}) => {
                   />
                 </TableCell>
                 <TableCell align="left">{assignment.id}</TableCell>
-                <TableCell align="left">{idx + 1}</TableCell>
+                {/* <TableCell align="left">{idx + 1}</TableCell> */}
                 <TableCell align="left">{assignment.title}</TableCell>
-                <TableCell align="left">{assignment.courseId}</TableCell>
-                <TableCell align="left">{assignment.category}</TableCell>
+                {/* <TableCell align="left">{assignment.courseId}</TableCell> */}
+                {/* <TableCell align="left">{assignment.category}</TableCell> */}
                 <TableCell align="left">{assignment.description}</TableCell>
-                <TableCell align="left">{assignment.userId}</TableCell>
+                <TableCell align="left">
+                  {assignment.URL && (
+                    <a
+                      className="link"
+                      href={assignment.URL}
+                      rel="noreferrer"
+                      target="_blank"
+                      download
+                    >
+                      Open Assignment
+                    </a>
+                  )}
+                </TableCell>
+                <TableCell align="left">
+                  <input
+                    // className={classes.input}
+                    // id="icon-button-file"
+                    type="file"
+                    // onChange={handleUpload}
+                  />
+                </TableCell>
+                {/* <TableCell align="left">{assignment.userId}</TableCell> */}
               </TableRow>
             ))}
           </TableBody>

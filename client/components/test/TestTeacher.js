@@ -63,14 +63,16 @@ class TestTeacher extends Component {
     })
     console.log(this.state.submit)
   }
+
   render() {
     const {test, isTest, allRows} = this.props
     const {grade} = this.state
-    console.log(test, isTest, this.props, allRows[0])
+    //console.log(test, isTest, this.props, allRows[0])
+
     return (
       <div>
         {grade > 0 ? <h1>{grade}</h1> : ''}
-        <h1>TEST: {test.name}</h1>
+        <h3>Step 2: Confirm Uploaded TEST: {test.name}</h3>
         <form
           // action="/course/3/assignments"
           onSubmit={e => {

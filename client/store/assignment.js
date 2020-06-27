@@ -101,10 +101,10 @@ export const createAssignmentTest = (assignment, push) => {
   }
 }
 
-export const updateAssignment = assignment => {
+export const updateAssignment = (assignment, id) => {
   return async dispatch => {
     const updatedAssignment = (await axios.put(
-      `/api/assignment/${assignment.id}`,
+      `/api/assignments/${id}`,
       assignment
     )).data
     dispatch(_updateAssignment(updatedAssignment))

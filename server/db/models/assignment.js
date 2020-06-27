@@ -15,13 +15,7 @@ const Assignment = db.define('assignment', {
       notEmpty: true
     }
   },
-  category: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
+
   description: {
     type: STRING,
     allowNull: false,
@@ -37,7 +31,7 @@ const Assignment = db.define('assignment', {
     type: DATEONLY,
     allowNull: true
   },
-  assignmentURL: {
+  URL: {
     type: STRING,
     allowNull: true
   },
