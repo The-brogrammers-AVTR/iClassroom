@@ -17,7 +17,13 @@ class Students extends React.Component {
   }
   render() {
     const {toggle} = this.state
-    const {course, instructor, filteredStudents, user} = this.props
+    const {
+      course,
+      instructor,
+      filteredStudents,
+      waitingStudents,
+      user
+    } = this.props
     console.log(course, instructor, filteredStudents, user)
     console.log(filteredStudents)
 
@@ -44,7 +50,11 @@ class Students extends React.Component {
             </div>
 
             <div>
-              <StudentList filteredStudents={filteredStudents} />
+              <StudentList
+                courseId={course.id}
+                filteredStudents={filteredStudents}
+                waitingStudents={waitingStudents}
+              />
             </div>
           </div>
         </div>
@@ -61,10 +71,19 @@ const mapStateToProps = ({courses, teachers, students, user}, {match}) => {
   )
 
   const filteredStudents = students.filter(student =>
-    course.UserCourses.find(usercourse => usercourse.userId === student.id)
+    course.UserCourses.find(
+      usercourse =>
+        usercourse.userId === student.id && usercourse.admit === true
+    )
   )
-
-  return {course, instructor, filteredStudents, user}
+  const waitingStudents = students.filter(student =>
+    course.UserCourses.find(
+      usercourse =>
+        usercourse.userId === student.id && usercourse.admit === false
+    )
+  )
+  console.log('Students: ', filteredStudents, waitingStudents)
+  return {course, instructor, filteredStudents, waitingStudents, user}
 }
 
 export default connect(mapStateToProps)(Students)

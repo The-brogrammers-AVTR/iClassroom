@@ -13,3 +13,17 @@ router.post('/', async (req, res, next) => {
     .then(course => res.send(course))
     .catch(next)
 })
+
+router.put('/', async (req, res, next) => {
+  const courseid = req.body.courseId
+  const userid = req.body.userId
+  console.log('usercourse put route: ', courseid, userid)
+  await UserCourse.findByPk({
+    where: {
+      userId: {userid},
+      courseId: {courseid}
+    }
+  })
+    .then(usercourse => res.send(usercourse))
+    .catch(next)
+})
