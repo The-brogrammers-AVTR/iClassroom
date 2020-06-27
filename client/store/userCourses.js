@@ -36,7 +36,7 @@ const _admitUserCourse = course => ({type: ADMIT_USER_COURSE, course})
 const getUserCourses = () => {
   return async dispatch => {
     const response = await axios.get('/api/usercourses')
-    console.log('get user corses ', response.data)
+    // console.log('get user corses ', response.data)
     dispatch(_getUserCourses(response.data))
   }
 }

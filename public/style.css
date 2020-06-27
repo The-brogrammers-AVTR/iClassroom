@@ -913,7 +913,7 @@ body {
   background-color: black;
   border-radius: 50%;
 }
-
+l
 /* width */
 #messagesUsers ::-webkit-scrollbar {
   width: 10px;
@@ -954,13 +954,11 @@ body {
 .green {
   width: 20px;
   height: 20px;
-
   background-color: greenyellow;
 }
 .red {
   width: 20px;
   height: 20px;
-
   background-color: red;
 }
 
@@ -975,6 +973,11 @@ body {
 }
 
 .link {
-  text-decoration-line: underline;
   color: #6576bb;
+}
+
+.assignment-link {
+  padding: 1rem;
+  font-weight: bold;
+  margin-left: 5%;
 }
