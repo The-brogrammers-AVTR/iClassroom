@@ -30,7 +30,7 @@ function WhiteBoard() {
   const getRandomInt = max => {
     return Math.floor(Math.random() * Math.floor(max))
   }
-  //console.log('sstageEl', layerEl)
+  console.log('shapes sstageEl shapes', shapes, React.useState(), React)
 
   const addRectangle = () => {
     const rect = {
@@ -78,12 +78,12 @@ function WhiteBoard() {
     )
   }
 
-  // const drawLine2 = line => {
-  //   // console.log(line)
+  const drawLine2 = line => {
+    // console.log(line)
 
-  //   console.log('1', line)
-  //   addLine2(color, stageEl.current.getStage(), layerEl.current, 'brush', line)
-  // }
+    console.log('1', line)
+    addLine2(color, stageEl.current.getStage(), layerEl.current, 'brush', line)
+  }
 
   const eraseLine = () => {
     let tcolor = color
@@ -173,12 +173,15 @@ function WhiteBoard() {
     }
   })
 
-  socket.on('line', collection => {
-    console.log(collection)
-    for (let i = 0; i < collection.length; i++) {
-      console.log(JSON.parse(collection[i]))
-    }
-  })
+  // socket.on('line', collection => {
+  //   console.log(collection)
+  //   for (let i = 0; i < collection.length; i++) {
+  //     console.log(JSON.parse(collection[i]))
+  //     if (collection[i].className == 'Line') {
+  //       drawLine2(collection[i].attrs)
+  //     }
+  //   }
+  // })
   socket.on('circle', circle => {
     //console.log('cirles from socket,', circle)
     setCircles(circle)
@@ -209,7 +212,7 @@ function WhiteBoard() {
   const handleClose = () => {
     setAction({action: false})
   }
-  console.log(stageEl)
+  console.log('stage', stageEl)
   return (
     <div className="whiteboard" id="crosshair">
       <ButtonGroup>
@@ -267,12 +270,12 @@ function WhiteBoard() {
         <Layer
           ref={layerEl}
           onChange={() => {
-            console.log('we changing')
+            console.log('we changing', layerEl)
             socket.emit('layer', layer)
           }}
         >
           {rectangles.map((rect, i) => {
-            console.log(layerEl)
+            //console.log(layerEl)
             return (
               <Rectangle
                 key={i}

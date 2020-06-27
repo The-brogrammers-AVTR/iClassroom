@@ -12,11 +12,16 @@ export const addLine = (color, stage, layer, mode = 'brush', collection) => {
     mode: mode,
     collection: collection
   })
-
+  // if (collection.draggable) {
+  //   console.log(collection)
+  //   layer.add(collection)
+  //   layer.batchDraw()
+  //   return
+  // }
   //console.log('last line', line)
   //console.log(line ? true : false, line)
   stage.on('mousedown touchstart', function(e) {
-    socket.emit('line', collection)
+    //socket.emit('line', collection)
     //document.getElementsByClassName('home-page').style.cursor = 'crosshair'
     isPaint = true
     let pos = stage.getPointerPosition()
