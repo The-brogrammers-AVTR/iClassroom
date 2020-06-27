@@ -70,15 +70,19 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
               console.log(rowData)
               return (
                 <div className="assignment-link">
-                  <a
-                    className="link"
-                    href={rowData.submissionLink}
-                    rel="noreferrer"
-                    target="_blank"
-                    download
-                  >
-                    {rowData.submissionLink ? 'Assignment Link' : ''}
-                  </a>
+                  {rowData.submissionLink ? (
+                    <a
+                      className="link"
+                      href={rowData.submissionLink}
+                      rel="noreferrer"
+                      target="_blank"
+                      download
+                    >
+                      {rowData.submissionLink ? 'Assignment Link' : ''}
+                    </a>
+                  ) : (
+                    <p>No Assignment</p>
+                  )}
                 </div>
               )
             }
