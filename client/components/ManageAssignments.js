@@ -48,7 +48,19 @@ const ManageAssignments = ({
     courseId: assign.courseId,
     // category: assign.category,
     description: assign.description,
-    URL: assign.URL,
+    URL: assign.URL ? (
+      <a
+        className="link"
+        href={assign.URL}
+        rel="noreferrer"
+        target="_blank"
+        download
+      >
+        Open Assignment
+      </a>
+    ) : (
+      ''
+    ),
     startDate: assign.startDate,
     endDate: assign.endDate,
     userId: assign.userId

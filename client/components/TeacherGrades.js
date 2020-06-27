@@ -16,7 +16,19 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
     assignment: assignment.find(assign => assign.id === userassign.assignmentId)
       .title,
     isComplete: userassign.isComplete ? 'Yes' : 'No',
-    submissionLink: userassign.submissionURL ? userassign.submissionURL : '',
+    submissionLink: userassign.submissionURL ? (
+      <a
+        className="link"
+        href={userassign.submissionURL}
+        rel="noreferrer"
+        target="_blank"
+        download
+      >
+        Open Assignment
+      </a>
+    ) : (
+      ''
+    ),
     grade: userassign.grade ? userassign.grade : undefined
   }))
 
@@ -31,7 +43,7 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
     },
     {title: 'Assignment', field: 'assignment', editable: 'never'},
     {title: 'Complete', field: 'isComplete', editable: 'never'},
-    {title: 'Submission Link', field: 'submissionURL', editable: 'never'},
+    {title: 'Submission Link', field: 'submissionLink', editable: 'never'},
     {title: 'Grade', field: 'grade', type: 'numeric'}
   ]
 

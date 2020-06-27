@@ -42,6 +42,7 @@ const OneStudentGrades = ({userassignments, user, course, assignment}) => {
           <TableHead>
             <TableRow>
               <TableCell align="left">Assignment</TableCell>
+              <TableCell align="left">Link</TableCell>
               <TableCell align="left">Grade</TableCell>
             </TableRow>
           </TableHead>
@@ -56,6 +57,17 @@ const OneStudentGrades = ({userassignments, user, course, assignment}) => {
                         assign => assign.id === _userassign.assignmentId
                       ).title
                     }
+                  </TableCell>
+                  <TableCell align="left">
+                    <a
+                      className="link"
+                      href={_userassign.submissionURL}
+                      rel="noreferrer"
+                      target="_blank"
+                      download
+                    >
+                      {_userassign.submissionURL ? 'Assignment Link' : ''}
+                    </a>
                   </TableCell>
                   <TableCell align="left">{_userassign.grade}</TableCell>
                 </TableRow>
