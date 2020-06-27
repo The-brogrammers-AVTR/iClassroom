@@ -52,6 +52,7 @@ const mapStateToProps = ({courses, user, coursess}, {history}) => {
   let myIdsCourses = coursess.filter(cor => {
     // console.log('cor cor cor', cor)
     if (cor.userId === user.id) {
+      //&& cor.admit===true
       // console.log(cor.userId === user.id, cor.userId, user.id, cor.courseId)
       return cor.courseId
     }

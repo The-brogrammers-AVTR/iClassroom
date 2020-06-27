@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {getCourses} from './course'
+import store from './index'
 
 /**
  * ACTION TYPES ------------------------------------------------
@@ -7,6 +8,8 @@ import {getCourses} from './course'
 const GET_USER_COURSES = 'GET_USER_COURSES'
 //const GET_DETAILS = 'GET_DETAILS'
 const CREATE_USER_COURSE = 'CREATE_USER_COURSE'
+const JOIN_USER_COURSE = 'JOIN_USER_COURSE'
+const ADMIT_USER_COURSE = 'ADMIT_USER_COURSE'
 //const UPDATE_COURSE = 'UPDATE_COURSE'
 //const REMOVE_COURSE = 'REMOVE_COURSE'
 
@@ -23,6 +26,9 @@ const _getUserCourses = courses => ({type: GET_USER_COURSES, courses})
 const _createUserCourse = course => ({type: CREATE_USER_COURSE, course})
 //const _updateCourse = course => ({type: UPDATE_COURSE, course})
 //const _removeCourse = id => ({type: REMOVE_COURSE, id})
+const _joinUserCourse = course => ({type: JOIN_USER_COURSE, course})
+
+const _admitUserCourse = course => ({type: ADMIT_USER_COURSE, course})
 
 /**
  * THUNK CREATORS -------------------------------------------------
@@ -47,6 +53,38 @@ const createUserCourse = (userId, courseId, push) => {
     dispatch(getCourses())
     push('/')
   }
+}
+const joinUserCourse = (courseId, userId) => {
+  console.log('Join User Course', courseId, userId)
+  return async dispatch => {
+    const response = await axios.post('/api/usercourses', {
+      userId: userId,
+      courseId: courseId,
+      admit: false
+    })
+    console.log('create user courses ', response.data)
+    dispatch(_joinUserCourse(response.data))
+    dispatch(getCourses())
+  }
+}
+
+const admitUserCourse = (courseId, userId) => {
+  console.log('Accept Student', courseId, userId)
+  let userCourseToUpdate = store.getState().UserCourse
+  console.log(userCourseToUpdate)
+
+  return async dispatch => {
+    const admitUser = await axios.put('/api/usercourses', {
+      userId: userId,
+      courseId: courseId,
+      admit: true
+    }).data
+    console.log('after put', admitUser)
+    dispatch(_admitUserCourse(admitUser))
+    // dispatch(getUserCourses())
+  }
+  //
+  //
 }
 // const getDetails = id => {
 //   return async dispatch => {
@@ -93,6 +131,11 @@ const coursess = function(state = initialState, action) {
     case CREATE_USER_COURSE:
       return [...state, action.course]
 
+    case JOIN_USER_COURSE:
+      return [...state, action.course]
+    case ADMIT_USER_COURSE:
+      return [...state, action.course]
+    //state= state.map()
     // case REMOVE_COURSE:
     //   return state.filter(course => course.id !== action.id)
 
@@ -122,4 +165,10 @@ const coursess = function(state = initialState, action) {
 //   }
 // }
 
-export {coursess, getUserCourses, createUserCourse}
+export {
+  coursess,
+  getUserCourses,
+  createUserCourse,
+  joinUserCourse,
+  admitUserCourse
+}

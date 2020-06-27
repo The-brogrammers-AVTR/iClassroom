@@ -10,7 +10,12 @@ const Userassignment = require('./userassignment')
 const Test = require('./test')
 
 // blank models
-const UserCourse = db.define('UserCourse')
+const UserCourse = db.define('UserCourse', {
+  admit: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
+  }
+})
 // const Userassignment = db.define('Userassignment', {
 //   grade: {
 //     type: Sequelize.INTEGER,
