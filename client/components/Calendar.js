@@ -25,6 +25,9 @@ const useStyles = makeStyles({
     margin: theme.spacing(10, 0),
     padding: theme.spacing(0),
     width: '95%'
+  },
+  root: {
+    backgroundColor: 'aliceblue'
   }
 })
 
@@ -57,18 +60,17 @@ const Calendar = ({user, userassignments}) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper>
+      <Paper className={classes.root}>
         <Scheduler data={data}>
           <ViewState
             defaultCurrentDate={today.format('YYYY-MM-DD')}
             defaultCurrentViewName="Month"
           />
-          <DayView startDayHour={9} endDayHour={18} />
-          <WeekView startDayHour={10} endDayHour={19} />
+
           <MonthView />
           <Appointments />
           <Toolbar />
-          <ViewSwitcher />
+
           <DateNavigator />
           <TodayButton />
         </Scheduler>

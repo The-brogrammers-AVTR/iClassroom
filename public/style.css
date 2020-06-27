@@ -174,9 +174,9 @@ td {
   padding: 0.5rem;
 }
 
-tr:nth-child(even) {
+/* tr:nth-child(even) {
   background-color: lightblue;
-}
+} */
 
 /* search-bar */
 
@@ -980,4 +980,10 @@ l
   padding: 1rem;
   font-weight: bold;
   margin-left: 5%;
+}
+
+.assignment-url {
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
 }

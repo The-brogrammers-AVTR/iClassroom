@@ -81,7 +81,7 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
                       {rowData.submissionLink ? 'Assignment Link' : ''}
                     </a>
                   ) : (
-                    <p>No Assignment</p>
+                    <p className="assignment-url">No Assignment Submitted</p>
                   )}
                 </div>
               )
