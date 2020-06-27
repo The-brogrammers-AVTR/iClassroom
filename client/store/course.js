@@ -30,7 +30,7 @@ const _removeCourse = id => ({type: REMOVE_COURSE, id})
 const getCourses = () => {
   return async dispatch => {
     const response = await axios.get('/api/courses')
-    console.log('get corses after create', response.data)
+    // console.log('get corses after create', response.data)
     dispatch(_getCourses(response.data))
   }
 }

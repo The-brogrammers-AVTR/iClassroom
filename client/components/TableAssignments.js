@@ -13,7 +13,7 @@ import {storage} from '../firebase'
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
-    width: '80%',
+    width: '90%',
     margin: 'auto'
   },
   cell: {
@@ -25,19 +25,17 @@ const useStyles = makeStyles({
 })
 
 const TableAssignments = ({assignment, userassignment, update}) => {
-  console.log(assignment, userassignment)
   const classes = useStyles()
 
-  const [_url, setUrl] = useState(
-    userassignment.submissionURL ? userassignment.submissionURL : ''
-  )
+  // const [_url, setUrl] = useState(
+  //   userassignment.submissionURL ? userassignment.submissionURL : ''
+  // )
   const [error, setError] = useState('')
   const [progress, setProgress] = useState(0)
 
   const handleUpload = (e, id) => {
     if (e.target.files[0]) {
       const file = e.target.files[0]
-
       const uploadTask = storage.ref(`submissions/${file.name}`).put(file)
       uploadTask.on(
         'state_changed',
@@ -68,56 +66,33 @@ const TableAssignments = ({assignment, userassignment, update}) => {
   if (!assignment || !userassignment) {
     return null
   }
-  console.log('assign', assignment)
-  console.log('userassign', userassignment)
+  console.log('assignment', assignment)
+  console.log('userassignment', userassignment)
   return (
     <Fragment>
       <h1>Assignments</h1>
       <TableContainer>
-        <Table
-          className={classes.table}
-          size="medium"
-          aria-label="a dense table"
-        >
+        <Table className={classes.table} size="medium">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Done</TableCell>
-              {/* <TableCell align="left">Assignment ID</TableCell> */}
               <TableCell align="left">Assignment#</TableCell>
               <TableCell align="left">Assignment</TableCell>
-              {/* <TableCell align="left">Course</TableCell> */}
-              {/* <TableCell align="left">Category</TableCell> */}
               <TableCell align="left">Description</TableCell>
+              <TableCell align="left">Start Date</TableCell>
+              <TableCell align="left">Due Date</TableCell>
               <TableCell align="left">Link</TableCell>
               <TableCell align="left">Submission</TableCell>
               <TableCell align="left">Submission Link</TableCell>
-              {/* <TableCell align="left">Teacher</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
             {assignment.map((assignment, idx) => (
               <TableRow key={assignment.id}>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    // checked={
-                    //   userassignment.find(
-                    //     userassign => userassign.assignmentId === assignment.id
-                    //   ).isComplete
-                    // }
-                    onChange={ev => {
-                      const id = userassignment.find(
-                        userassign => userassign.assignmentId === assignment.id
-                      ).id
-                      update(id, {isComplete: ev.target.checked})
-                    }}
-                  />
-                </TableCell>
                 <TableCell align="left">{assignment.id}</TableCell>
-                {/* <TableCell align="left">{idx + 1}</TableCell> */}
                 <TableCell align="left">{assignment.title}</TableCell>
-                {/* <TableCell align="left">{assignment.courseId}</TableCell> */}
-                {/* <TableCell align="left">{assignment.category}</TableCell> */}
                 <TableCell align="left">{assignment.description}</TableCell>
+                <TableCell align="left">{assignment.startDate}</TableCell>
+                <TableCell align="left">{assignment.endDate}</TableCell>
                 <TableCell align="left">
                   {assignment.URL && (
                     <a
@@ -142,26 +117,26 @@ const TableAssignments = ({assignment, userassignment, update}) => {
                       ).id
                       handleUpload(ev, id)
                     }}
-                    // onChange={handleUpload}
                   />
                 </TableCell>
                 <TableCell align="left">
-                  {/* {userassignment.filter(
-                      (userassign) =>
-                          userassign.assignmentId === assignment.id
-                      )
-                    )} */}
-
                   <a
                     className="link"
-                    href={userassign.submissionURL}
+                    href={
+                      userassignment.find(
+                        userassign => userassign.assignmentId === assignment.id
+                      ).submissionURL
+                    }
                     rel="noreferrer"
                     target="_blank"
                   >
-                    Assignment
+                    {userassignment.find(
+                      userassign => userassign.assignmentId === assignment.id
+                    ).submissionURL
+                      ? 'Assignment Link'
+                      : ''}
                   </a>
                 </TableCell>
-                {/* <TableCell align="left">{assignment.userId}</TableCell> */}
               </TableRow>
             ))}
           </TableBody>
