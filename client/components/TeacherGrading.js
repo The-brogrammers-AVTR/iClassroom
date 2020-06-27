@@ -76,6 +76,7 @@ function Row(props) {
                     <TableCell align="left">Date</TableCell>
                     <TableCell align="left">Assignment</TableCell>
                     <TableCell align="left">Complete</TableCell>
+                    <TableCell align="left">Link</TableCell>
                     <TableCell align="left">Grade</TableCell>
                     <TableCell align="left">Edit Grade</TableCell>
                   </TableRow>
@@ -89,6 +90,16 @@ function Row(props) {
                       <TableCell>{userassignRow.assignment}</TableCell>
                       <TableCell align="left">
                         {userassignRow.complete}
+                      </TableCell>
+                      <TableCell align="left">
+                        <a
+                          className="link"
+                          href={userassignRow.submissionURL}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          Assignment Link
+                        </a>
                       </TableCell>
                       <TableCell align="left">{userassignRow.grade}</TableCell>
                       <TableCell align="left">

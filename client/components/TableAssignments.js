@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {useState, Fragment} from 'react'
 //Material-UI
 import {makeStyles} from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Checkbox from '@material-ui/core/Checkbox'
+import {storage} from '../firebase'
 
 const useStyles = makeStyles({
   table: {
@@ -26,6 +27,44 @@ const useStyles = makeStyles({
 const TableAssignments = ({assignment, userassignment, update}) => {
   console.log(assignment, userassignment)
   const classes = useStyles()
+
+  const [_url, setUrl] = useState(
+    userassignment.submissionURL ? userassignment.submissionURL : ''
+  )
+  const [error, setError] = useState('')
+  const [progress, setProgress] = useState(0)
+
+  const handleUpload = (e, id) => {
+    if (e.target.files[0]) {
+      const file = e.target.files[0]
+
+      const uploadTask = storage.ref(`submissions/${file.name}`).put(file)
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress = Math.round(
+            snapshot.bytesTransferred / snapshot.totalBytes * 100
+          )
+          setProgress(progress)
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          storage
+            .ref('submissions')
+            .child(file.name)
+            .getDownloadURL()
+            .then(url => {
+              update(id, {
+                submissionURL: url
+              })
+            })
+        }
+      )
+    }
+  }
+
   if (!assignment || !userassignment) {
     return null
   }
@@ -51,6 +90,7 @@ const TableAssignments = ({assignment, userassignment, update}) => {
               <TableCell align="left">Description</TableCell>
               <TableCell align="left">Link</TableCell>
               <TableCell align="left">Submission</TableCell>
+              <TableCell align="left">Submission Link</TableCell>
               {/* <TableCell align="left">Teacher</TableCell> */}
             </TableRow>
           </TableHead>
@@ -96,8 +136,30 @@ const TableAssignments = ({assignment, userassignment, update}) => {
                     // className={classes.input}
                     // id="icon-button-file"
                     type="file"
+                    onChange={ev => {
+                      const id = userassignment.find(
+                        userassign => userassign.assignmentId === assignment.id
+                      ).id
+                      handleUpload(ev, id)
+                    }}
                     // onChange={handleUpload}
                   />
+                </TableCell>
+                <TableCell align="left">
+                  {/* {userassignment.filter(
+                      (userassign) =>
+                          userassign.assignmentId === assignment.id
+                      )
+                    )} */}
+
+                  <a
+                    className="link"
+                    href={userassign.submissionURL}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Assignment
+                  </a>
                 </TableCell>
                 {/* <TableCell align="left">{assignment.userId}</TableCell> */}
               </TableRow>

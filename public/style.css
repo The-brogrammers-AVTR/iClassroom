@@ -954,13 +954,11 @@ body {
 .green {
   width: 20px;
   height: 20px;
-
   background-color: greenyellow;
 }
 .red {
   width: 20px;
   height: 20px;
-
   background-color: red;
 }
 
@@ -975,6 +973,5 @@ body {
 }
 
 .link {
-  text-decoration-line: underline;
   color: #6576bb;
 }

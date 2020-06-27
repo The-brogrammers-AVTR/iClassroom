@@ -16,6 +16,7 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
     assignment: assignment.find(assign => assign.id === userassign.assignmentId)
       .title,
     isComplete: userassign.isComplete ? 'Yes' : 'No',
+    submissionLink: userassign.submissionURL ? userassign.submissionURL : '',
     grade: userassign.grade ? userassign.grade : undefined
   }))
 
@@ -30,6 +31,7 @@ const TeacherGrades = ({userassignments, course, assignment, update, load}) => {
     },
     {title: 'Assignment', field: 'assignment', editable: 'never'},
     {title: 'Complete', field: 'isComplete', editable: 'never'},
+    {title: 'Submission Link', field: 'submissionURL', editable: 'never'},
     {title: 'Grade', field: 'grade', type: 'numeric'}
   ]
 
