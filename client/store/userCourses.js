@@ -27,6 +27,9 @@ const _createUserCourse = course => ({type: CREATE_USER_COURSE, course})
 //const _updateCourse = course => ({type: UPDATE_COURSE, course})
 //const _removeCourse = id => ({type: REMOVE_COURSE, id})
 const _joinUserCourse = course => ({type: JOIN_USER_COURSE, course})
+
+const _admitUserCourse = course => ({type: ADMIT_USER_COURSE, course})
+
 /**
  * THUNK CREATORS -------------------------------------------------
  */
@@ -71,14 +74,17 @@ const admitUserCourse = (courseId, userId) => {
   console.log(userCourseToUpdate)
 
   return async dispatch => {
-    await axios.put('/api/usercourse', {
+    const admitUser = await axios.put('/api/usercourses', {
       userId: userId,
       courseId: courseId,
       admit: true
-    })
-    dispatch(getUserCourses())
-    // dispatch(_admitUserCourse())
+    }).data
+    console.log('after put', admitUser)
+    dispatch(_admitUserCourse(admitUser))
+    // dispatch(getUserCourses())
   }
+  //
+  //
 }
 // const getDetails = id => {
 //   return async dispatch => {
@@ -128,6 +134,7 @@ const coursess = function(state = initialState, action) {
     case JOIN_USER_COURSE:
       return [...state, action.course]
     case ADMIT_USER_COURSE:
+      return [...state, action.course]
     //state= state.map()
     // case REMOVE_COURSE:
     //   return state.filter(course => course.id !== action.id)

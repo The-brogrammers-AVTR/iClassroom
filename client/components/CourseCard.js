@@ -44,7 +44,7 @@ const CourseCard = ({
   join
 }) => {
   const classes = useStyles()
-  let instructor, enrolled
+  let instructor, enrolled, pending
   const userId = user.id
   console.log('CourseCard userid:', userId)
   if (UserCourses && teachers) {
@@ -52,6 +52,9 @@ const CourseCard = ({
       UserCourses.find(usercourse => usercourse.userId === teacher.id)
     )
     enrolled = UserCourses.some(usercourse => usercourse.userId === user.id)
+    pending = UserCourses.some(
+      usercourse => usercourse.userId === user.id && usercourse.admit === false
+    )
   }
   if (!instructor) {
     return null
@@ -80,7 +83,9 @@ const CourseCard = ({
         </CardActionArea>
 
         <CardActions>
-          {enrolled ? (
+          {pending ? (
+            'Pending'
+          ) : enrolled ? (
             <Link to={`/course/${id}/announcements`}>
               <Button variant="contained" color="primary">
                 Enter

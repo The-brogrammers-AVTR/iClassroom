@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import admitUserCourse from '../store'
+import {admitUserCourse} from '../store'
 import {connect} from 'react-redux'
 import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
 import theme from './Theme'
@@ -27,6 +27,7 @@ const StudentList = ({
 }) => {
   const classes = useStyles()
   console.log('Students awaiting enrollments ', waitingStudents)
+
   return (
     <ThemeProvider theme={theme}>
       <TableContainer className={classes.table}>
@@ -91,7 +92,7 @@ const mapDispatchToProps = dispatch => {
   return {
     admitStudent: (courseId, userId) => {
       console.log('mapDispatch -- admit', courseId, userId)
-      dispatch(admitUserCourse({courseId, userId})) //put thunk
+      dispatch(admitUserCourse(courseId, userId)) //put thunk
     }
   }
 }

@@ -17,13 +17,20 @@ router.post('/', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   const courseid = req.body.courseId
   const userid = req.body.userId
-  console.log('usercourse put route: ', courseid, userid)
-  await UserCourse.findByPk({
+  console.log('usercourse put route: ', typeof courseid, typeof userid)
+
+  const userCourseToUpdate = await UserCourse.findOne({
     where: {
-      userId: {userid},
-      courseId: {courseid}
+      userId: userid,
+      courseId: courseid
     }
   })
-    .then(usercourse => res.send(usercourse))
-    .catch(next)
+  userCourseToUpdate.update({admit: req.body.admit})
+  res.send(userCourseToUpdate)
+  //  .then(usercourse =>{
+  //   console.log(usercourse);
+  //   usercourse.
+  //  res.send(usercourse)
+  // })
+  // .catch(next)
 })
