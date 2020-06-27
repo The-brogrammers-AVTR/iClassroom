@@ -28,7 +28,7 @@ const ReportCard = ({user, courses, userassignment}) => {
   if (allAssignments.length) {
     gradedAssignments = allAssignments.filter(aa => aa.isComplete === true)
   }
-  console.log(userassignment, allAssignments, gradedAssignments)
+  console.log('hahaha', userassignment, allAssignments, gradedAssignments)
 
   let courseGrade = [],
     index = 0
