@@ -91,11 +91,12 @@ class VideoStudent extends Component {
       alert('You need to provide a peer to connect with !')
       return false
     }
+    //this.call(conn)
   }
 
   async componentDidMount() {
     socket.on('teacherPeerId', peerId => {
-      console.log(peerId)
+      window.localStorage.setItem('peerId', peerId)
     })
     const {user} = this.props
     requestLocalVideo({
@@ -155,7 +156,7 @@ class VideoStudent extends Component {
       //console.log(data)
     })
     this.connctToPeer(window.localStorage.getItem('peerId'))
-    this.call()
+    //this.call()
   }
 
   render() {

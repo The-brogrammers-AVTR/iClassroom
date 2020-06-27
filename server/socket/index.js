@@ -67,8 +67,8 @@ module.exports = io => {
       io.emit('images', images)
     })
     socket.on('teacherPeerId', peerId => {
-      //console.log('cirle', circle)
-      io.emit('circle', peerId)
+      console.log('teacher peer id', peerId)
+      io.emit('teacherPeerId', peerId)
     })
     // socket.on('getUsers', msg => {
     //   const user = getCurrentUser(socket.id)

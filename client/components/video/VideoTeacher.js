@@ -24,13 +24,27 @@ function requestLocalVideo(callbacks) {
     callbacks.error
   )
 }
+function off(callbacks) {
+  // Monkeypatch for crossbrowser geusermedia
+  navigator.getUserMedia =
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia
 
+  // Request audio an video
+  //console.log('navigation video', navigator.getUserMedia)
+  navigator.getUserMedia(
+    {audio: false, video: false},
+    callbacks.success,
+    callbacks.error
+  )
+}
 function onReceiveStream(stream, element_id) {
   // Retrieve the video element according to the desired
   var video = document.getElementById(element_id)
   // Set the given stream as the video source
   video.srcObject = stream //video.src = window.URL.createObjectURL(stream)
-
+  console.log('stream on')
   // Store a global reference of the stream
   //window.peer_stream = stream
 }
@@ -85,14 +99,20 @@ class VideoTeacher extends Component {
       return false
     }
   }
-
+  componentWillUnmount() {
+    var video = document.getElementById('my-camera')
+    video.pause()
+    video.src = ''
+    localStream.getTracks()[0].stop()
+    console.log('Vid off')
+  }
   componentDidMount() {
     const {user} = this.props
     requestLocalVideo({
       success: function(stream) {
-        //console.log(stream)
+        console.log(stream)
         window.localStream = stream
-        //console.log(stream)
+        console.log(stream)
         onReceiveStream(stream, 'my-camera')
       },
       error: function(err) {
@@ -103,6 +123,7 @@ class VideoTeacher extends Component {
     peer = this.initialize()
     if (user.isTeacher) {
       window.localStorage.setItem('peerId', peer.id)
+
       socket.emit('teacherPeerId', peer.id)
     }
     // console.log(window.localStorage.getItem('peerId'))
@@ -134,7 +155,7 @@ class VideoTeacher extends Component {
 
       call.on('stream', stream => {
         window.peer_stream = stream
-        //console.log('stream stream', stream, call, window.peer_stream)
+        console.log('stream stream', stream, call, window.peer_stream)
         onReceiveStream(stream, 'rVideo')
       })
 
