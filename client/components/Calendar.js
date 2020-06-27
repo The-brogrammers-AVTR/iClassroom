@@ -28,14 +28,6 @@ const useStyles = makeStyles({
   }
 })
 
-// const assignments = [
-//   {
-//     title: 'Assignment',
-//     startDate: '2020-06-01',
-//     endDate: '2020-06-02',
-//   },
-// ]
-
 const Calendar = ({user, userassignments}) => {
   // console.log('In Cal user', user)
   // console.log('In Cal assign', assignments)
