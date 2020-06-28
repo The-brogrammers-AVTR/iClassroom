@@ -125,6 +125,7 @@ li {
   width: 100%;
   border-radius: 10px;
   padding: 2%;
+  box-shadow: 4px 1px 9px -1px rgba(0, 0, 0, 0.29);
 }
 
 .timestamp {
@@ -216,8 +217,13 @@ body {
   height: 100%;
 }
 .whiteboard {
-  border: solid black 15px;
-  margin: 1%;
+  /* border: solid black 15px;
+  margin: 1%; */
+
+  /* border: solid black 1px; */
+  margin: 0.5% 0.5% 0.5% 1%;
+  /* margin-left: 2%; */
+  box-shadow: 7px 6px 11px 0px rgba(0, 0, 0, 0.29);
 }
 
 /* #imojis {
@@ -845,7 +851,7 @@ body {
 
 /* video */
 .video-wrapper {
-  border: solid 1px black;
+  /* border: solid 1px #6576bb; */
   border-radius: 10px;
   width: 600px;
   margin: 1%;
@@ -865,7 +871,7 @@ body {
 .video-view {
   display: flex;
   justify-content: space-around;
-  border-bottom: solid 1px black;
+  border-bottom: solid 1px 6576bb;
   height: 200px;
 }
 
@@ -885,7 +891,7 @@ body {
 #chat-wrapper {
   margin: 1%;
   border-radius: 10px;
-  border: solid 1px black;
+  /* border: solid 1px #6576bb; */
   width: 600px;
   box-shadow: 7px 6px 11px 0px rgba(0, 0, 0, 0.29);
 }
@@ -913,13 +919,13 @@ body {
   background: aliceblue;
   text-align: center;
   border-radius: 10px 0px 0px 0px;
-  border-right: solid 1px black;
+  /* border-right: solid 1px #6576bb; */
 }
 
 #chatInput {
   text-align: center;
   padding: 1rem;
-  border-top: solid 1px black;
+  /* border-top: solid 1px #6576bb; */
   border-radius: 0px 0px 10px 10px;
   background: aliceblue;
 }
