@@ -216,7 +216,7 @@ body {
   height: 100%;
 }
 .whiteboard {
-  border: solid black 5px;
+  border: solid black 15px;
   margin: 1%;
 }
 
@@ -866,6 +866,7 @@ body {
   display: flex;
   justify-content: space-around;
   border-bottom: solid 1px black;
+  height: 200px;
 }
 
 .video-whiteboard-wrapper {
@@ -1017,4 +1018,9 @@ l
 
 .endcall {
   color: crimson;
+}
+
+#canvas {
+  height: 500px;
+  width: 500px;
 }

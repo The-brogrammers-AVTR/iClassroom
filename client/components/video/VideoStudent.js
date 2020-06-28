@@ -172,7 +172,7 @@ class VideoStudent extends Component {
           <video
             id="my-camera"
             width="250"
-            height="250"
+            height="200"
             autoPlay="autoplay"
             muted="true"
             className="center-block"
@@ -180,7 +180,7 @@ class VideoStudent extends Component {
           <video
             id="peer-camera"
             width="250"
-            height="250"
+            height="200"
             autoPlay="autoplay"
             className="center-block"
           />
