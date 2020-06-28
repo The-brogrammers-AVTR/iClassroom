@@ -44,7 +44,6 @@ const _readAssignments = assignments => {
 
 //THUNK CREATORS
 export const createAssignment = assignment => {
-  console.log(assignment)
   return async dispatch => {
     const createdAssignment = (await axios.post('/api/assignments', assignment))
       .data
@@ -53,7 +52,6 @@ export const createAssignment = assignment => {
 }
 
 export const createAssignmentTest = (assignment, push) => {
-  console.log(assignment)
   return async dispatch => {
     const createdAssignment = (await axios.post('/api/assignments', assignment))
       .data
@@ -64,38 +62,31 @@ export const createAssignmentTest = (assignment, push) => {
     const students = courses.find(course => {
       return course.id === assignment.courseId
     })
-    let a = students.UserCourses.filter(stud =>
+    let a = studentNames.filter(stud =>
+      students.UserCourses.find(s => stud.id === s.userId)
+    )
+    let b = students.UserCourses.filter(stud =>
       studentNames.find(s => stud.userId === s.id)
     )
-    console.log({
-      students: students,
-      courses: courses,
-      a: a,
-      studentNames: studentNames
-    })
 
-    students.UserCourses.map((student, index) => {
+    console.log({studentNames: studentNames, a: a, b: b, students: students})
+    await b.map((student, index) => {
+
+    
+
       dispatch(
         createUserassignment({
           isComplete: false,
           courseId: student.courseId,
           userId: student.userId,
           assignmentId: createdAssignment.id,
-          userName: studentNames[index].firstName
+          userName: `${a[index].firstName}  ${a[index].firstName}`
         })
       )
     })
-    console.log(students)
+
     push(`/course/${assignment.courseId}/assignments`)
-    //export const createAssignment = (assignment, push) => {
-    // return async dispatch => {
-    //   const createdAssignment = (await axios.post('/api/assignments', assignment))
-    //     .data
-    // if (push) {
-    //   push(`/course/${assignment.courseId}/assignments`)
-    // } else {
-    //   null
-    // }
+
     dispatch(_createAssignment(createdAssignment))
   }
 }

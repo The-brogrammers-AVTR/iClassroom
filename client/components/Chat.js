@@ -26,22 +26,28 @@ class Chat extends Component {
     }
     this.submit = this.submit.bind(this)
     this.displayImoji = this.displayImoji.bind(this)
+    this.getUsers = this.getUsers.bind(this)
   }
   getUsers() {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
-
+    socket.emit('joinRoom', {userName, room})
     socket.emit('getUsers', {userName, room})
   }
   componentDidMount() {
     socket.connect()
-    console.log('hello from mount', socket)
+    console.log(
+      'hello from mount',
+
+      this.state.message,
+      this.state.emoji
+    )
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
     this.getUsers()
     //socket.emit('getUsers', {userName, room})
-    socket.emit('joinRoom', {userName, room})
-
+    // socket.emit('joinRoom', {userName, room})
+    // socket.emit('getUsers', {userName, room})
     // socket.on('chat message', function(msg) {
     //   console.log(msg)
     //   let mes = document.getElementById('message')
@@ -69,24 +75,10 @@ class Chat extends Component {
                  </div>`
       let li = document.createElement('li')
       li.innerHTML = html
-      mes.append(li)
+      mes.appendChild(li)
       var chatList = document.getElementById('displayMessage')
       chatList.scrollTop = chatList.scrollHeight
       //console.log(this.state.message)
-    })
-    socket.on('userTyping', function(msg) {
-      //console.log('hello')
-      let label = document.getElementById('inputLabel')
-      label.innerText = msg + ': ' + 'user is typing'
-
-      // this.setState({action: msg + 'user is typing'})
-    })
-    socket.on('userFinishTyping', function(msg) {
-      console.log('hello')
-      let label = document.getElementById('inputLabel')
-      label.innerText = 'message'
-
-      // this.setState({action: msg + 'user is typing'})
     })
 
     // socket.on('joinRoom', function(msg) {
@@ -199,7 +191,6 @@ class Chat extends Component {
               variant="outlined"
               onChange={e => {
                 this.setState({message: e.target.value})
-                socket.emit('userTyping', this.state.message)
               }}
               value={this.state.message}
               className="textfield"
