@@ -58,14 +58,14 @@ class Chat extends Component {
 
       //mes.innerHTML = msg.userName + ' ' + msg.message + ' ' + msg.time
       let html = `<div class="container">
-                <div class="messageUser">
-                  <img src="/images/ninja.png" alt="Avatar" className={
-                  userName == msg.userName ? 'rigth' : 'rigth'
-                  } >
-                  <p class="userName">${msg.userName}</p>
-                  <h6 class="time-right">${msg.time}</h6>
-                  </div>
-                  <p>${msg.message}</p>              
+                    <div class="messageUser">
+                       <img src="/images/ninja.png" alt="Avatar">
+                        <p>${msg.userName}</p>
+                    </div>
+                    <div class="message-bubble">
+                        <p>${msg.message}</p>              
+                        <p class="timestamp">${msg.time}</p>
+                    </div>
                  </div>`
       let li = document.createElement('li')
       li.innerHTML = html
@@ -173,8 +173,9 @@ class Chat extends Component {
             <div id="message" />
           </div>
           <div id="displayUsers">
-            <span style={{fontWeight: 'bold', alignText: 'center'}}>Users</span>
-            <hr />
+            <h3 style={{fontWeight: 'bold', alignText: 'center'}}>
+              Online Users
+            </h3>
             <div id="users" />
           </div>
         </div>

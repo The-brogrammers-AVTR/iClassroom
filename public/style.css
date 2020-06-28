@@ -90,23 +90,13 @@ li {
 .container {
   display: flex;
   flex-direction: row;
-  background-color: #add8e6;
+  /* background-color: #add8e6; */
   border-radius: 5px;
   padding: 5px;
   margin: 10px;
 }
 
-.messageUser {
-  display: flex;
-  flex-direction: column;
-}
-
-.darker {
-  border-color: #ccc;
-  background-color: #ddd;
-}
-
-.container::after {
+.container:after {
   content: '';
   clear: both;
   display: table;
@@ -114,9 +104,8 @@ li {
 
 .container img {
   float: left;
-  max-width: 60px;
-  width: 100%;
-  margin-right: 20px;
+  max-width: 50px;
+  margin-right: 15px;
   border-radius: 50%;
 }
 
@@ -124,6 +113,29 @@ li {
   float: right;
   margin-left: 20px;
   margin-right: 0;
+}
+
+.messageUser {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-bubble {
+  background-color: #add8e6;
+  width: 100%;
+  border-radius: 10px;
+  padding: 2%;
+}
+
+.timestamp {
+  color: gray;
+  text-align: right;
+  font-size: 13px;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
 }
 
 .time-right {
@@ -187,7 +199,7 @@ td {
 }
 
 body {
-  font: 14px 'Century Gothic', Futura, sans-serif;
+  /* font: 14px 'Century Gothic', Futura, sans-serif; */
   margin: 0;
 }
 
@@ -862,10 +874,13 @@ body {
 /* chat */
 
 #chat-wrapper {
-  margin: 1%;
-  border: solid 5px black;
+  /* margin: 1%;
+  border: solid 5px black; */
   border-radius: 10px;
+  border: solid 1px black;
+  margin-left: 2%;
   width: 600px;
+  box-shadow: 7px 6px 11px 0px rgba(0, 0, 0, 0.29);
 }
 
 #message-wrapper {
@@ -888,12 +903,18 @@ body {
   overflow-y: scroll;
   margin: 0;
   width: 25%;
-  background: lightblue;
+  background: aliceblue;
+  text-align: center;
+  border-radius: 10px 0px 0px 0px;
+  border-right: solid 1px black;
 }
 
 #chatInput {
   text-align: center;
   padding: 1rem;
+  border-top: solid 1px black;
+  border-radius: 0px 0px 10px 10px;
+  background: aliceblue;
 }
 
 .textfield {

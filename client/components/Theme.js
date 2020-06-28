@@ -12,20 +12,11 @@ const Theme = createMuiTheme({
     black: 'black',
     red: 'red'
   },
-  status: {
-    danger: 'orange'
-  },
+  status: {danger: 'orange'},
   overrides: {
-    MuiTable: {
-      root: {
-        width: '95%'
-      }
-    },
-    Toolbar: {
-      toolbar: {
-        background: '#ADD8E6'
-      }
-    }
+    MuiTable: {root: {width: '95%'}},
+    MuiOutlinedInput: {input: {background: 'white'}},
+    Toolbar: {toolbar: {background: '#ADD8E6'}}
   }
 })
 

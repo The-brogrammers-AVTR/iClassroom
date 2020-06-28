@@ -22,7 +22,7 @@ module.exports = io => {
       // socket.broadcast
       //   .to(user.room)
       //   .emit('message', formatMessage(userName, 'welcome11'))
-      socket.emit('message', formatMessage(name, `welcome to room: ${room}`))
+      socket.emit('message', formatMessage(name, `Welcome to room: ${room}`))
     })
     //socket.broadcast.to(socket.id).emit(name, `welcome to room: ${room}`)
     // socket.emit('message', formatMessage(name, `welcome to room: ${room}`))
