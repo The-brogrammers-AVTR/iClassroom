@@ -12,8 +12,7 @@ import {
   TodayButton,
   ViewSwitcher
 } from '@devexpress/dx-react-scheduler-material-ui'
-import {ThemeProvider} from '@material-ui/styles'
-import {makeStyles, Paper} from '@material-ui/core'
+import {makeStyles, Paper, ThemeProvider} from '@material-ui/core'
 import axios from 'axios'
 import theme from './Theme'
 import {setDate} from 'date-fns/esm'
@@ -70,7 +69,6 @@ const Calendar = ({user, userassignments}) => {
           <MonthView />
           <Appointments />
           <Toolbar />
-
           <DateNavigator />
           <TodayButton />
         </Scheduler>

@@ -20,6 +20,11 @@ const Theme = createMuiTheme({
       root: {
         width: '95%'
       }
+    },
+    Toolbar: {
+      toolbar: {
+        background: '#ADD8E6'
+      }
     }
   }
 })
