@@ -157,6 +157,7 @@ class Chat extends Component {
     socket.emit('disconnect', {userName: userName, room: room})
     console.log('from unmount')
     socket.close()
+    this.setState({message: ''})
   }
   render() {
     let userName = queryString.parse(this.props.location.search).userName
