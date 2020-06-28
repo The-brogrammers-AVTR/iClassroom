@@ -13,7 +13,7 @@ import socketIOClient from 'socket.io-client'
 import {SwatchesPicker, GithubPicker, TwitterPicker} from 'react-color'
 import {popover, cover} from './WBmodules/WBconstants'
 
-import {Tooltip, IconButton} from '@material-ui/core'
+import {Tooltip, IconButton, Paper} from '@material-ui/core'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank' //square
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked' //circle
 import TextFormatIcon from '@material-ui/icons/TextFormat' //Text
@@ -226,7 +226,7 @@ function WhiteBoard() {
   }
   console.log('stage', stageEl)
   return (
-    <div className="whiteboard" id="crosshair">
+    <Paper className="whiteboard" id="crosshair">
       <ButtonGroup>
         <Tooltip title="Rectangle">
           <IconButton onClick={addRectangle}>
@@ -359,7 +359,7 @@ function WhiteBoard() {
           })}
         </Layer>
       </Stage>
-    </div>
+    </Paper>
   )
 }
 export default WhiteBoard

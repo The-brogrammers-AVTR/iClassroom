@@ -10,7 +10,7 @@ import VideoTeacher from './VideoTeacher'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
 
-import {Tooltip, IconButton} from '@material-ui/core'
+import {Tooltip, IconButton, Paper} from '@material-ui/core'
 import CallIcon from '@material-ui/icons/Call'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import GroupAddIcon from '@material-ui/icons/GroupAdd'
@@ -167,7 +167,7 @@ class VideoStudent extends Component {
   render() {
     //console.log('video teacher', VideoTeacher.call, this.props)
     return (
-      <div className="video-wrapper">
+      <Paper className="video-wrapper">
         <div className="video-view">
           <video
             id="my-camera"
@@ -217,7 +217,7 @@ class VideoStudent extends Component {
             </IconButton>
           </Tooltip>
         </div>
-      </div>
+      </Paper>
     )
   }
 }

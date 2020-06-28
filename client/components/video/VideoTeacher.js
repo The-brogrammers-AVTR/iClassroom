@@ -10,7 +10,7 @@ import {connect} from 'react-redux'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
 
-import {Tooltip, IconButton} from '@material-ui/core'
+import {Tooltip, IconButton, Paper} from '@material-ui/core'
 import CallIcon from '@material-ui/icons/Call'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import GroupAddIcon from '@material-ui/icons/GroupAdd'
@@ -183,7 +183,7 @@ class VideoTeacher extends Component {
   render() {
     console.log('peer peer', peer, this.state.inputId)
     return (
-      <div className="video-wrapper">
+      <Paper className="video-wrapper">
         <div className="video-view">
           <video
             id="my-camera"
@@ -244,7 +244,7 @@ class VideoTeacher extends Component {
           autoPlay="autoplay"
           className="center-block"
         /> */}
-      </div>
+      </Paper>
     )
   }
 }
