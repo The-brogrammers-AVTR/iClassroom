@@ -22,7 +22,12 @@ module.exports = io => {
       // socket.broadcast
       //   .to(user.room)
       //   .emit('message', formatMessage(userName, 'welcome11'))
-      socket.emit('message', formatMessage(name, `Welcome to room: ${room}`))
+
+      socket.emit('message', formatMessage(name, `welcome to room: ${room}`))
+      socket.broadcast.emit(
+        'message',
+        formatMessage(name, `user ${name} joined room`)
+      )
     })
     //socket.broadcast.to(socket.id).emit(name, `welcome to room: ${room}`)
     // socket.emit('message', formatMessage(name, `welcome to room: ${room}`))
@@ -55,8 +60,8 @@ module.exports = io => {
     })
 
     socket.on('line', layer => {
-      //console.log('line', layer)
-      io.emit('line', layer)
+      console.log('line', layer)
+      socket.broadcast.emit('line', layer)
     })
     socket.on('rectangles', rectangles => {
       //console.log('rectangles', rectangles)
