@@ -23,7 +23,7 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle' //eraser
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined' //image
 import UndoIcon from '@material-ui/icons/Undo' //undo
 import ColorLensIcon from '@material-ui/icons/ColorLens' //colorpicker
-// import ClearIcon from '@material-ui/icons/Clear'
+import ClearIcon from '@material-ui/icons/Clear'
 
 const socket = socketIOClient() //'http://127.0.0.1:8080')
 const uuidv1 = require('uuid')
@@ -231,7 +231,7 @@ function WhiteBoard() {
   console.log('stage', stageEl)
   return (
     <Paper className="whiteboard" id="crosshair">
-      <ButtonGroup>
+      <div className="whiteboard-toolbar">
         <Tooltip title="Rectangle">
           <IconButton onClick={addRectangle}>
             <CheckBoxOutlineBlankIcon />
@@ -272,6 +272,11 @@ function WhiteBoard() {
             <ColorLensIcon />
           </IconButton>
         </Tooltip>
+        <Tooltip title="Clear">
+          <IconButton>
+            <ClearIcon />
+          </IconButton>
+        </Tooltip>
 
         {action ? (
           //<div style={popover}>
@@ -281,7 +286,7 @@ function WhiteBoard() {
             <TwitterPicker color={color} onChange={handleChangeComplete} />
           </div>
         ) : null}
-      </ButtonGroup>
+      </div>
       <input
         style={{display: 'none'}}
         type="file"

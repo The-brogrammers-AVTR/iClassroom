@@ -217,12 +217,16 @@ body {
   height: 100%;
 }
 .whiteboard {
-  /* border: solid black 15px;
-  margin: 1%; */
-
-  /* border: solid black 1px; */
   margin: 0.5% 0.5% 0.5% 1%;
-  /* margin-left: 2%; */
+  /* display: flex;
+  flex-direction: row-reverse; */
+}
+
+.whiteboard-toolbar {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
+  background-color: aliceblue;
 }
 
 /* #imojis {
