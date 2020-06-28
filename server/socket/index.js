@@ -23,11 +23,13 @@ module.exports = io => {
       //   .to(user.room)
       //   .emit('message', formatMessage(userName, 'welcome11'))
 
+
       socket.emit('message', formatMessage(name, `welcome to room: ${room}`))
       socket.broadcast.emit(
         'message',
         formatMessage(name, `user ${name} joined room`)
       )
+
     })
     //socket.broadcast.to(socket.id).emit(name, `welcome to room: ${room}`)
     // socket.emit('message', formatMessage(name, `welcome to room: ${room}`))

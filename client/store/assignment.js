@@ -68,8 +68,12 @@ export const createAssignmentTest = (assignment, push) => {
     let b = students.UserCourses.filter(stud =>
       studentNames.find(s => stud.userId === s.id)
     )
+
     console.log({studentNames: studentNames, a: a, b: b, students: students})
     await b.map((student, index) => {
+
+    
+
       dispatch(
         createUserassignment({
           isComplete: false,

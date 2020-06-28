@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 import React, {useState, useEffect} from 'react'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
@@ -12,6 +13,17 @@ import socketIOClient from 'socket.io-client'
 import {SwatchesPicker, GithubPicker, TwitterPicker} from 'react-color'
 import {popover, cover} from './WBmodules/WBconstants'
 import Konva from 'konva'
+
+import {Tooltip, IconButton} from '@material-ui/core'
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank' //square
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked' //circle
+import TextFormatIcon from '@material-ui/icons/TextFormat' //Text
+import BrushIcon from '@material-ui/icons/Brush' // line
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle' //eraser
+import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined' //image
+import UndoIcon from '@material-ui/icons/Undo' //undo
+import ColorLensIcon from '@material-ui/icons/ColorLens' //colorpicker
+// import ClearIcon from '@material-ui/icons/Clear'
 
 const socket = socketIOClient() //'http://127.0.0.1:8080')
 const uuidv1 = require('uuid')
@@ -220,30 +232,47 @@ function WhiteBoard() {
   return (
     <div className="whiteboard" id="crosshair">
       <ButtonGroup>
-        <Button variant="primary" onClick={addRectangle}>
-          Rectangle
-        </Button>
-        <Button variant="primary" onClick={addCircle}>
-          Circle
-        </Button>
-        <Button variant="primary" onClick={drawLine}>
-          Line
-        </Button>
-        <Button variant="primary" onClick={eraseLine}>
-          Erase
-        </Button>
-        <Button variant="primary" onClick={drawText}>
-          Text
-        </Button>
-        <Button variant="primary" onClick={drawImage}>
-          Image
-        </Button>
-        <Button variant="primary" onClick={undo}>
-          Undo
-        </Button>
-        <Button variant="primary" onClick={handleClick}>
-          Pick Color
-        </Button>
+        <Tooltip title="Rectangle">
+          <IconButton onClick={addRectangle}>
+            <CheckBoxOutlineBlankIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Circle">
+          <IconButton onClick={addCircle}>
+            <RadioButtonUncheckedIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Line">
+          <IconButton onClick={drawLine}>
+            <BrushIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Eraser">
+          <IconButton onClick={eraseLine}>
+            <RemoveCircleIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Text">
+          <IconButton onClick={drawText}>
+            <TextFormatIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Add Image">
+          <IconButton onClick={drawImage}>
+            <ImageOutlinedIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Undo">
+          <IconButton onClick={undo}>
+            <UndoIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Color Palette">
+          <IconButton onClick={handleClick}>
+            <ColorLensIcon />
+          </IconButton>
+        </Tooltip>
+
         {action ? (
           //<div style={popover}>
           <div style={cover} onClick={handleClose}>
@@ -260,8 +289,8 @@ function WhiteBoard() {
         onChange={fileChange}
       />
       <Stage
-        width={window.innerWidth}
-        height={window.innerHeight}
+        width={window.innerWidth / 2}
+        height={window.innerHeight / 6 * 5}
         ref={stageEl}
         onMouseDown={e => {
           // deselect when clicked on empty area

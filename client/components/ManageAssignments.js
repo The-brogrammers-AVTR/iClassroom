@@ -29,24 +29,17 @@ const ManageAssignments = ({
   console.log('allUserassign', allUserassignments)
 
   const columns = [
-    // {title: 'Assignment ID', field: 'assignmentid', editable: 'never'},
-    //{title: 'Assignment#', field: 'assignNum', editable: 'never'},
     {title: 'Assignment', field: 'title'},
-    // {title: 'Course', field: 'courseId', initialEditValue: course.id},
-    // {title: 'Category', field: 'category'},
     {title: 'Description', field: 'description'},
     {title: 'URL', field: 'URL', editable: 'never'},
     {title: 'Start Date', field: 'startDate'},
     {title: 'Due Date', field: 'endDate'}
-    // {title: 'Teacher', field: 'userId', initialEditValue: instructor.id},
   ]
 
   const data = assignment.map((assign, idx) => ({
     assignmentid: assign.id,
-    //assignNum: idx + 1,
     title: assign.title,
     courseId: assign.courseId,
-    // category: assign.category,
     description: assign.description,
     URL: assign.URL ? (
       <a
@@ -66,7 +59,6 @@ const ManageAssignments = ({
     userId: assign.userId
   }))
 
-  // const newAssignmentID = Math.max(...allAssignments.map(assign => assign.id))
   const newAssignmentID = allAssignments.length + 1
   const handleCreateUserassignments = students => {
     students.forEach(student => {
@@ -88,7 +80,6 @@ const ManageAssignments = ({
   const handleDeleteUserassignments = (assignid, callback) => {
     allUserassignments.forEach(userassign => {
       if (userassign.assignmentId === assignid) {
-        //console.log(userassign.id)
         removeUserassign(userassign.id)
       }
     })
@@ -164,8 +155,6 @@ const ManageAssignments = ({
               return (
                 <div>
                   <input
-                    // className={classes.input}
-                    // id="icon-button-file"
                     type="file"
                     onChange={e => {
                       handleUpload(e, rowData.assignmentid)

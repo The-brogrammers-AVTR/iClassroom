@@ -77,7 +77,6 @@ const CreateCourse = ({user, save, load, history}) => {
       <Paper className={classes.root} elevation={3}>
         <form>
           <Grid
-            // className={classes.root}
             container
             direction="column"
             alignItems="center"
