@@ -5,6 +5,7 @@ const moment = require('moment')
 let feedProviderId = v4()
 let conn
 let peer
+
 import {connect} from 'react-redux'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
@@ -40,6 +41,7 @@ function off(callbacks) {
   )
 }
 function onReceiveStream(stream, element_id) {
+  console.log('stream and video', stream, element_id)
   // Retrieve the video element according to the desired
   var video = document.getElementById(element_id)
   // Set the given stream as the video source
@@ -53,7 +55,8 @@ class VideoTeacher extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      inputId: ''
+      inputId: '',
+      connections: []
     }
     this.connctToPeer = this.connctToPeer.bind(this)
     this.call = this.call.bind(this)
@@ -137,8 +140,8 @@ class VideoTeacher extends Component {
     })
     peer.on('connection', connection => {
       conn = connection
-      //console.log('conection.....', connection)
-      this.setState({peerId: connection.peer})
+      console.log('conection.....', connection)
+      // this.setState({peerId: connection.peer})
       conn.on('data', function(data) {
         // Will print 'hi!'
         //console.log(data)
@@ -155,8 +158,11 @@ class VideoTeacher extends Component {
 
       call.on('stream', stream => {
         window.peer_stream = stream
-        console.log('stream stream', stream, call, window.peer_stream)
-        onReceiveStream(stream, 'rVideo')
+        console.log('peer peer peer peerr', Object.keys(peer.connections))
+        this.setState({connections: Object.keys(peer.connections)})
+        console.log('stream stream', stream, call.peer, window.peer_stream)
+
+        onReceiveStream(stream, 'peer-camera-teacher')
       })
 
       // call.on('close', () => {
@@ -170,12 +176,24 @@ class VideoTeacher extends Component {
   }
 
   render() {
+    console.log('peer peer', peer, this.state.inputId)
     return (
       <div className="video-wrapper">
         <div className="video-header">
           <h6>Teacher</h6>
           <h6>{window.localStorage.getItem('peerId')}</h6>
+          <select
+            onChange={e => {
+              this.setState({inputId: e.target.value})
+            }}
+          >
+            <option>--student ids--</option>
+            {this.state.connections.map(p => {
+              return <option value={p}>{p}</option>
+            })}
+          </select>
           <input
+            value={this.state.inputId}
             placeholder="peer id"
             onChange={e => {
               this.setState({inputId: e.target.value})
