@@ -33,6 +33,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty'
 import VideoLabelIcon from '@material-ui/icons/VideoLabel'
 import AttachmentIcon from '@material-ui/icons/Attachment'
+import CastIcon from '@material-ui/icons/Cast'
 
 const drawerWidth = 240
 
@@ -372,7 +373,7 @@ const Sidebar = ({
               <ListItem button>
                 <Tooltip title="Video Classroom">
                   <ListItemIcon>
-                    <VideoLabelIcon />
+                    <CastIcon />
                   </ListItemIcon>
                 </Tooltip>
                 <ListItemText> Classroom </ListItemText>

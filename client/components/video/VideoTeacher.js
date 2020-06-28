@@ -10,6 +10,11 @@ import {connect} from 'react-redux'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
 
+import {Tooltip, IconButton} from '@material-ui/core'
+import CallIcon from '@material-ui/icons/Call'
+import CallEndIcon from '@material-ui/icons/CallEnd'
+import GroupAddIcon from '@material-ui/icons/GroupAdd'
+
 function requestLocalVideo(callbacks) {
   // Monkeypatch for crossbrowser geusermedia
   navigator.getUserMedia =
@@ -179,9 +184,26 @@ class VideoTeacher extends Component {
     console.log('peer peer', peer, this.state.inputId)
     return (
       <div className="video-wrapper">
+        <div className="video-view">
+          <video
+            id="my-camera"
+            width="250"
+            height="250"
+            autoPlay="autoplay"
+            muted="true"
+            className="center-block"
+          />
+          <video
+            id="peer-camera-teacher"
+            width="250"
+            height="250"
+            autoPlay="autoplay"
+            className="center-block"
+          />
+        </div>
         <div className="video-header">
-          <h6>Teacher</h6>
-          <h6>{window.localStorage.getItem('peerId')}</h6>
+          <p>Teacher</p>
+          <p>{window.localStorage.getItem('peerId')}</p>
           <select
             onChange={e => {
               this.setState({inputId: e.target.value})
@@ -199,36 +221,29 @@ class VideoTeacher extends Component {
               this.setState({inputId: e.target.value})
             }}
           />
-
-          <button onClick={() => this.connctToPeer(this.state.inputId)}>
-            connect
-          </button>
-          <button onClick={this.call}>call</button>
+          <Tooltip title="Connect to Peer">
+            <IconButton onClick={() => this.connctToPeer(this.state.inputId)}>
+              <GroupAddIcon className="connect" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Call">
+            <IconButton onClick={this.call}>
+              <CallIcon className="call" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Leave Call">
+            <IconButton>
+              <CallEndIcon className="endcall" />
+            </IconButton>
+          </Tooltip>
         </div>
-        <div className="video-view">
-          <video
-            id="my-camera"
-            width="250"
-            height="250"
-            autoPlay="autoplay"
-            muted="true"
-            className="center-block"
-          />
-          <video
-            id="peer-camera-teacher"
-            width="250"
-            height="250"
-            autoPlay="autoplay"
-            className="center-block"
-          />
-          {/* <video
+        {/* <video
           id="rVideo"
           width="300"
           height="300"
           autoPlay="autoplay"
           className="center-block"
         /> */}
-        </div>
       </div>
     )
   }
