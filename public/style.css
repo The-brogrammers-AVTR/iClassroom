@@ -125,7 +125,7 @@ li {
   width: 100%;
   border-radius: 10px;
   padding: 2%;
-  box-shadow: 4px 1px 9px -1px rgba(0, 0, 0, 0.29);
+  /* box-shadow: 4px 1px 9px -1px rgba(0, 0, 0, 0.29); */
 }
 
 .timestamp {
@@ -226,7 +226,7 @@ body {
   display: flex;
   /* flex-direction: column; */
   justify-content: space-evenly;
-  background-color: aliceblue;
+  background-color: #add8e6;
 }
 
 /* #imojis {
@@ -863,6 +863,7 @@ body {
 .video-header {
   text-align: center;
   display: flex;
+  justify-content: space-evenly;
   font-size: 10px;
   background: aliceblue;
   padding: 1%;
@@ -879,12 +880,18 @@ body {
 .video-whiteboard-wrapper {
   display: flex;
   justify-content: space-between;
+  margin: 5px 10px 5px 10px;
 }
 
 .video-chat-wrapper {
   display: flex;
   flex-direction: column;
   margin-left: 5%;
+}
+
+.peer-connection-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 /* chat */
@@ -921,6 +928,7 @@ body {
   text-align: center;
   border-radius: 10px 0px 0px 0px;
   /* border-right: solid 1px #6576bb; */
+  border-bottom: solid 1px cadetblue;
 }
 
 #chatInput {

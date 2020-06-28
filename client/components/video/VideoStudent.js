@@ -193,14 +193,19 @@ class VideoStudent extends Component {
         /> */}
         </div>
         <div className="video-header">
-          <p>Student</p>
-          <p>{window.localStorage.getItem('peerId')}</p>
-          <input
-            placeholder="peer id"
-            onChange={e => {
-              this.setState({inputId: e.target.value})
-            }}
-          />
+          <div className="peer-connection-wrapper">
+            <p>Student ID: {window.localStorage.getItem('peerId')}</p>
+            <div>
+              <input
+                value={this.state.inputId}
+                placeholder="peer id"
+                onChange={e => {
+                  this.setState({inputId: e.target.value})
+                }}
+              />
+            </div>
+          </div>
+
           <Tooltip title="Connect to Peer">
             <IconButton onClick={() => this.connctToPeer(this.state.inputId)}>
               <GroupAddIcon className="connect" />
