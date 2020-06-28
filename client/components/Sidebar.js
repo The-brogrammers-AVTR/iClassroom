@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
-import {Link, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {updateCourse} from '../store'
-import clsx from 'clsx'
 import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
+import {storage} from '../firebase'
 import theme from './Theme'
+import clsx from 'clsx'
 import {
   Drawer,
   AppBar,
@@ -28,15 +29,11 @@ import UpdateIcon from '@material-ui/icons/Update' //announcement
 import NoteIcon from '@material-ui/icons/Note'
 import AssignmentIcon from '@material-ui/icons/Assignment' //assignment
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd' //grade
-import SmsIcon from '@material-ui/icons/Sms'
-import CastForEducationIcon from '@material-ui/icons/CastForEducation'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty'
 import VideoLabelIcon from '@material-ui/icons/VideoLabel'
-
-import {storage} from '../firebase'
 import AttachmentIcon from '@material-ui/icons/Attachment'
-import SaveAltIcon from '@material-ui/icons/SaveAlt'
+
 const drawerWidth = 240
 
 const useStyles = makeStyles({
@@ -94,7 +91,6 @@ const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar
   },
   content: {
@@ -283,15 +279,6 @@ const Sidebar = ({
                           </IconButton>
                         </Tooltip>
                       </label>
-                      {/* <Tooltip title="Update Syllabus">
-                        <IconButton
-                          color="primary"
-                          // onClick={onSubmit}
-                          disabled={syllabusFile === syllabus}
-                        >
-                          <SaveAltIcon />
-                        </IconButton>
-                      </Tooltip> */}
                     </div>
                   )}
                 </div>

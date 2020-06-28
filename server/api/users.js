@@ -14,15 +14,6 @@ router.get('/', async (req, res, next) => {
           model: Userassignment
         }
       ]
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      // include: [
-
-      //   {
-      //     model: Userassignment
-      //   }
-      // ]
     })
     res.json(users)
   } catch (err) {

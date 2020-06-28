@@ -75,7 +75,6 @@ export const createAssignmentTest = (assignment, push) => {
     })
 
     students.UserCourses.map((student, index) => {
-      //console.log(studentNames[index].firstName)
       dispatch(
         createUserassignment({
           isComplete: false,

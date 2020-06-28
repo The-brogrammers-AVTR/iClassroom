@@ -17,9 +17,6 @@ import {ThemeProvider} from '@material-ui/styles'
 import theme from './Theme'
 
 const useStyles = makeStyles({
-  gradient: {
-    backgroundColor: theme.palette.primary.main
-  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',

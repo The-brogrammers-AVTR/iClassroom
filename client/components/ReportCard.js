@@ -18,9 +18,6 @@ const useStyles = makeStyles({
 })
 
 const ReportCard = ({user, courses, userassignment}) => {
-  // console.log(this.props)
-  //const {user, courses, userassignment} = this.props
-
   const classes = useStyles()
   const allAssignments = userassignment.filter(ua => user.id === ua.userId)
 
@@ -70,7 +67,6 @@ const ReportCard = ({user, courses, userassignment}) => {
     console.log('-Course Grades-after removing null grades-', courseGrade)
     console.log('Graded Assignments: ', gradedAssignments)
 
-    //  console.log(' ReportCard :', this.props)
     return (
       <ThemeProvider theme={theme}>
         <TableContainer className={classes.table}>

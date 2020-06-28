@@ -17,13 +17,11 @@ import {
   IconButton,
   Tooltip
 } from '@material-ui/core'
-import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 const useStyles = makeStyles({
   root: {
     minWidth: 400,
-    // backgroundColor: theme.palette.secondary.main,
     marginBottom: 50
   },
   media: {
@@ -59,7 +57,6 @@ const CourseCard = ({
   if (!instructor) {
     return null
   }
-  // const enrolled = true
   return (
     <ThemeProvider theme={theme}>
       <Card className={classes.root}>
@@ -100,11 +97,6 @@ const CourseCard = ({
           )}
           {user.isTeacher && (
             <div>
-              <Tooltip title="Edit">
-                <IconButton>
-                  <EditIcon color="primary">Edit Course</EditIcon>
-                </IconButton>
-              </Tooltip>
               <Tooltip title="Delete">
                 <IconButton onClick={() => remove(id)}>
                   <DeleteIcon />

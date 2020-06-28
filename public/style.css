@@ -1,14 +1,6 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  /* background-image: linear-gradient(to right, teal, #59cbc0); */
-  /* background: linear-gradient(
-    45deg,
-    rgba(28, 63, 90, 1) 21%,
-    rgba(37, 84, 107, 1) 50%,
-    rgba(59, 137, 153, 1) 100%,
-    rgba(25, 157, 184, 1) 100%
-  ); */
 }
 
 a {

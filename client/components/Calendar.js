@@ -31,16 +31,11 @@ const useStyles = makeStyles({
 })
 
 const Calendar = ({user, userassignments}) => {
-  // console.log('In Cal user', user)
-  // console.log('In Cal assign', assignments)
-  // console.log('In Cal userassign', userassignments)
-
   const classes = useStyles()
   const [data, setData] = useState([])
   const [error, setError] = useState('')
 
   useEffect(() => {
-    //console.log('in effect', user)
     user.isTeacher
       ? axios
           .get(`/api/users/${user.id}`)

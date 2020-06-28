@@ -7,21 +7,15 @@ import {
   Assignments,
   Home,
   Announcements,
-  Chat,
-  MakeAssignment,
   Lessons,
   Students,
   ManageAssignments,
-  WhiteBoard,
   Profile,
   Grades,
-  OneStudentGrades,
-  TeacherGrades,
   Verification,
   Live,
   ReportCard,
   TestStudent,
-  TestTeacher,
   UploadExcel
 } from './components'
 import {
@@ -36,9 +30,7 @@ import {
   readAssignments,
   getTest
 } from './store'
-import Test from './components/test/Test'
 import Video2 from './components/video/Video2'
-//import TestStudent from './components/TestStudent'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -117,7 +109,6 @@ const mapDispatch = dispatch => {
       dispatch(readUserassignments())
       dispatch(getUserCourses())
       dispatch(readAssignments())
-
       dispatch(me())
     }
   }
