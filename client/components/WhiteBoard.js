@@ -5,12 +5,13 @@ import {Stage, Layer} from 'react-konva'
 import Rectangle from './WBmodules/Rectangle'
 import Circle from './WBmodules/Circle'
 import {addLine} from './WBmodules/Line'
-import {addLine2} from './WBmodules/Line2'
+
 import {addTextNode} from './WBmodules/textNode'
 import Image from './WBmodules/Image'
 import socketIOClient from 'socket.io-client'
 import {SwatchesPicker, GithubPicker, TwitterPicker} from 'react-color'
 import {popover, cover} from './WBmodules/WBconstants'
+import Konva from 'konva'
 
 const socket = socketIOClient() //'http://127.0.0.1:8080')
 const uuidv1 = require('uuid')
@@ -30,7 +31,13 @@ function WhiteBoard() {
   const getRandomInt = max => {
     return Math.floor(Math.random() * Math.floor(max))
   }
-  console.log('shapes sstageEl shapes', shapes, React.useState(), React)
+  useEffect(
+    () => {
+      console.log(layerEl.current)
+    },
+    [layerEl]
+  )
+  //console.log('shapes sstageEl shapes', shapes, React.useState(), React)
 
   const addRectangle = () => {
     const rect = {
@@ -63,12 +70,6 @@ function WhiteBoard() {
   }
 
   const drawLine = () => {
-    console.log(
-      '2',
-      color,
-      stageEl.current.getStage(),
-      layerEl.current.children
-    )
     addLine(
       color,
       stageEl.current.getStage(),
@@ -76,13 +77,6 @@ function WhiteBoard() {
       'brush',
       layerEl.current.children
     )
-  }
-
-  const drawLine2 = line => {
-    // console.log(line)
-
-    console.log('1', line)
-    addLine2(color, stageEl.current.getStage(), layerEl.current, 'brush', line)
   }
 
   const eraseLine = () => {
@@ -101,7 +95,7 @@ function WhiteBoard() {
     const id = addTextNode(color, stageEl.current.getStage(), layerEl.current)
     const shs = shapes.concat([id])
     setShapes(shs)
-    console.log(shs)
+    // console.log(shs)
   }
   const drawImage = () => {
     fileUploadEl.current.click()
@@ -173,15 +167,25 @@ function WhiteBoard() {
     }
   })
 
-  // socket.on('line', collection => {
-  //   console.log(collection)
-  //   for (let i = 0; i < collection.length; i++) {
-  //     console.log(JSON.parse(collection[i]))
-  //     if (collection[i].className == 'Line') {
-  //       drawLine2(collection[i].attrs)
-  //     }
-  //   }
-  // })
+  socket.on('line', attrs => {
+    //console.log(attrs, attrs.stroke)
+
+    var line = new Konva.Line({
+      stroke: attrs.stroke,
+      strokeWidth: 5,
+      globalCompositeOperation: 'source-over',
+      points: attrs.points,
+
+      tension: 1
+    })
+    let layer = layerEl.current
+    //console.log(line, layerEl, layer)
+    if (layerEl.current != null) {
+      // console.log(line, layerEl, layer)
+      layer.add(line)
+      layer.batchDraw()
+    }
+  })
   socket.on('circle', circle => {
     //console.log('cirles from socket,', circle)
     setCircles(circle)

@@ -27,8 +27,10 @@ function removeUser(id) {
   users = users.filter(user => {
     return user.id !== id
   })
-  console.log('user from remove', users)
+
+  console.log('user from remove', users, id)
 }
+console.log(users)
 module.exports = {
   userJoin,
   getCurrentUser,
