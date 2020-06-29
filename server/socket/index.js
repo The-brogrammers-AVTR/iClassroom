@@ -63,12 +63,20 @@ module.exports = io => {
     })
 
     socket.on('line', layer => {
-      console.log('line', layer)
+      //console.log('line', layer)
+      socket.broadcast.emit('line', layer)
+    })
+    socket.on('eraseLine', layer => {
+      //console.log('line', layer)
       socket.broadcast.emit('line', layer)
     })
     socket.on('rectangles', rectangles => {
       //console.log('rectangles', rectangles)
       io.emit('rectangles', rectangles)
+    })
+    socket.on('text', textObj => {
+      console.log('text', textObj)
+      socket.broadcast.emit('text', textObj)
     })
     socket.on('images', images => {
       //console.log('images', images)

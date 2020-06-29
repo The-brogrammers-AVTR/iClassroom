@@ -35,6 +35,8 @@ class Chat extends Component {
     socket.emit('getUsers', {userName, room})
   }
   componentDidMount() {
+    const {user} = this.props
+    console.log('user>>>>>>>>>>>', user)
     socket.connect()
     console.log(
       'hello from mount',

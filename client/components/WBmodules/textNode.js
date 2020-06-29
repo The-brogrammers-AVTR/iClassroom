@@ -1,4 +1,6 @@
 import Konva from 'konva'
+import socketIOClient from 'socket.io-client'
+const socket = socketIOClient()
 const uuidv1 = require('uuid')
 export const addTextNode = (color, stage, layer) => {
   const id = uuidv1
@@ -22,6 +24,7 @@ export const addTextNode = (color, stage, layer) => {
       return newBox
     }
   })
+
   stage.on('click', function(e) {
     if (!this.clickStartShape) {
       return
@@ -68,6 +71,7 @@ export const addTextNode = (color, stage, layer) => {
     // remember that text rendering on canvas and on the textarea can be different
     // and sometimes it is hard to make it 100% the same. But we will try...
     textarea.value = textNode.text()
+    console.log('<<<<textarea>>>>>', textarea.value)
     textarea.style.position = 'absolute'
     textarea.style.top = areaPosition.y + 'px'
     textarea.style.left = areaPosition.x + 'px'
@@ -154,6 +158,9 @@ export const addTextNode = (color, stage, layer) => {
     setTimeout(() => {
       window.addEventListener('click', handleOutsideClick)
     })
+    //socket.emit('text', {textNode: textNode, tr: tr})
   })
+  console.log('idididididid', id)
+  // socket.emit('text', {textNode: textNode, tr: tr})
   return id
 }

@@ -2,7 +2,7 @@ import Konva from 'konva'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
 
-export const addLine = (color, stage, layer, mode = 'brush', collection) => {
+export const addLine = (color, stage, layer, mode, collection) => {
   let isPaint = false
   let lastLine
 
@@ -36,8 +36,11 @@ export const addLine = (color, stage, layer, mode = 'brush', collection) => {
     //console.log(line, newPoints)
 
     lastLine.points(newPoints)
-
-    socket.emit('line', lastLine.attrs)
+    if (mode == 'brush') {
+      socket.emit('line', lastLine.attrs)
+    } else if (mode == 'erase') {
+      socket.emit('eraseLine', lastLine.attrs)
+    }
     layer.batchDraw()
   })
 }
