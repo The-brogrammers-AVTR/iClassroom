@@ -65,7 +65,7 @@ class Chat extends Component {
       //mes.innerHTML = msg.userName + ' ' + msg.message + ' ' + msg.time
       let html = `<div class="container">
                     <div class="messageUser">
-                       <img src="/images/ninja.png" alt="Avatar">
+                       <img src="https://i.dlpng.com/static/png/1647142-profilepng-512512-profile-png-512_512_preview.png" alt="Avatar">
                         <p>${msg.userName}</p>
                     </div>
                     <div class="message-bubble">
