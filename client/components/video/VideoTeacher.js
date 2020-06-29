@@ -65,6 +65,7 @@ class VideoTeacher extends Component {
     }
     this.connctToPeer = this.connctToPeer.bind(this)
     this.call = this.call.bind(this)
+    this.stopStream = this.stopStream.bind(this)
   }
 
   initialize() {
@@ -86,6 +87,15 @@ class VideoTeacher extends Component {
     })
   }
   //
+  stopStream(videoElement) {
+    let elem = document.getElementById(videoElement)
+    const stream = elem.srcObject
+    const tracks = stream.getTracks()
+    tracks.forEach(track => {
+      track.stop()
+    })
+    elem.srcObject = null
+  }
   connctToPeer(peerId) {
     const username = this.state.name
     const peer_id = this.state.peerId
@@ -232,7 +242,7 @@ class VideoTeacher extends Component {
             </IconButton>
           </Tooltip>
           <Tooltip title="Leave Call">
-            <IconButton>
+            <IconButton onClick={() => this.stopStream('my-camera')}>
               <CallEndIcon className="endcall" />
             </IconButton>
           </Tooltip>

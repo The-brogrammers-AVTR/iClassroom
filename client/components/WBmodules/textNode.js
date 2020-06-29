@@ -161,6 +161,6 @@ export const addTextNode = (color, stage, layer) => {
     //socket.emit('text', {textNode: textNode, tr: tr})
   })
   console.log('idididididid', id)
-  socket.emit('text', {textNode: textNode, tr: tr})
+  // socket.emit('text', {textNode: textNode, tr: tr})
   return id
 }

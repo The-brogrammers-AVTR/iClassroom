@@ -35,6 +35,8 @@ class Chat extends Component {
     socket.emit('getUsers', {userName, room})
   }
   componentDidMount() {
+    const {user} = this.props
+    console.log('user>>>>>>>>>>>', user)
     socket.connect()
     console.log(
       'hello from mount',
@@ -65,7 +67,7 @@ class Chat extends Component {
       //mes.innerHTML = msg.userName + ' ' + msg.message + ' ' + msg.time
       let html = `<div class="container">
                     <div class="messageUser">
-                       <img src="/images/ninja.png" alt="Avatar">
+                       <img src=${user.imageURL} alt="Avatar">
                         <p>${msg.userName}</p>
                     </div>
                     <div class="message-bubble">
