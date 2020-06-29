@@ -12,6 +12,7 @@ import socketIOClient from 'socket.io-client'
 import {SwatchesPicker, GithubPicker, TwitterPicker} from 'react-color'
 import {popover, cover} from './WBmodules/WBconstants'
 import Konva from 'konva'
+const uuidv2 = require('uuid')
 
 const socket = socketIOClient() //'http://127.0.0.1:8080')
 const uuidv1 = require('uuid')
@@ -185,6 +186,65 @@ function WhiteBoard() {
       layer.add(line)
       layer.batchDraw()
     }
+  })
+  socket.on('eraseLine', attrs => {
+    console.log(attrs, attrs.stroke)
+
+    var line = new Konva.Line({
+      stroke: 'white',
+      strokeWidth: 20,
+      globalCompositeOperation: 'source-over',
+      points: attrs.points,
+
+      tension: 1
+    })
+    let layer = layerEl.current
+    //console.log(line, layerEl, layer)
+    if (layerEl.current != null) {
+      // console.log(line, layerEl, layer)
+      layer.add(line)
+      layer.batchDraw()
+      forceUpdate()
+    }
+  })
+  socket.on('text', textObj => {
+    console.group(textObj)
+    let node = JSON.parse(textObj.textNode)
+    let trs = JSON.parse(textObj.tr)
+    console.log(node, trs)
+    const textNode = new Konva.Text({
+      text: node.text,
+      x: node.x,
+      y: node.y,
+      fontSize: node.fontSize,
+      draggable: node.draggable,
+      width: node.width,
+      id: node.id,
+      fill: node.fill,
+      visible: node.visible || true
+    })
+    let layer = layerEl.current
+    if (layerEl.current != null) {
+      console.log(textNode, layerEl, layer)
+      layer.add(textNode)
+      layer.batchDraw()
+    }
+    let tr = new Konva.Transformer({
+      node: textNode,
+      enabledAnchors: ['middle-left', 'middle-right'],
+      // set minimum width of text
+      boundBoxFunc: function(oldBox, newBox) {
+        newBox.width = Math.max(30, newBox.width)
+        return newBox
+      }
+    })
+    if (layerEl.current != null) {
+      console.log(textNode, layerEl, layer)
+      layer.add(tr)
+      layer.batchDraw()
+    }
+    const shs = shapes.concat([uuidv2])
+    setShapes(shs)
   })
   socket.on('circle', circle => {
     //console.log('cirles from socket,', circle)
