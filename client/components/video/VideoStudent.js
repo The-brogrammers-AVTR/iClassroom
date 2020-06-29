@@ -194,11 +194,13 @@ class VideoStudent extends Component {
         </div>
         <div className="video-header">
           <div className="peer-connection-wrapper">
-            <p>Student ID: {window.localStorage.getItem('peerId')}</p>
+            <p className="peerID">
+              Student ID: {window.localStorage.getItem('peerId')}
+            </p>
             <div>
               <input
                 value={this.state.inputId}
-                placeholder="peer id"
+                placeholder="Peer ID"
                 onChange={e => {
                   this.setState({inputId: e.target.value})
                 }}

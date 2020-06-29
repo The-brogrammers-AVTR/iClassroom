@@ -757,7 +757,8 @@ body {
 }
 
 #crosshair {
-  cursor: crosshair;
+  cursor: url('https://upload.wikimedia.org/wikipedia/commons/a/a8/Ski_trail_rating_symbol_black_circle.png'),
+    auto;
 }
 
 /* below are for UploadExcel (tests) */
@@ -1038,4 +1039,14 @@ l
 #canvas {
   height: 500px;
   width: 500px;
+}
+
+.peerID {
+  font-size: 12px;
+  margin: 5px;
+}
+
+.peerID-wrapper {
+  display: flex;
+  justify-content: space-evenly;
 }

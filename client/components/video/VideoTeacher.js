@@ -203,21 +203,23 @@ class VideoTeacher extends Component {
         </div>
         <div className="video-header">
           <div className="peer-connection-wrapper">
-            <p>Teacher ID: {window.localStorage.getItem('peerId')}</p>
-            <div>
+            <p className="peerID">
+              Teacher ID: {window.localStorage.getItem('peerId')}
+            </p>
+            <div className="peerID-wrapper">
               <select
                 onChange={e => {
                   this.setState({inputId: e.target.value})
                 }}
               >
-                <option>--student ids--</option>
+                <option>--Student IDs--</option>
                 {this.state.connections.map(p => {
                   return <option value={p}>{p}</option>
                 })}
               </select>
               <input
                 value={this.state.inputId}
-                placeholder="peer id"
+                placeholder="Peer ID"
                 onChange={e => {
                   this.setState({inputId: e.target.value})
                 }}
