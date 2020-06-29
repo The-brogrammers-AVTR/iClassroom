@@ -10,6 +10,11 @@ import VideoTeacher from './VideoTeacher'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
 
+import {Tooltip, IconButton} from '@material-ui/core'
+import CallIcon from '@material-ui/icons/Call'
+import CallEndIcon from '@material-ui/icons/CallEnd'
+import GroupAddIcon from '@material-ui/icons/GroupAdd'
+
 function requestLocalVideo(callbacks) {
   // Monkeypatch for crossbrowser geusermedia
   navigator.getUserMedia =
@@ -163,26 +168,11 @@ class VideoStudent extends Component {
     //console.log('video teacher', VideoTeacher.call, this.props)
     return (
       <div className="video-wrapper">
-        <div className="video-header">
-          <h6>Student</h6>
-          <h6>{window.localStorage.getItem('peerId')}</h6>
-          <input
-            placeholder="peer id"
-            onChange={e => {
-              this.setState({inputId: e.target.value})
-            }}
-          />
-
-          <button onClick={() => this.connctToPeer(this.state.inputId)}>
-            connect
-          </button>
-          <button onClick={this.call}>call</button>
-        </div>
         <div className="video-view">
           <video
             id="my-camera"
             width="250"
-            height="250"
+            height="200"
             autoPlay="autoplay"
             muted="true"
             className="center-block"
@@ -190,7 +180,7 @@ class VideoStudent extends Component {
           <video
             id="peer-camera"
             width="250"
-            height="250"
+            height="200"
             autoPlay="autoplay"
             className="center-block"
           />
@@ -201,6 +191,31 @@ class VideoStudent extends Component {
           autoPlay="autoplay"
           className="center-block"
         /> */}
+        </div>
+        <div className="video-header">
+          <p>Student</p>
+          <p>{window.localStorage.getItem('peerId')}</p>
+          <input
+            placeholder="peer id"
+            onChange={e => {
+              this.setState({inputId: e.target.value})
+            }}
+          />
+          <Tooltip title="Connect to Peer">
+            <IconButton onClick={() => this.connctToPeer(this.state.inputId)}>
+              <GroupAddIcon className="connect" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Call">
+            <IconButton onClick={this.call}>
+              <CallIcon className="call" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Leave Call">
+            <IconButton>
+              <CallEndIcon className="endcall" />
+            </IconButton>
+          </Tooltip>
         </div>
       </div>
     )

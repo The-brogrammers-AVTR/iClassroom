@@ -12,8 +12,7 @@ import {
   TodayButton,
   ViewSwitcher
 } from '@devexpress/dx-react-scheduler-material-ui'
-import {ThemeProvider} from '@material-ui/styles'
-import {makeStyles, Paper} from '@material-ui/core'
+import {makeStyles, Paper, ThemeProvider} from '@material-ui/core'
 import axios from 'axios'
 import theme from './Theme'
 import {setDate} from 'date-fns/esm'
@@ -25,20 +24,18 @@ const useStyles = makeStyles({
     margin: theme.spacing(10, 0),
     padding: theme.spacing(0),
     width: '95%'
+  },
+  root: {
+    backgroundColor: 'aliceblue'
   }
 })
 
 const Calendar = ({user, userassignments}) => {
-  // console.log('In Cal user', user)
-  // console.log('In Cal assign', assignments)
-  // console.log('In Cal userassign', userassignments)
-
   const classes = useStyles()
   const [data, setData] = useState([])
   const [error, setError] = useState('')
 
   useEffect(() => {
-    //console.log('in effect', user)
     user.isTeacher
       ? axios
           .get(`/api/users/${user.id}`)
@@ -57,18 +54,16 @@ const Calendar = ({user, userassignments}) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper>
+      <Paper className={classes.root}>
         <Scheduler data={data}>
           <ViewState
             defaultCurrentDate={today.format('YYYY-MM-DD')}
             defaultCurrentViewName="Month"
           />
-          <DayView startDayHour={9} endDayHour={18} />
-          <WeekView startDayHour={10} endDayHour={19} />
+
           <MonthView />
           <Appointments />
           <Toolbar />
-          <ViewSwitcher />
           <DateNavigator />
           <TodayButton />
         </Scheduler>

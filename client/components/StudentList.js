@@ -43,9 +43,6 @@ const StudentList = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* <Link to="/"> Student Report</Link>
-                  </td> */}
-
             {filteredStudents &&
               filteredStudents.map(student => (
                 <TableRow key={student.id}>
@@ -70,7 +67,10 @@ const StudentList = ({
                   <TableCell align="center">{student.email}</TableCell>
                   <TableCell align="center">N/A</TableCell>
                   <TableCell align="center">
-                    <button onClick={() => admitStudent(courseId, student.id)}>
+                    <button
+                      type="submit"
+                      onClick={() => admitStudent(courseId, student.id)}
+                    >
                       Accept
                     </button>
                   </TableCell>

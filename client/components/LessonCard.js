@@ -15,9 +15,7 @@ import {
 } from '@material-ui/core'
 import theme from './Theme'
 import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import AttachmentIcon from '@material-ui/icons/Attachment'
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +27,6 @@ const useStyles = makeStyles({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0
-    // color: theme.palette.primary.main,
   }
 })
 
@@ -39,7 +36,6 @@ const LessonCard = ({
   id,
   documents,
   remove,
-  idx,
   user,
   update
 }) => {
@@ -132,13 +128,6 @@ const LessonCard = ({
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
               >
-                {/* <Typography
-                  className={classes.heading}
-                  color="primary"
-                  variant="h6"
-                >
-                  Lesson {idx + 1}
-                </Typography> */}
                 <Typography
                   className={classes.heading}
                   color="primary"
@@ -152,8 +141,8 @@ const LessonCard = ({
               </ExpansionPanelDetails>
 
               {docs.length > 0 &&
-                docs.map((doc, idx) => (
-                  <ExpansionPanelDetails key={idx}>
+                docs.map(doc => (
+                  <ExpansionPanelDetails key={doc.id}>
                     <a
                       className="link"
                       href={doc.link}
@@ -170,7 +159,6 @@ const LessonCard = ({
                   <div id="row">
                     <div className="row">
                       <input
-                        // className={classes.input}
                         id="icon-button-lessons"
                         multiple
                         type="file"

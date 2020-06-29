@@ -39,7 +39,6 @@ const TabPanel = props => {
 }
 
 const Home = props => {
-  //console.log(props)
   const userassignments = props.userassignment
   const [value, setValue] = useState(0)
 
@@ -91,13 +90,7 @@ const Home = props => {
   )
 }
 
-// const mapStateToProps = ({user, assignments, userassignments}) => {
-//   console.log('user', user)
-//   //console.log('map', assignments)
-//   return {user, assignments, userassignments}
-// }
-
-const mapStateToProps = ({userassignment, user}, {match}) => {
+const mapStateToProps = ({userassignment, user}) => {
   if (!userassignment) {
     return {}
   }

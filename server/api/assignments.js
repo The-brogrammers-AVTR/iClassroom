@@ -31,7 +31,6 @@ router.delete('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const assignment = await Assignment.create(req.body)
-    //console.log('in post', assignment)
     res.status(201).send(assignment)
   } catch (err) {
     next(err)

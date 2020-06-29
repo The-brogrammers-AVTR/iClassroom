@@ -27,10 +27,4 @@ router.put('/', async (req, res, next) => {
   })
   userCourseToUpdate.update({admit: req.body.admit})
   res.send(userCourseToUpdate)
-  //  .then(usercourse =>{
-  //   console.log(usercourse);
-  //   usercourse.
-  //  res.send(usercourse)
-  // })
-  // .catch(next)
 })
