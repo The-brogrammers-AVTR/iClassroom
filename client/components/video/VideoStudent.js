@@ -15,6 +15,7 @@ import CallIcon from '@material-ui/icons/Call'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import GroupAddIcon from '@material-ui/icons/GroupAdd'
 import MicOffIcon from '@material-ui/icons/MicOff'
+import MicIcon from '@material-ui/icons/Mic'
 
 function requestLocalVideo(callbacks) {
   // Monkeypatch for crossbrowser geusermedia
@@ -39,7 +40,7 @@ function onReceiveStream(stream, element_id) {
   // Set the given stream as the video source
   //console.log(video, element_id)
   video.srcObject = stream //video.src = window.URL.createObjectURL(stream)
-
+  document.getElementById('peer-camera').muted = true
   // Store a global reference of the stream
   window.peer_stream = stream
 }
@@ -93,7 +94,7 @@ class VideoStudent extends Component {
 
     if (this.state.muteAction) {
       console.log('true action mute')
-      document.getElementById('peer-camera').muted = true
+      //document.getElementById('peer-camera').muted = true
       document.getElementById('my-camera').muted = true
     } else {
       console.log('false action unmute')
@@ -251,7 +252,11 @@ class VideoStudent extends Component {
           </Tooltip>
           <Tooltip title="Mute">
             <IconButton onClick={() => this.mute('my-camera')}>
-              <MicOffIcon className="mute" />
+              {this.state.muteAction ? (
+                <MicIcon className="mute" />
+              ) : (
+                <MicOffIcon className="unmute" />
+              )}
             </IconButton>
           </Tooltip>
         </div>
