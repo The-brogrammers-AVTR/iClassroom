@@ -15,7 +15,7 @@ import {popover, cover} from './WBmodules/WBconstants'
 import Konva from 'konva'
 const uuidv2 = require('uuid')
 
-import {Tooltip, IconButton} from '@material-ui/core'
+import {Tooltip, IconButton, Paper} from '@material-ui/core'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank' //square
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked' //circle
 import TextFormatIcon from '@material-ui/icons/TextFormat' //Text
@@ -24,7 +24,7 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle' //eraser
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined' //image
 import UndoIcon from '@material-ui/icons/Undo' //undo
 import ColorLensIcon from '@material-ui/icons/ColorLens' //colorpicker
-// import ClearIcon from '@material-ui/icons/Clear'
+import ClearIcon from '@material-ui/icons/Clear'
 
 const socket = socketIOClient() //'http://127.0.0.1:8080')
 const uuidv1 = require('uuid')
@@ -290,8 +290,8 @@ function WhiteBoard() {
   }
   console.log('stage', stageEl)
   return (
-    <div className="whiteboard" id="crosshair">
-      <ButtonGroup>
+    <Paper className="whiteboard" id="crosshair">
+      <div className="whiteboard-toolbar">
         <Tooltip title="Rectangle">
           <IconButton onClick={addRectangle}>
             <CheckBoxOutlineBlankIcon />
@@ -332,6 +332,11 @@ function WhiteBoard() {
             <ColorLensIcon />
           </IconButton>
         </Tooltip>
+        <Tooltip title="Clear">
+          <IconButton>
+            <ClearIcon />
+          </IconButton>
+        </Tooltip>
 
         {action ? (
           //<div style={popover}>
@@ -341,7 +346,7 @@ function WhiteBoard() {
             <TwitterPicker color={color} onChange={handleChangeComplete} />
           </div>
         ) : null}
-      </ButtonGroup>
+      </div>
       <input
         style={{display: 'none'}}
         type="file"
@@ -423,7 +428,7 @@ function WhiteBoard() {
           })}
         </Layer>
       </Stage>
-    </div>
+    </Paper>
   )
 }
 export default WhiteBoard

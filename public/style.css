@@ -125,7 +125,7 @@ li {
   width: 100%;
   border-radius: 10px;
   padding: 2%;
-  box-shadow: 4px 1px 9px -1px rgba(0, 0, 0, 0.29);
+  /* box-shadow: 4px 1px 9px -1px rgba(0, 0, 0, 0.29); */
 }
 
 .timestamp {
@@ -217,13 +217,16 @@ body {
   height: 100%;
 }
 .whiteboard {
-  /* border: solid black 15px;
-  margin: 1%; */
-
-  /* border: solid black 1px; */
   margin: 0.5% 0.5% 0.5% 1%;
-  /* margin-left: 2%; */
-  box-shadow: 7px 6px 11px 0px rgba(0, 0, 0, 0.29);
+  /* display: flex;
+  flex-direction: row-reverse; */
+}
+
+.whiteboard-toolbar {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
+  background-color: #add8e6;
 }
 
 /* #imojis {
@@ -754,7 +757,8 @@ body {
 }
 
 #crosshair {
-  cursor: crosshair;
+  cursor: url('https://upload.wikimedia.org/wikipedia/commons/a/a8/Ski_trail_rating_symbol_black_circle.png'),
+    auto;
 }
 
 /* below are for UploadExcel (tests) */
@@ -855,13 +859,12 @@ body {
   border-radius: 10px;
   width: 600px;
   margin: 1%;
-
-  box-shadow: 7px 6px 11px 0px rgba(0, 0, 0, 0.29);
 }
 
 .video-header {
   text-align: center;
   display: flex;
+  justify-content: space-evenly;
   font-size: 10px;
   background: aliceblue;
   padding: 1%;
@@ -878,12 +881,18 @@ body {
 .video-whiteboard-wrapper {
   display: flex;
   justify-content: space-between;
+  margin: 5px 10px 5px 10px;
 }
 
 .video-chat-wrapper {
   display: flex;
   flex-direction: column;
   margin-left: 5%;
+}
+
+.peer-connection-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 /* chat */
@@ -893,7 +902,7 @@ body {
   border-radius: 10px;
   /* border: solid 1px #6576bb; */
   width: 600px;
-  box-shadow: 7px 6px 11px 0px rgba(0, 0, 0, 0.29);
+  /* box-shadow: 7px 6px 11px 0px rgba(0, 0, 0, 0.29); */
 }
 
 #message-wrapper {
@@ -920,6 +929,7 @@ body {
   text-align: center;
   border-radius: 10px 0px 0px 0px;
   /* border-right: solid 1px #6576bb; */
+  border-bottom: solid 1px cadetblue;
 }
 
 #chatInput {
@@ -1029,4 +1039,14 @@ l
 #canvas {
   height: 500px;
   width: 500px;
+}
+
+.peerID {
+  font-size: 12px;
+  margin: 5px;
+}
+
+.peerID-wrapper {
+  display: flex;
+  justify-content: space-evenly;
 }

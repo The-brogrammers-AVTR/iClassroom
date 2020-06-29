@@ -10,7 +10,7 @@ import {connect} from 'react-redux'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
 
-import {Tooltip, IconButton} from '@material-ui/core'
+import {Tooltip, IconButton, Paper} from '@material-ui/core'
 import CallIcon from '@material-ui/icons/Call'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import GroupAddIcon from '@material-ui/icons/GroupAdd'
@@ -193,7 +193,7 @@ class VideoTeacher extends Component {
   render() {
     console.log('peer peer', peer, this.state.inputId)
     return (
-      <div className="video-wrapper">
+      <Paper className="video-wrapper">
         <div className="video-view">
           <video
             id="my-camera"
@@ -212,25 +212,31 @@ class VideoTeacher extends Component {
           />
         </div>
         <div className="video-header">
-          <p>Teacher</p>
-          <p>{window.localStorage.getItem('peerId')}</p>
-          <select
-            onChange={e => {
-              this.setState({inputId: e.target.value})
-            }}
-          >
-            <option>--student ids--</option>
-            {this.state.connections.map(p => {
-              return <option value={p}>{p}</option>
-            })}
-          </select>
-          <input
-            value={this.state.inputId}
-            placeholder="peer id"
-            onChange={e => {
-              this.setState({inputId: e.target.value})
-            }}
-          />
+          <div className="peer-connection-wrapper">
+            <p className="peerID">
+              Teacher ID: {window.localStorage.getItem('peerId')}
+            </p>
+            <div className="peerID-wrapper">
+              <select
+                onChange={e => {
+                  this.setState({inputId: e.target.value})
+                }}
+              >
+                <option>--Student IDs--</option>
+                {this.state.connections.map(p => {
+                  return <option value={p}>{p}</option>
+                })}
+              </select>
+              <input
+                value={this.state.inputId}
+                placeholder="Peer ID"
+                onChange={e => {
+                  this.setState({inputId: e.target.value})
+                }}
+              />
+            </div>
+          </div>
+
           <Tooltip title="Connect to Peer">
             <IconButton onClick={() => this.connctToPeer(this.state.inputId)}>
               <GroupAddIcon className="connect" />
@@ -254,7 +260,7 @@ class VideoTeacher extends Component {
           autoPlay="autoplay"
           className="center-block"
         /> */}
-      </div>
+      </Paper>
     )
   }
 }

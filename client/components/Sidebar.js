@@ -23,17 +23,17 @@ import {
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import MenuIcon from '@material-ui/icons/Menu'
-import ContactsIcon from '@material-ui/icons/Contacts'
-import AssessmentIcon from '@material-ui/icons/Assessment' //student GPA
-import UpdateIcon from '@material-ui/icons/Update' //announcement
-import NoteIcon from '@material-ui/icons/Note'
-import AssignmentIcon from '@material-ui/icons/Assignment' //assignment
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd' //grade
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty'
-import VideoLabelIcon from '@material-ui/icons/VideoLabel'
-import AttachmentIcon from '@material-ui/icons/Attachment'
-import CastIcon from '@material-ui/icons/Cast'
+
+import ContactMailIcon from '@material-ui/icons/ContactMail' //Contact
+import AttachmentIcon from '@material-ui/icons/Attachment' //Syllabus
+import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar' //Students
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive' //Announcement
+import SchoolIcon from '@material-ui/icons/School' //Lessons
+import AssignmentIcon from '@material-ui/icons/Assignment' //Assignment
+import ExtensionIcon from '@material-ui/icons/Extension' //Tests
+import AssessmentIcon from '@material-ui/icons/Assessment' //Grades
+import CastConnectedIcon from '@material-ui/icons/CastConnected' //Classroom
+import ExitToAppIcon from '@material-ui/icons/ExitToApp' //Exit
 
 const drawerWidth = 240
 
@@ -239,7 +239,7 @@ const Sidebar = ({
             <ListItem>
               <Tooltip title="Contact Info">
                 <ListItemIcon>
-                  <ContactsIcon />
+                  <ContactMailIcon />
                 </ListItemIcon>
               </Tooltip>
               <ListItemText>
@@ -298,7 +298,7 @@ const Sidebar = ({
                 <ListItem button>
                   <Tooltip title="Students">
                     <ListItemIcon>
-                      <AssignmentIndIcon />
+                      <PermContactCalendarIcon />
                     </ListItemIcon>
                   </Tooltip>
                   <ListItemText> Students </ListItemText>
@@ -310,7 +310,7 @@ const Sidebar = ({
               <ListItem button>
                 <Tooltip title="Announcements">
                   <ListItemIcon>
-                    <UpdateIcon />
+                    <NotificationsActiveIcon />
                   </ListItemIcon>
                 </Tooltip>
                 <ListItemText> Announcements </ListItemText>
@@ -321,7 +321,7 @@ const Sidebar = ({
               <ListItem button>
                 <Tooltip title="Lessons">
                   <ListItemIcon>
-                    <NoteIcon />
+                    <SchoolIcon />
                   </ListItemIcon>
                 </Tooltip>
                 <ListItemText> Lessons </ListItemText>
@@ -346,7 +346,7 @@ const Sidebar = ({
               <ListItem button>
                 <Tooltip title="Test">
                   <ListItemIcon>
-                    <HourglassEmptyIcon />
+                    <ExtensionIcon />
                   </ListItemIcon>
                 </Tooltip>
                 <ListItemText> Test </ListItemText>
@@ -372,7 +372,7 @@ const Sidebar = ({
               <ListItem button>
                 <Tooltip title="Video Classroom">
                   <ListItemIcon>
-                    <CastIcon />
+                    <CastConnectedIcon />
                   </ListItemIcon>
                 </Tooltip>
                 <ListItemText> Classroom </ListItemText>

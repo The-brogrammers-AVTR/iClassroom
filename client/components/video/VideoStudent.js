@@ -10,7 +10,7 @@ import VideoTeacher from './VideoTeacher'
 import socketIOClient from 'socket.io-client'
 const socket = socketIOClient()
 
-import {Tooltip, IconButton} from '@material-ui/core'
+import {Tooltip, IconButton, Paper} from '@material-ui/core'
 import CallIcon from '@material-ui/icons/Call'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import GroupAddIcon from '@material-ui/icons/GroupAdd'
@@ -177,7 +177,7 @@ class VideoStudent extends Component {
   render() {
     //console.log('video teacher', VideoTeacher.call, this.props)
     return (
-      <div className="video-wrapper">
+      <Paper className="video-wrapper">
         <div className="video-view">
           <video
             id="my-camera"
@@ -203,14 +203,21 @@ class VideoStudent extends Component {
         /> */}
         </div>
         <div className="video-header">
-          <p>Student</p>
-          <p>{window.localStorage.getItem('peerId')}</p>
-          <input
-            placeholder="peer id"
-            onChange={e => {
-              this.setState({inputId: e.target.value})
-            }}
-          />
+          <div className="peer-connection-wrapper">
+            <p className="peerID">
+              Student ID: {window.localStorage.getItem('peerId')}
+            </p>
+            <div>
+              <input
+                value={this.state.inputId}
+                placeholder="Peer ID"
+                onChange={e => {
+                  this.setState({inputId: e.target.value})
+                }}
+              />
+            </div>
+          </div>
+
           <Tooltip title="Connect to Peer">
             <IconButton onClick={() => this.connctToPeer(this.state.inputId)}>
               <GroupAddIcon className="connect" />
@@ -227,7 +234,7 @@ class VideoStudent extends Component {
             </IconButton>
           </Tooltip>
         </div>
-      </div>
+      </Paper>
     )
   }
 }

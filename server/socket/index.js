@@ -23,13 +23,14 @@ module.exports = io => {
       //   .to(user.room)
       //   .emit('message', formatMessage(userName, 'welcome11'))
 
-
-      socket.emit('message', formatMessage(name, `welcome to room: ${room}`))
+      socket.emit(
+        'message',
+        formatMessage(name, `Welcome! You are now in room: ${room}.`)
+      )
       socket.broadcast.emit(
         'message',
-        formatMessage(name, `user ${name} joined room`)
+        formatMessage(name, `${name} joined the room.`)
       )
-
     })
     //socket.broadcast.to(socket.id).emit(name, `welcome to room: ${room}`)
     // socket.emit('message', formatMessage(name, `welcome to room: ${room}`))
@@ -94,7 +95,7 @@ module.exports = io => {
     socket.on('disconnect', msg => {
       console.log('disconnect:', msg, socket.id)
       removeUser(socket.id)
-      io.emit('message', formatMessage(name, `user disconected ${name}`))
+      io.emit('message', formatMessage(name, `${name} left the room.`))
     })
   })
   // io.on('connection', socket => {

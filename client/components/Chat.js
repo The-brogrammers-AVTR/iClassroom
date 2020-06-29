@@ -9,7 +9,7 @@ import {Picker} from 'emoji-mart'
 //import 'emoji-mart/css/emoji-mart.css'
 import {connect} from 'react-redux'
 import queryString from 'query-string'
-import {IconButton, TextField} from '@material-ui/core'
+import {IconButton, TextField, Paper} from '@material-ui/core'
 import SendRoundedIcon from '@material-ui/icons/SendRounded'
 import EmojiEmotionsRoundedIcon from '@material-ui/icons/EmojiEmotionsRounded'
 import {Label} from 'react-konva'
@@ -67,7 +67,7 @@ class Chat extends Component {
       //mes.innerHTML = msg.userName + ' ' + msg.message + ' ' + msg.time
       let html = `<div class="container">
                     <div class="messageUser">
-                       <img src=${user.imageURL} alt="Avatar">
+                       <img src="https://i.dlpng.com/static/png/1647142-profilepng-512512-profile-png-512_512_preview.png" alt="Avatar">
                         <p>${msg.userName}</p>
                     </div>
                     <div class="message-bubble">
@@ -161,7 +161,7 @@ class Chat extends Component {
     const {user} = this.props
 
     return (
-      <div id="chat-wrapper">
+      <Paper id="chat-wrapper">
         <div id="message-wrapper">
           <div id="displayMessage">
             <div id="message" />
@@ -221,7 +221,7 @@ class Chat extends Component {
             {/* <Link to="/video">video</Link> */}
           </div>
         </form>
-      </div>
+      </Paper>
     )
   }
 }

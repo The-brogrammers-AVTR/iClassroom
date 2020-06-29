@@ -71,9 +71,6 @@ export const createAssignmentTest = (assignment, push) => {
 
     console.log({studentNames: studentNames, a: a, b: b, students: students})
     await b.map((student, index) => {
-
-    
-
       dispatch(
         createUserassignment({
           isComplete: false,
