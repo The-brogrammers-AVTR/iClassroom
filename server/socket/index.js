@@ -50,6 +50,7 @@ module.exports = io => {
       console.log('fromm message', socket.id)
       //console.log('cirle', msg)
       const user = getCurrentUser(socket.id)
+      //socket.broadcast.to(user.room).emit('message', msg)
       io.to(user.room).emit('message', formatMessage(user.userName, msg))
     })
     socket.on('getUsers', msg => {

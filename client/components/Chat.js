@@ -13,7 +13,7 @@ import {IconButton, TextField, Paper} from '@material-ui/core'
 import SendRoundedIcon from '@material-ui/icons/SendRounded'
 import EmojiEmotionsRoundedIcon from '@material-ui/icons/EmojiEmotionsRounded'
 import {Label} from 'react-konva'
-
+//window.location.reload(true)
 let DisplayImoji
 class Chat extends Component {
   constructor() {
@@ -36,7 +36,8 @@ class Chat extends Component {
   }
   componentDidMount() {
     const {user} = this.props
-    console.log('user>>>>>>>>>>>', user)
+    socket.removeAllListeners()
+    console.log('user>>>>>>>>>>>', user, this.state.message)
     socket.connect()
     console.log(
       'hello from mount',
@@ -67,7 +68,7 @@ class Chat extends Component {
       //mes.innerHTML = msg.userName + ' ' + msg.message + ' ' + msg.time
       let html = `<div class="container">
                     <div class="messageUser">
-                       <img src="https://i.dlpng.com/static/png/1647142-profilepng-512512-profile-png-512_512_preview.png" alt="Avatar">
+                       <img src=${user.imageURL} alt="Avatar">
                         <p>${msg.userName}</p>
                     </div>
                     <div class="message-bubble">
@@ -148,7 +149,7 @@ class Chat extends Component {
   componentWillUnmount() {
     let userName = queryString.parse(this.props.location.search).userName
     let room = queryString.parse(this.props.location.search).room
-    socket.emit('disconnect', {userName: userName, room: room})
+    //socket.emit('disconnect', {userName: userName, room: room})
     console.log('from unmount')
     socket.close()
     this.setState({message: ''})

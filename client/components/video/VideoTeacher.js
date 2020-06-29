@@ -52,6 +52,7 @@ function onReceiveStream(stream, element_id) {
   // Set the given stream as the video source
   video.srcObject = stream //video.src = window.URL.createObjectURL(stream)
   console.log('stream on')
+  document.getElementById('peer-camera-teacher').muted = true
   // Store a global reference of the stream
   //window.peer_stream = stream
 }

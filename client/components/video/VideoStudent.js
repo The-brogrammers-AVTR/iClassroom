@@ -14,6 +14,7 @@ import {Tooltip, IconButton, Paper} from '@material-ui/core'
 import CallIcon from '@material-ui/icons/Call'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import GroupAddIcon from '@material-ui/icons/GroupAdd'
+import MicOffIcon from '@material-ui/icons/MicOff'
 
 function requestLocalVideo(callbacks) {
   // Monkeypatch for crossbrowser geusermedia
@@ -47,7 +48,8 @@ class VideoStudent extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      inputId: ''
+      inputId: '',
+      muteAction: true
     }
     //console.log(props)
     this.connctToPeer = this.connctToPeer.bind(this)
@@ -85,6 +87,20 @@ class VideoStudent extends Component {
       track.stop()
     })
     elem.srcObject = null
+  }
+  mute() {
+    this.setState({muteAction: !this.state.muteAction})
+
+    if (this.state.muteAction) {
+      console.log('true action mute')
+      document.getElementById('peer-camera').muted = true
+      document.getElementById('my-camera').muted = true
+    } else {
+      console.log('false action unmute')
+      document.getElementById('peer-camera').muted = false
+      document.getElementById('my-camera').muted = false
+    }
+    //elem.getAudioTracks()[0].enabled = !elem.getAudioTracks()[0].enabled
   }
   connctToPeer(peerId) {
     const username = this.state.name
@@ -231,6 +247,11 @@ class VideoStudent extends Component {
           <Tooltip title="Leave Call">
             <IconButton onClick={() => this.stopStream('my-camera')}>
               <CallEndIcon className="endcall" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Mute">
+            <IconButton onClick={() => this.mute('my-camera')}>
+              <MicOffIcon className="mute" />
             </IconButton>
           </Tooltip>
         </div>
