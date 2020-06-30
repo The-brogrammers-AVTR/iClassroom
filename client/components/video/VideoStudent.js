@@ -40,7 +40,10 @@ function onReceiveStream(stream, element_id) {
   // Set the given stream as the video source
   //console.log(video, element_id)
   video.srcObject = stream //video.src = window.URL.createObjectURL(stream)
-  document.getElementById('peer-camera').muted = true
+  // if (element_id == 'peer-camera') {
+  //document.getElementById('my-camera').muted = false
+  document.getElementById('peer-camera').muted = false
+  //}
   // Store a global reference of the stream
   window.peer_stream = stream
 }
@@ -50,7 +53,7 @@ class VideoStudent extends Component {
     super(props)
     this.state = {
       inputId: '',
-      muteAction: true
+      muteAction: false
     }
     //console.log(props)
     this.connctToPeer = this.connctToPeer.bind(this)
@@ -95,7 +98,7 @@ class VideoStudent extends Component {
 
     if (this.state.muteAction) {
       console.log('true action mute')
-      //document.getElementById('peer-camera').muted = true
+      document.getElementById('peer-camera').muted = false
       document.getElementById('my-camera').muted = true
     } else {
       console.log('false action unmute')
