@@ -56,6 +56,7 @@ class VideoStudent extends Component {
     this.connctToPeer = this.connctToPeer.bind(this)
     this.call = this.call.bind(this)
     this.stopStream = this.stopStream.bind(this)
+    this.mute = this.mute.bind(this)
   }
 
   initialize() {

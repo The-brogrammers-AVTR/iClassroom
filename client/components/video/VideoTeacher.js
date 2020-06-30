@@ -14,6 +14,8 @@ import {Tooltip, IconButton, Paper} from '@material-ui/core'
 import CallIcon from '@material-ui/icons/Call'
 import CallEndIcon from '@material-ui/icons/CallEnd'
 import GroupAddIcon from '@material-ui/icons/GroupAdd'
+import MicOffIcon from '@material-ui/icons/MicOff'
+import MicIcon from '@material-ui/icons/Mic'
 
 function requestLocalVideo(callbacks) {
   // Monkeypatch for crossbrowser geusermedia
@@ -67,6 +69,7 @@ class VideoTeacher extends Component {
     this.connctToPeer = this.connctToPeer.bind(this)
     this.call = this.call.bind(this)
     this.stopStream = this.stopStream.bind(this)
+    this.mute = this.mute.bind(this)
   }
 
   initialize() {
@@ -74,6 +77,21 @@ class VideoTeacher extends Component {
   }
 
   //
+  mute() {
+    this.setState({muteAction: !this.state.muteAction})
+
+    if (this.state.muteAction) {
+      console.log('true action mute')
+      //document.getElementById('peer-camera-teacher').muted = true
+      document.getElementById('my-camera').muted = true
+    } else {
+      console.log('false action unmute')
+      document.getElementById('peer-camera-teacher').muted = false
+      document.getElementById('my-camera').muted = false
+    }
+    //elem.getAudioTracks()[0].enabled = !elem.getAudioTracks()[0].enabled
+  }
+
   call() {
     //console.log('Calling to ' + this.state.peerId)
     const {peer} = this.state
@@ -218,7 +236,7 @@ class VideoTeacher extends Component {
               Teacher ID: {window.localStorage.getItem('peerId')}
             </p>
             <div className="peerID-wrapper">
-              <select
+              {/* <select
                 onChange={e => {
                   this.setState({inputId: e.target.value})
                 }}
@@ -227,7 +245,7 @@ class VideoTeacher extends Component {
                 {this.state.connections.map(p => {
                   return <option value={p}>{p}</option>
                 })}
-              </select>
+              </select> */}
               <input
                 value={this.state.inputId}
                 placeholder="Peer ID"
@@ -251,6 +269,15 @@ class VideoTeacher extends Component {
           <Tooltip title="Leave Call">
             <IconButton onClick={() => this.stopStream('my-camera')}>
               <CallEndIcon className="endcall" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Mute">
+            <IconButton onClick={() => this.mute('my-camera')}>
+              {this.state.muteAction ? (
+                <MicIcon className="mute" />
+              ) : (
+                <MicOffIcon className="unmute" />
+              )}
             </IconButton>
           </Tooltip>
         </div>
