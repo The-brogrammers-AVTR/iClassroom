@@ -48,6 +48,13 @@ const LoginForm = props => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        <Typography component="h1" variant="h5">
+          Username: student1@gmail.com
+        </Typography>
+        <Typography component="h1" variant="h5">
+          Password: 123
+        </Typography>
+
         <form
           className={classes.form}
           onSubmit={handleSubmit}
