@@ -94,7 +94,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.21.11",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "talkjs": "^0.14.2",
     "use-image": "^1.0.5",
     "uuid": "^8.1.0",
