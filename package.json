@@ -98,7 +98,7 @@
     "talkjs": "^0.14.2",
     "use-image": "^1.0.5",
     "uuid": "^8.1.0",
-    "xlsx": "^0.16.2"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.1",
